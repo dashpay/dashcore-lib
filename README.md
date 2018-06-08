@@ -35,7 +35,7 @@ See the section below to generate your own bundle, or download the pre-generated
 * [Script](docs/script.md)
 * [Transaction](docs/transaction.md)
 * [Using Different Units](docs/unit.md)
-* [Unspent Output](docs/upspentoutput.md)
+* [Unspent Output](docs/unspentoutput.md)
 * [URI](docs/uri.md)
 * [Governance Object / Proposal](docs/govobject/govobject.md)
 

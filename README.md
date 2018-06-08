@@ -41,7 +41,7 @@ See the section below to generate your own bundle, or download the pre-generated
 
 ## Examples
 
-Some examples can be find [here](docs/examples.md), below is a list of direct link for some of them.
+Some examples can be found [here](docs/examples.md), below is a list of direct links for some of them.
 
 
 * [Generate a random address](docs/examples.md#generate-a-random-address)

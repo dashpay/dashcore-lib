@@ -112,5 +112,6 @@ or run a test coverage report with `npm run coverage`.
 
 Code released under [the MIT license](LICENSE).
 
-Copyright 2013-2017 BitPay, Inc. Bitcore is a trademark maintained by BitPay, Inc.
-Copyright 2016-2018 The Dash Foundation, Inc.
+Copyright 2013-2017 BitPay, Inc. Bitcore is a trademark maintained by BitPay, Inc.  
+Copyright 2016-2017 The Dash Foundation, Inc.  
+Copyright 2017-2018 Dash Core Group, Inc.  

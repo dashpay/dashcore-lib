@@ -60,7 +60,7 @@ Some functionality is implemented as a module that can be installed separately:
 
 * [Payment Protocol Support](https://github.com/dashevo/dashcore-payment-protocol)
 * [Peer to Peer Networking](https://github.com/dashevo/dashcore-p2p)
-* [Bitcoin Core JSON-RPC](https://github.com/dashevo/dashd-rpc)
+* [Dash Core JSON-RPC](https://github.com/dashevo/dashd-rpc)
 * [Payment Channels](https://github.com/dashevo/dashcore-channel)
 * [Mnemonics](https://github.com/dashevo/dashcore-mnemonic)
 * [Elliptical Curve Integrated Encryption Scheme](https://github.com/dashevo/bitcore-ecies-dash)

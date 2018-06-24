@@ -24,17 +24,17 @@ See the section below to generate your own bundle, or download the pre-generated
 
 ## Docs
 
-* [Addresses](address.md)
-* [Block](block.md)
-* [Crypto](crypto.md)
-* [Encoding](encoding.md)
-* [Hierarchically-derived Private and Public Keys](hierarchical.md)
+* [Addresses](docs/address.md)
+* [Block](docs/block.md)
+* [Crypto](docs/crypto.md)
+* [Encoding](docs/encoding.md)
+* [Hierarchically-derived Private and Public Keys](docs/hierarchical.md)
 * [Networks](docs/networks.md)
 * [PrivateKey](docs/privatekey.md)
 * [PublicKey](docs/publickey.md)
 * [Script](docs/script.md)
 * [Transaction](docs/transaction.md)
-* [Using Different Units](unit.md)
+* [Using Different Units](docs/unit.md)
 * [Unspent Output](docs/upspentoutput.md)
 * [URI](docs/uri.md)
 * [Governance Object / Proposal](govobject/govobject.md)

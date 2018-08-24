@@ -1428,27 +1428,13 @@ describe('Transaction', function() {
   });
 
   describe('Special transaction vectors', function () {
+    var randomPubKeyId = new PrivateKey().toPublicKey()._getID().toString('hex');
+    var subTxRegisterHex = '03000800000140420f0000000000016a000000005d0100047465737488d9931ea73d60eaf7e5671efc0552b912911f2a412068b83466eaae3ac1f5c021d8d95559592c1e4c49142dc0da61e4912e124b4bca5ad5f5e282e24f6c0c1b1580545479d2c40ca088e54316c836221a143da5596c';
+    var username = 'test';
+    var expectedPubKeyId = new PrivateKey(privateKey).toPublicKey()._getID().toString('hex');
+
     describe('Registration transaction', function () {
-      var input = {
-        "prevTxId": "502315deb03c98f5308aa6846a18492dcfec1ab4bae6ed37255f0a8336504cbb",
-        "outputIndex": 0,
-        "sequenceNumber": 4294967294,
-        "script": "47304402202f482aff7c28c4ab0a4258f18a0e2b64eabb163679b0e80286f7f651417060cd0220703376a60fcc6b2e62b09d1c2b18bca689e7be14ec81df519ea33df8c5e1d31d01",
-        "scriptString": "71 0x304402202f482aff7c28c4ab0a4258f18a0e2b64eabb163679b0e80286f7f651417060cd0220703376a60fcc6b2e62b09d1c2b18bca689e7be14ec81df519ea33df8c5e1d31d01"
-      };
-      var fundingOutput = {
-        "satoshis": 1000000, // 0.01 dash
-        "script": "6a" //OP_RETURN
-      };
-      var changeOutput = {
-        "satoshis": 49998999738,
-        "script": "76a9140f2c47ee25b8ba7b4f20e856b69f393cce3ad5f988ac"
-      };
-      var randomPubKeyId = new PrivateKey().toPublicKey()._getID().toString('hex');
-      var subTxRegisterHex = '03000800000140420f0000000000016a000000005d0100047465737488d9931ea73d60eaf7e5671efc0552b912911f2a412068b83466eaae3ac1f5c021d8d95559592c1e4c49142dc0da61e4912e124b4bca5ad5f5e282e24f6c0c1b1580545479d2c40ca088e54316c836221a143da5596c';
-      var username = 'test';
-      var expectedPubKeyId = new PrivateKey(privateKey).toPublicKey()._getID().toString('hex');
-      var expectedPayloadSignature = '412068b83466eaae3ac1f5c021d8d95559592c1e4c49142dc0da61e4912e124b4bca5ad5f5e282e24f6c0c1b1580545479d2c40ca088e54316c836221a143da559';
+
       it('Should parse special transaction correctly', function () {
         var parsedTransaction = new Transaction(subTxRegisterHex);
         var obj = parsedTransaction.toObject();
@@ -1461,7 +1447,8 @@ describe('Transaction', function() {
         expect(parsedTransaction.extraPayload.verifySignature(expectedPubKeyId)).to.be.true;
         expect(parsedTransaction.extraPayload.verifySignature(randomPubKeyId)).to.be.false;
       });
-      it('Should create same hex', function () {
+
+      it('Should create valid hex', function () {
         // In this case, funding will be 0.0001 and fee 0.00001
         var privateKeyToSignTransaction = "cRbKdvygFSgwQQ61owyRuiNiknvWPN2zjjw7KS22q7kCwt2naVJf";
         var transaction = new Transaction()
@@ -1494,7 +1481,39 @@ describe('Transaction', function() {
         expect(transaction.extraPayload.verifySignature(expectedPubKeyId)).to.be.true;
         expect(transaction.extraPayload.verifySignature(randomPubKeyId)).to.be.false;
       });
+
+      describe('State transition', function () {
+        var regTxId = 'd0df4810f9899a71968b5e4147b52cab86ad9342a9806a514227514d8a160a3c';
+        var hashPrevSubTx = 'd0df4810f9899a71968b5e4147b52cab86ad9342a9806a514227514d8a160a3c';
+        var hashSTPacket = 'a0df4810f9899a71968b5e4147b52cab86ad9342a9806a514227514d8a160a3a';
+        var creditFee = 1000; // 0.00001 dash
+
+        it('Should parse and verify hex', function () {
+          // Without packet
+          var subTxTransitionTxHex = '03000c000000000000006b01003c0a168a4d512742516a80a94293ad86ab2cb547415e8b96719a89f91048dfd03c0a168a4d512742516a80a94293ad86ab2cb547415e8b96719a89f91048dfd0e8030000000000003a0a168a4d512742516a80a94293ad86ab2cb547415e8b96719a89f91048dfa000';
+
+          subTxTransitionTxHex = '03000c00000000000000ac01003c0a168a4d512742516a80a94293ad86ab2cb547415e8b96719a89f91048dfd03c0a168a4d512742516a80a94293ad86ab2cb547415e8b96719a89f91048dfd0e8030000000000003a0a168a4d512742516a80a94293ad86ab2cb547415e8b96719a89f91048dfa0411f3ae683b0a3ac3c3342ab30e646df344e8c3648902b48c5cb5f29c17f15a43ad93943b49c1f83a06321c6c434ae1c73d22ae83da3d39b9c5ce98a7947f5deab90';
+
+          var transaction = new Transaction(subTxTransitionTxHex);
+
+          expect(transaction.extraPayload.version).to.be.equal(1);
+          expect(transaction.extraPayload.regTxId).to.be.equal(regTxId);
+          expect(transaction.extraPayload.hashPrevSubTx).to.be.equal(hashPrevSubTx);
+          expect(transaction.extraPayload.hashSTPacket).to.be.equal(hashSTPacket);
+          expect(transaction.extraPayload.creditFee).to.be.equal(creditFee);
+
+          expect(transaction.extraPayload.verifySignature(expectedPubKeyId)).to.be.true;
+          expect(transaction.extraPayload.verifySignature(randomPubKeyId)).to.be.false;
+        });
+
+        it('Should create valid hex', function () {
+
+        });
+
+      });
+
     });
+
   });
 
 });

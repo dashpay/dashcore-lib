@@ -21,5 +21,5 @@ deploy:
   skip_cleanup: true
   - npm publish
   on:
-    repo: dashevo/dapi
+    repo: dashevo/dashcore-lib
     branch: master

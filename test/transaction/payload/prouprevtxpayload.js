@@ -15,7 +15,7 @@ var validProUpRevTxPayloadJSON = {
 }
 
 // TODO: The following need to be correctly defined
-var validProUpRevTxPayloadHexString = '0100a45f4e6af45dfc15d44147ec6e5ab0d8d2048ea2e95e2820f7cdfd1c1b9175094312010000000000000000000000ffff0102030604d41976a9148603df234fe8f26064439de60ed13eb92d76cc5588ac8c62104a85a6efb165315d61e1660ee7e25c1831d240c35878053929ba377c88411fdaf84b78552f91c99eb267efec1be0e63b7459e66f142daabb0345477842592b68ce0f59b163657c480061fe834a888f9a9697e7635b36b4ede84a2374ad9831';
+var validProUpRevTxPayloadHexString = '01000ef786b05e3070a5ff3c07dd393463653846ff6c354345059004762fb30e040100004f422948637072af5cdc211bb30fe96386c4935f64da82e6a855c6c9f3b377084120fd80034be1b0a94ecf7518eae71435b7774f3862f9e3a544848e2a24048043a33929089a0a871a17bbeb794c1153ed371eecbffd6d346e543a02fce734a059d3';
 var validProUpRevTxPayloadBuffer = Buffer.from(validProUpRevTxPayloadHexString, 'hex');
 var validProUpRevTxPayload = ProUpRevTxPayload.fromBuffer(validProUpRevTxPayloadBuffer);
 var validProUpRevTxHash = 'a64e3e06c71873aff149c446d76618efad9a5908007886f6024e9fddb3e6aa13';
@@ -36,7 +36,7 @@ describe('ProUpRevTxPayload', function () {
       var payload = ProUpRevTxPayload.fromBuffer(Buffer.from(validProUpRevTxPayloadHexString, 'hex'));
 
       expect(payload.version).to.be.equal(1);
-      expect(payload.proTXHash).to.be.equal('0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4');
+      expect(payload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(payload.reason).to.be.equal(1);
       expect(payload.inputsHash).to.be.equal('887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c');
     });
@@ -60,7 +60,7 @@ describe('ProUpRevTxPayload', function () {
       var payload = ProUpRevTxPayload.fromJSON(validProUpRevTxPayloadJSON);
 
       expect(payload.version).to.be.equal(1);
-      expect(payload.proTXHash).to.be.equal('0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4');
+      expect(payload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(payload.reason).to.be.equal(1);
       expect(payload.inputsHash).to.be.equal('887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c');
     });
@@ -85,7 +85,7 @@ describe('ProUpRevTxPayload', function () {
       var payloadJSON = payload.toJSON();
 
       expect(payloadJSON.version).to.be.equal(1);
-      expect(payloadJSON.proTXHash).to.be.equal('0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4');
+      expect(payloadJSON.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(payloadJSON.reason).to.be.equal(1);
       expect(payloadJSON.inputsHash).to.be.equal('887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c');
     });
@@ -114,7 +114,7 @@ describe('ProUpRevTxPayload', function () {
       var restoredPayload = ProUpRevTxPayload.fromBuffer(serializedPayload);
 
       expect(restoredPayload.version).to.be.equal(1);
-      expect(restoredPayload.proTXHash).to.be.equal('0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4');
+      expect(restoredPayload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(restoredPayload.reason).to.be.equal(1);
       expect(restoredPayload.inputsHash).to.be.equal('887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c');
     });

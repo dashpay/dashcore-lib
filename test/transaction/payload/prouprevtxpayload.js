@@ -10,7 +10,7 @@ var validProUpRevTxPayloadJSON = {
   version: 1,
   proTXHash: '0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4',
   reason: 1,
-  inputsHash: 'a6f7b4284fb753eab9b554283c4fe1f1d7e143e6cf3b975d0376d7c08ba4cdf5',
+  inputsHash: '887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c',
   payloadSig: '48d6a1bd2cd9eec54eb866fc71209418a950402b5d7e52363bfb75c98e141175',
 }
 
@@ -38,7 +38,7 @@ describe('ProUpRevTxPayload', function () {
       expect(payload.version).to.be.equal(1);
       expect(payload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(payload.reason).to.be.equal(1);
-      expect(payload.inputsHash).to.be.equal('887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c');
+      expect(payload.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
     });
 
     it('Should throw an error when there is unexpected information in the raw payload', function() {
@@ -62,7 +62,7 @@ describe('ProUpRevTxPayload', function () {
       expect(payload.version).to.be.equal(1);
       expect(payload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(payload.reason).to.be.equal(1);
-      expect(payload.inputsHash).to.be.equal('887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c');
+      expect(payload.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
     });
 
     after(function () {
@@ -87,7 +87,7 @@ describe('ProUpRevTxPayload', function () {
       expect(payloadJSON.version).to.be.equal(1);
       expect(payloadJSON.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(payloadJSON.reason).to.be.equal(1);
-      expect(payloadJSON.inputsHash).to.be.equal('887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c');
+      expect(payloadJSON.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
     });
 
     it('Should call #validate', function () {
@@ -116,7 +116,7 @@ describe('ProUpRevTxPayload', function () {
       expect(restoredPayload.version).to.be.equal(1);
       expect(restoredPayload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(restoredPayload.reason).to.be.equal(1);
-      expect(restoredPayload.inputsHash).to.be.equal('887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c');
+      expect(restoredPayload.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
     });
 
     it('Should call #validate', function () {

@@ -8,13 +8,12 @@ var ProUpRevTxPayload = Payload.ProUpRevTxPayload;
 
 var validProUpRevTxPayloadJSON = {
   version: 1,
-  proTXHash: '0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4',
-  reason: 1,
-  inputsHash: '887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c',
+  proTXHash: '01040eb32f760490054543356cff463865633439dd073cffa570305eb086f70e',
+  reason: 0,
+  inputsHash: '4f422948637072af5cdc211bb30fe96386c4935f64da82e6a855c6c9f3b37708',
   payloadSig: '48d6a1bd2cd9eec54eb866fc71209418a950402b5d7e52363bfb75c98e141175',
 }
 
-// TODO: The following need to be correctly defined
 var validProUpRevTxPayloadHexString = '01000ef786b05e3070a5ff3c07dd393463653846ff6c354345059004762fb30e040100004f422948637072af5cdc211bb30fe96386c4935f64da82e6a855c6c9f3b377084120fd80034be1b0a94ecf7518eae71435b7774f3862f9e3a544848e2a24048043a33929089a0a871a17bbeb794c1153ed371eecbffd6d346e543a02fce734a059d3';
 var validProUpRevTxPayloadBuffer = Buffer.from(validProUpRevTxPayloadHexString, 'hex');
 var validProUpRevTxPayload = ProUpRevTxPayload.fromBuffer(validProUpRevTxPayloadBuffer);
@@ -32,13 +31,16 @@ describe('ProUpRevTxPayload', function () {
     });
 
     it('Should return instance of ProUpRevTxPayload and call #validate on it', function() {
-      // TODO: Is there supposed to be logic here to test that validate is called?
+      ProUpRevTxPayload.prototype.validate.reset();
       var payload = ProUpRevTxPayload.fromBuffer(Buffer.from(validProUpRevTxPayloadHexString, 'hex'));
+      expect(payload.validate.callCount).to.be.equal(1);
 
-      expect(payload.version).to.be.equal(1);
+      var json = payload.toJSON();
+      expect(payload.version).to.be.equal(validProUpRevTxPayloadJSON.version);
       expect(payload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
-      expect(payload.reason).to.be.equal(1);
+      expect(payload.reason).to.be.equal(validProUpRevTxPayloadJSON.reason);
       expect(payload.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
+
     });
 
     it('Should throw an error when there is unexpected information in the raw payload', function() {
@@ -59,9 +61,9 @@ describe('ProUpRevTxPayload', function () {
     it('Should return instance of ProUpRevTxPayload and call #validate on it', function() {
       var payload = ProUpRevTxPayload.fromJSON(validProUpRevTxPayloadJSON);
 
-      expect(payload.version).to.be.equal(1);
+      expect(payload.version).to.be.equal(validProUpRevTxPayloadJSON.version);
       expect(payload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
-      expect(payload.reason).to.be.equal(1);
+      expect(payload.reason).to.be.equal(validProUpRevTxPayloadJSON.reason);
       expect(payload.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
     });
 
@@ -84,17 +86,10 @@ describe('ProUpRevTxPayload', function () {
 
       var payloadJSON = payload.toJSON();
 
-      expect(payloadJSON.version).to.be.equal(1);
+      expect(payloadJSON.version).to.be.equal(validProUpRevTxPayloadJSON.version);
       expect(payloadJSON.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
-      expect(payloadJSON.reason).to.be.equal(1);
+      expect(payloadJSON.reason).to.be.equal(validProUpRevTxPayloadJSON.reason);
       expect(payloadJSON.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
-    });
-
-    it('Should call #validate', function () {
-      var payload = ProUpRevTxPayload.fromJSON(validProUpRevTxPayloadJSON);
-      ProUpRevTxPayload.prototype.validate.reset();
-      payload.toJSON();
-      expect(payload.validate.callCount).to.be.equal(1);
     });
   });
 
@@ -113,9 +108,9 @@ describe('ProUpRevTxPayload', function () {
       var serializedPayload = payload.toBuffer();
       var restoredPayload = ProUpRevTxPayload.fromBuffer(serializedPayload);
 
-      expect(restoredPayload.version).to.be.equal(1);
+      expect(restoredPayload.version).to.be.equal(validProUpRevTxPayloadJSON.version);
       expect(restoredPayload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
-      expect(restoredPayload.reason).to.be.equal(1);
+      expect(restoredPayload.reason).to.be.equal(validProUpRevTxPayloadJSON.reason);
       expect(restoredPayload.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
     });
 

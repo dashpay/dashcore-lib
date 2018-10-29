@@ -1526,6 +1526,28 @@ describe('Transaction', function() {
 
     });
 
+    describe('Provider Update Registrar Transaction', function () {
+
+      it('Should parse the payload', function () {
+        var transactionHex = '01000ef786b05e3070a5ff3c07dd393463653846ff6c354345059004762fb30e04010829b934be9a32f083d93ddb477ca8d5cdc32ee70404328a22be369bf5e731bcc3cb8440fb01aec21976a9144fda85c81774b362d745fd453f074ddbf16416c288ac24d01582eb8ad72ef32714511307c571b68c8b590ed351db1663fe2fe0b3470e411ca150395389416102887e0a5dd609a3d477edf1f79faaf61603e4dc2564a4b31b603671cdd719e617f0588bd541568131f0d9444e0b5e2deba9dd16e927f48911';
+        var tx = new Transaction(transactionHex);
+
+        var actual = tx.extraPayload;
+        var expected = {
+          version: 1,
+          proTXHash: '01040eb32f760490054543356cff463865633439dd073cffa570305eb086f70e',
+          keyIdOperator: 'e72ec3cdd5a87c47db3dd983f0329abe34b92908',
+          keyIdVoting: 'c2ae01fb4084cbc3bc31e7f59b36be228a320404',
+          scriptPayout: 'ac88c21664f1db4d073f45fd45d762b37417c885da4f14a976',
+          inputsHash: '0e47b3e02ffe6316db51d30e598b8cb671c50713511427f32ed78aeb8215d024',
+          payloadSig: '1ca150395389416102887e0a5dd609a3d477edf1f79faaf61603e4dc2564a4b31b603671cdd719e617f0588bd541568131f0d9444e0b5e2deba9dd16e927f48911',
+        };
+
+        expect(actual).to.be.deepEqual(expected);
+      });
+
+    });
+
     describe('Provider Service Update Transaction ', function () {
 
       it('Should parse the payload', function () {

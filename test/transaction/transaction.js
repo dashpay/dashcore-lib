@@ -1543,7 +1543,7 @@ describe('Transaction', function() {
           payloadSig: '1ca150395389416102887e0a5dd609a3d477edf1f79faaf61603e4dc2564a4b31b603671cdd719e617f0588bd541568131f0d9444e0b5e2deba9dd16e927f48911',
         };
 
-        expect(actual).to.be.deep.equal(expected);
+        expect(JSON.stringify(actual)).to.be.deep.equal(JSON.stringify(expected));
       });
 
     });

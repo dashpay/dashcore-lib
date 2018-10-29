@@ -1526,6 +1526,26 @@ describe('Transaction', function() {
 
     });
 
+    describe('Provider Update Revoke Transaction', function () {
+
+      it('Should parse the payload', function () {
+        var transactionHex = '01000ef786b05e3070a5ff3c07dd393463653846ff6c354345059004762fb30e040100004f422948637072af5cdc211bb30fe96386c4935f64da82e6a855c6c9f3b377084120fd80034be1b0a94ecf7518eae71435b7774f3862f9e3a544848e2a24048043a33929089a0a871a17bbeb794c1153ed371eecbffd6d346e543a02fce734a059d3';
+        var tx = new Transaction(transactionHex);
+
+        var actual = tx.extraPayload;
+        var expected = {
+          version: 1,
+          proTXHash: '01040eb32f760490054543356cff463865633439dd073cffa570305eb086f70e',
+          reason: 0,
+          inputsHash: '4f422948637072af5cdc211bb30fe96386c4935f64da82e6a855c6c9f3b37708',
+          payloadSig: '48d6a1bd2cd9eec54eb866fc71209418a950402b5d7e52363bfb75c98e141175',
+        };
+
+        expect(actual).to.be.deepEqual(expected);
+      });
+
+    });
+
     describe('Provider Service Update Transaction ', function () {
 
       it('Should parse the payload', function () {

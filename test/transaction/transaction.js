@@ -1540,6 +1540,7 @@ describe('Transaction', function() {
           keyIdVoting: 'c2ae01fb4084cbc3bc31e7f59b36be228a320404',
           scriptPayout: 'ac88c21664f1db4d073f45fd45d762b37417c885da4f14a976',
           inputsHash: '0e47b3e02ffe6316db51d30e598b8cb671c50713511427f32ed78aeb8215d024',
+          payloadSig: '1ca150395389416102887e0a5dd609a3d477edf1f79faaf61603e4dc2564a4b31b603671cdd719e617f0588bd541568131f0d9444e0b5e2deba9dd16e927f48911',
         };
 
         expect(JSON.stringify(actual)).to.be.deep.equal(JSON.stringify(expected));

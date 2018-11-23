@@ -2,7 +2,7 @@
   "name": "@dashevo/dashcore-lib",
   "version": "0.15.6",
   "description": "A pure and powerful JavaScript Dash library.",
-  "author": "BitPay <dev@bitpay.com>",
+  "author": "Dash Core Group, Inc. <dev@dash.org>",
   "main": "index.js",
   "scripts": {
     "lint": "jshint . || true",

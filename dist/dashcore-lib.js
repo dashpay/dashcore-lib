@@ -55372,32 +55372,40 @@ var CURRENT_PAYLOAD_VERSION = 1;
 /**
  * @typedef {Object} ProRegTxPayloadJSON
  * @property {number} version	uint_16	2	Provider transaction version number. Currently set to 1.
- * @property {number} protocolVersion
+ //* @property {number} protocolVersion
+ * @property {number} type
+ * @property {number} mode
+ * @property {string} collateralHash
  * @property {number} collateralIndex	uint_32	4	The collateral index.
  * @property {string} ipAddress	byte[]	16	IPv6 address in network byte order. Only IPv4 mapped addresses are allowed (to be extended in the future)
  * @property {number} port uint_16	2	Port (network byte order)
  * @property {string} keyIdOwner	CKeyID	20	The public key hash used for owner related signing (ProTx updates, governance voting)
- * @property {string} keyIdOperator	CKeyID	20	The public key hash used for operational related signing (network messages, ProTx updates)
+ * @property {string} keyIdOperator	BLSPubKey	48	The public key used for operational related signing (network messages, ProTx updates)
  * @property {string} keyIdVoting	CKeyID	20	The public key hash used for voting.
  * @property {number} operatorReward	uint_16	2	A value from 0 to 10000.
  * @property {string} scriptPayout	Script	Variable	Payee script (p2pkh/p2sh)
  * @property {string} inputsHash	uint256	32	Hash of all the outpoints of the transaction inputs
+ * @property {number} [payloadSigSize] Size of the Signature
  * @property {string} [payloadSig] Signature of the hash of the ProTx fields. Signed with KeyIdOwner
  */
 
 /**
  * @class ProRegTxPayload
  * @property {number} version	uint_16	2	Provider transaction version number. Currently set to 1.
- * @property {number} protocolVersion
+ //* @property {number} protocolVersion
+ * @property {number} type
+ * @property {number} mode
+ * @property {string} collateralHash
  * @property {number} collateralIndex	uint_32	4	The collateral index.
  * @property {string} ipAddress	byte[]	16	IPv6 address in network byte order. Only IPv4 mapped addresses are allowed (to be extended in the future)
  * @property {number} port uint_16	2	Port (network byte order)
  * @property {string} keyIdOwner	CKeyID	20	The public key hash used for owner related signing (ProTx updates, governance voting)
- * @property {string} keyIdOperator	CKeyID	20	The public key hash used for operational related signing (network messages, ProTx updates)
+ * @property {string} keyIdOperator	BLSPubKey	48	The public key used for operational related signing (network messages, ProTx updates)
  * @property {string} keyIdVoting	CKeyID	20	The public key hash used for voting.
  * @property {number} operatorReward	uint_16	2	A value from 0 to 10000.
  * @property {string} scriptPayout	Script	Variable	Payee script (p2pkh/p2sh)
  * @property {string} inputsHash	uint256	32	Hash of all the outpoints of the transaction inputs
+ * @property {number} [payloadSigSize] Size of the Signature
  * @property {string} [payloadSig] Signature of the hash of the ProTx fields. Signed with KeyIdOwner
  */
 function ProRegTxPayload(options) {
@@ -55405,6 +55413,9 @@ function ProRegTxPayload(options) {
   this.version = CURRENT_PAYLOAD_VERSION;
 
   if (options) {
+    this.type = options.type;
+    this.mode = options.mode;
+    this.collateralHash = options.collateralHash;
     this.collateralIndex = options.collateralIndex;
     this.ipAddress = options.ipAddress;
     this.port = options.port;
@@ -55415,6 +55426,7 @@ function ProRegTxPayload(options) {
     this.scriptPayout = options.scriptPayout;
     this.inputsHash = options.inputsHash;
     this.payloadSig = options.payloadSig;
+    this.payloadSigSize = this.payloadSig.length * 2
     this.protocolVersion = options.protocolVersion;
   }
 }
@@ -55434,26 +55446,22 @@ ProRegTxPayload.fromBuffer = function fromBuffer(rawPayload) {
   var payload = new ProRegTxPayload();
 
   payload.version = payloadBufferReader.readUInt16LE();
-  payload.protocolVersion = payloadBufferReader.readInt32LE();
+  payload.type = payloadBufferReader.readUInt16LE();
+  payload.mode = payloadBufferReader.readUInt16LE();
+  payload.collateralHash = payloadBufferReader.read(constants.SHA256_HASH_SIZE).reverse().toString('hex');
   payload.collateralIndex = payloadBufferReader.readUInt32LE();
   payload.ipAddress = payloadBufferReader.read(16).toString('hex');
   payload.port = payloadBufferReader.readUInt16BE();
-
-  // TODO: not sure about a byte order
-  payload.keyIdOwner = payloadBufferReader.read(constants.PUBKEY_ID_SIZE).toString('hex');
-  payload.keyIdOperator = payloadBufferReader.read(constants.PUBKEY_ID_SIZE).toString('hex');
-  payload.keyIdVoting = payloadBufferReader.read(constants.PUBKEY_ID_SIZE).toString('hex');
-
+  payload.keyIdOwner = payloadBufferReader.read(constants.PUBKEY_ID_SIZE).reverse().toString('hex');
+  payload.keyIdOperator = payloadBufferReader.read(constants.BLS_PUBLIC_KEY_SIZE).toString('hex');
+  payload.keyIdVoting = payloadBufferReader.read(constants.PUBKEY_ID_SIZE).reverse().toString('hex');
+  payload.operatorReward = payloadBufferReader.readUInt16LE();
   var scriptPayoutSize = payloadBufferReader.readVarintNum();
   payload.scriptPayout = payloadBufferReader.read(scriptPayoutSize).toString('hex');
-
-  payload.operatorReward = payloadBufferReader.readUInt16LE();
   payload.inputsHash = payloadBufferReader.read(constants.SHA256_HASH_SIZE).toString('hex');
-
-  var payloadSigSize = payloadBufferReader.readVarintNum();
-
-  if (payloadSigSize > 0) {
-    payload.payloadSig = payloadBufferReader.read(payloadSigSize).toString('hex');
+  payload.payloadSigSize = payloadBufferReader.readVarintNum();
+  if (payload.payloadSigSize > 0) {
+    payload.payloadSig = payloadBufferReader.read(payload.payloadSigSize).toString('hex');
   }
 
   if (!payloadBufferReader.finished()) {
@@ -55482,24 +55490,20 @@ ProRegTxPayload.fromJSON = function fromJSON(payloadJson) {
  */
 ProRegTxPayload.prototype.validate = function () {
   Preconditions.checkArgument(utils.isUnsignedInteger(this.version), 'Expect version to be an unsigned integer');
-  Preconditions.checkArgument(utils.isUnsignedInteger(this.protocolVersion), 'Expect protocolVersion to be an unsigned integer');
+  Preconditions.checkArgumentType(this.collateralIndex, 'number', 'collateralIndex');
   Preconditions.checkArgument(utils.isUnsignedInteger(this.collateralIndex), 'Expect collateralIndex to be an unsigned integer');
-
+  Preconditions.checkArgument(utils.isSha256HexString(this.collateralHash), 'Expect collateralHash to be a hex string representing sha256 hash');
   Preconditions.checkArgument(this.ipAddress, 'string', 'Expect ipAddress to be a string');
   Preconditions.checkArgument(this.ipAddress.length === constants.IP_ADDRESS_SIZE * 2, 'Expect ipAddress to be a hex string representing an ipv6 address');
-
   Preconditions.checkArgument(utils.isUnsignedInteger(this.port), 'Expect port to be an unsigned integer');
-
   Preconditions.checkArgument(utils.isHexaString(this.keyIdOwner), 'Expect keyIdOwner to be a hex string');
   Preconditions.checkArgument(utils.isHexaString(this.keyIdOperator), 'Expect keyIdOperator to be a hex string');
   Preconditions.checkArgument(utils.isHexaString(this.keyIdVoting), 'Expect keyIdVoting to be a hex string');
   Preconditions.checkArgument(this.keyIdOwner.length === constants.PUBKEY_ID_SIZE * 2, 'Expect keyIdOwner to be 20 bytes in size ');
-  Preconditions.checkArgument(this.keyIdOperator.length === constants.PUBKEY_ID_SIZE * 2, 'Expect keyIdOwner to be 20 bytes in size ');
+  Preconditions.checkArgument(this.keyIdOperator.length === constants.BLS_PUBLIC_KEY_SIZE * 2, 'Expect keyIdOwner to be 48 bytes in size ');
   Preconditions.checkArgument(this.keyIdVoting.length === constants.PUBKEY_ID_SIZE * 2, 'Expect keyIdOwner to be 20 bytes in size ');
-
   Preconditions.checkArgument(utils.isUnsignedInteger(this.operatorReward), 'Expect operatorReward to be an unsigned integer');
   Preconditions.checkArgument(this.operatorReward < 10000, 'Expect operatorReward to be lesser than 10000');
-
   Preconditions.checkArgument(utils.isHexaString(this.inputsHash), 'Expect inputsHash to be a hex string');
 
   if (this.scriptPayout) {
@@ -55508,6 +55512,8 @@ ProRegTxPayload.prototype.validate = function () {
   }
 
   if (Boolean(this.payloadSig)) {
+    Preconditions.checkArgumentType(this.payloadSigSize, 'number', 'payloadSigSize');
+    Preconditions.checkArgument(utils.isUnsignedInteger(this.payloadSigSize), 'Expect payloadSigSize to be an unsigned integer');
     Preconditions.checkArgument(utils.isHexaString(this.payloadSig), 'Expect payload sig to be a hex string');
   }
 };
@@ -55524,7 +55530,10 @@ ProRegTxPayload.prototype.toJSON = function toJSON(options) {
   this.validate();
   var payloadJSON = {
     version : this.version,
-    protocolVersion: this.protocolVersion,
+    //protocolVersion: this.protocolVersion,
+    type : this.type,
+    mode : this.mode,
+    collateralHash: this.collateralHash,
     collateralIndex: this.collateralIndex,
     ipAddress: this.ipAddress,
     port: this.port,
@@ -55536,6 +55545,7 @@ ProRegTxPayload.prototype.toJSON = function toJSON(options) {
     inputsHash: this.inputsHash
   };
   if (!skipSignature) {
+    payloadJSON.payloadSigSize = this.payloadSigSize;
     payloadJSON.payloadSig = this.payloadSig;
   }
   return payloadJSON;
@@ -55556,16 +55566,18 @@ ProRegTxPayload.prototype.toBuffer = function toBuffer(options) {
 
   payloadBufferWriter
     .writeUInt16LE(this.version)
-    .writeUInt32LE(this.protocolVersion)
+    .writeUInt16LE(this.type)
+    .writeUInt16LE(this.mode)
+    .write(Buffer.from(this.collateralHash, 'hex').reverse())
     .writeInt32LE(this.collateralIndex)
     .write(Buffer.from(this.ipAddress, 'hex'))
     .writeUInt16BE(this.port)
-    .write(Buffer.from(this.keyIdOwner, 'hex'))
+    .write(Buffer.from(this.keyIdOwner, 'hex').reverse())
     .write(Buffer.from(this.keyIdOperator, 'hex'))
-    .write(Buffer.from(this.keyIdVoting, 'hex'))
+    .write(Buffer.from(this.keyIdVoting, 'hex').reverse())
+    .writeUInt16LE(this.operatorReward)
     .writeVarintNum(Buffer.from(this.scriptPayout, 'hex').length)
     .write(Buffer.from(this.scriptPayout, 'hex'))
-    .writeUInt16LE(this.operatorReward)
     .write(Buffer.from(this.inputsHash, 'hex'));
 
   if (!skipSignature) {
@@ -55583,6 +55595,7 @@ ProRegTxPayload.prototype.copy = function copy() {
 };
 
 module.exports = ProRegTxPayload;
+
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
@@ -57599,7 +57612,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 /* 147 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"@dashevo/dashcore-lib","version":"1.0.0-alpha.20","description":"A pure and powerful JavaScript Dash library.","author":"Dash Core Group, Inc. <dev@dash.org>","main":"index.js","scripts":{"lint":"jshint . || true","test":"npm run build && npm run test:node && npm run test:browser && npm run lint","test:node":"mocha $NODE_DEBUG_OPTION --no-timeouts --recursive","test:browser":"karma start ./karma.conf.js --single-run","coverage":"nyc mocha --recursive","build":"webpack --display-error-details"},"contributors":[{"name":"Daniel Cousens","email":"bitcoin@dcousens.com"},{"name":"Esteban Ordano","email":"eordano@gmail.com"},{"name":"Gordon Hall","email":"gordon@bitpay.com"},{"name":"Jeff Garzik","email":"jgarzik@bitpay.com"},{"name":"Kyle Drake","email":"kyle@kyledrake.net"},{"name":"Manuel Araoz","email":"manuelaraoz@gmail.com"},{"name":"Matias Alejo Garcia","email":"ematiu@gmail.com"},{"name":"Ryan X. Charles","email":"ryanxcharles@gmail.com"},{"name":"Stefan Thomas","email":"moon@justmoon.net"},{"name":"Stephen Pair","email":"stephen@bitpay.com"},{"name":"Wei Lu","email":"luwei.here@gmail.com"},{"name":"UdjinM6","email":"UdjinM6@gmail.com"},{"name":"Jon Kindel","email":"jon@dash.org"},{"name":"Alex Werner","email":"alex@werner.fr"}],"keywords":["dash","transaction","address","p2p","ecies","cryptocurrency","blockchain","payment","bip21","bip32","bip37","bip69","bip70","multisig","dashcore"],"repository":{"type":"git","url":"https://github.com/dashevo/dashcore-lib.git"},"bugs":{"url":"https://github.com/dashevo/dashcore-lib/issues"},"homepage":"https://github.com/dashevo/dashcore-lib","browser":{"request":"browser-request"},"dependencies":{"@dashevo/x11-hash-js":"^1.0.2","bn.js":"=2.0.4","bs58":"=2.0.0","buffer-compare":"=1.0.0","elliptic":"=3.0.3","inherits":"=2.0.1","lodash":"^4.17.11","sha512":"=0.0.1","unorm":"^1.3.3"},"devDependencies":{"brfs":"^2.0.1","chai":"^4.2.0","karma":"^3.1.1","karma-chai":"^0.1.0","karma-chrome-launcher":"^2.2.0","karma-detect-browsers":"^2.3.3","karma-firefox-launcher":"^1.1.0","karma-mocha":"^1.3.0","karma-mocha-reporter":"^2.2.5","karma-webpack":"^3.0.5","mocha":"^5.2.0","nyc":"^13.1.0","raw-loader":"^0.5.1","sinon":"^4.5.0","transform-loader":"^0.2.4","uglifyjs-webpack-plugin":"^1.3.0","webpack":"^3.12.0"},"license":"MIT"}
+module.exports = {"name":"@dashevo/dashcore-lib","version":"1.0.0-alpha.21","description":"A pure and powerful JavaScript Dash library.","author":"Dash Core Group, Inc. <dev@dash.org>","main":"index.js","scripts":{"lint":"jshint . || true","test":"npm run build && npm run test:node && npm run test:browser && npm run lint","test:node":"mocha $NODE_DEBUG_OPTION --no-timeouts --recursive","test:browser":"karma start ./karma.conf.js --single-run","coverage":"nyc mocha --recursive","build":"webpack --display-error-details"},"contributors":[{"name":"Daniel Cousens","email":"bitcoin@dcousens.com"},{"name":"Esteban Ordano","email":"eordano@gmail.com"},{"name":"Gordon Hall","email":"gordon@bitpay.com"},{"name":"Jeff Garzik","email":"jgarzik@bitpay.com"},{"name":"Kyle Drake","email":"kyle@kyledrake.net"},{"name":"Manuel Araoz","email":"manuelaraoz@gmail.com"},{"name":"Matias Alejo Garcia","email":"ematiu@gmail.com"},{"name":"Ryan X. Charles","email":"ryanxcharles@gmail.com"},{"name":"Stefan Thomas","email":"moon@justmoon.net"},{"name":"Stephen Pair","email":"stephen@bitpay.com"},{"name":"Wei Lu","email":"luwei.here@gmail.com"},{"name":"UdjinM6","email":"UdjinM6@gmail.com"},{"name":"Jon Kindel","email":"jon@dash.org"},{"name":"Alex Werner","email":"alex@werner.fr"}],"keywords":["dash","transaction","address","p2p","ecies","cryptocurrency","blockchain","payment","bip21","bip32","bip37","bip69","bip70","multisig","dashcore"],"repository":{"type":"git","url":"https://github.com/dashevo/dashcore-lib.git"},"bugs":{"url":"https://github.com/dashevo/dashcore-lib/issues"},"homepage":"https://github.com/dashevo/dashcore-lib","browser":{"request":"browser-request"},"dependencies":{"@dashevo/x11-hash-js":"^1.0.2","bn.js":"=2.0.4","bs58":"=2.0.0","buffer-compare":"=1.0.0","elliptic":"=3.0.3","inherits":"=2.0.1","lodash":"^4.17.11","sha512":"=0.0.1","unorm":"^1.3.3"},"devDependencies":{"brfs":"^2.0.1","chai":"^4.2.0","karma":"^3.1.1","karma-chai":"^0.1.0","karma-chrome-launcher":"^2.2.0","karma-detect-browsers":"^2.3.3","karma-firefox-launcher":"^1.1.0","karma-mocha":"^1.3.0","karma-mocha-reporter":"^2.2.5","karma-webpack":"^3.0.5","mocha":"^5.2.0","nyc":"^13.1.0","raw-loader":"^0.5.1","sinon":"^4.5.0","transform-loader":"^0.2.4","uglifyjs-webpack-plugin":"^1.3.0","webpack":"^3.12.0"},"license":"MIT"}
 
 /***/ }),
 /* 148 */
@@ -57866,7 +57879,7 @@ if (typeof Object.create === 'function') {
 /* 151 */
 /***/ (function(module, exports) {
 
-module.exports = {"_args":[["elliptic@3.0.3","/home/anton/dash_software/dashcore-lib"]],"_from":"elliptic@3.0.3","_id":"elliptic@3.0.3","_inBundle":false,"_integrity":"sha1-hlybQgv75VAGuflp+XoNLESWZZU=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@3.0.3","name":"elliptic","escapedName":"elliptic","rawSpec":"3.0.3","saveSpec":null,"fetchSpec":"3.0.3"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-3.0.3.tgz","_spec":"3.0.3","_where":"/home/anton/dash_software/dashcore-lib","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^2.0.0","brorand":"^1.0.1","hash.js":"^1.0.0","inherits":"^2.0.1"},"description":"EC cryptography","devDependencies":{"browserify":"^3.44.2","jscs":"^1.11.3","jshint":"^2.6.0","mocha":"^2.1.0","uglify-js":"^2.4.13"},"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"test":"make lint && mocha --reporter=spec test/*-test.js"},"version":"3.0.3"}
+module.exports = {"_args":[["elliptic@3.0.3","/Users/pascalmeyer/WebstormProjects/dashcore-lib"]],"_from":"elliptic@3.0.3","_id":"elliptic@3.0.3","_inBundle":false,"_integrity":"sha1-hlybQgv75VAGuflp+XoNLESWZZU=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@3.0.3","name":"elliptic","escapedName":"elliptic","rawSpec":"3.0.3","saveSpec":null,"fetchSpec":"3.0.3"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-3.0.3.tgz","_spec":"3.0.3","_where":"/Users/pascalmeyer/WebstormProjects/dashcore-lib","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^2.0.0","brorand":"^1.0.1","hash.js":"^1.0.0","inherits":"^2.0.1"},"description":"EC cryptography","devDependencies":{"browserify":"^3.44.2","jscs":"^1.11.3","jshint":"^2.6.0","mocha":"^2.1.0","uglify-js":"^2.4.13"},"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"test":"make lint && mocha --reporter=spec test/*-test.js"},"version":"3.0.3"}
 
 /***/ }),
 /* 152 */
@@ -77485,7 +77498,7 @@ module.exports.makeKey = makeKey
 /* 233 */
 /***/ (function(module, exports) {
 
-module.exports = {"_args":[["elliptic@6.4.1","/home/anton/dash_software/dashcore-lib"]],"_development":true,"_from":"elliptic@6.4.1","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/browserify-sign/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.1","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.1","saveSpec":null,"fetchSpec":"6.4.1"},"_requiredBy":["/browserify-sign"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_spec":"6.4.1","_where":"/home/anton/dash_software/dashcore-lib","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"}
+module.exports = {"_args":[["elliptic@6.4.1","/Users/pascalmeyer/WebstormProjects/dashcore-lib"]],"_development":true,"_from":"elliptic@6.4.1","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/browserify-sign/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.1","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.1","saveSpec":null,"fetchSpec":"6.4.1"},"_requiredBy":["/browserify-sign"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_spec":"6.4.1","_where":"/Users/pascalmeyer/WebstormProjects/dashcore-lib","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"}
 
 /***/ }),
 /* 234 */
@@ -86462,7 +86475,7 @@ function formatReturnValue (bn, enc, len) {
 /* 266 */
 /***/ (function(module, exports) {
 
-module.exports = {"_args":[["elliptic@6.4.1","/home/anton/dash_software/dashcore-lib"]],"_development":true,"_from":"elliptic@6.4.1","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/create-ecdh/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.1","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.1","saveSpec":null,"fetchSpec":"6.4.1"},"_requiredBy":["/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_spec":"6.4.1","_where":"/home/anton/dash_software/dashcore-lib","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"}
+module.exports = {"_args":[["elliptic@6.4.1","/Users/pascalmeyer/WebstormProjects/dashcore-lib"]],"_development":true,"_from":"elliptic@6.4.1","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/create-ecdh/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.1","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.1","saveSpec":null,"fetchSpec":"6.4.1"},"_requiredBy":["/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_spec":"6.4.1","_where":"/Users/pascalmeyer/WebstormProjects/dashcore-lib","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"}
 
 /***/ }),
 /* 267 */

@@ -11,15 +11,14 @@ console.log(merkleRootMNList);
 
 var validProTxUpServPayloadJSON = {
   version: 1,
-  proTXHash: '0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4',
-  port: 1236,
-  ipAddress: '00000000000000000000ffff01020306',
-  inputsHash: '887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c',
-  //address: 'yYY42uyDZk8Rp32SSyjAAy2pUtzkAT2WDb'
-  merkleRootMNList: merkleRootMNList,
-  scriptOperatorPayout: '76a9148603df234fe8f26064439de60ed13eb92d76cc5588ac'
+  proTXHash: 'c571c3168c77d7b91e647d532da46d8a8fc9d5b4b1a4806acd0cf15e09d347da',
+  port: 19999,
+  ipAddress: '00000000000000000000ffffc38d8f31',
+  inputsHash: '0a816f69b6458351b2449455a43cb77c0aa980e3a6c6f982dc1d9cde79201d20',
+  //address: 'yTSw4medvYq3nPWHdC9nQ1DtSRCnJUdJ4T'
+  scriptOperatorPayout: ''
 };
-var validProTxUpServPayloadHexString = '0100a45f4e6af45dfc15d44147ec6e5ab0d8d2048ea2e95e2820f7cdfd1c1b9175094312010000000000000000000000ffff0102030604d41976a9148603df234fe8f26064439de60ed13eb92d76cc5588ac8c62104a85a6efb165315d61e1660ee7e25c1831d240c35878053929ba377c88411fdaf84b78552f91c99eb267efec1be0e63b7459e66f142daabb0345477842592b68ce0f59b163657c480061fe834a888f9a9697e7635b36b4ede84a2374ad9831';
+var validProTxUpServPayloadHexString = '0100da47d3095ef10ccd6a80a4b1b4d5c98f8a6da42d537d641eb9d7778c16c371c500000000000000000000ffffc38d8f314e1f00201d2079de9c1ddc82f9c6a6e380a90a7cb73ca4559444b2518345b6696f810a951c228f519ba2cb6d542d85d76e8b8390d12e03df608ff0c79d08489ac52ed62e076642f31b7e0bfcf21ec927ecdb2718ad3e7f7b41db8c627c89ab40a0b45020ed0743a954740352a14e2869f0c7fd14c7cb9de7cc65850247ea59f487c779';
 var validProTxUpServPayloadBuffer = Buffer.from(validProTxUpServPayloadHexString, 'hex');
 var validProTxUpServPayload = ProTxUpServPayload.fromBuffer(validProTxUpServPayloadBuffer);
 
@@ -39,13 +38,12 @@ describe('ProTxUpServPayload', function () {
       var payload = ProTxUpServPayload.fromBuffer(Buffer.from(validProTxUpServPayloadHexString, 'hex'));
 
       expect(payload.version).to.be.equal(1);
-      expect(payload.proTXHash).to.be.equal('0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4');
+      expect(payload.proTXHash).to.be.equal('c571c3168c77d7b91e647d532da46d8a8fc9d5b4b1a4806acd0cf15e09d347da');
       // 1.2.3.6 mapped to IPv6
-      expect(payload.ipAddress).to.be.equal('00000000000000000000ffff01020306');
-      expect(payload.inputsHash).to.be.equal('887c37ba2939057858c340d231185ce2e70e66e1615d3165b1efa6854a10628c');
-      expect(payload.port).to.be.equal(1236);
-      expect(payload.protocolVersion).to.be.equal(70211);
-      expect(new Script(payload.scriptOperatorPayout).toAddress('testnet').toString()).to.be.equal('yYY42uyDZk8Rp32SSyjAAy2pUtzkAT2WDb');
+      expect(payload.ipAddress).to.be.equal('00000000000000000000ffffc38d8f31');
+      expect(payload.port).to.be.equal(19999);
+      expect(payload.inputsHash).to.be.equal('0a816f69b6458351b2449455a43cb77c0aa980e3a6c6f982dc1d9cde79201d20');
+      expect(new Script(payload.scriptOperatorPayout).toAddress('testnet').toString()).to.be.equal('');
     });
 
     it('Should throw in case if there is some unexpected information in raw payload', function() {
@@ -67,12 +65,12 @@ describe('ProTxUpServPayload', function () {
       var payload = ProTxUpServPayload.fromJSON(validProTxUpServPayloadJSON);
 
       expect(payload.version).to.be.equal(1);
-      expect(payload.proTXHash).to.be.equal('0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4');
+      expect(payload.proTXHash).to.be.equal('c571c3168c77d7b91e647d532da46d8a8fc9d5b4b1a4806acd0cf15e09d347da');
       // 1.2.3.6 mapped to IPv6
-      expect(payload.ipAddress).to.be.equal('00000000000000000000ffff01020306');
-      expect(payload.port).to.be.equal(1236);
-      expect(payload.protocolVersion).to.be.equal(70211);
-      expect(new Script(payload.scriptOperatorPayout).toAddress('testnet').toString()).to.be.equal('yYY42uyDZk8Rp32SSyjAAy2pUtzkAT2WDb');
+      expect(payload.ipAddress).to.be.equal('00000000000000000000ffffc38d8f31');
+      expect(payload.port).to.be.equal(19999);
+      expect(payload.inputsHash).to.be.equal('0a816f69b6458351b2449455a43cb77c0aa980e3a6c6f982dc1d9cde79201d20');
+      expect(new Script(payload.scriptOperatorPayout).toAddress('testnet').toString()).to.be.equal('');
     });
 
     after(function () {
@@ -95,12 +93,12 @@ describe('ProTxUpServPayload', function () {
       var payloadJSON = payload.toJSON();
 
       expect(payloadJSON.version).to.be.equal(1);
-      expect(payloadJSON.proTXHash).to.be.equal('0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4');
+      expect(payloadJSON.proTXHash).to.be.equal('c571c3168c77d7b91e647d532da46d8a8fc9d5b4b1a4806acd0cf15e09d347da');
       // 1.2.3.6 mapped to IPv6
-      expect(payloadJSON.ipAddress).to.be.equal('00000000000000000000ffff01020306');
-      expect(payloadJSON.port).to.be.equal(1236);
-      expect(payloadJSON.protocolVersion).to.be.equal(70211);
-      expect(new Script(payloadJSON.scriptOperatorPayout).toAddress('testnet').toString()).to.be.equal('yYY42uyDZk8Rp32SSyjAAy2pUtzkAT2WDb');
+      expect(payloadJSON.ipAddress).to.be.equal('00000000000000000000ffffc38d8f31');
+      expect(payloadJSON.port).to.be.equal(19999);
+      expect(payload.inputsHash).to.be.equal('0a816f69b6458351b2449455a43cb77c0aa980e3a6c6f982dc1d9cde79201d20');
+      expect(new Script(payloadJSON.scriptOperatorPayout).toAddress('testnet').toString()).to.be.equal('');
     });
     it('Should call #validate', function () {
       var payload = ProTxUpServPayload.fromJSON(validProTxUpServPayloadJSON);
@@ -126,12 +124,12 @@ describe('ProTxUpServPayload', function () {
       var restoredPayload = ProTxUpServPayload.fromBuffer(serializedPayload);
 
       expect(restoredPayload.version).to.be.equal(1);
-      expect(restoredPayload.proTXHash).to.be.equal('0975911b1cfdcdf720285ee9a28e04d2d8b05a6eec4741d415fc5df46a4e5fa4');
+      expect(restoredPayload.proTXHash).to.be.equal('c571c3168c77d7b91e647d532da46d8a8fc9d5b4b1a4806acd0cf15e09d347da');
       // 1.2.3.6 mapped to IPv6
-      expect(restoredPayload.ipAddress).to.be.equal('00000000000000000000ffff01020306');
-      expect(restoredPayload.port).to.be.equal(1236);
-      expect(restoredPayload.protocolVersion).to.be.equal(70211);
-      expect(new Script(restoredPayload.scriptOperatorPayout).toAddress('testnet').toString()).to.be.equal('yYY42uyDZk8Rp32SSyjAAy2pUtzkAT2WDb');
+      expect(restoredPayload.ipAddress).to.be.equal('00000000000000000000ffffc38d8f31');
+      expect(restoredPayload.port).to.be.equal(19999);
+      expect(payload.inputsHash).to.be.equal('0a816f69b6458351b2449455a43cb77c0aa980e3a6c6f982dc1d9cde79201d20');
+      expect(new Script(restoredPayload.scriptOperatorPayout).toAddress('testnet').toString()).to.be.equal('');
     });
     it('Should call #validate', function () {
       var payload = ProTxUpServPayload.fromJSON(validProTxUpServPayloadJSON);

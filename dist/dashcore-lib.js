@@ -55372,7 +55372,6 @@ var CURRENT_PAYLOAD_VERSION = 1;
 /**
  * @typedef {Object} ProRegTxPayloadJSON
  * @property {number} version	uint_16	2	Provider transaction version number. Currently set to 1.
- //* @property {number} protocolVersion
  * @property {number} type
  * @property {number} mode
  * @property {string} collateralHash
@@ -55392,7 +55391,6 @@ var CURRENT_PAYLOAD_VERSION = 1;
 /**
  * @class ProRegTxPayload
  * @property {number} version	uint_16	2	Provider transaction version number. Currently set to 1.
- //* @property {number} protocolVersion
  * @property {number} type
  * @property {number} mode
  * @property {string} collateralHash
@@ -55530,7 +55528,6 @@ ProRegTxPayload.prototype.toJSON = function toJSON(options) {
   this.validate();
   var payloadJSON = {
     version : this.version,
-    //protocolVersion: this.protocolVersion,
     type : this.type,
     mode : this.mode,
     collateralHash: this.collateralHash,

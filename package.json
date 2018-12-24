@@ -5,7 +5,8 @@
   "author": "Dash Core Group, Inc. <dev@dash.org>",
   "main": "index.js",
   "scripts": {
-    "lint": "jshint . || true",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "npm run build && npm run test:node && npm run test:browser && npm run lint",
     "test:node": "mocha $NODE_DEBUG_OPTION --no-timeouts --recursive",
     "test:browser": "karma start ./karma.conf.js --single-run",
@@ -112,6 +113,9 @@
   "devDependencies": {
     "brfs": "^2.0.1",
     "chai": "^4.2.0",
+    "eslint": "^5.11.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "karma": "^3.1.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",

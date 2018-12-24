@@ -1,30 +1,6 @@
-*.swp
-.idea
-coverage
+# do not track dependencies
 node_modules
-browser/tests.js
-docs/api
 
-dist/mocha-test.js
-
-CONTRIBUTING.html
-LICENSE.html
-README.html
-examples.html
-npm-debug.log
-
-apiref
-bower_components
-report
-.DS_Store
-
-
-bitcore.js
-bitcore.min.js
-bitcore.js.sig
-bitcore.min.js.sig
-tests.js
-
-launch.json
-
+# ignore generated code coverage output
+coverage
 .nyc_output/

@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 /* jshint unused: false */
 /* jshint latedef: false */
 var should = require('chai').should();

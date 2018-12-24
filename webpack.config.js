@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 

@@ -30,7 +30,7 @@ var karmaConfig = {
   port: 9876,
   colors: true,
   autoWatch: false,
-  browsers: ['Chrome', 'Firefox'],
+  browsers: ['ChromeHeadless', 'FirefoxHeadless'],
   singleRun: false,
   concurrency: Infinity,
   plugins: [
@@ -40,7 +40,13 @@ var karmaConfig = {
     'karma-chrome-launcher',
     'karma-firefox-launcher',
     'karma-webpack'
-  ]
+  ],
+  customLaunchers: {
+    FirefoxHeadless: {
+      base: 'Firefox',
+      flags: ['-headless'],
+    },
+  },
 };
 karmaConfig.preprocessors[src] = ['webpack'];
 karmaConfig.preprocessors[tests] = ['webpack'];

@@ -1,6 +1,3 @@
-/* eslint-disable */
-// TODO: Remove previous line and work through linting issues at next edit
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -73,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 144);
+/******/ 	return __webpack_require__(__webpack_require__.s = 145);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,8 +88,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 
-var base64 = __webpack_require__(146)
-var ieee754 = __webpack_require__(147)
+var base64 = __webpack_require__(147)
+var ieee754 = __webpack_require__(148)
 var isArray = __webpack_require__(87)
 
 exports.Buffer = Buffer
@@ -1871,16 +1868,19 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
 
-var errors = __webpack_require__(13);
+
+var errors = __webpack_require__(14);
 var _ = __webpack_require__(3);
 
 module.exports = {
@@ -19056,17 +19056,20 @@ if (typeof Object.create === 'function') {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(26)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(26)(module)))
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var _ = __webpack_require__(3);
-var constants = __webpack_require__(14);
+var constants = __webpack_require__(10);
 
 /**
  * Determines whether a string contains only hexadecimal values
@@ -19153,6 +19156,9 @@ module.exports = {
   isSha256HexString: function (string) {
     // * 2 as hash size in bytes, and when represented as a hex string 2 symbols is 1 byte
     return isHexa(string) && string.length === constants.SHA256_HASH_SIZE * 2;
+  },
+  isHexStringOfSize: function (string, size) {
+    return isHexa(string) && string.length === size;
   }
 };
 
@@ -19230,10 +19236,13 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var buffer = __webpack_require__(0);
-var assert = __webpack_require__(53);
+var assert = __webpack_require__(54);
 
 var js = __webpack_require__(4);
 var $ = __webpack_require__(1);
@@ -19415,10 +19424,13 @@ module.exports.EMPTY_BUFFER = new Buffer(0);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var bufferUtil = __webpack_require__(6);
-var assert = __webpack_require__(53);
+var assert = __webpack_require__(54);
 
 var BufferWriter = function BufferWriter(obj) {
   if (!(this instanceof BufferWriter))
@@ -19574,12 +19586,15 @@ module.exports = BufferWriter;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
 var BufferUtil = __webpack_require__(6);
-var BN = __webpack_require__(10);
+var BN = __webpack_require__(11);
 
 var BufferReader = function BufferReader(buf) {
   if (!(this instanceof BufferReader)) {
@@ -19780,10 +19795,13 @@ module.exports = BufferReader;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
-var sha512 = __webpack_require__(172);
-var x11hash = __webpack_require__(176);
+
+
+var sha512 = __webpack_require__(173);
+var x11hash = __webpack_require__(177);
 var crypto = __webpack_require__(67);
 var BufferUtil = __webpack_require__(6);
 var $ = __webpack_require__(1);
@@ -19877,12 +19895,59 @@ Hash.sha512hmac = function(data, key) {
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  // Public key id size in bytes
+  PUBKEY_ID_SIZE: 20,
+  // Standard compact size variable, size in bytes
+  COMPACT_SIGNATURE_SIZE: 65,
+  // SHA256 hash size in bytes
+  SHA256_HASH_SIZE: 32,
+  // Quorum BLS Public Key size in bytes
+  BLS_PUBLIC_KEY_SIZE: 48,
+  // BLS Signature size in bytes
+  BLS_SIGNATURE_SIZE: 96,
+  registeredTransactionTypes: {
+    TRANSACTION_NORMAL: 0,
+    TRANSACTION_PROVIDER_REGISTER: 1,
+    TRANSACTION_PROVIDER_UPDATE_SERVICE: 2,
+    TRANSACTION_PROVIDER_UPDATE_REGISTRAR: 3,
+    TRANSACTION_PROVIDER_UPDATE_REVOKE: 4,
+    TRANSACTION_COINBASE: 5,
+    TRANSACTION_QUORUM_COMMITMENT: 6,
+    TRANSACTION_SUBTX_REGISTER: 8,
+    TRANSACTION_SUBTX_TOPUP: 9,
+    TRANSACTION_SUBTX_RESETKEY: 10,
+    TRANSACTION_SUBTX_CLOSEACCOUNT: 11,
+    TRANSACTION_SUBTX_TRANSITION: 12,
+  },
+  EMPTY_SIGNATURE_SIZE: 0,
+  primitives: {
+    BOOLEAN: 1,
+  },
+  ipAddresses: {
+    IPV4MAPPEDHOST: 16,
+    PORT: 2,
+  },
+  IP_ADDRESS_SIZE: 16,
+  EMPTY_IPV6_ADDRESS: '[0:0:0:0:0:0:0:0]:0',
+  EMPTY_IPV4_ADDRESS: '0.0.0.0:0',
+  CURRENT_PROTOCOL_VERSION: 70211,
+};
+
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
-var BN = __webpack_require__(12);
+
+
+var BN = __webpack_require__(13);
 var $ = __webpack_require__(1);
 var _ = __webpack_require__(3);
 
@@ -20086,7 +20151,7 @@ module.exports = BN;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 var g;
@@ -20113,7 +20178,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {(function (module, exports) {
@@ -22406,10 +22471,13 @@ Mont.prototype.invm = function invm(a) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(26)(module)))
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var _ = __webpack_require__(3);
@@ -22463,7 +22531,7 @@ bitcore.Error.prototype = Object.create(Error.prototype);
 bitcore.Error.prototype.name = 'bitcore.Error';
 
 
-var data = __webpack_require__(149);
+var data = __webpack_require__(150);
 traverseRoot(bitcore.Error, data);
 
 module.exports = bitcore.Error;
@@ -22474,47 +22542,15 @@ module.exports.extend = function(spec) {
 
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = {
-  // Public key id size in bytes
-  PUBKEY_ID_SIZE: 20,
-  // Standard compact size variable, size in bytes
-  COMPACT_SIGNATURE_SIZE: 65,
-  // SHA256 hash size in bytes
-  SHA256_HASH_SIZE: 32,
-  // Quorum BLS Public Key size in bytes
-  BLS_PUBLIC_KEY_SIZE: 48,
-  //BLS Signature size in bytes
-  BLS_SIGNATURE_SIZE: 96,
-  registeredTransactionTypes: {
-    TRANSACTION_NORMAL: 0,
-    TRANSACTION_PROVIDER_REGISTER: 1,
-    TRANSACTION_PROVIDER_UPDATE_SERVICE: 2,
-    TRANSACTION_PROVIDER_UPDATE_REGISTRAR: 3,
-    TRANSACTION_PROVIDER_UPDATE_REVOKE: 4,
-    TRANSACTION_COINBASE: 5,
-    TRANSACTION_QUORUM_COMMITMENT: 6,
-    TRANSACTION_SUBTX_REGISTER: 8,
-    TRANSACTION_SUBTX_TOPUP: 9,
-    TRANSACTION_SUBTX_RESETKEY: 10,
-    TRANSACTION_SUBTX_CLOSEACCOUNT: 11,
-    TRANSACTION_SUBTX_TRANSITION: 12
-  },
-  EMPTY_SIGNATURE_SIZE: 0,
-  IP_ADDRESS_SIZE: 16,
-  CURRENT_PROTOCOL_VERSION: 70211
-};
-
-
-/***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 module.exports = __webpack_require__(126);
 
-module.exports.Interpreter = __webpack_require__(287);
+module.exports.Interpreter = __webpack_require__(288);
 
 
 /***/ }),
@@ -22539,9 +22575,12 @@ assert.equal = function assertEqual(l, r, msg) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
-var BN = __webpack_require__(10);
+
+
+var BN = __webpack_require__(11);
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
 var BufferUtil = __webpack_require__(6);
@@ -23124,15 +23163,15 @@ module.exports.isBuffer = function(obj) {
 
 var elliptic = exports;
 
-elliptic.version = __webpack_require__(234).version;
-elliptic.utils = __webpack_require__(235);
-elliptic.rand = __webpack_require__(54);
-elliptic.curve = __webpack_require__(59);
-elliptic.curves = __webpack_require__(241);
+elliptic.version = __webpack_require__(235).version;
+elliptic.utils = __webpack_require__(236);
+elliptic.rand = __webpack_require__(55);
+elliptic.curve = __webpack_require__(60);
+elliptic.curves = __webpack_require__(242);
 
 // Protocols
-elliptic.ec = __webpack_require__(243);
-elliptic.eddsa = __webpack_require__(246);
+elliptic.ec = __webpack_require__(244);
+elliptic.eddsa = __webpack_require__(247);
 
 
 /***/ }),
@@ -23609,23 +23648,26 @@ module.exports.xORTable = function(d, s1, s2, len) {
 
 var elliptic = exports;
 
-elliptic.version = __webpack_require__(267).version;
-elliptic.utils = __webpack_require__(268);
-elliptic.rand = __webpack_require__(54);
-elliptic.curve = __webpack_require__(61);
-elliptic.curves = __webpack_require__(274);
+elliptic.version = __webpack_require__(268).version;
+elliptic.utils = __webpack_require__(269);
+elliptic.rand = __webpack_require__(55);
+elliptic.curve = __webpack_require__(62);
+elliptic.curves = __webpack_require__(275);
 
 // Protocols
-elliptic.ec = __webpack_require__(276);
-elliptic.eddsa = __webpack_require__(279);
+elliptic.ec = __webpack_require__(277);
+elliptic.eddsa = __webpack_require__(280);
 
 
 /***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var Hash = __webpack_require__(9);
-var hashSignature = __webpack_require__(293);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var Hash = __webpack_require__(9);
+var hashSignature = __webpack_require__(294);
 
 function AbstractPayload() {
 
@@ -23891,9 +23933,12 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
-var BN = __webpack_require__(10);
+
+
+var BN = __webpack_require__(11);
 var Point = __webpack_require__(38);
 var Hash = __webpack_require__(9);
 var JSUtil = __webpack_require__(4);
@@ -24343,7 +24388,7 @@ module.exports = PublicKey;
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(236).Buffer;
+    Buffer = __webpack_require__(237).Buffer;
   } catch (e) {
   }
 
@@ -27758,15 +27803,15 @@ module.exports = function(module) {
 
 var elliptic = exports;
 
-elliptic.version = __webpack_require__(152).version;
-elliptic.utils = __webpack_require__(153);
-elliptic.rand = __webpack_require__(54);
-elliptic.hmacDRBG = __webpack_require__(155);
-elliptic.curve = __webpack_require__(55);
-elliptic.curves = __webpack_require__(167);
+elliptic.version = __webpack_require__(153).version;
+elliptic.utils = __webpack_require__(154);
+elliptic.rand = __webpack_require__(55);
+elliptic.hmacDRBG = __webpack_require__(156);
+elliptic.curve = __webpack_require__(56);
+elliptic.curves = __webpack_require__(168);
 
 // Protocols
-elliptic.ec = __webpack_require__(169);
+elliptic.ec = __webpack_require__(170);
 
 
 /***/ }),
@@ -27777,7 +27822,7 @@ elliptic.ec = __webpack_require__(169);
 
 
 var assert = __webpack_require__(16);
-var inherits = __webpack_require__(156);
+var inherits = __webpack_require__(157);
 
 exports.inherits = inherits;
 
@@ -28085,7 +28130,7 @@ exports.shr64_lo = shr64_lo;
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(269).Buffer;
+    Buffer = __webpack_require__(270).Buffer;
   } catch (e) {
   }
 
@@ -31468,17 +31513,20 @@ exports.shr64_lo = shr64_lo;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var Address = __webpack_require__(31);
 var Base58Check = __webpack_require__(48);
-var BN = __webpack_require__(10);
+var BN = __webpack_require__(11);
 var JSUtil = __webpack_require__(4);
 var Networks = __webpack_require__(37);
 var Point = __webpack_require__(38);
 var PublicKey = __webpack_require__(24);
-var Random = __webpack_require__(51);
+var Random = __webpack_require__(52);
 var $ = __webpack_require__(1);
 
 /**
@@ -31876,11 +31924,14 @@ module.exports = PrivateKey;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
-var errors = __webpack_require__(13);
+var errors = __webpack_require__(14);
 var Base58Check = __webpack_require__(48);
 var Networks = __webpack_require__(37);
 var Hash = __webpack_require__(9);
@@ -32487,7 +32538,10 @@ module.exports = CipherBase
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var buffer = __webpack_require__(0);
 
@@ -32496,9 +32550,9 @@ var Script = __webpack_require__(15);
 var Output = __webpack_require__(34);
 var BufferReader = __webpack_require__(8);
 var BufferWriter = __webpack_require__(7);
-var BN = __webpack_require__(10);
+var BN = __webpack_require__(11);
 var Hash = __webpack_require__(9);
-var ECDSA = __webpack_require__(52);
+var ECDSA = __webpack_require__(53);
 var $ = __webpack_require__(1);
 var _ = __webpack_require__(3);
 
@@ -32631,17 +32685,20 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var _ = __webpack_require__(3);
-var BN = __webpack_require__(10);
+var BN = __webpack_require__(11);
 var buffer = __webpack_require__(0);
 var bufferUtil = __webpack_require__(6);
 var JSUtil = __webpack_require__(4);
 var BufferWriter = __webpack_require__(7);
 var Script = __webpack_require__(15);
 var $ = __webpack_require__(1);
-var errors = __webpack_require__(13);
+var errors = __webpack_require__(14);
 
 var MAX_SAFE_INTEGER = 0x1fffffffffffff;
 
@@ -32809,9 +32866,9 @@ var hash = exports;
 
 hash.utils = __webpack_require__(28);
 hash.common = __webpack_require__(41);
-hash.sha = __webpack_require__(157);
-hash.ripemd = __webpack_require__(161);
-hash.hmac = __webpack_require__(162);
+hash.sha = __webpack_require__(158);
+hash.ripemd = __webpack_require__(162);
+hash.hmac = __webpack_require__(163);
 
 // Proxy hash functions to the main object
 hash.sha1 = hash.sha.sha1;
@@ -32857,7 +32914,7 @@ hash.ripemd160 = hash.ripemd.ripemd160;
 
 /*<replacement>*/
 
-var processNextTick = __webpack_require__(56);
+var processNextTick = __webpack_require__(57);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -32957,6 +33014,9 @@ function forEach(xs, f) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 var _ = __webpack_require__(3);
 
@@ -33230,9 +33290,12 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
-var BN = __webpack_require__(10);
+
+
+var BN = __webpack_require__(11);
 var BufferUtil = __webpack_require__(6);
 var ec = __webpack_require__(27).curves.secp256k1;
 var ecPoint = ec.curve.point.bind(ec.curve);
@@ -33424,7 +33487,7 @@ function randomBytes (size, cb) {
   return bytes
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(23)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(23)))
 
 /***/ }),
 /* 40 */
@@ -33815,13 +33878,13 @@ if (typeof Object.create === 'function') {
 
 var asn1 = exports;
 
-asn1.bignum = __webpack_require__(250);
+asn1.bignum = __webpack_require__(251);
 
-asn1.define = __webpack_require__(252).define;
+asn1.define = __webpack_require__(253).define;
 asn1.base = __webpack_require__(47);
 asn1.constants = __webpack_require__(118);
-asn1.decoders = __webpack_require__(258);
-asn1.encoders = __webpack_require__(260);
+asn1.decoders = __webpack_require__(259);
+asn1.encoders = __webpack_require__(261);
 
 
 /***/ }),
@@ -33830,10 +33893,10 @@ asn1.encoders = __webpack_require__(260);
 
 var base = exports;
 
-base.Reporter = __webpack_require__(255).Reporter;
+base.Reporter = __webpack_require__(256).Reporter;
 base.DecoderBuffer = __webpack_require__(117).DecoderBuffer;
 base.EncoderBuffer = __webpack_require__(117).EncoderBuffer;
-base.Node = __webpack_require__(256);
+base.Node = __webpack_require__(257);
 
 
 /***/ }),
@@ -33841,10 +33904,13 @@ base.Node = __webpack_require__(256);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
-var Base58 = __webpack_require__(63);
+var Base58 = __webpack_require__(64);
 var buffer = __webpack_require__(0);
 var sha256sha256 = __webpack_require__(9).sha256sha256;
 
@@ -33943,12 +34009,32 @@ module.exports = Base58Check;
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+module.exports = __webpack_require__(83);
+
+module.exports.Input = __webpack_require__(84);
+module.exports.Output = __webpack_require__(34);
+module.exports.UnspentOutput = __webpack_require__(128);
+module.exports.Signature = __webpack_require__(51);
+module.exports.Sighash = __webpack_require__(33);
+module.exports.Payload = __webpack_require__(129);
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
-var errors = __webpack_require__(13);
+var errors = __webpack_require__(14);
 var BufferWriter = __webpack_require__(7);
 var buffer = __webpack_require__(0);
 var BufferUtil = __webpack_require__(6);
@@ -34143,11 +34229,14 @@ module.exports = Input;
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -34156,7 +34245,7 @@ var BufferUtil = __webpack_require__(6);
 var JSUtil = __webpack_require__(4);
 
 var PublicKey = __webpack_require__(24);
-var errors = __webpack_require__(13);
+var errors = __webpack_require__(14);
 var Signature = __webpack_require__(17);
 
 /**
@@ -34240,11 +34329,14 @@ module.exports = TransactionSignature;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process, Buffer) {
+/* WEBPACK VAR INJECTION */(function(process, Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 function Random() {
 }
@@ -34305,17 +34397,20 @@ module.exports = Random;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23), __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
-var BN = __webpack_require__(10);
+
+
+var BN = __webpack_require__(11);
 var Point = __webpack_require__(38);
 var Signature = __webpack_require__(17);
 var PublicKey = __webpack_require__(24);
-var Random = __webpack_require__(51);
+var Random = __webpack_require__(52);
 var Hash = __webpack_require__(9);
 var BufferUtil = __webpack_require__(6);
 var _ = __webpack_require__(3);
@@ -34609,7 +34704,7 @@ module.exports = ECDSA;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35104,10 +35199,10 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var r;
@@ -35165,7 +35260,7 @@ if (typeof self === 'object') {
 } else {
   // Node.js or Web worker with no crypto support
   try {
-    var crypto = __webpack_require__(154);
+    var crypto = __webpack_require__(155);
     if (typeof crypto.randomBytes !== 'function')
       throw new Error('Not supported');
 
@@ -35178,7 +35273,7 @@ if (typeof self === 'object') {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35186,14 +35281,14 @@ if (typeof self === 'object') {
 
 var curve = exports;
 
-curve.base = __webpack_require__(163);
-curve.short = __webpack_require__(164);
-curve.mont = __webpack_require__(165);
-curve.edwards = __webpack_require__(166);
+curve.base = __webpack_require__(164);
+curve.short = __webpack_require__(165);
+curve.mont = __webpack_require__(166);
+curve.edwards = __webpack_require__(167);
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35244,7 +35339,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // based on the aes implimentation in triple sec
@@ -35478,7 +35573,7 @@ module.exports.AES = AES
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(5).Buffer
@@ -35529,7 +35624,7 @@ module.exports = EVP_BytesToKey
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35537,19 +35632,19 @@ module.exports = EVP_BytesToKey
 
 var curve = exports;
 
-curve.base = __webpack_require__(237);
-curve.short = __webpack_require__(238);
-curve.mont = __webpack_require__(239);
-curve.edwards = __webpack_require__(240);
+curve.base = __webpack_require__(238);
+curve.short = __webpack_require__(239);
+curve.mont = __webpack_require__(240);
+curve.edwards = __webpack_require__(241);
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(249)
-var aesid = __webpack_require__(263)
-var fixProc = __webpack_require__(264)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(250)
+var aesid = __webpack_require__(264)
+var fixProc = __webpack_require__(265)
 var ciphers = __webpack_require__(77)
 var compat = __webpack_require__(104)
 module.exports = parseKeys
@@ -35657,7 +35752,7 @@ function decrypt (data, password) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35665,14 +35760,14 @@ function decrypt (data, password) {
 
 var curve = exports;
 
-curve.base = __webpack_require__(270);
-curve.short = __webpack_require__(271);
-curve.mont = __webpack_require__(272);
-curve.edwards = __webpack_require__(273);
+curve.base = __webpack_require__(271);
+curve.short = __webpack_require__(272);
+curve.mont = __webpack_require__(273);
+curve.edwards = __webpack_require__(274);
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* eslint-disable node/no-deprecated-api */
@@ -35740,11 +35835,14 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var bs58 = __webpack_require__(125);
@@ -35818,28 +35916,17 @@ module.exports = Base58;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(83);
-
-module.exports.Input = __webpack_require__(84);
-module.exports.Output = __webpack_require__(34);
-module.exports.UnspentOutput = __webpack_require__(128);
-module.exports.Signature = __webpack_require__(50);
-module.exports.Sighash = __webpack_require__(33);
-module.exports.Payload = __webpack_require__(129);
-
-
-/***/ }),
 /* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
-var BN = __webpack_require__(10);
+var BN = __webpack_require__(11);
 var BufferUtil = __webpack_require__(6);
 var BufferReader = __webpack_require__(8);
 var BufferWriter = __webpack_require__(7);
@@ -36269,7 +36356,7 @@ exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = _
 exports.createHash = exports.Hash = __webpack_require__(42)
 exports.createHmac = exports.Hmac = __webpack_require__(101)
 
-var algos = __webpack_require__(204)
+var algos = __webpack_require__(205)
 var algoKeys = Object.keys(algos)
 var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(algoKeys)
 exports.getHashes = function () {
@@ -36280,7 +36367,7 @@ var p = __webpack_require__(104)
 exports.pbkdf2 = p.pbkdf2
 exports.pbkdf2Sync = p.pbkdf2Sync
 
-var aes = __webpack_require__(206)
+var aes = __webpack_require__(207)
 
 exports.Cipher = aes.Cipher
 exports.createCipher = aes.createCipher
@@ -36293,7 +36380,7 @@ exports.createDecipheriv = aes.createDecipheriv
 exports.getCiphers = aes.getCiphers
 exports.listCiphers = aes.listCiphers
 
-var dh = __webpack_require__(224)
+var dh = __webpack_require__(225)
 
 exports.DiffieHellmanGroup = dh.DiffieHellmanGroup
 exports.createDiffieHellmanGroup = dh.createDiffieHellmanGroup
@@ -36301,16 +36388,16 @@ exports.getDiffieHellman = dh.getDiffieHellman
 exports.createDiffieHellman = dh.createDiffieHellman
 exports.DiffieHellman = dh.DiffieHellman
 
-var sign = __webpack_require__(230)
+var sign = __webpack_require__(231)
 
 exports.createSign = sign.createSign
 exports.Sign = sign.Sign
 exports.createVerify = sign.createVerify
 exports.Verify = sign.Verify
 
-exports.createECDH = __webpack_require__(266)
+exports.createECDH = __webpack_require__(267)
 
-var publicEncrypt = __webpack_require__(282)
+var publicEncrypt = __webpack_require__(283)
 
 exports.publicEncrypt = publicEncrypt.publicEncrypt
 exports.privateEncrypt = publicEncrypt.privateEncrypt
@@ -36330,7 +36417,7 @@ exports.privateDecrypt = publicEncrypt.privateDecrypt
 //   }
 // })
 
-var rf = __webpack_require__(286)
+var rf = __webpack_require__(287)
 
 exports.randomFill = rf.randomFill
 exports.randomFillSync = rf.randomFillSync
@@ -36370,7 +36457,7 @@ exports.constants = {
 
 var inherits = __webpack_require__(2)
 var HashBase = __webpack_require__(94)
-var Buffer = __webpack_require__(198).Buffer
+var Buffer = __webpack_require__(199).Buffer
 
 var ARRAY16 = new Array(16)
 
@@ -36547,10 +36634,10 @@ var inherits = __webpack_require__(2);
 
 inherits(Stream, EE);
 Stream.Readable = __webpack_require__(71);
-Stream.Writable = __webpack_require__(194);
-Stream.Duplex = __webpack_require__(195);
-Stream.Transform = __webpack_require__(196);
-Stream.PassThrough = __webpack_require__(197);
+Stream.Writable = __webpack_require__(195);
+Stream.Duplex = __webpack_require__(196);
+Stream.Transform = __webpack_require__(197);
+Stream.PassThrough = __webpack_require__(198);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -36966,7 +37053,7 @@ exports.Readable = exports;
 exports.Writable = __webpack_require__(72);
 exports.Duplex = __webpack_require__(36);
 exports.Transform = __webpack_require__(98);
-exports.PassThrough = __webpack_require__(193);
+exports.PassThrough = __webpack_require__(194);
 
 
 /***/ }),
@@ -37003,7 +37090,7 @@ exports.PassThrough = __webpack_require__(193);
 
 /*<replacement>*/
 
-var processNextTick = __webpack_require__(56);
+var processNextTick = __webpack_require__(57);
 /*</replacement>*/
 
 module.exports = Writable;
@@ -37046,7 +37133,7 @@ util.inherits = __webpack_require__(44);
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(192)
+  deprecate: __webpack_require__(193)
 };
 /*</replacement>*/
 
@@ -37638,7 +37725,7 @@ Writable.prototype._destroy = function (err, cb) {
   this.end();
   cb(err);
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23), __webpack_require__(190).setImmediate, __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23), __webpack_require__(191).setImmediate, __webpack_require__(12)))
 
 /***/ }),
 /* 73 */
@@ -38101,11 +38188,11 @@ var exports = module.exports = function SHA (algorithm) {
   return new Algorithm()
 }
 
-exports.sha = __webpack_require__(199)
-exports.sha1 = __webpack_require__(200)
-exports.sha224 = __webpack_require__(201)
+exports.sha = __webpack_require__(200)
+exports.sha1 = __webpack_require__(201)
+exports.sha224 = __webpack_require__(202)
 exports.sha256 = __webpack_require__(99)
-exports.sha384 = __webpack_require__(202)
+exports.sha384 = __webpack_require__(203)
 exports.sha512 = __webpack_require__(100)
 
 
@@ -38116,19 +38203,19 @@ exports.sha512 = __webpack_require__(100)
 "use strict";
 
 
-exports.utils = __webpack_require__(208);
-exports.Cipher = __webpack_require__(209);
-exports.DES = __webpack_require__(210);
-exports.CBC = __webpack_require__(211);
-exports.EDE = __webpack_require__(212);
+exports.utils = __webpack_require__(209);
+exports.Cipher = __webpack_require__(210);
+exports.DES = __webpack_require__(211);
+exports.CBC = __webpack_require__(212);
+exports.EDE = __webpack_require__(213);
 
 
 /***/ }),
 /* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ciphers = __webpack_require__(214)
-var deciphers = __webpack_require__(222)
+var ciphers = __webpack_require__(215)
+var deciphers = __webpack_require__(223)
 var modes = __webpack_require__(110)
 
 function getCiphers () {
@@ -38147,12 +38234,12 @@ exports.listCiphers = exports.getCiphers = getCiphers
 /***/ (function(module, exports, __webpack_require__) {
 
 var modeModules = {
-  ECB: __webpack_require__(215),
-  CBC: __webpack_require__(216),
-  CFB: __webpack_require__(217),
-  CFB8: __webpack_require__(218),
-  CFB1: __webpack_require__(219),
-  OFB: __webpack_require__(220),
+  ECB: __webpack_require__(216),
+  CBC: __webpack_require__(217),
+  CFB: __webpack_require__(218),
+  CFB8: __webpack_require__(219),
+  CFB1: __webpack_require__(220),
+  OFB: __webpack_require__(221),
   CTR: __webpack_require__(108),
   GCM: __webpack_require__(108)
 }
@@ -38170,7 +38257,7 @@ module.exports = modes
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(232);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(233);
 var randomBytes = __webpack_require__(39);
 module.exports = crt;
 function blind(priv) {
@@ -38334,7 +38421,7 @@ utils.encode = function encode(arr, enc) {
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(284).Buffer;
+    Buffer = __webpack_require__(285).Buffer;
   } catch (e) {
   }
 
@@ -41717,7 +41804,10 @@ utils.encode = function encode(arr, enc) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
@@ -41973,14 +42063,17 @@ module.exports = Opcode;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
 var buffer = __webpack_require__(0);
 var compare = Buffer.compare || __webpack_require__(127);
 
-var errors = __webpack_require__(13);
+var errors = __webpack_require__(14);
 var BufferUtil = __webpack_require__(6);
 var JSUtil = __webpack_require__(4);
 var BufferReader = __webpack_require__(8);
@@ -41999,7 +42092,7 @@ var MultiSigInput = Input.MultiSig;
 var Output = __webpack_require__(34);
 var Script = __webpack_require__(15);
 var PrivateKey = __webpack_require__(30);
-var BN = __webpack_require__(10);
+var BN = __webpack_require__(11);
 var Payload = __webpack_require__(129);
 var registeredTransactionTypes = Payload.constants.registeredTransactionTypes;
 
@@ -43340,12 +43433,15 @@ module.exports = Transaction;
 /* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(49);
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
-module.exports.PublicKey = __webpack_require__(288);
-module.exports.PublicKeyHash = __webpack_require__(289);
-module.exports.MultiSig = __webpack_require__(290);
-module.exports.MultiSigScriptHash = __webpack_require__(291);
+module.exports = __webpack_require__(50);
+
+module.exports.PublicKey = __webpack_require__(289);
+module.exports.PublicKeyHash = __webpack_require__(290);
+module.exports.MultiSig = __webpack_require__(291);
+module.exports.MultiSigScriptHash = __webpack_require__(292);
 
 
 /***/ }),
@@ -43353,11 +43449,14 @@ module.exports.MultiSigScriptHash = __webpack_require__(291);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var _ = __webpack_require__(3);
 
-var errors = __webpack_require__(13);
+var errors = __webpack_require__(14);
 var $ = __webpack_require__(1);
 
 var UNITS = {
@@ -43598,24 +43697,27 @@ module.exports = Unit;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
 
-var assert = __webpack_require__(53);
+
+
+var assert = __webpack_require__(54);
 var buffer = __webpack_require__(0);
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
 
-var BN = __webpack_require__(10);
-var Base58 = __webpack_require__(63);
+var BN = __webpack_require__(11);
+var Base58 = __webpack_require__(64);
 var Base58Check = __webpack_require__(48);
 var Hash = __webpack_require__(9);
 var Network = __webpack_require__(37);
 var Point = __webpack_require__(38);
 var PrivateKey = __webpack_require__(30);
-var Random = __webpack_require__(51);
+var Random = __webpack_require__(52);
 
-var errors = __webpack_require__(13);
+var errors = __webpack_require__(14);
 var hdErrors = errors.HDPrivateKey;
 var BufferUtil = __webpack_require__(6);
 var JSUtil = __webpack_require__(4);
@@ -44033,7 +44135,7 @@ HDPrivateKey.fromSeed = function(hexa, network) {
 
 HDPrivateKey.prototype._calcHDPublicKey = function() {
   if (!this._hdPublicKey) {
-    var HDPublicKey = __webpack_require__(142);
+    var HDPublicKey = __webpack_require__(143);
     this._hdPublicKey = new HDPublicKey(this);
   }
 };
@@ -44787,7 +44889,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = __webpack_require__(150);
+exports.isBuffer = __webpack_require__(151);
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -44831,7 +44933,7 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-exports.inherits = __webpack_require__(151);
+exports.inherits = __webpack_require__(152);
 
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
@@ -44849,7 +44951,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(23)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(23)))
 
 /***/ }),
 /* 89 */
@@ -45361,9 +45463,9 @@ function g1_512_lo(xh, xl) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var Hasher = __webpack_require__(173).Hasher 
+var Hasher = __webpack_require__(174).Hasher 
 
-var C_x64 = __webpack_require__(174)
+var C_x64 = __webpack_require__(175)
 var X64Word = C_x64.Word;
 var X64WordArray = C_x64.WordArray;
 
@@ -46043,7 +46145,7 @@ module.exports = HashBase
 
 /*<replacement>*/
 
-var processNextTick = __webpack_require__(56);
+var processNextTick = __webpack_require__(57);
 /*</replacement>*/
 
 module.exports = Readable;
@@ -46089,7 +46191,7 @@ util.inherits = __webpack_require__(44);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(188);
+var debugUtil = __webpack_require__(189);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -46098,7 +46200,7 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(189);
+var BufferList = __webpack_require__(190);
 var destroyImpl = __webpack_require__(97);
 var StringDecoder;
 
@@ -47025,7 +47127,7 @@ function indexOf(xs, x) {
   }
   return -1;
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(23)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(23)))
 
 /***/ }),
 /* 96 */
@@ -47043,7 +47145,7 @@ module.exports = __webpack_require__(70).EventEmitter;
 
 /*<replacement>*/
 
-var processNextTick = __webpack_require__(56);
+var processNextTick = __webpack_require__(57);
 /*</replacement>*/
 
 // undocumented cb() API, needed for core, not for public API
@@ -47746,7 +47848,7 @@ module.exports = Sha512
 "use strict";
 
 var inherits = __webpack_require__(2)
-var Legacy = __webpack_require__(203)
+var Legacy = __webpack_require__(204)
 var Base = __webpack_require__(32)
 var Buffer = __webpack_require__(5).Buffer
 var md5 = __webpack_require__(102)
@@ -47829,7 +47931,7 @@ module.exports = {"sha224WithRSAEncryption":{"sign":"rsa","hash":"sha224","id":"
 /* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.pbkdf2 = __webpack_require__(205)
+exports.pbkdf2 = __webpack_require__(206)
 exports.pbkdf2Sync = __webpack_require__(107)
 
 
@@ -48062,11 +48164,11 @@ module.exports = {"aes-128-ecb":{"cipher":"AES","key":128,"iv":0,"mode":"ECB","t
 /* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aes = __webpack_require__(57)
+var aes = __webpack_require__(58)
 var Buffer = __webpack_require__(5).Buffer
 var Transform = __webpack_require__(32)
 var inherits = __webpack_require__(2)
-var GHASH = __webpack_require__(221)
+var GHASH = __webpack_require__(222)
 var xor = __webpack_require__(45)
 var incr32 = __webpack_require__(109)
 
@@ -48185,7 +48287,7 @@ module.exports = StreamCipher
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aes = __webpack_require__(57)
+var aes = __webpack_require__(58)
 var Buffer = __webpack_require__(5).Buffer
 var Transform = __webpack_require__(32)
 var inherits = __webpack_require__(2)
@@ -48381,7 +48483,7 @@ function findPrime(bits, gen) {
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(225).Buffer;
+    Buffer = __webpack_require__(226).Buffer;
   } catch (e) {
   }
 
@@ -51763,8 +51865,8 @@ function findPrime(bits, gen) {
 /* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var bn = __webpack_require__(226);
-var brorand = __webpack_require__(54);
+var bn = __webpack_require__(227);
+var brorand = __webpack_require__(55);
 
 function MillerRabin(rand) {
   this.rand = rand || new brorand.Rand();
@@ -52144,7 +52246,7 @@ constants._reverse = function reverse(map) {
   return res;
 };
 
-constants.der = __webpack_require__(257);
+constants.der = __webpack_require__(258);
 
 
 /***/ }),
@@ -52789,7 +52891,7 @@ module.exports = {"1.3.132.0.10":"secp256k1","1.3.132.0.33":"p224","1.2.840.1004
 /***/ (function(module, exports, __webpack_require__) {
 
 var createHash = __webpack_require__(42)
-var Buffer = __webpack_require__(62).Buffer
+var Buffer = __webpack_require__(63).Buffer
 
 module.exports = function (seed, len) {
   var t = Buffer.alloc(0)
@@ -52828,7 +52930,7 @@ module.exports = function xor (a, b) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var BN = __webpack_require__(81)
-var Buffer = __webpack_require__(62).Buffer
+var Buffer = __webpack_require__(63).Buffer
 
 function withPublic (paddedMsg, key) {
   return Buffer.from(paddedMsg
@@ -52932,7 +53034,10 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var Address = __webpack_require__(31);
 var BufferReader = __webpack_require__(8);
@@ -52944,7 +53049,7 @@ var Signature = __webpack_require__(17);
 var Networks = __webpack_require__(37);
 var $ = __webpack_require__(1);
 var _ = __webpack_require__(3);
-var errors = __webpack_require__(13);
+var errors = __webpack_require__(14);
 var buffer = __webpack_require__(0);
 var BufferUtil = __webpack_require__(6);
 var JSUtil = __webpack_require__(4);
@@ -54046,6 +54151,9 @@ module.exports = function(cmp,to){
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var _ = __webpack_require__(3);
@@ -54152,7 +54260,10 @@ module.exports = UnspentOutput;
 /* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Payload = __webpack_require__(292);
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var Payload = __webpack_require__(293);
 
 Payload.ProUpRegTxPayload = __webpack_require__(139);
 Payload.ProUpRevTxPayload = __webpack_require__(140);
@@ -54162,11 +54273,10 @@ Payload.SubTxResetKeyPayload = __webpack_require__(132);
 Payload.SubTxTopupPayload = __webpack_require__(133);
 Payload.SubTxTransitionPayload = __webpack_require__(134);
 Payload.CoinbasePayload = __webpack_require__(135);
+Payload.constants = __webpack_require__(10);
 Payload.ProRegTxPayload = __webpack_require__(137);
 Payload.ProTxUpServPayload = __webpack_require__(138);
 Payload.CommitmentTxPayload = __webpack_require__(136)
-
-Payload.constants = __webpack_require__(14);
 
 module.exports = Payload;
 
@@ -54175,14 +54285,17 @@ module.exports = Payload;
 /* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferWriter = __webpack_require__(7);
 var BufferReader = __webpack_require__(8);
 var AbstractPayload = __webpack_require__(22);
 var utils = __webpack_require__(4);
 var PrivateKey = __webpack_require__(30);
-var BigNumber = __webpack_require__(12);
+var BigNumber = __webpack_require__(13);
 
 var isUnsignedInteger = utils.isUnsignedInteger;
 var isSha256HexString = utils.isSha256HexString;
@@ -54384,8 +54497,11 @@ module.exports = SubTxCloseAccountPayload;
 /* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var utils = __webpack_require__(4);
-var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var utils = __webpack_require__(4);
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferUtil = __webpack_require__(6);
 var BufferWriter = __webpack_require__(7);
@@ -54609,7 +54725,10 @@ module.exports = SubTxRegisterPayload;
 /* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferUtil = __webpack_require__(6);
 var BufferWriter = __webpack_require__(7);
@@ -54617,7 +54736,7 @@ var BufferReader = __webpack_require__(8);
 var AbstractPayload = __webpack_require__(22);
 var utils = __webpack_require__(4);
 var PrivateKey = __webpack_require__(30);
-var BigNumber = __webpack_require__(12);
+var BigNumber = __webpack_require__(13);
 
 var isUnsignedInteger = utils.isUnsignedInteger;
 var isSha256HexString = utils.isSha256HexString;
@@ -54861,7 +54980,10 @@ module.exports = SubTxResetKeyPayload;
 /* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferWriter = __webpack_require__(7);
 var BufferReader = __webpack_require__(8);
@@ -54979,19 +55101,24 @@ SubTxTopupPayload.prototype.copy = function copy() {
 };
 
 module.exports = SubTxTopupPayload;
+
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
 /* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var constants = __webpack_require__(10);
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferWriter = __webpack_require__(7);
 var BufferReader = __webpack_require__(8);
 var AbstractPayload = __webpack_require__(22);
 var utils = __webpack_require__(4);
-var BigNumber = __webpack_require__(12);
+var BigNumber = __webpack_require__(13);
 
 var isUnsignedInteger = utils.isUnsignedInteger;
 var isHexString = utils.isHexaString;
@@ -55229,13 +55356,17 @@ SubTxTransitionPayload.prototype.copy = function copy() {
 };
 
 module.exports = SubTxTransitionPayload;
+
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
 /* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferWriter = __webpack_require__(7);
 var BufferReader = __webpack_require__(8);
@@ -55358,14 +55489,18 @@ CoinbasePayload.prototype.copy = function copy() {
 };
 
 module.exports = CoinbasePayload;
+
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
 /* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var utils = __webpack_require__(4);
-var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var utils = __webpack_require__(4);
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferWriter = __webpack_require__(7);
 var BufferReader = __webpack_require__(8);
@@ -55585,8 +55720,11 @@ module.exports = CommitmentTxPayload;
 /* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var utils = __webpack_require__(4);
-var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var utils = __webpack_require__(4);
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferWriter = __webpack_require__(7);
 var BufferReader = __webpack_require__(8);
@@ -55806,7 +55944,7 @@ ProRegTxPayload.prototype.toBuffer = function toBuffer(options) {
     payloadBufferWriter.writeVarintNum(Buffer.from(this.payloadSig, 'hex').length);
     payloadBufferWriter.write(Buffer.from(this.payloadSig, 'hex'));
   } else {
-    payloadBufferWriter.write(constants.EMPTY_SIGNATURE_SIZE);
+    payloadBufferWriter.writeVarintNum(constants.EMPTY_SIGNATURE_SIZE);
   }
 
   return payloadBufferWriter.toBuffer();
@@ -55824,7 +55962,10 @@ module.exports = ProRegTxPayload;
 /* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferWriter = __webpack_require__(7);
 var BufferReader = __webpack_require__(8);
@@ -56034,13 +56175,16 @@ module.exports = ProUpServTxPayload;
 /* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferWriter = __webpack_require__(7);
 var BufferReader = __webpack_require__(8);
 var AbstractPayload = __webpack_require__(22);
 var utils = __webpack_require__(4);
-var BigNumber = __webpack_require__(12);
+var BigNumber = __webpack_require__(13);
 
 var isUnsignedInteger = utils.isUnsignedInteger;
 var isHexString = utils.isHexaString;
@@ -56273,13 +56417,16 @@ module.exports = ProUpRegTxPayload;
 /* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var constants = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var constants = __webpack_require__(10);
 var Preconditions = __webpack_require__(1);
 var BufferWriter = __webpack_require__(7);
 var BufferReader = __webpack_require__(8);
 var AbstractPayload = __webpack_require__(22);
 var utils = __webpack_require__(4);
-var BigNumber = __webpack_require__(12);
+var BigNumber = __webpack_require__(13);
 
 var isUnsignedInteger = utils.isUnsignedInteger;
 var isHexString = utils.isHexaString;
@@ -56294,7 +56441,6 @@ var HASH_SIZE = constants.SHA256_HASH_SIZE;
  * @property {string} proTXHash
  * @property {number} reason
  * @property {string} inputsHash
- * @property {number} payloadSigSize
  * @property {string} payloadSig
  */
 
@@ -56304,7 +56450,6 @@ var HASH_SIZE = constants.SHA256_HASH_SIZE;
  * @property {string} proTXHash uint256	32	The hash of the provider transaction
  * @property {number} reason uint_16	2	The reason for revoking the key.
  * @property {string} inputsHash uint256	32	Hash of all the outpoints of the transaction inputs
- * @property {number} payloadSigSize compactSize uint	1-9	Size of the Signature
  * @property {string} payloadSig BLSSig Signature of the hash of the ProTx fields. Signed by the Operator.
  */
 function ProUpRevTxPayload(payloadJSON) {
@@ -56346,7 +56491,6 @@ ProUpRevTxPayload.serializeJSONToBuffer = function (transitionPayloadJSON) {
 
   if (transitionPayloadJSON.payloadSig) {
     var signatureBuf = Buffer.from(transitionPayloadJSON.payloadSig, 'hex');
-    payloadBufferWriter.writeVarintNum(signatureBuf.length);
     payloadBufferWriter.write(signatureBuf);
   } else {
     payloadBufferWriter.writeVarintNum(constants.EMPTY_SIGNATURE_SIZE);
@@ -56368,16 +56512,7 @@ ProUpRevTxPayload.fromBuffer = function (rawPayloadBuffer) {
   payload.proTXHash = payloadBufferReader.read(HASH_SIZE).reverse().toString('hex');
   payload.reason = payloadBufferReader.readUInt16LE();
   payload.inputsHash = payloadBufferReader.read(HASH_SIZE).toString('hex');
-  var scriptPayoutSize = payloadBufferReader.readVarintNum();
-  payload.scriptPayout = payloadBufferReader.read(scriptPayoutSize).toString('hex');
-
-  if (!payloadBufferReader.finished()) {
-    signatureSize = payloadBufferReader.readVarintNum();
-  }
-
-  if (signatureSize > 0) {
-    payload.payloadSig = payloadBufferReader.read(signatureSize).toString('hex');
-  }
+  payload.payloadSig = payloadBufferReader.read(constants.BLS_SIGNATURE_SIZE).toString('hex');
 
   if (!payloadBufferReader.finished()) {
     throw new Error('Failed to parse payload: raw payload is bigger than expected.');
@@ -56489,7 +56624,10 @@ module.exports = ProUpRevTxPayload;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var BlockHeader = __webpack_require__(65);
@@ -56498,7 +56636,7 @@ var BufferReader = __webpack_require__(8);
 var BufferWriter = __webpack_require__(7);
 var Hash = __webpack_require__(9);
 var JSUtil = __webpack_require__(4);
-var Transaction = __webpack_require__(64);
+var Transaction = __webpack_require__(49);
 var $ = __webpack_require__(1);
 
 /**
@@ -56769,13 +56907,182 @@ module.exports = MerkleBlock;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
+var _ = __webpack_require__(3);
+var BufferReader = __webpack_require__(8);
+var BufferWriter = __webpack_require__(7);
+var BufferUtil = __webpack_require__(6);
+var $ = __webpack_require__(1);
+var Hash = __webpack_require__(9);
+var constants = __webpack_require__(10);
+var utils = __webpack_require__(4);
+var ipUtils = __webpack_require__(300);
+
+var isSha256 = utils.isSha256HexString;
+var isHexStringOfSize = utils.isHexStringOfSize;
+var isHexString = utils.isHexaString;
+var parseIp = ipUtils.bufferToIPAndPort;
+var serializeIp = ipUtils.ipAndPortToBuffer;
+
+var SHA256_HASH_SIZE = constants.SHA256_HASH_SIZE;
+var PUBKEY_ID_SIZE = constants.PUBKEY_ID_SIZE;
+
+/**
+ * @typedef {Object} SMLEntry
+ * @property {string} proRegTxHash uint256
+ * @property {string} service - ip and port
+ * @property {string} keyIDOperator - public key hash, 20 bytes
+ * @property {string} keyIDVoting - public key hash, 20 bytes
+ * @property {boolean} isValid
+ */
+
+/**
+ * @class SimplifiedMNListEntry
+ * @param {*} arg - A Buffer, JSON string, or Object representing a SmlEntry
+ * @constructor
+ * @property {string} proRegTxHash uint256
+ * @property {string} service - ip and port
+ * @property {string} keyIDOperator - public key hash, 20 bytes
+ * @property {string} keyIDVoting - public key hash, 20 bytes
+ * @property {boolean} isValid
+ */
+function SimplifiedMNListEntry(arg) {
+  if (arg) {
+    if (arg instanceof SimplifiedMNListEntry) {
+      return arg.copy();
+    } else if (BufferUtil.isBuffer(arg)) {
+      return SimplifiedMNListEntry.fromBuffer(arg);
+    } else if (_.isObject(arg)) {
+      return SimplifiedMNListEntry.fromObject(arg);
+    } else if (arg instanceof SimplifiedMNListEntry) {
+      return arg.copy();
+    } else if (isHexString(arg)) {
+      return SimplifiedMNListEntry.fromHexString(arg);
+    } else {
+      throw new TypeError('Unrecognized argument for SimplifiedMNListEntry');
+    }
+  }
+}
+
+/**
+ * Parse buffer and returns SimplifiedMNListEntry
+ * @param buffer
+ * @return {SimplifiedMNListEntry}
+ */
+SimplifiedMNListEntry.fromBuffer = function fromBuffer(buffer) {
+  var bufferReader = new BufferReader(buffer);
+
+  return SimplifiedMNListEntry.fromObject({
+    proRegTxHash: bufferReader.read(SHA256_HASH_SIZE).toString('hex'),
+    service: parseIp(bufferReader.read(ipUtils.IP_AND_PORT_SIZE)),
+    keyIDOperator: bufferReader.read(PUBKEY_ID_SIZE).toString('hex'),
+    keyIDVoting: bufferReader.read(PUBKEY_ID_SIZE).toString('hex'),
+    isValid: Boolean(bufferReader.readUInt8())
+  });
+};
+
+/**
+ * @param {string} string
+ * @return {SimplifiedMNListEntry}
+ */
+SimplifiedMNListEntry.fromHexString = function fromString(string) {
+  return SimplifiedMNListEntry.fromBuffer(Buffer.from(string, 'hex'));
+};
+
+/**
+ * Serialize SML entry to buffer
+ * @return {Buffer}
+ */
+SimplifiedMNListEntry.prototype.toBuffer = function toBuffer() {
+  this.validate();
+  var bufferWriter = new BufferWriter();
+
+  bufferWriter.write(Buffer.from(this.proRegTxHash, 'hex'));
+  bufferWriter.write(serializeIp(this.service));
+  bufferWriter.write(Buffer.from(this.keyIDOperator, 'hex'));
+  bufferWriter.write(Buffer.from(this.keyIDVoting, 'hex'));
+  bufferWriter.writeUInt8(Number(this.isValid));
+
+  return bufferWriter.toBuffer();
+};
+
+/**
+ * Create SMLEntry from an object
+ * @param {SMLEntry} obj
+ * @return {SimplifiedMNListEntry}
+ */
+SimplifiedMNListEntry.fromObject = function fromObject(obj) {
+  var SMLEntry = new SimplifiedMNListEntry();
+  SMLEntry.proRegTxHash = obj.proRegTxHash;
+  SMLEntry.service = obj.service;
+  SMLEntry.keyIDOperator = obj.keyIDOperator;
+  SMLEntry.keyIDVoting = obj.keyIDVoting;
+  SMLEntry.isValid = obj.isValid;
+
+  SMLEntry.validate();
+  return SMLEntry;
+};
+
+SimplifiedMNListEntry.prototype.validate = function validate() {
+  $.checkArgument(isSha256(this.proRegTxHash), 'Expected proRegTxHash to be a sha256 hex string');
+  if (!ipUtils.isZeroAddress(this.service)) {
+    $.checkArgument(ipUtils.isIPV4(this.service), 'Expected service to be a string with ip address and port');
+  }
+  if (!isHexStringOfSize(this.keyIDVoting, PUBKEY_ID_SIZE * 2)) {
+    console.log(this.keyIDVoting);
+  }
+  $.checkArgument(isHexStringOfSize(this.keyIDOperator, PUBKEY_ID_SIZE * 2), 'Expected keyIDOperator to be a pubkey id');
+  $.checkArgument(isHexStringOfSize(this.keyIDVoting, PUBKEY_ID_SIZE * 2), 'Expected keyIDVoting to be a pubkey id');
+  $.checkArgument(typeof this.isValid === 'boolean', 'Expected isValid to be a boolean');
+};
+
+SimplifiedMNListEntry.prototype.toObject = function toObject() {
+  return {
+    proRegTxHash: this.proRegTxHash,
+    service: this.service,
+    keyIDOperator: this.keyIDOperator,
+    keyIDVoting: this.keyIDVoting,
+    isValid: this.isValid
+  };
+};
+
+/**
+ * @return {Buffer}
+ */
+SimplifiedMNListEntry.prototype.getHash = function hash() {
+  return Hash.sha256sha256(this.toBuffer());
+};
+
+/**
+ * Creates a copy of SimplifiedMNListEntry
+ * @return {SimplifiedMNListEntry}
+ */
+SimplifiedMNListEntry.prototype.copy = function copy() {
+  return SimplifiedMNListEntry.fromBuffer(this.toBuffer());
+};
+
+module.exports = SimplifiedMNListEntry;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
+
+/***/ }),
+/* 143 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
 
-var BN = __webpack_require__(10);
-var Base58 = __webpack_require__(63);
+var BN = __webpack_require__(11);
+var Base58 = __webpack_require__(64);
 var Base58Check = __webpack_require__(48);
 var Hash = __webpack_require__(9);
 var HDPrivateKey = __webpack_require__(86);
@@ -56783,10 +57090,10 @@ var Network = __webpack_require__(37);
 var Point = __webpack_require__(38);
 var PublicKey = __webpack_require__(24);
 
-var bitcoreErrors = __webpack_require__(13);
+var bitcoreErrors = __webpack_require__(14);
 var errors = bitcoreErrors;
 var hdErrors = bitcoreErrors.HDPublicKey;
-var assert = __webpack_require__(53);
+var assert = __webpack_require__(54);
 
 var JSUtil = __webpack_require__(4);
 var BufferUtil = __webpack_require__(6);
@@ -57269,18 +57576,21 @@ module.exports = HDPublicKey;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
 var buffer = __webpack_require__(0);
 var compare = Buffer.compare || __webpack_require__(127);
 
-var errors = __webpack_require__(13);
+var errors = __webpack_require__(14);
 var BufferUtil = __webpack_require__(6);
 var JSUtil = __webpack_require__(4);
 var BufferReader = __webpack_require__(8);
@@ -57483,23 +57793,26 @@ module.exports = GovObject;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 144 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(145);
-
-
-/***/ }),
 /* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(146);
+
+
+/***/ }),
+/* 146 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global, Buffer) {
+/* WEBPACK VAR INJECTION */(function(global, Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var bitcore = module.exports;
 
 // module information
-bitcore.version = 'v' + __webpack_require__(148).version;
+bitcore.version = 'v' + __webpack_require__(149).version;
 bitcore.versionGuard = function(version) {
   if (version !== undefined) {
     var message = 'More than one instance of dashcore-lib found. ' +
@@ -57512,54 +57825,55 @@ global._dashcore = bitcore.version;
 
 // crypto
 bitcore.crypto = {};
-bitcore.crypto.BN = __webpack_require__(10);
-bitcore.crypto.ECDSA = __webpack_require__(52);
+bitcore.crypto.BN = __webpack_require__(11);
+bitcore.crypto.ECDSA = __webpack_require__(53);
 bitcore.crypto.Hash = __webpack_require__(9);
-bitcore.crypto.Random = __webpack_require__(51);
+bitcore.crypto.Random = __webpack_require__(52);
 bitcore.crypto.Point = __webpack_require__(38);
 bitcore.crypto.Signature = __webpack_require__(17);
 
 // encoding
 bitcore.encoding = {};
-bitcore.encoding.Base58 = __webpack_require__(63);
+bitcore.encoding.Base58 = __webpack_require__(64);
 bitcore.encoding.Base58Check = __webpack_require__(48);
 bitcore.encoding.BufferReader = __webpack_require__(8);
 bitcore.encoding.BufferWriter = __webpack_require__(7);
-bitcore.encoding.Varint = __webpack_require__(294);
+bitcore.encoding.Varint = __webpack_require__(295);
 
 // utilities
 bitcore.util = {};
 bitcore.util.buffer = __webpack_require__(6);
 bitcore.util.js = __webpack_require__(4);
 bitcore.util.preconditions = __webpack_require__(1);
-bitcore.util.hashUtil = __webpack_require__(295);
+bitcore.util.hashUtil = __webpack_require__(296);
 
 // errors thrown by the library
-bitcore.errors = __webpack_require__(13);
+bitcore.errors = __webpack_require__(14);
 
 // main bitcoin library
 bitcore.Address = __webpack_require__(31);
-bitcore.Block = __webpack_require__(296);
+bitcore.Block = __webpack_require__(297);
 bitcore.MerkleBlock = __webpack_require__(141);
-bitcore.MnListDiff = __webpack_require__(298);
+bitcore.SimplifiedMNListDiff = __webpack_require__(299);
+bitcore.SimplifiedMNListEntry = __webpack_require__(142);
 bitcore.BlockHeader = __webpack_require__(65);
 bitcore.HDPrivateKey = __webpack_require__(86);
-bitcore.HDPublicKey = __webpack_require__(142);
+bitcore.HDPublicKey = __webpack_require__(143);
 bitcore.Networks = __webpack_require__(37);
 bitcore.Opcode = __webpack_require__(82);
 bitcore.PrivateKey = __webpack_require__(30);
 bitcore.PublicKey = __webpack_require__(24);
 bitcore.Script = __webpack_require__(15);
-bitcore.Transaction = __webpack_require__(64);
-bitcore.GovObject = __webpack_require__(299);
-bitcore.URI = __webpack_require__(301);
+bitcore.Transaction = __webpack_require__(49);
+bitcore.GovObject = __webpack_require__(303);
+bitcore.URI = __webpack_require__(305);
 bitcore.Unit = __webpack_require__(85);
-bitcore.Message = __webpack_require__(308);
-bitcore.Mnemonic = __webpack_require__(309);
+bitcore.Message = __webpack_require__(312);
+bitcore.Mnemonic = __webpack_require__(313);
 
 // dependencies, subject to change
 bitcore.deps = {};
-bitcore.deps.bnjs = __webpack_require__(12);
+bitcore.deps.bnjs = __webpack_require__(13);
 bitcore.deps.bs58 = __webpack_require__(125);
 bitcore.deps.Buffer = Buffer;
 bitcore.deps.elliptic = __webpack_require__(27);
@@ -57568,10 +57882,10 @@ bitcore.deps._ = __webpack_require__(3);
 // Internal usage, exposed for testing/advanced tweaking
 bitcore.Transaction.sighash = __webpack_require__(33);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(0).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57729,7 +58043,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -57819,16 +58133,19 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"@dashevo/dashcore-lib","version":"1.0.0-alpha.21","description":"A pure and powerful JavaScript Dash library.","author":"Dash Core Group, Inc. <dev@dash.org>","main":"index.js","scripts":{"lint":"jshint . || true","test":"npm run build && npm run test:node && npm run test:browser && npm run lint","test:node":"mocha $NODE_DEBUG_OPTION --no-timeouts --recursive","test:browser":"karma start ./karma.conf.js --single-run","coverage":"nyc mocha --recursive","build":"webpack --display-error-details"},"contributors":[{"name":"Daniel Cousens","email":"bitcoin@dcousens.com"},{"name":"Esteban Ordano","email":"eordano@gmail.com"},{"name":"Gordon Hall","email":"gordon@bitpay.com"},{"name":"Jeff Garzik","email":"jgarzik@bitpay.com"},{"name":"Kyle Drake","email":"kyle@kyledrake.net"},{"name":"Manuel Araoz","email":"manuelaraoz@gmail.com"},{"name":"Matias Alejo Garcia","email":"ematiu@gmail.com"},{"name":"Ryan X. Charles","email":"ryanxcharles@gmail.com"},{"name":"Stefan Thomas","email":"moon@justmoon.net"},{"name":"Stephen Pair","email":"stephen@bitpay.com"},{"name":"Wei Lu","email":"luwei.here@gmail.com"},{"name":"UdjinM6","email":"UdjinM6@gmail.com"},{"name":"Jon Kindel","email":"jon@dash.org"},{"name":"Alex Werner","email":"alex@werner.fr"}],"keywords":["dash","transaction","address","p2p","ecies","cryptocurrency","blockchain","payment","bip21","bip32","bip37","bip69","bip70","multisig","dashcore"],"repository":{"type":"git","url":"https://github.com/dashevo/dashcore-lib.git"},"bugs":{"url":"https://github.com/dashevo/dashcore-lib/issues"},"homepage":"https://github.com/dashevo/dashcore-lib","browser":{"request":"browser-request"},"dependencies":{"@dashevo/x11-hash-js":"^1.0.2","bn.js":"=2.0.4","bs58":"=2.0.0","buffer-compare":"=1.0.0","elliptic":"=3.0.3","inherits":"=2.0.1","lodash":"^4.17.11","sha512":"=0.0.1","unorm":"^1.3.3"},"devDependencies":{"brfs":"^2.0.1","chai":"^4.2.0","karma":"^3.1.1","karma-chai":"^0.1.0","karma-chrome-launcher":"^2.2.0","karma-detect-browsers":"^2.3.3","karma-firefox-launcher":"^1.1.0","karma-mocha":"^1.3.0","karma-mocha-reporter":"^2.2.5","karma-webpack":"^3.0.5","mocha":"^5.2.0","nyc":"^13.1.0","raw-loader":"^0.5.1","sinon":"^4.5.0","transform-loader":"^0.2.4","uglifyjs-webpack-plugin":"^1.3.0","webpack":"^3.12.0"},"license":"MIT"}
+module.exports = {"name":"@dashevo/dashcore-lib","version":"1.0.0-alpha.23","description":"A pure and powerful JavaScript Dash library.","author":"Dash Core Group, Inc. <dev@dash.org>","main":"index.js","scripts":{"lint":"eslint .","lint:fix":"eslint . --fix","test":"npm run build && npm run test:node && npm run test:browser","test:node":"mocha $NODE_DEBUG_OPTION --no-timeouts --recursive","test:browser":"karma start ./karma.conf.js --single-run","coverage":"nyc mocha --recursive","build":"webpack --display-error-details"},"contributors":[{"name":"Daniel Cousens","email":"bitcoin@dcousens.com"},{"name":"Esteban Ordano","email":"eordano@gmail.com"},{"name":"Gordon Hall","email":"gordon@bitpay.com"},{"name":"Jeff Garzik","email":"jgarzik@bitpay.com"},{"name":"Kyle Drake","email":"kyle@kyledrake.net"},{"name":"Manuel Araoz","email":"manuelaraoz@gmail.com"},{"name":"Matias Alejo Garcia","email":"ematiu@gmail.com"},{"name":"Ryan X. Charles","email":"ryanxcharles@gmail.com"},{"name":"Stefan Thomas","email":"moon@justmoon.net"},{"name":"Stephen Pair","email":"stephen@bitpay.com"},{"name":"Wei Lu","email":"luwei.here@gmail.com"},{"name":"UdjinM6","email":"UdjinM6@gmail.com"},{"name":"Jon Kindel","email":"jon@dash.org"},{"name":"Alex Werner","email":"alex@werner.fr"},{"name":"Anton Suprunchuk","email":"antouhou@gmail.com"}],"keywords":["dash","transaction","address","p2p","ecies","cryptocurrency","blockchain","payment","bip21","bip32","bip37","bip69","bip70","multisig","dashcore"],"repository":{"type":"git","url":"https://github.com/dashevo/dashcore-lib.git"},"bugs":{"url":"https://github.com/dashevo/dashcore-lib/issues"},"homepage":"https://github.com/dashevo/dashcore-lib","browser":{"request":"browser-request"},"dependencies":{"@dashevo/x11-hash-js":"^1.0.2","bn.js":"=2.0.4","bs58":"=2.0.0","buffer-compare":"=1.0.0","elliptic":"=3.0.3","inherits":"=2.0.1","lodash":"^4.17.11","sha512":"=0.0.1","unorm":"^1.3.3"},"devDependencies":{"brfs":"^2.0.1","chai":"^4.2.0","eslint":"^5.11.0","eslint-config-airbnb-base":"^13.1.0","eslint-plugin-import":"^2.14.0","karma":"^3.1.1","karma-chai":"^0.1.0","karma-chrome-launcher":"^2.2.0","karma-detect-browsers":"^2.3.3","karma-firefox-launcher":"^1.1.0","karma-mocha":"^1.3.0","karma-mocha-reporter":"^2.2.5","karma-webpack":"^3.0.5","mocha":"^5.2.0","nyc":"^13.1.0","raw-loader":"^0.5.1","sinon":"^4.5.0","transform-loader":"^0.2.4","uglifyjs-webpack-plugin":"^1.3.0","webpack":"^3.12.0"},"license":"MIT"}
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var docsURL = 'http://bitcore.io/';
@@ -58046,7 +58363,7 @@ module.exports = [{
 
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports) {
 
 module.exports = function isBuffer(arg) {
@@ -58057,7 +58374,7 @@ module.exports = function isBuffer(arg) {
 }
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports) {
 
 if (typeof Object.create === 'function') {
@@ -58086,13 +58403,13 @@ if (typeof Object.create === 'function') {
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports) {
 
 module.exports = {"_args":[["elliptic@3.0.3","/Users/pascalmeyer/WebstormProjects/dashcore-lib"]],"_from":"elliptic@3.0.3","_id":"elliptic@3.0.3","_inBundle":false,"_integrity":"sha1-hlybQgv75VAGuflp+XoNLESWZZU=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@3.0.3","name":"elliptic","escapedName":"elliptic","rawSpec":"3.0.3","saveSpec":null,"fetchSpec":"3.0.3"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-3.0.3.tgz","_spec":"3.0.3","_where":"/Users/pascalmeyer/WebstormProjects/dashcore-lib","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^2.0.0","brorand":"^1.0.1","hash.js":"^1.0.0","inherits":"^2.0.1"},"description":"EC cryptography","devDependencies":{"browserify":"^3.44.2","jscs":"^1.11.3","jshint":"^2.6.0","mocha":"^2.1.0","uglify-js":"^2.4.13"},"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"test":"make lint && mocha --reporter=spec test/*-test.js"},"version":"3.0.3"}
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58249,13 +58566,13 @@ utils.getJSF = getJSF;
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58376,7 +58693,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports) {
 
 if (typeof Object.create === 'function') {
@@ -58405,21 +58722,21 @@ if (typeof Object.create === 'function') {
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.sha1 = __webpack_require__(158);
-exports.sha224 = __webpack_require__(159);
+exports.sha1 = __webpack_require__(159);
+exports.sha224 = __webpack_require__(160);
 exports.sha256 = __webpack_require__(90);
-exports.sha384 = __webpack_require__(160);
+exports.sha384 = __webpack_require__(161);
 exports.sha512 = __webpack_require__(91);
 
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58500,7 +58817,7 @@ SHA1.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58537,7 +58854,7 @@ SHA224.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58579,7 +58896,7 @@ SHA384.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58732,7 +59049,7 @@ var sh = [
 
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58786,13 +59103,13 @@ Hmac.prototype.digest = function digest(enc) {
 
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var bn = __webpack_require__(12);
+var bn = __webpack_require__(13);
 var elliptic = __webpack_require__(27);
 
 var getNAF = elliptic.utils.getNAF;
@@ -59096,15 +59413,15 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(55);
+var curve = __webpack_require__(56);
 var elliptic = __webpack_require__(27);
-var bn = __webpack_require__(12);
+var bn = __webpack_require__(13);
 var inherits = __webpack_require__(2);
 var Base = curve.base;
 
@@ -60010,14 +60327,14 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(55);
-var bn = __webpack_require__(12);
+var curve = __webpack_require__(56);
+var bn = __webpack_require__(13);
 var inherits = __webpack_require__(2);
 var Base = curve.base;
 
@@ -60178,15 +60495,15 @@ Point.prototype.getX = function getX() {
 
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(55);
+var curve = __webpack_require__(56);
 var elliptic = __webpack_require__(27);
-var bn = __webpack_require__(12);
+var bn = __webpack_require__(13);
 var inherits = __webpack_require__(2);
 var Base = curve.base;
 
@@ -60556,7 +60873,7 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60681,7 +60998,7 @@ defineCurve('ed25519', {
 
 var pre;
 try {
-  pre = __webpack_require__(168);
+  pre = __webpack_require__(169);
 } catch (e) {
   pre = undefined;
 }
@@ -60720,7 +61037,7 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -61506,19 +61823,19 @@ module.exports = {
 
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var bn = __webpack_require__(12);
+var bn = __webpack_require__(13);
 var elliptic = __webpack_require__(27);
 var utils = elliptic.utils;
 var assert = utils.assert;
 
-var KeyPair = __webpack_require__(170);
-var Signature = __webpack_require__(171);
+var KeyPair = __webpack_require__(171);
+var Signature = __webpack_require__(172);
 
 function EC(options) {
   if (!(this instanceof EC))
@@ -61679,13 +61996,13 @@ EC.prototype.verify = function verify(msg, signature, key, enc) {
 
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var bn = __webpack_require__(12);
+var bn = __webpack_require__(13);
 
 var elliptic = __webpack_require__(27);
 var utils = elliptic.utils;
@@ -61836,13 +62153,13 @@ KeyPair.prototype.inspect = function inspect() {
 
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var bn = __webpack_require__(12);
+var bn = __webpack_require__(13);
 
 var elliptic = __webpack_require__(27);
 var utils = elliptic.utils;
@@ -61908,14 +62225,14 @@ Signature.prototype.toDER = function toDER(enc) {
 
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(92)
-module.exports.hmac = __webpack_require__(175)
+module.exports.hmac = __webpack_require__(176)
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var WordArray = __webpack_require__(66)
@@ -62230,7 +62547,7 @@ module.exports.Hasher = Hasher
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var X32WordArray = __webpack_require__(66)
@@ -62272,7 +62589,7 @@ module.exports.WordArray = X64WordArray
 
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var sha512 = __webpack_require__(92).sha512
@@ -62371,23 +62688,23 @@ module.exports = HMAC
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var blake = __webpack_require__(177);
-var keccak = __webpack_require__(178).keccak_512;
-var skein = __webpack_require__(179);
-var luffa = __webpack_require__(180);
-var simd = __webpack_require__(181);
-var shavite = __webpack_require__(182);
-var cubehash = __webpack_require__(183);
-var jh = __webpack_require__(184);
-var echo = __webpack_require__(185);
-var groestl = __webpack_require__(186);
-var bmw = __webpack_require__(187);
+var blake = __webpack_require__(178);
+var keccak = __webpack_require__(179).keccak_512;
+var skein = __webpack_require__(180);
+var luffa = __webpack_require__(181);
+var simd = __webpack_require__(182);
+var shavite = __webpack_require__(183);
+var cubehash = __webpack_require__(184);
+var jh = __webpack_require__(185);
+var echo = __webpack_require__(186);
+var groestl = __webpack_require__(187);
+var bmw = __webpack_require__(188);
 var h = __webpack_require__(18);
 
 /**
@@ -62527,7 +62844,7 @@ module.exports.skein = function (str, format, output) {
 
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62750,7 +63067,7 @@ module.exports = function(input, format, output) {
 
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63272,7 +63589,7 @@ module.exports = methods;
 
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //from http://www.h2database.com/skein/
@@ -63407,7 +63724,7 @@ function block(c, tweak, b, off) {
 
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63900,7 +64217,7 @@ module.exports = function(input, format, output) {
 
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64382,7 +64699,7 @@ module.exports = function(input, format, output) {
 
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65081,7 +65398,7 @@ module.exports = function(input, format, output) {
 
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65418,7 +65735,7 @@ module.exports = function(input, format, output) {
 
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65915,7 +66232,7 @@ module.exports = function(input, format, output) {
 
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66206,7 +66523,7 @@ module.exports = function(input, format, output) {
 
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /////////////////////////////////////
@@ -67459,7 +67776,7 @@ module.exports = function(input, format, output) {
 
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67833,13 +68150,13 @@ module.exports = function(input, format, output) {
 
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67919,7 +68236,7 @@ module.exports = function () {
 }();
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -67975,7 +68292,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(191);
+__webpack_require__(192);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -67986,10 +68303,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -68179,10 +68496,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(23)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(23)))
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -68253,10 +68570,10 @@ function config (name) {
   return String(val).toLowerCase() === 'true';
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68309,35 +68626,35 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(72);
 
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(36);
 
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(71).Transform
 
 
 /***/ }),
-/* 197 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(71).PassThrough
 
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* eslint-disable node/no-deprecated-api */
@@ -68405,7 +68722,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -68505,7 +68822,7 @@ module.exports = Sha
 
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -68610,7 +68927,7 @@ module.exports = Sha1
 
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -68669,7 +68986,7 @@ module.exports = Sha224
 
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(2)
@@ -68732,7 +69049,7 @@ module.exports = Sha384
 
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68785,14 +69102,14 @@ module.exports = Hmac
 
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(103)
 
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {var checkParameters = __webpack_require__(105)
@@ -68896,17 +69213,17 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
   }), callback)
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(23)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(23)))
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var DES = __webpack_require__(207)
+var DES = __webpack_require__(208)
 var aes = __webpack_require__(77)
 var aesModes = __webpack_require__(78)
-var desModes = __webpack_require__(223)
-var ebtk = __webpack_require__(58)
+var desModes = __webpack_require__(224)
+var ebtk = __webpack_require__(59)
 
 function createCipher (suite, password) {
   suite = suite.toLowerCase()
@@ -68972,13 +69289,13 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var CipherBase = __webpack_require__(32)
 var des = __webpack_require__(76)
 var inherits = __webpack_require__(2)
-var Buffer = __webpack_require__(213).Buffer
+var Buffer = __webpack_require__(214).Buffer
 
 var modes = {
   'des-ede3-cbc': des.CBC.instantiate(des.EDE),
@@ -69028,7 +69345,7 @@ DES.prototype._final = function () {
 
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69291,7 +69608,7 @@ exports.padSplit = function padSplit(num, size, group) {
 
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69439,7 +69756,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69589,7 +69906,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69661,7 +69978,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
 
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69723,7 +70040,7 @@ EDE.prototype._unpad = DES.prototype._unpad;
 
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* eslint-disable node/no-deprecated-api */
@@ -69791,7 +70108,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var MODES = __webpack_require__(78)
@@ -69799,8 +70116,8 @@ var AuthCipher = __webpack_require__(111)
 var Buffer = __webpack_require__(5).Buffer
 var StreamCipher = __webpack_require__(112)
 var Transform = __webpack_require__(32)
-var aes = __webpack_require__(57)
-var ebtk = __webpack_require__(58)
+var aes = __webpack_require__(58)
+var ebtk = __webpack_require__(59)
 var inherits = __webpack_require__(2)
 
 function Cipher (mode, key, iv) {
@@ -69911,7 +70228,7 @@ exports.createCipher = createCipher
 
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports) {
 
 exports.encrypt = function (self, block) {
@@ -69924,7 +70241,7 @@ exports.decrypt = function (self, block) {
 
 
 /***/ }),
-/* 216 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var xor = __webpack_require__(45)
@@ -69947,7 +70264,7 @@ exports.decrypt = function (self, block) {
 
 
 /***/ }),
-/* 217 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(5).Buffer
@@ -69986,7 +70303,7 @@ exports.encrypt = function (self, data, decrypt) {
 
 
 /***/ }),
-/* 218 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(5).Buffer
@@ -70017,7 +70334,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 
 /***/ }),
-/* 219 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(5).Buffer
@@ -70065,7 +70382,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 
 /***/ }),
-/* 220 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(45)
@@ -70088,7 +70405,7 @@ exports.encrypt = function (self, chunk) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 221 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(5).Buffer
@@ -70183,7 +70500,7 @@ module.exports = GHASH
 
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AuthCipher = __webpack_require__(111)
@@ -70191,8 +70508,8 @@ var Buffer = __webpack_require__(5).Buffer
 var MODES = __webpack_require__(78)
 var StreamCipher = __webpack_require__(112)
 var Transform = __webpack_require__(32)
-var aes = __webpack_require__(57)
-var ebtk = __webpack_require__(58)
+var aes = __webpack_require__(58)
+var ebtk = __webpack_require__(59)
 var inherits = __webpack_require__(2)
 
 function Decipher (mode, key, iv) {
@@ -70313,7 +70630,7 @@ exports.createDecipheriv = createDecipheriv
 
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, exports) {
 
 exports['des-ecb'] = {
@@ -70343,13 +70660,13 @@ exports['des-ede'] = {
 
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(113)
-var primes = __webpack_require__(228)
+var primes = __webpack_require__(229)
 
-var DH = __webpack_require__(229)
+var DH = __webpack_require__(230)
 
 function getDiffieHellman (mod) {
   var prime = new Buffer(primes[mod].prime, 'hex')
@@ -70392,13 +70709,13 @@ exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 225 */
+/* 226 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 226 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {(function (module, exports) {
@@ -70453,7 +70770,7 @@ exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(227).Buffer;
+    Buffer = __webpack_require__(228).Buffer;
   } catch (e) {
   }
 
@@ -73832,19 +74149,19 @@ exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(26)(module)))
 
 /***/ }),
-/* 227 */
+/* 228 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 228 */
+/* 229 */
 /***/ (function(module, exports) {
 
 module.exports = {"modp1":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a63a3620ffffffffffffffff"},"modp2":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece65381ffffffffffffffff"},"modp5":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca237327ffffffffffffffff"},"modp14":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aacaa68ffffffffffffffff"},"modp15":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a93ad2caffffffffffffffff"},"modp16":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c934063199ffffffffffffffff"},"modp17":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dcc4024ffffffffffffffff"},"modp18":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"}}
 
 /***/ }),
-/* 229 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(114);
@@ -74015,14 +74332,14 @@ function formatReturnValue(bn, enc) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 230 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(42)
 var stream = __webpack_require__(69)
 var inherits = __webpack_require__(2)
-var sign = __webpack_require__(231)
-var verify = __webpack_require__(265)
+var sign = __webpack_require__(232)
+var verify = __webpack_require__(266)
 
 var algorithms = __webpack_require__(103)
 Object.keys(algorithms).forEach(function (key) {
@@ -74113,7 +74430,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 231 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
@@ -74121,7 +74438,7 @@ var createHmac = __webpack_require__(101)
 var crt = __webpack_require__(79)
 var EC = __webpack_require__(19).ec
 var BN = __webpack_require__(25)
-var parseKeys = __webpack_require__(60)
+var parseKeys = __webpack_require__(61)
 var curves = __webpack_require__(121)
 
 function sign (hash, key, hashType, signType, tag) {
@@ -74265,7 +74582,7 @@ module.exports.makeKey = makeKey
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 232 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {(function (module, exports) {
@@ -74320,7 +74637,7 @@ module.exports.makeKey = makeKey
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(233).Buffer;
+    Buffer = __webpack_require__(234).Buffer;
   } catch (e) {
   }
 
@@ -77699,19 +78016,19 @@ module.exports.makeKey = makeKey
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(26)(module)))
 
 /***/ }),
-/* 233 */
+/* 234 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 234 */
+/* 235 */
 /***/ (function(module, exports) {
 
 module.exports = {"_args":[["elliptic@6.4.1","/Users/pascalmeyer/WebstormProjects/dashcore-lib"]],"_development":true,"_from":"elliptic@6.4.1","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/browserify-sign/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.1","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.1","saveSpec":null,"fetchSpec":"6.4.1"},"_requiredBy":["/browserify-sign"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_spec":"6.4.1","_where":"/Users/pascalmeyer/WebstormProjects/dashcore-lib","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"}
 
 /***/ }),
-/* 235 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -77838,13 +78155,13 @@ utils.intFromLE = intFromLE;
 
 
 /***/ }),
-/* 236 */
+/* 237 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 237 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -78226,13 +78543,13 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 238 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(59);
+var curve = __webpack_require__(60);
 var elliptic = __webpack_require__(19);
 var BN = __webpack_require__(25);
 var inherits = __webpack_require__(2);
@@ -79170,13 +79487,13 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 
 /***/ }),
-/* 239 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(59);
+var curve = __webpack_require__(60);
 var BN = __webpack_require__(25);
 var inherits = __webpack_require__(2);
 var Base = curve.base;
@@ -79357,13 +79674,13 @@ Point.prototype.getX = function getX() {
 
 
 /***/ }),
-/* 240 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(59);
+var curve = __webpack_require__(60);
 var elliptic = __webpack_require__(19);
 var BN = __webpack_require__(25);
 var inherits = __webpack_require__(2);
@@ -79797,7 +80114,7 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 
 /***/ }),
-/* 241 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -79970,7 +80287,7 @@ defineCurve('ed25519', {
 
 var pre;
 try {
-  pre = __webpack_require__(242);
+  pre = __webpack_require__(243);
 } catch (e) {
   pre = undefined;
 }
@@ -80009,7 +80326,7 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 242 */
+/* 243 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -80795,7 +81112,7 @@ module.exports = {
 
 
 /***/ }),
-/* 243 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80807,8 +81124,8 @@ var elliptic = __webpack_require__(19);
 var utils = elliptic.utils;
 var assert = utils.assert;
 
-var KeyPair = __webpack_require__(244);
-var Signature = __webpack_require__(245);
+var KeyPair = __webpack_require__(245);
+var Signature = __webpack_require__(246);
 
 function EC(options) {
   if (!(this instanceof EC))
@@ -81042,7 +81359,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 
 /***/ }),
-/* 244 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -81168,7 +81485,7 @@ KeyPair.prototype.inspect = function inspect() {
 
 
 /***/ }),
-/* 245 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -81310,7 +81627,7 @@ Signature.prototype.toDER = function toDER(enc) {
 
 
 /***/ }),
-/* 246 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -81321,8 +81638,8 @@ var elliptic = __webpack_require__(19);
 var utils = elliptic.utils;
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
-var KeyPair = __webpack_require__(247);
-var Signature = __webpack_require__(248);
+var KeyPair = __webpack_require__(248);
+var Signature = __webpack_require__(249);
 
 function EDDSA(curve) {
   assert(curve === 'ed25519', 'only tested with ed25519 so far');
@@ -81435,7 +81752,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 
 
 /***/ }),
-/* 247 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -81538,7 +81855,7 @@ module.exports = KeyPair;
 
 
 /***/ }),
-/* 248 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -81611,7 +81928,7 @@ module.exports = Signature;
 
 
 /***/ }),
-/* 249 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -81621,7 +81938,7 @@ module.exports = Signature;
 
 var asn1 = __webpack_require__(46)
 
-exports.certificate = __webpack_require__(262)
+exports.certificate = __webpack_require__(263)
 
 var RSAPrivateKey = asn1.define('RSAPrivateKey', function () {
   this.seq().obj(
@@ -81740,7 +82057,7 @@ exports.signature = asn1.define('signature', function () {
 
 
 /***/ }),
-/* 250 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {(function (module, exports) {
@@ -81795,7 +82112,7 @@ exports.signature = asn1.define('signature', function () {
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(251).Buffer;
+    Buffer = __webpack_require__(252).Buffer;
   } catch (e) {
   }
 
@@ -85174,13 +85491,13 @@ exports.signature = asn1.define('signature', function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(26)(module)))
 
 /***/ }),
-/* 251 */
+/* 252 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 252 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var asn1 = __webpack_require__(46);
@@ -85203,7 +85520,7 @@ function Entity(name, body) {
 Entity.prototype._createNamed = function createNamed(base) {
   var named;
   try {
-    named = __webpack_require__(253).runInThisContext(
+    named = __webpack_require__(254).runInThisContext(
       '(function ' + this.name + '(entity) {\n' +
       '  this._initNamed(entity);\n' +
       '})'
@@ -85247,10 +85564,10 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
 
 
 /***/ }),
-/* 253 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var indexOf = __webpack_require__(254);
+var indexOf = __webpack_require__(255);
 
 var Object_keys = function (obj) {
     if (Object.keys) return Object.keys(obj)
@@ -85391,7 +85708,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 254 */
+/* 255 */
 /***/ (function(module, exports) {
 
 
@@ -85406,7 +85723,7 @@ module.exports = function(arr, obj){
 };
 
 /***/ }),
-/* 255 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(2);
@@ -85533,7 +85850,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 
 
 /***/ }),
-/* 256 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Reporter = __webpack_require__(47).Reporter;
@@ -86173,7 +86490,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
 
 
 /***/ }),
-/* 257 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var constants = __webpack_require__(118);
@@ -86221,17 +86538,17 @@ exports.tagByName = constants._reverse(exports.tag);
 
 
 /***/ }),
-/* 258 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var decoders = exports;
 
 decoders.der = __webpack_require__(119);
-decoders.pem = __webpack_require__(259);
+decoders.pem = __webpack_require__(260);
 
 
 /***/ }),
-/* 259 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(2);
@@ -86286,17 +86603,17 @@ PEMDecoder.prototype.decode = function decode(data, options) {
 
 
 /***/ }),
-/* 260 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var encoders = exports;
 
 encoders.der = __webpack_require__(120);
-encoders.pem = __webpack_require__(261);
+encoders.pem = __webpack_require__(262);
 
 
 /***/ }),
-/* 261 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(2);
@@ -86323,7 +86640,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 
 /***/ }),
-/* 262 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -86418,20 +86735,20 @@ module.exports = X509Certificate
 
 
 /***/ }),
-/* 263 */
+/* 264 */
 /***/ (function(module, exports) {
 
 module.exports = {"2.16.840.1.101.3.4.1.1":"aes-128-ecb","2.16.840.1.101.3.4.1.2":"aes-128-cbc","2.16.840.1.101.3.4.1.3":"aes-128-ofb","2.16.840.1.101.3.4.1.4":"aes-128-cfb","2.16.840.1.101.3.4.1.21":"aes-192-ecb","2.16.840.1.101.3.4.1.22":"aes-192-cbc","2.16.840.1.101.3.4.1.23":"aes-192-ofb","2.16.840.1.101.3.4.1.24":"aes-192-cfb","2.16.840.1.101.3.4.1.41":"aes-256-ecb","2.16.840.1.101.3.4.1.42":"aes-256-cbc","2.16.840.1.101.3.4.1.43":"aes-256-ofb","2.16.840.1.101.3.4.1.44":"aes-256-cfb"}
 
 /***/ }),
-/* 264 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED[\n\r]+DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)[\n\r]+([0-9A-z\n\r\+\/\=]+)[\n\r]+/m
 var startRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----/m
 var fullRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----([0-9A-z\n\r\+\/\=]+)-----END \1-----$/m
-var evp = __webpack_require__(58)
+var evp = __webpack_require__(59)
 var ciphers = __webpack_require__(77)
 module.exports = function (okey, password) {
   var key = okey.toString()
@@ -86461,13 +86778,13 @@ module.exports = function (okey, password) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 265 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var BN = __webpack_require__(25)
 var EC = __webpack_require__(19).ec
-var parseKeys = __webpack_require__(60)
+var parseKeys = __webpack_require__(61)
 var curves = __webpack_require__(121)
 
 function verify (sig, hash, key, signType, tag) {
@@ -86551,7 +86868,7 @@ module.exports = verify
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 266 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(21)
@@ -86682,13 +86999,13 @@ function formatReturnValue (bn, enc, len) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 267 */
+/* 268 */
 /***/ (function(module, exports) {
 
 module.exports = {"_args":[["elliptic@6.4.1","/Users/pascalmeyer/WebstormProjects/dashcore-lib"]],"_development":true,"_from":"elliptic@6.4.1","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/create-ecdh/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.1","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.1","saveSpec":null,"fetchSpec":"6.4.1"},"_requiredBy":["/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_spec":"6.4.1","_where":"/Users/pascalmeyer/WebstormProjects/dashcore-lib","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"}
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -86815,13 +87132,13 @@ utils.intFromLE = intFromLE;
 
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -87203,13 +87520,13 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(61);
+var curve = __webpack_require__(62);
 var elliptic = __webpack_require__(21);
 var BN = __webpack_require__(29);
 var inherits = __webpack_require__(2);
@@ -88147,13 +88464,13 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(61);
+var curve = __webpack_require__(62);
 var BN = __webpack_require__(29);
 var inherits = __webpack_require__(2);
 var Base = curve.base;
@@ -88334,13 +88651,13 @@ Point.prototype.getX = function getX() {
 
 
 /***/ }),
-/* 273 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(61);
+var curve = __webpack_require__(62);
 var elliptic = __webpack_require__(21);
 var BN = __webpack_require__(29);
 var inherits = __webpack_require__(2);
@@ -88774,7 +89091,7 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 
 /***/ }),
-/* 274 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -88947,7 +89264,7 @@ defineCurve('ed25519', {
 
 var pre;
 try {
-  pre = __webpack_require__(275);
+  pre = __webpack_require__(276);
 } catch (e) {
   pre = undefined;
 }
@@ -88986,7 +89303,7 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 275 */
+/* 276 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -89772,7 +90089,7 @@ module.exports = {
 
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -89784,8 +90101,8 @@ var elliptic = __webpack_require__(21);
 var utils = elliptic.utils;
 var assert = utils.assert;
 
-var KeyPair = __webpack_require__(277);
-var Signature = __webpack_require__(278);
+var KeyPair = __webpack_require__(278);
+var Signature = __webpack_require__(279);
 
 function EC(options) {
   if (!(this instanceof EC))
@@ -90019,7 +90336,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -90145,7 +90462,7 @@ KeyPair.prototype.inspect = function inspect() {
 
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -90287,7 +90604,7 @@ Signature.prototype.toDER = function toDER(enc) {
 
 
 /***/ }),
-/* 279 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -90298,8 +90615,8 @@ var elliptic = __webpack_require__(21);
 var utils = elliptic.utils;
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
-var KeyPair = __webpack_require__(280);
-var Signature = __webpack_require__(281);
+var KeyPair = __webpack_require__(281);
+var Signature = __webpack_require__(282);
 
 function EDDSA(curve) {
   assert(curve === 'ed25519', 'only tested with ed25519 so far');
@@ -90412,7 +90729,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 
 
 /***/ }),
-/* 280 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -90515,7 +90832,7 @@ module.exports = KeyPair;
 
 
 /***/ }),
-/* 281 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -90588,11 +90905,11 @@ module.exports = Signature;
 
 
 /***/ }),
-/* 282 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.publicEncrypt = __webpack_require__(283)
-exports.privateDecrypt = __webpack_require__(285)
+exports.publicEncrypt = __webpack_require__(284)
+exports.privateDecrypt = __webpack_require__(286)
 
 exports.privateEncrypt = function privateEncrypt (key, buf) {
   return exports.publicEncrypt(key, buf, true)
@@ -90604,10 +90921,10 @@ exports.publicDecrypt = function publicDecrypt (key, buf) {
 
 
 /***/ }),
-/* 283 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var parseKeys = __webpack_require__(60)
+var parseKeys = __webpack_require__(61)
 var randomBytes = __webpack_require__(39)
 var createHash = __webpack_require__(42)
 var mgf = __webpack_require__(122)
@@ -90615,7 +90932,7 @@ var xor = __webpack_require__(123)
 var BN = __webpack_require__(81)
 var withPublic = __webpack_require__(124)
 var crt = __webpack_require__(79)
-var Buffer = __webpack_require__(62).Buffer
+var Buffer = __webpack_require__(63).Buffer
 
 module.exports = function publicEncrypt (publicKey, msg, reverse) {
   var padding
@@ -90698,23 +91015,23 @@ function nonZero (len) {
 
 
 /***/ }),
-/* 284 */
+/* 285 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 285 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var parseKeys = __webpack_require__(60)
+var parseKeys = __webpack_require__(61)
 var mgf = __webpack_require__(122)
 var xor = __webpack_require__(123)
 var BN = __webpack_require__(81)
 var crt = __webpack_require__(79)
 var createHash = __webpack_require__(42)
 var withPublic = __webpack_require__(124)
-var Buffer = __webpack_require__(62).Buffer
+var Buffer = __webpack_require__(63).Buffer
 
 module.exports = function privateDecrypt (privateKey, enc, reverse) {
   var padding
@@ -90815,7 +91132,7 @@ function compare (a, b) {
 
 
 /***/ }),
-/* 286 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -90928,20 +91245,23 @@ function randomFillSync (buf, offset, size) {
   return actualFill(buf, offset, size)
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(23)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(23)))
 
 /***/ }),
-/* 287 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 
 var Script = __webpack_require__(126);
 var Opcode = __webpack_require__(82);
-var BN = __webpack_require__(10);
+var BN = __webpack_require__(11);
 var Hash = __webpack_require__(9);
 var Signature = __webpack_require__(17);
 var PublicKey = __webpack_require__(24);
@@ -90982,7 +91302,7 @@ var Interpreter = function Interpreter(obj) {
  * Translated from bitcoind's VerifyScript
  */
 Interpreter.prototype.verify = function(scriptSig, scriptPubkey, tx, nin, flags) {
-  var Transaction = __webpack_require__(64);
+  var Transaction = __webpack_require__(49);
   if (_.isUndefined(tx)) {
     tx = new Transaction();
   }
@@ -92204,10 +92524,13 @@ Interpreter.prototype.step = function() {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 288 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var inherits = __webpack_require__(2);
@@ -92215,12 +92538,12 @@ var inherits = __webpack_require__(2);
 var $ = __webpack_require__(1);
 var BufferUtil = __webpack_require__(6);
 
-var Input = __webpack_require__(49);
+var Input = __webpack_require__(50);
 var Output = __webpack_require__(34);
 var Sighash = __webpack_require__(33);
 var Script = __webpack_require__(15);
 var Signature = __webpack_require__(17);
-var TransactionSignature = __webpack_require__(50);
+var TransactionSignature = __webpack_require__(51);
 
 /**
  * Represents a special kind of input of PayToPublicKey kind.
@@ -92300,10 +92623,13 @@ module.exports = PublicKeyInput;
 
 
 /***/ }),
-/* 289 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var inherits = __webpack_require__(2);
@@ -92312,12 +92638,12 @@ var $ = __webpack_require__(1);
 var BufferUtil = __webpack_require__(6);
 
 var Hash = __webpack_require__(9);
-var Input = __webpack_require__(49);
+var Input = __webpack_require__(50);
 var Output = __webpack_require__(34);
 var Sighash = __webpack_require__(33);
 var Script = __webpack_require__(15);
 var Signature = __webpack_require__(17);
-var TransactionSignature = __webpack_require__(50);
+var TransactionSignature = __webpack_require__(51);
 
 /**
  * Represents a special kind of input of PayToPublicKeyHash kind.
@@ -92402,16 +92728,19 @@ module.exports = PublicKeyHashInput;
 
 
 /***/ }),
-/* 290 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var _ = __webpack_require__(3);
 var inherits = __webpack_require__(2);
 var Transaction = __webpack_require__(83);
-var Input = __webpack_require__(49);
+var Input = __webpack_require__(50);
 var Output = __webpack_require__(34);
 var $ = __webpack_require__(1);
 
@@ -92420,7 +92749,7 @@ var Signature = __webpack_require__(17);
 var Sighash = __webpack_require__(33);
 var PublicKey = __webpack_require__(24);
 var BufferUtil = __webpack_require__(6);
-var TransactionSignature = __webpack_require__(50);
+var TransactionSignature = __webpack_require__(51);
 
 /**
  * @constructor
@@ -92620,15 +92949,18 @@ module.exports = MultiSigInput;
 
 
 /***/ }),
-/* 291 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var _ = __webpack_require__(3);
 var inherits = __webpack_require__(2);
-var Input = __webpack_require__(49);
+var Input = __webpack_require__(50);
 var Output = __webpack_require__(34);
 var $ = __webpack_require__(1);
 
@@ -92637,7 +92969,7 @@ var Signature = __webpack_require__(17);
 var Sighash = __webpack_require__(33);
 var PublicKey = __webpack_require__(24);
 var BufferUtil = __webpack_require__(6);
-var TransactionSignature = __webpack_require__(50);
+var TransactionSignature = __webpack_require__(51);
 
 /**
  * @constructor
@@ -92793,10 +93125,13 @@ module.exports = MultiSigScriptHashInput;
 
 
 /***/ }),
-/* 292 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var RegisteredPayloadTypes = __webpack_require__(14).registeredTransactionTypes;
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var RegisteredPayloadTypes = __webpack_require__(10).registeredTransactionTypes;
 var AbstractPayload = __webpack_require__(22);
 var SubTxCloseAccountPayload = __webpack_require__(130);
 var SubTxRegisterPayload = __webpack_require__(131);
@@ -92907,11 +93242,14 @@ module.exports = {
 
 
 /***/ }),
-/* 293 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var Signature = __webpack_require__(17);
-var ECDSA = __webpack_require__(52);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var Signature = __webpack_require__(17);
+var ECDSA = __webpack_require__(53);
 var PrivateKey = __webpack_require__(30);
 
 var hashSignature = {
@@ -92958,15 +93296,18 @@ module.exports = hashSignature;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 294 */
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var BufferWriter = __webpack_require__(7);
 var BufferReader = __webpack_require__(8);
-var BN = __webpack_require__(10);
+var BN = __webpack_require__(11);
 
 var Varint = function Varint(buf) {
   if (!(this instanceof Varint))
@@ -93038,10 +93379,13 @@ module.exports = Varint;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 295 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var Hash = __webpack_require__(9);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var Hash = __webpack_require__(9);
 
 var HashUtil = {
   getRandomHashHexString: function getRandomHashHexString() {
@@ -93053,30 +93397,36 @@ module.exports = HashUtil;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 296 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(297);
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+module.exports = __webpack_require__(298);
 
 module.exports.BlockHeader = __webpack_require__(65);
 module.exports.MerkleBlock = __webpack_require__(141);
 
 
 /***/ }),
-/* 297 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var BlockHeader = __webpack_require__(65);
-var BN = __webpack_require__(10);
+var BN = __webpack_require__(11);
 var BufferUtil = __webpack_require__(6);
 var BufferReader = __webpack_require__(8);
 var BufferWriter = __webpack_require__(7);
 var Hash = __webpack_require__(9);
-var Transaction = __webpack_require__(64);
+var Transaction = __webpack_require__(49);
 var $ = __webpack_require__(1);
 
 /**
@@ -93352,157 +93702,445 @@ module.exports = Block;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 298 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 var BufferReader = __webpack_require__(8);
 var BufferWriter = __webpack_require__(7);
 var BufferUtil = __webpack_require__(6);
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
+var isHexString = __webpack_require__(4).isHexa;
 
-/* @param {*} - A Buffer, JSON string, or Object representing a MerkleBlock
-* @returns {MerkleBlock}
-* @constructor
-*/
-function MnListDiff(arg) {
+var SimplifiedMNListEntry = __webpack_require__(142);
+var PartialMerkleTree = __webpack_require__(301);
+var Transaction = __webpack_require__(49);
+var constants = __webpack_require__(10);
 
-  if (!(this instanceof MnListDiff)) {
-    return new MnListDiff(arg);
-  }
-
-  var info = {};
-  if (BufferUtil.isBuffer(arg)) {
-    info = MerkleBlock._fromBufferReader(BufferReader(arg));
-  } else if (_.isObject(arg)) {
-    info = {
-      baseBlockHash: arg.baseBlockHash,
-      blockHash: arg.blockHash,
-      totalTransactions: arg.totalTransactions,
-      merkleHashes: arg.merkleHashes,
-      merkleFlags: arg.merkleFlags,
-      cbTx: arg.cbTx,
-      deletedMNs: arg.deletedMNs,
-      mnList: arg.mnList,
+/**
+ * @param {Buffer|Object|string} [arg] - A Buffer, JSON string, or Object representing a MnListDiff
+ * @class {SimplifiedMNListDiff}
+ * @property {string} baseBlockHash - sha256
+ * @property {string} blockHash - sha256
+ * @property {PartialMerkleTree} cbTxMerkleTree;
+ * @property {Transaction} cbTx;
+ * @property {Array<string>} deletedMNs - sha256 hashes of deleted MNs
+ * @property {Array<SimplifiedMNListEntry>} mnList
+ */
+function SimplifiedMNListDiff(arg) {
+  if (arg) {
+    if (arg instanceof SimplifiedMNListDiff) {
+      return arg.copy();
+    } else if (BufferUtil.isBuffer(arg)) {
+      return SimplifiedMNListDiff.fromBuffer(arg);
+    } else if (_.isObject(arg)) {
+      return SimplifiedMNListDiff.fromObject(arg);
+    } else if (isHexString(arg)) {
+      return SimplifiedMNListDiff.fromHexString(arg);
+    } else {
+      throw new TypeError('Unrecognized argument passed to SimplifiedMNListDiff constructor');
     }
   }
-  else {
-    throw new TypeError('Unrecognized argument for MerkleBlock');
-  }
-  _.extend(this, info);
-  this._flagBitsUsed = 0;
-  this._hashesUsed = 0;
-  return this;
 }
 
-MnListDiff._fromBufferReader = function _fromBufferReader(br) {
-  $.checkState(!br.finished(), 'No mndifflist data received');
-  var info = {};
-  info.baseBlockHash = br.read(32).toString('hex');
-  info.blockHash = br.read(32).toString('hex');
-  info.totalTransactions = br.readVarintNum();
-  
-  info.merkleHashes = []
-  for (var i = 0; i < br.readVarintNum(); i++) {
-    info.merkleHashes.push(br.read(32).toString('hex'));
+/**
+ * Creates MnListDiff from a Buffer.
+ * @param {Buffer} buffer
+ * @return {SimplifiedMNListDiff}
+ */
+SimplifiedMNListDiff.fromBuffer = function fromBuffer(buffer) {
+  var bufferReader = new BufferReader(buffer);
+  var data = {};
+
+  data.baseBlockHash = bufferReader.read(constants.SHA256_HASH_SIZE).toString('hex');
+  data.blockHash = bufferReader.read(constants.SHA256_HASH_SIZE).toString('hex');
+
+  data.cbTxMerkleTree = PartialMerkleTree.fromBufferReader(bufferReader);
+  data.cbTx = new Transaction().fromBufferReader(bufferReader);
+
+  var deletedMNsCount = bufferReader.readVarintNum();
+  data.deletedMNs = [];
+  for (var i = 0; i < deletedMNsCount; i++) {
+    data.deletedMNs.push(bufferReader.read(constants.SHA256_HASH_SIZE).toString('hex'));
   }
 
-  info.merkleFlags = []
-  for (var i = 0; i < br.readVarintNum(); i++) {
-    info.merkleFlags.push(br.readUInt8());
+  var mnListSize = bufferReader.readVarintNum();
+  data.mnList = [];
+  for (var i = 0; i < mnListSize; i++) {
+    data.mnList.push(SimplifiedMNListEntry.fromBuffer(bufferReader.read(91)));
   }
 
-  info.cbTx = br.read();
-
-  info.deletedMNs = []
-  for (var i = 0; i < br.readVarintNum(); i++) {
-    info.deletedMNs.push(br.read());
-  }
-
-  info.mnList = []
-  for (var i = 0; i < br.readVarintNum(); i++) {
-    info.mnList.push(br.read());
-  }
-
-  return info;
+  return this.fromObject(data);
 };
 
-MnListDiff.prototype.toBufferWriter = function toBufferWriter(bw) {
-  if (!bw) {
-    bw = new BufferWriter();
-  }
-
-  bw.write(this.baseBlockHash);
-  bw.write(this.blockHash);
-  bw.writeVarintNum(this.totalTransactions);
-
-  bw.writeVarintNum(this.merkleHashes.length);
-  for (var i = 0; i < this.merkleHashes.length; i++) {
-    bw.write(new Buffer(this.merkleHashes[i], 'hex'));
-  }
-
-  bw.writeVarintNum(this.merkleFlags.length);
-  for (var i = 0; i < this.merkleFlags.length; i++) {
-    bw.writeUInt8(this.merkleFlags[i]);
-  }
-
-  bw.write(this.cbTx);
-
-  bw.writeVarintNum(this.deletedMNs.length);
-  for (var i = 0; i < this.deletedMNs.length; i++) {
-    bw.write(this.deletedMNs[i]);
-  }
-
-  bw.writeVarintNum(this.mnList.length);
-  for (var i = 0; i < this.mnList.length; i++) {
-    bw.write(this.mnList[i]);
-  }
-
-  return bw;
+/**
+ * @param {string} hexString
+ * @return {SimplifiedMNListDiff}
+ */
+SimplifiedMNListDiff.fromHexString = function fromHexString(hexString) {
+  return SimplifiedMNListDiff.fromBuffer(Buffer.from(hexString, 'hex'));
 };
 
-MnListDiff.fromObject = function fromObject(obj) {
-  return new MnListDiff(obj);
+/**
+ * Serializes mnlist diff to a Buffer
+ * @return {Buffer}
+ */
+SimplifiedMNListDiff.prototype.toBuffer = function toBuffer() {
+  var bufferWriter = new BufferWriter();
+
+  bufferWriter.write(Buffer.from(this.baseBlockHash, 'hex'));
+  bufferWriter.write(Buffer.from(this.blockHash, 'hex'));
+
+  bufferWriter.write(this.cbTxMerkleTree.toBuffer());
+  bufferWriter.write(this.cbTx.toBuffer());
+
+  bufferWriter.writeVarintNum(this.deletedMNs.length);
+  this.deletedMNs.forEach(function (deleteMNHash) {
+    bufferWriter.write(Buffer.from(deleteMNHash, 'hex'));
+  });
+
+  bufferWriter.writeVarintNum(this.mnList.length);
+  this.mnList.forEach(function (simplifiedMNListEntry) {
+    bufferWriter.write(simplifiedMNListEntry.toBuffer());
+  });
+
+  return bufferWriter.toBuffer();
 };
 
-MnListDiff.fromBufferReader = function fromBufferReader(br) {
-  return new MnListDiff(MnListDiff._fromBufferReader(br));
+/**
+ * Creates MNListDiff from object
+ * @param obj
+ * @return {SimplifiedMNListDiff}
+ */
+SimplifiedMNListDiff.fromObject = function fromObject(obj) {
+  var simplifiedMNListDiff = new SimplifiedMNListDiff();
+
+  simplifiedMNListDiff.baseBlockHash = obj.baseBlockHash;
+  simplifiedMNListDiff.blockHash = obj.blockHash;
+
+  /* cbTxMerkleRoot start */
+  simplifiedMNListDiff.cbTxMerkleTree = new PartialMerkleTree(obj.cbTxMerkleTree);
+  /* cbTxMerkleRoot stop */
+
+  simplifiedMNListDiff.cbTx = new Transaction(obj.cbTx);
+  // Copy array of strings
+  simplifiedMNListDiff.deletedMNs = obj.deletedMNs.slice();
+  simplifiedMNListDiff.mnList = obj.mnList.map(function (SMLEntry) {
+    return new SimplifiedMNListEntry(SMLEntry);
+  });
+
+  return simplifiedMNListDiff;
 };
 
-MnListDiff.fromBuffer = function fromBuffer(buf) {
-  return MnListDiff.fromBufferReader(BufferReader(buf));
+SimplifiedMNListDiff.prototype.toObject = function toObject() {
+  var obj = {};
+  obj.baseBlockHash = this.baseBlockHash;
+  obj.blockHash = this.blockHash;
+
+  /* cbTxMerkleRoot start */
+  obj.cbTxMerkleTree = this.cbTxMerkleTree.toString();
+  /* cbTxMerkleRoot stop */
+
+  obj.cbTx = this.cbTx.serialize(true);
+  // Copy array of strings
+  obj.deletedMNs = this.deletedMNs.slice();
+  obj.mnList = this.mnList.map(function (SMLEntry) {
+    return SMLEntry.toObject();
+  });
+
+  return obj;
 };
 
-MnListDiff.prototype.toBuffer = function toBuffer() {
-  return this.toBufferWriter().concat();
+SimplifiedMNListDiff.prototype.copy = function copy() {
+  return SimplifiedMNListDiff.fromBuffer(this.toBuffer());
 };
 
-module.exports = MnListDiff;
+module.exports = SimplifiedMNListDiff;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
-
-/***/ }),
-/* 299 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(143);
-
-module.exports.Proposal = __webpack_require__(300);
-
 
 /***/ }),
 /* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var BufferWriter = __webpack_require__(7);
+var BufferReader = __webpack_require__(8);
+var constants = __webpack_require__(10);
+var serviceRegex = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):[0-9]+$/;
+var ipV6prefix = Buffer.alloc(12);
+var emptyAddress = Buffer.alloc(18);
+var EMPTY_IPV6_ADDRESS = constants.EMPTY_IPV6_ADDRESS;
+var EMPTY_IPV4_ADDRESS = constants.EMPTY_IPV4_ADDRESS;
+
+/**
+ * Maps ipv4:port to ipv6 buffer and port
+ * Note: this is made mostly for the deterministic masternode list, which are ipv4 addresses encoded as ipv6 addresses
+ * @param {string} string
+ * @return {Buffer}
+ */
+function ipAndPortToBuffer(string) {
+  if (isZeroAddress(string)) {
+    return emptyAddress.slice();
+  }
+  if(!isIpV4(string)) {
+    throw new Error('Only serialization of ipv4 and zero ipv6 is allowed');
+  }
+  var addressParts = string.split(':');
+  var addressBytes = addressParts[0]
+    .split('.')
+    .map(function (byte) { return Number(byte) });
+  var port = Number(addressParts[1]);
+
+  var bufferWriter = new BufferWriter();
+  bufferWriter.write(ipV6prefix);
+  bufferWriter.write(Buffer.from(addressBytes));
+  bufferWriter.writeUInt16BE(port);
+  return bufferWriter.toBuffer();
+}
+
+/**
+ * Parses ipv6 buffer and port to ipv4:port string
+ * @param {Buffer} buffer
+ * @return {string}
+ */
+function bufferToIPAndPort(buffer) {
+  if (buffer.length !== 18) {
+    throw new Error('Ip buffer has wrong size. Expected size is 18 bytes');
+  }
+  var bufferReader = new BufferReader(buffer);
+  var ipV6Buffer = bufferReader.read(constants.IP_ADDRESS_SIZE);
+  var port = bufferReader.readUInt16BE();
+
+  // To get ipv4 bytes, we need to ignore first 12 bytes of ipv6
+  var ipV4DecimalBytes = Array.prototype.slice.call(ipV6Buffer.slice(12, 16));
+  var ipV4string = ipV4DecimalBytes.join('.');
+  var serviceString = ipV4string + ':' + String(port);
+  // This is a hack to match core implementation, which in case of an empty address returns ipv6 string
+  serviceString = isZeroAddress(serviceString) ? EMPTY_IPV6_ADDRESS : serviceString;
+  return serviceString;
+}
+
+/**
+ * Checks if string is an ipv4 address
+ * @param {string} ipAndPortString
+ * @return {boolean}
+ */
+function isIpV4(ipAndPortString) {
+  return serviceRegex.test(ipAndPortString);
+}
+
+/**
+ * @param {string} address
+ * @return {boolean}
+ */
+function isZeroAddress(address) {
+  return (address === EMPTY_IPV6_ADDRESS) || (address === EMPTY_IPV4_ADDRESS);
+}
+
+var ip = {
+  isIPV4: isIpV4,
+  ipAndPortToBuffer: ipAndPortToBuffer,
+  bufferToIPAndPort: bufferToIPAndPort,
+  isZeroAddress: isZeroAddress,
+  IP_AND_PORT_SIZE: constants.ipAddresses.IPV4MAPPEDHOST + constants.ipAddresses.PORT
+};
+
+module.exports = ip;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
+
+/***/ }),
+/* 301 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+var BufferReader = __webpack_require__(8);
+var BufferWriter = __webpack_require__(7);
+var BufferUtil = __webpack_require__(6);
+var isObject = __webpack_require__(302);
+var isHexString = __webpack_require__(4).isHexa;
+var constants = __webpack_require__(10);
+
+/**
+ * @param serialized
+ * @return {PartialMerkleTree}
+ * @class
+ * @property {number} totalTransactions
+ * @property {Array<string>} merkleHashes
+ * @property {Array<number>} merkleFlags
+ */
+function PartialMerkleTree(serialized) {
+  if (serialized) {
+    if (serialized instanceof PartialMerkleTree) {
+      return serialized.copy();
+    } else if (BufferUtil.isBuffer(serialized)) {
+      return PartialMerkleTree.fromBuffer(serialized);
+    } else if (isObject(serialized)) {
+      return PartialMerkleTree.fromObject(serialized);
+    } else if (isHexString(serialized)) {
+      return PartialMerkleTree.fromHexString(serialized);
+    } else {
+      throw new Error('Invalid argument passed to PartialMerkleTree - expected hex string, object or buffer');
+    }
+  }
+}
+
+/* Static methods */
+
+/**
+ * Creates an instance of PartialMerkleTree from buffer reader
+ * @param {BufferReader} bufferReader
+ * @return {PartialMerkleTree}
+ */
+PartialMerkleTree.fromBufferReader = function fromBufferReader(bufferReader) {
+  var partialMerkleTree = new PartialMerkleTree();
+  partialMerkleTree.totalTransactions = bufferReader.readUInt32LE();
+
+  var merkleHashesCount = bufferReader.readVarintNum();
+  partialMerkleTree.merkleHashes = [];
+  for (var i = 0; i < merkleHashesCount; i++) {
+    partialMerkleTree.merkleHashes.push(bufferReader.read(constants.SHA256_HASH_SIZE).toString('hex'));
+  }
+
+  var merkleFlagsCount = bufferReader.readVarintNum();
+  partialMerkleTree.merkleFlags = [];
+  for (i = 0; i < merkleFlagsCount; i++) {
+    partialMerkleTree.merkleFlags.push(bufferReader.readUInt8());
+  }
+
+  return partialMerkleTree;
+};
+
+/**
+ * @param {Buffer} buffer
+ * @return {PartialMerkleTree}
+ */
+PartialMerkleTree.fromBuffer = function fromBuffer(buffer) {
+  return PartialMerkleTree.fromBufferReader(new BufferReader(buffer));
+};
+
+/**
+ * @param {string} hexString
+ * @return {PartialMerkleTree}
+ */
+PartialMerkleTree.fromHexString = function fromHexString(hexString) {
+  return PartialMerkleTree.fromBuffer(Buffer.from(hexString, 'hex'));
+};
+
+/* Instance methods */
+
+/**
+ * @return {Buffer}
+ */
+PartialMerkleTree.prototype.toBuffer = function toBuffer() {
+  var bufferWriter = new BufferWriter();
+
+  bufferWriter.writeUInt32LE(this.totalTransactions);
+
+  bufferWriter.writeVarintNum(this.merkleHashes.length);
+  this.merkleHashes.forEach(function (hash) {
+    bufferWriter.write(Buffer.from(hash, 'hex'));
+  });
+
+  bufferWriter.writeVarintNum(this.merkleFlags.length);
+  this.merkleFlags.forEach(function(flag) {
+    bufferWriter.writeUInt8(flag);
+  });
+
+  return bufferWriter.toBuffer();
+};
+
+/**
+ * @return {PartialMerkleTree}
+ */
+PartialMerkleTree.prototype.copy = function copy() {
+  return PartialMerkleTree.fromBuffer(this.toBuffer());
+};
+
+/**
+ * @return {string}
+ */
+PartialMerkleTree.prototype.toString = function toString() {
+  return this.toBuffer().toString('hex');
+};
+
+module.exports = PartialMerkleTree;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
+
+/***/ }),
+/* 302 */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+}
+
+module.exports = isObject;
+
+
+/***/ }),
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+module.exports = __webpack_require__(144);
+
+module.exports.Proposal = __webpack_require__(304);
+
+
+/***/ }),
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var _ = __webpack_require__(3);
 var $ = __webpack_require__(1);
-var GovObject = __webpack_require__(143);
-var errors = __webpack_require__(13);
+var GovObject = __webpack_require__(144);
+var errors = __webpack_require__(14);
 var inherits = __webpack_require__(88).inherits;
 
 /**
@@ -93672,14 +94310,17 @@ module.exports = Proposal;
 
 
 /***/ }),
-/* 301 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var _ = __webpack_require__(3);
-var URL = __webpack_require__(302);
+var URL = __webpack_require__(306);
 
 var Address = __webpack_require__(31);
 var Unit = __webpack_require__(85);
@@ -93902,7 +94543,7 @@ module.exports = URI;
 
 
 /***/ }),
-/* 302 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -93929,8 +94570,8 @@ module.exports = URI;
 
 
 
-var punycode = __webpack_require__(303);
-var util = __webpack_require__(304);
+var punycode = __webpack_require__(307);
+var util = __webpack_require__(308);
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -94005,7 +94646,7 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
       'gopher:': true,
       'file:': true
     },
-    querystring = __webpack_require__(305);
+    querystring = __webpack_require__(309);
 
 function urlParse(url, parseQueryString, slashesDenoteHost) {
   if (url && util.isObject(url) && url instanceof Url) return url;
@@ -94641,7 +95282,7 @@ Url.prototype.parseHost = function() {
 
 
 /***/ }),
-/* 303 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
@@ -95177,10 +95818,10 @@ Url.prototype.parseHost = function() {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(26)(module), __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(26)(module), __webpack_require__(12)))
 
 /***/ }),
-/* 304 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -95203,18 +95844,18 @@ module.exports = {
 
 
 /***/ }),
-/* 305 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(306);
-exports.encode = exports.stringify = __webpack_require__(307);
+exports.decode = exports.parse = __webpack_require__(310);
+exports.encode = exports.stringify = __webpack_require__(311);
 
 
 /***/ }),
-/* 306 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -95305,7 +95946,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 307 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -95397,18 +96038,21 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 308 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var _ = __webpack_require__(3);
 var PrivateKey = __webpack_require__(30);
 var PublicKey = __webpack_require__(24);
 var Address = __webpack_require__(31);
 var BufferWriter = __webpack_require__(7);
-var ECDSA = __webpack_require__(52);
+var ECDSA = __webpack_require__(53);
 var Signature = __webpack_require__(17);
 var Hash = __webpack_require__(9);
 var sha256sha256 = Hash.sha256sha256;
@@ -95573,29 +96217,35 @@ module.exports = Message;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 309 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(310);
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+module.exports = __webpack_require__(314);
 
 
 /***/ }),
-/* 310 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var $ = __webpack_require__(1);
-var errors = __webpack_require__(311);
-var BN = __webpack_require__(10);
-var unorm = __webpack_require__(312);
+var errors = __webpack_require__(315);
+var BN = __webpack_require__(11);
+var unorm = __webpack_require__(316);
 var _ = __webpack_require__(3);
 
-var pbkdf2 = __webpack_require__(313);
+var pbkdf2 = __webpack_require__(317);
 
 var Hash = __webpack_require__(9);
-var Random = __webpack_require__(51);
+var Random = __webpack_require__(52);
 var HDPrivateKey = __webpack_require__(86);
 
 
@@ -95678,7 +96328,7 @@ var Mnemonic = function(data, wordlist) {
   });
 };
 
-Mnemonic.Words = __webpack_require__(314);
+Mnemonic.Words = __webpack_require__(318);
 
 /**
  * Will return a boolean if the mnemonic is valid
@@ -95881,10 +96531,13 @@ module.exports = Mnemonic;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 311 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var spec = {
@@ -95902,10 +96555,10 @@ var spec = {
   }]
 };
 
-module.exports = __webpack_require__(13).extend(spec);
+module.exports = __webpack_require__(14).extend(spec);
 
 /***/ }),
-/* 312 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (root) {
@@ -96353,11 +97006,14 @@ UChar.udata={
 
 
 /***/ }),
-/* 313 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
+
 
 var crypto = __webpack_require__(67);
 
@@ -96431,24 +97087,30 @@ module.exports = pbkdf2;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0).Buffer))
 
 /***/ }),
-/* 314 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 module.exports = {
-  'CHINESE': __webpack_require__(315),
-  'ENGLISH': __webpack_require__(316),
-  'FRENCH': __webpack_require__(317),
-  'ITALIAN': __webpack_require__(318),
-  'JAPANESE': __webpack_require__(319),
-  'SPANISH': __webpack_require__(320)
+  'CHINESE': __webpack_require__(319),
+  'ENGLISH': __webpack_require__(320),
+  'FRENCH': __webpack_require__(321),
+  'ITALIAN': __webpack_require__(322),
+  'JAPANESE': __webpack_require__(323),
+  'SPANISH': __webpack_require__(324)
 };
 
 
 /***/ }),
-/* 315 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var chinese = ['的', '一', '是', '在', '不', '了', '有', '和', '人', '这', '中', '大', '为', '上', '个', '国', '我', '以', '要', '他', '时', '来', '用', '们', '生', '到', '作', '地', '于', '出', '就', '分', '对', '成', '会', '可', '主', '发', '年', '动', '同', '工', '也', '能', '下', '过', '子', '说', '产', '种', '面', '而', '方', '后', '多', '定', '行', '学', '法', '所', '民', '得', '经', '十', '三', '之', '进', '着', '等', '部', '度', '家', '电', '力', '里', '如', '水', '化', '高', '自', '二', '理', '起', '小', '物', '现', '实', '加', '量', '都', '两', '体', '制', '机', '当', '使', '点', '从', '业', '本', '去', '把', '性', '好', '应', '开', '它', '合', '还', '因', '由', '其', '些', '然', '前', '外', '天', '政', '四', '日', '那', '社', '义', '事', '平', '形', '相', '全', '表', '间', '样', '与', '关', '各', '重', '新', '线', '内', '数', '正', '心', '反', '你', '明', '看', '原', '又', '么', '利', '比', '或', '但', '质', '气', '第', '向', '道', '命', '此', '变', '条', '只', '没', '结', '解', '问', '意', '建', '月', '公', '无', '系', '军', '很', '情', '者', '最', '立', '代', '想', '已', '通', '并', '提', '直', '题', '党', '程', '展', '五', '果', '料', '象', '员', '革', '位', '入', '常', '文', '总', '次', '品', '式', '活', '设', '及', '管', '特', '件', '长', '求', '老', '头', '基', '资', '边', '流', '路', '级', '少', '图', '山', '统', '接', '知', '较', '将', '组', '见', '计', '别', '她', '手', '角', '期', '根', '论', '运', '农', '指', '几', '九', '区', '强', '放', '决', '西', '被', '干', '做', '必', '战', '先', '回', '则', '任', '取', '据', '处', '队', '南', '给', '色', '光', '门', '即', '保', '治', '北', '造', '百', '规', '热', '领', '七', '海', '口', '东', '导', '器', '压', '志', '世', '金', '增', '争', '济', '阶', '油', '思', '术', '极', '交', '受', '联', '什', '认', '六', '共', '权', '收', '证', '改', '清', '美', '再', '采', '转', '更', '单', '风', '切', '打', '白', '教', '速', '花', '带', '安', '场', '身', '车', '例', '真', '务', '具', '万', '每', '目', '至', '达', '走', '积', '示', '议', '声', '报', '斗', '完', '类', '八', '离', '华', '名', '确', '才', '科', '张', '信', '马', '节', '话', '米', '整', '空', '元', '况', '今', '集', '温', '传', '土', '许', '步', '群', '广', '石', '记', '需', '段', '研', '界', '拉', '林', '律', '叫', '且', '究', '观', '越', '织', '装', '影', '算', '低', '持', '音', '众', '书', '布', '复', '容', '儿', '须', '际', '商', '非', '验', '连', '断', '深', '难', '近', '矿', '千', '周', '委', '素', '技', '备', '半', '办', '青', '省', '列', '习', '响', '约', '支', '般', '史', '感', '劳', '便', '团', '往', '酸', '历', '市', '克', '何', '除', '消', '构', '府', '称', '太', '准', '精', '值', '号', '率', '族', '维', '划', '选', '标', '写', '存', '候', '毛', '亲', '快', '效', '斯', '院', '查', '江', '型', '眼', '王', '按', '格', '养', '易', '置', '派', '层', '片', '始', '却', '专', '状', '育', '厂', '京', '识', '适', '属', '圆', '包', '火', '住', '调', '满', '县', '局', '照', '参', '红', '细', '引', '听', '该', '铁', '价', '严', '首', '底', '液', '官', '德', '随', '病', '苏', '失', '尔', '死', '讲', '配', '女', '黄', '推', '显', '谈', '罪', '神', '艺', '呢', '席', '含', '企', '望', '密', '批', '营', '项', '防', '举', '球', '英', '氧', '势', '告', '李', '台', '落', '木', '帮', '轮', '破', '亚', '师', '围', '注', '远', '字', '材', '排', '供', '河', '态', '封', '另', '施', '减', '树', '溶', '怎', '止', '案', '言', '士', '均', '武', '固', '叶', '鱼', '波', '视', '仅', '费', '紧', '爱', '左', '章', '早', '朝', '害', '续', '轻', '服', '试', '食', '充', '兵', '源', '判', '护', '司', '足', '某', '练', '差', '致', '板', '田', '降', '黑', '犯', '负', '击', '范', '继', '兴', '似', '余', '坚', '曲', '输', '修', '故', '城', '夫', '够', '送', '笔', '船', '占', '右', '财', '吃', '富', '春', '职', '觉', '汉', '画', '功', '巴', '跟', '虽', '杂', '飞', '检', '吸', '助', '升', '阳', '互', '初', '创', '抗', '考', '投', '坏', '策', '古', '径', '换', '未', '跑', '留', '钢', '曾', '端', '责', '站', '简', '述', '钱', '副', '尽', '帝', '射', '草', '冲', '承', '独', '令', '限', '阿', '宣', '环', '双', '请', '超', '微', '让', '控', '州', '良', '轴', '找', '否', '纪', '益', '依', '优', '顶', '础', '载', '倒', '房', '突', '坐', '粉', '敌', '略', '客', '袁', '冷', '胜', '绝', '析', '块', '剂', '测', '丝', '协', '诉', '念', '陈', '仍', '罗', '盐', '友', '洋', '错', '苦', '夜', '刑', '移', '频', '逐', '靠', '混', '母', '短', '皮', '终', '聚', '汽', '村', '云', '哪', '既', '距', '卫', '停', '烈', '央', '察', '烧', '迅', '境', '若', '印', '洲', '刻', '括', '激', '孔', '搞', '甚', '室', '待', '核', '校', '散', '侵', '吧', '甲', '游', '久', '菜', '味', '旧', '模', '湖', '货', '损', '预', '阻', '毫', '普', '稳', '乙', '妈', '植', '息', '扩', '银', '语', '挥', '酒', '守', '拿', '序', '纸', '医', '缺', '雨', '吗', '针', '刘', '啊', '急', '唱', '误', '训', '愿', '审', '附', '获', '茶', '鲜', '粮', '斤', '孩', '脱', '硫', '肥', '善', '龙', '演', '父', '渐', '血', '欢', '械', '掌', '歌', '沙', '刚', '攻', '谓', '盾', '讨', '晚', '粒', '乱', '燃', '矛', '乎', '杀', '药', '宁', '鲁', '贵', '钟', '煤', '读', '班', '伯', '香', '介', '迫', '句', '丰', '培', '握', '兰', '担', '弦', '蛋', '沉', '假', '穿', '执', '答', '乐', '谁', '顺', '烟', '缩', '征', '脸', '喜', '松', '脚', '困', '异', '免', '背', '星', '福', '买', '染', '井', '概', '慢', '怕', '磁', '倍', '祖', '皇', '促', '静', '补', '评', '翻', '肉', '践', '尼', '衣', '宽', '扬', '棉', '希', '伤', '操', '垂', '秋', '宜', '氢', '套', '督', '振', '架', '亮', '末', '宪', '庆', '编', '牛', '触', '映', '雷', '销', '诗', '座', '居', '抓', '裂', '胞', '呼', '娘', '景', '威', '绿', '晶', '厚', '盟', '衡', '鸡', '孙', '延', '危', '胶', '屋', '乡', '临', '陆', '顾', '掉', '呀', '灯', '岁', '措', '束', '耐', '剧', '玉', '赵', '跳', '哥', '季', '课', '凯', '胡', '额', '款', '绍', '卷', '齐', '伟', '蒸', '殖', '永', '宗', '苗', '川', '炉', '岩', '弱', '零', '杨', '奏', '沿', '露', '杆', '探', '滑', '镇', '饭', '浓', '航', '怀', '赶', '库', '夺', '伊', '灵', '税', '途', '灭', '赛', '归', '召', '鼓', '播', '盘', '裁', '险', '康', '唯', '录', '菌', '纯', '借', '糖', '盖', '横', '符', '私', '努', '堂', '域', '枪', '润', '幅', '哈', '竟', '熟', '虫', '泽', '脑', '壤', '碳', '欧', '遍', '侧', '寨', '敢', '彻', '虑', '斜', '薄', '庭', '纳', '弹', '饲', '伸', '折', '麦', '湿', '暗', '荷', '瓦', '塞', '床', '筑', '恶', '户', '访', '塔', '奇', '透', '梁', '刀', '旋', '迹', '卡', '氯', '遇', '份', '毒', '泥', '退', '洗', '摆', '灰', '彩', '卖', '耗', '夏', '择', '忙', '铜', '献', '硬', '予', '繁', '圈', '雪', '函', '亦', '抽', '篇', '阵', '阴', '丁', '尺', '追', '堆', '雄', '迎', '泛', '爸', '楼', '避', '谋', '吨', '野', '猪', '旗', '累', '偏', '典', '馆', '索', '秦', '脂', '潮', '爷', '豆', '忽', '托', '惊', '塑', '遗', '愈', '朱', '替', '纤', '粗', '倾', '尚', '痛', '楚', '谢', '奋', '购', '磨', '君', '池', '旁', '碎', '骨', '监', '捕', '弟', '暴', '割', '贯', '殊', '释', '词', '亡', '壁', '顿', '宝', '午', '尘', '闻', '揭', '炮', '残', '冬', '桥', '妇', '警', '综', '招', '吴', '付', '浮', '遭', '徐', '您', '摇', '谷', '赞', '箱', '隔', '订', '男', '吹', '园', '纷', '唐', '败', '宋', '玻', '巨', '耕', '坦', '荣', '闭', '湾', '键', '凡', '驻', '锅', '救', '恩', '剥', '凝', '碱', '齿', '截', '炼', '麻', '纺', '禁', '废', '盛', '版', '缓', '净', '睛', '昌', '婚', '涉', '筒', '嘴', '插', '岸', '朗', '庄', '街', '藏', '姑', '贸', '腐', '奴', '啦', '惯', '乘', '伙', '恢', '匀', '纱', '扎', '辩', '耳', '彪', '臣', '亿', '璃', '抵', '脉', '秀', '萨', '俄', '网', '舞', '店', '喷', '纵', '寸', '汗', '挂', '洪', '贺', '闪', '柬', '爆', '烯', '津', '稻', '墙', '软', '勇', '像', '滚', '厘', '蒙', '芳', '肯', '坡', '柱', '荡', '腿', '仪', '旅', '尾', '轧', '冰', '贡', '登', '黎', '削', '钻', '勒', '逃', '障', '氨', '郭', '峰', '币', '港', '伏', '轨', '亩', '毕', '擦', '莫', '刺', '浪', '秘', '援', '株', '健', '售', '股', '岛', '甘', '泡', '睡', '童', '铸', '汤', '阀', '休', '汇', '舍', '牧', '绕', '炸', '哲', '磷', '绩', '朋', '淡', '尖', '启', '陷', '柴', '呈', '徒', '颜', '泪', '稍', '忘', '泵', '蓝', '拖', '洞', '授', '镜', '辛', '壮', '锋', '贫', '虚', '弯', '摩', '泰', '幼', '廷', '尊', '窗', '纲', '弄', '隶', '疑', '氏', '宫', '姐', '震', '瑞', '怪', '尤', '琴', '循', '描', '膜', '违', '夹', '腰', '缘', '珠', '穷', '森', '枝', '竹', '沟', '催', '绳', '忆', '邦', '剩', '幸', '浆', '栏', '拥', '牙', '贮', '礼', '滤', '钠', '纹', '罢', '拍', '咱', '喊', '袖', '埃', '勤', '罚', '焦', '潜', '伍', '墨', '欲', '缝', '姓', '刊', '饱', '仿', '奖', '铝', '鬼', '丽', '跨', '默', '挖', '链', '扫', '喝', '袋', '炭', '污', '幕', '诸', '弧', '励', '梅', '奶', '洁', '灾', '舟', '鉴', '苯', '讼', '抱', '毁', '懂', '寒', '智', '埔', '寄', '届', '跃', '渡', '挑', '丹', '艰', '贝', '碰', '拔', '爹', '戴', '码', '梦', '芽', '熔', '赤', '渔', '哭', '敬', '颗', '奔', '铅', '仲', '虎', '稀', '妹', '乏', '珍', '申', '桌', '遵', '允', '隆', '螺', '仓', '魏', '锐', '晓', '氮', '兼', '隐', '碍', '赫', '拨', '忠', '肃', '缸', '牵', '抢', '博', '巧', '壳', '兄', '杜', '讯', '诚', '碧', '祥', '柯', '页', '巡', '矩', '悲', '灌', '龄', '伦', '票', '寻', '桂', '铺', '圣', '恐', '恰', '郑', '趣', '抬', '荒', '腾', '贴', '柔', '滴', '猛', '阔', '辆', '妻', '填', '撤', '储', '签', '闹', '扰', '紫', '砂', '递', '戏', '吊', '陶', '伐', '喂', '疗', '瓶', '婆', '抚', '臂', '摸', '忍', '虾', '蜡', '邻', '胸', '巩', '挤', '偶', '弃', '槽', '劲', '乳', '邓', '吉', '仁', '烂', '砖', '租', '乌', '舰', '伴', '瓜', '浅', '丙', '暂', '燥', '橡', '柳', '迷', '暖', '牌', '秧', '胆', '详', '簧', '踏', '瓷', '谱', '呆', '宾', '糊', '洛', '辉', '愤', '竞', '隙', '怒', '粘', '乃', '绪', '肩', '籍', '敏', '涂', '熙', '皆', '侦', '悬', '掘', '享', '纠', '醒', '狂', '锁', '淀', '恨', '牲', '霸', '爬', '赏', '逆', '玩', '陵', '祝', '秒', '浙', '貌', '役', '彼', '悉', '鸭', '趋', '凤', '晨', '畜', '辈', '秩', '卵', '署', '梯', '炎', '滩', '棋', '驱', '筛', '峡', '冒', '啥', '寿', '译', '浸', '泉', '帽', '迟', '硅', '疆', '贷', '漏', '稿', '冠', '嫩', '胁', '芯', '牢', '叛', '蚀', '奥', '鸣', '岭', '羊', '凭', '串', '塘', '绘', '酵', '融', '盆', '锡', '庙', '筹', '冻', '辅', '摄', '袭', '筋', '拒', '僚', '旱', '钾', '鸟', '漆', '沈', '眉', '疏', '添', '棒', '穗', '硝', '韩', '逼', '扭', '侨', '凉', '挺', '碗', '栽', '炒', '杯', '患', '馏', '劝', '豪', '辽', '勃', '鸿', '旦', '吏', '拜', '狗', '埋', '辊', '掩', '饮', '搬', '骂', '辞', '勾', '扣', '估', '蒋', '绒', '雾', '丈', '朵', '姆', '拟', '宇', '辑', '陕', '雕', '偿', '蓄', '崇', '剪', '倡', '厅', '咬', '驶', '薯', '刷', '斥', '番', '赋', '奉', '佛', '浇', '漫', '曼', '扇', '钙', '桃', '扶', '仔', '返', '俗', '亏', '腔', '鞋', '棱', '覆', '框', '悄', '叔', '撞', '骗', '勘', '旺', '沸', '孤', '吐', '孟', '渠', '屈', '疾', '妙', '惜', '仰', '狠', '胀', '谐', '抛', '霉', '桑', '岗', '嘛', '衰', '盗', '渗', '脏', '赖', '涌', '甜', '曹', '阅', '肌', '哩', '厉', '烃', '纬', '毅', '昨', '伪', '症', '煮', '叹', '钉', '搭', '茎', '笼', '酷', '偷', '弓', '锥', '恒', '杰', '坑', '鼻', '翼', '纶', '叙', '狱', '逮', '罐', '络', '棚', '抑', '膨', '蔬', '寺', '骤', '穆', '冶', '枯', '册', '尸', '凸', '绅', '坯', '牺', '焰', '轰', '欣', '晋', '瘦', '御', '锭', '锦', '丧', '旬', '锻', '垄', '搜', '扑', '邀', '亭', '酯', '迈', '舒', '脆', '酶', '闲', '忧', '酚', '顽', '羽', '涨', '卸', '仗', '陪', '辟', '惩', '杭', '姚', '肚', '捉', '飘', '漂', '昆', '欺', '吾', '郎', '烷', '汁', '呵', '饰', '萧', '雅', '邮', '迁', '燕', '撒', '姻', '赴', '宴', '烦', '债', '帐', '斑', '铃', '旨', '醇', '董', '饼', '雏', '姿', '拌', '傅', '腹', '妥', '揉', '贤', '拆', '歪', '葡', '胺', '丢', '浩', '徽', '昂', '垫', '挡', '览', '贪', '慰', '缴', '汪', '慌', '冯', '诺', '姜', '谊', '凶', '劣', '诬', '耀', '昏', '躺', '盈', '骑', '乔', '溪', '丛', '卢', '抹', '闷', '咨', '刮', '驾', '缆', '悟', '摘', '铒', '掷', '颇', '幻', '柄', '惠', '惨', '佳', '仇', '腊', '窝', '涤', '剑', '瞧', '堡', '泼', '葱', '罩', '霍', '捞', '胎', '苍', '滨', '俩', '捅', '湘', '砍', '霞', '邵', '萄', '疯', '淮', '遂', '熊', '粪', '烘', '宿', '档', '戈', '驳', '嫂', '裕', '徙', '箭', '捐', '肠', '撑', '晒', '辨', '殿', '莲', '摊', '搅', '酱', '屏', '疫', '哀', '蔡', '堵', '沫', '皱', '畅', '叠', '阁', '莱', '敲', '辖', '钩', '痕', '坝', '巷', '饿', '祸', '丘', '玄', '溜', '曰', '逻', '彭', '尝', '卿', '妨', '艇', '吞', '韦', '怨', '矮', '歇'];
@@ -96456,10 +97118,13 @@ var chinese = ['的', '一', '是', '在', '不', '了', '有', '和', '人', '�
 module.exports = chinese;
 
 /***/ }),
-/* 316 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var english = ['abandon', 'ability', 'able', 'about', 'above', 'absent', 'absorb', 'abstract', 'absurd', 'abuse', 'access', 'accident', 'account', 'accuse', 'achieve', 'acid', 'acoustic', 'acquire', 'across', 'act', 'action', 'actor', 'actress', 'actual', 'adapt', 'add', 'addict', 'address', 'adjust', 'admit', 'adult', 'advance', 'advice', 'aerobic', 'affair', 'afford', 'afraid', 'again', 'age', 'agent', 'agree', 'ahead', 'aim', 'air', 'airport', 'aisle', 'alarm', 'album', 'alcohol', 'alert', 'alien', 'all', 'alley', 'allow', 'almost', 'alone', 'alpha', 'already', 'also', 'alter', 'always', 'amateur', 'amazing', 'among', 'amount', 'amused', 'analyst', 'anchor', 'ancient', 'anger', 'angle', 'angry', 'animal', 'ankle', 'announce', 'annual', 'another', 'answer', 'antenna', 'antique', 'anxiety', 'any', 'apart', 'apology', 'appear', 'apple', 'approve', 'april', 'arch', 'arctic', 'area', 'arena', 'argue', 'arm', 'armed', 'armor', 'army', 'around', 'arrange', 'arrest', 'arrive', 'arrow', 'art', 'artefact', 'artist', 'artwork', 'ask', 'aspect', 'assault', 'asset', 'assist', 'assume', 'asthma', 'athlete', 'atom', 'attack', 'attend', 'attitude', 'attract', 'auction', 'audit', 'august', 'aunt', 'author', 'auto', 'autumn', 'average', 'avocado', 'avoid', 'awake', 'aware', 'away', 'awesome', 'awful', 'awkward', 'axis', 'baby', 'bachelor', 'bacon', 'badge', 'bag', 'balance', 'balcony', 'ball', 'bamboo', 'banana', 'banner', 'bar', 'barely', 'bargain', 'barrel', 'base', 'basic', 'basket', 'battle', 'beach', 'bean', 'beauty', 'because', 'become', 'beef', 'before', 'begin', 'behave', 'behind', 'believe', 'below', 'belt', 'bench', 'benefit', 'best', 'betray', 'better', 'between', 'beyond', 'bicycle', 'bid', 'bike', 'bind', 'biology', 'bird', 'birth', 'bitter', 'black', 'blade', 'blame', 'blanket', 'blast', 'bleak', 'bless', 'blind', 'blood', 'blossom', 'blouse', 'blue', 'blur', 'blush', 'board', 'boat', 'body', 'boil', 'bomb', 'bone', 'bonus', 'book', 'boost', 'border', 'boring', 'borrow', 'boss', 'bottom', 'bounce', 'box', 'boy', 'bracket', 'brain', 'brand', 'brass', 'brave', 'bread', 'breeze', 'brick', 'bridge', 'brief', 'bright', 'bring', 'brisk', 'broccoli', 'broken', 'bronze', 'broom', 'brother', 'brown', 'brush', 'bubble', 'buddy', 'budget', 'buffalo', 'build', 'bulb', 'bulk', 'bullet', 'bundle', 'bunker', 'burden', 'burger', 'burst', 'bus', 'business', 'busy', 'butter', 'buyer', 'buzz', 'cabbage', 'cabin', 'cable', 'cactus', 'cage', 'cake', 'call', 'calm', 'camera', 'camp', 'can', 'canal', 'cancel', 'candy', 'cannon', 'canoe', 'canvas', 'canyon', 'capable', 'capital', 'captain', 'car', 'carbon', 'card', 'cargo', 'carpet', 'carry', 'cart', 'case', 'cash', 'casino', 'castle', 'casual', 'cat', 'catalog', 'catch', 'category', 'cattle', 'caught', 'cause', 'caution', 'cave', 'ceiling', 'celery', 'cement', 'census', 'century', 'cereal', 'certain', 'chair', 'chalk', 'champion', 'change', 'chaos', 'chapter', 'charge', 'chase', 'chat', 'cheap', 'check', 'cheese', 'chef', 'cherry', 'chest', 'chicken', 'chief', 'child', 'chimney', 'choice', 'choose', 'chronic', 'chuckle', 'chunk', 'churn', 'cigar', 'cinnamon', 'circle', 'citizen', 'city', 'civil', 'claim', 'clap', 'clarify', 'claw', 'clay', 'clean', 'clerk', 'clever', 'click', 'client', 'cliff', 'climb', 'clinic', 'clip', 'clock', 'clog', 'close', 'cloth', 'cloud', 'clown', 'club', 'clump', 'cluster', 'clutch', 'coach', 'coast', 'coconut', 'code', 'coffee', 'coil', 'coin', 'collect', 'color', 'column', 'combine', 'come', 'comfort', 'comic', 'common', 'company', 'concert', 'conduct', 'confirm', 'congress', 'connect', 'consider', 'control', 'convince', 'cook', 'cool', 'copper', 'copy', 'coral', 'core', 'corn', 'correct', 'cost', 'cotton', 'couch', 'country', 'couple', 'course', 'cousin', 'cover', 'coyote', 'crack', 'cradle', 'craft', 'cram', 'crane', 'crash', 'crater', 'crawl', 'crazy', 'cream', 'credit', 'creek', 'crew', 'cricket', 'crime', 'crisp', 'critic', 'crop', 'cross', 'crouch', 'crowd', 'crucial', 'cruel', 'cruise', 'crumble', 'crunch', 'crush', 'cry', 'crystal', 'cube', 'culture', 'cup', 'cupboard', 'curious', 'current', 'curtain', 'curve', 'cushion', 'custom', 'cute', 'cycle', 'dad', 'damage', 'damp', 'dance', 'danger', 'daring', 'dash', 'daughter', 'dawn', 'day', 'deal', 'debate', 'debris', 'decade', 'december', 'decide', 'decline', 'decorate', 'decrease', 'deer', 'defense', 'define', 'defy', 'degree', 'delay', 'deliver', 'demand', 'demise', 'denial', 'dentist', 'deny', 'depart', 'depend', 'deposit', 'depth', 'deputy', 'derive', 'describe', 'desert', 'design', 'desk', 'despair', 'destroy', 'detail', 'detect', 'develop', 'device', 'devote', 'diagram', 'dial', 'diamond', 'diary', 'dice', 'diesel', 'diet', 'differ', 'digital', 'dignity', 'dilemma', 'dinner', 'dinosaur', 'direct', 'dirt', 'disagree', 'discover', 'disease', 'dish', 'dismiss', 'disorder', 'display', 'distance', 'divert', 'divide', 'divorce', 'dizzy', 'doctor', 'document', 'dog', 'doll', 'dolphin', 'domain', 'donate', 'donkey', 'donor', 'door', 'dose', 'double', 'dove', 'draft', 'dragon', 'drama', 'drastic', 'draw', 'dream', 'dress', 'drift', 'drill', 'drink', 'drip', 'drive', 'drop', 'drum', 'dry', 'duck', 'dumb', 'dune', 'during', 'dust', 'dutch', 'duty', 'dwarf', 'dynamic', 'eager', 'eagle', 'early', 'earn', 'earth', 'easily', 'east', 'easy', 'echo', 'ecology', 'economy', 'edge', 'edit', 'educate', 'effort', 'egg', 'eight', 'either', 'elbow', 'elder', 'electric', 'elegant', 'element', 'elephant', 'elevator', 'elite', 'else', 'embark', 'embody', 'embrace', 'emerge', 'emotion', 'employ', 'empower', 'empty', 'enable', 'enact', 'end', 'endless', 'endorse', 'enemy', 'energy', 'enforce', 'engage', 'engine', 'enhance', 'enjoy', 'enlist', 'enough', 'enrich', 'enroll', 'ensure', 'enter', 'entire', 'entry', 'envelope', 'episode', 'equal', 'equip', 'era', 'erase', 'erode', 'erosion', 'error', 'erupt', 'escape', 'essay', 'essence', 'estate', 'eternal', 'ethics', 'evidence', 'evil', 'evoke', 'evolve', 'exact', 'example', 'excess', 'exchange', 'excite', 'exclude', 'excuse', 'execute', 'exercise', 'exhaust', 'exhibit', 'exile', 'exist', 'exit', 'exotic', 'expand', 'expect', 'expire', 'explain', 'expose', 'express', 'extend', 'extra', 'eye', 'eyebrow', 'fabric', 'face', 'faculty', 'fade', 'faint', 'faith', 'fall', 'false', 'fame', 'family', 'famous', 'fan', 'fancy', 'fantasy', 'farm', 'fashion', 'fat', 'fatal', 'father', 'fatigue', 'fault', 'favorite', 'feature', 'february', 'federal', 'fee', 'feed', 'feel', 'female', 'fence', 'festival', 'fetch', 'fever', 'few', 'fiber', 'fiction', 'field', 'figure', 'file', 'film', 'filter', 'final', 'find', 'fine', 'finger', 'finish', 'fire', 'firm', 'first', 'fiscal', 'fish', 'fit', 'fitness', 'fix', 'flag', 'flame', 'flash', 'flat', 'flavor', 'flee', 'flight', 'flip', 'float', 'flock', 'floor', 'flower', 'fluid', 'flush', 'fly', 'foam', 'focus', 'fog', 'foil', 'fold', 'follow', 'food', 'foot', 'force', 'forest', 'forget', 'fork', 'fortune', 'forum', 'forward', 'fossil', 'foster', 'found', 'fox', 'fragile', 'frame', 'frequent', 'fresh', 'friend', 'fringe', 'frog', 'front', 'frost', 'frown', 'frozen', 'fruit', 'fuel', 'fun', 'funny', 'furnace', 'fury', 'future', 'gadget', 'gain', 'galaxy', 'gallery', 'game', 'gap', 'garage', 'garbage', 'garden', 'garlic', 'garment', 'gas', 'gasp', 'gate', 'gather', 'gauge', 'gaze', 'general', 'genius', 'genre', 'gentle', 'genuine', 'gesture', 'ghost', 'giant', 'gift', 'giggle', 'ginger', 'giraffe', 'girl', 'give', 'glad', 'glance', 'glare', 'glass', 'glide', 'glimpse', 'globe', 'gloom', 'glory', 'glove', 'glow', 'glue', 'goat', 'goddess', 'gold', 'good', 'goose', 'gorilla', 'gospel', 'gossip', 'govern', 'gown', 'grab', 'grace', 'grain', 'grant', 'grape', 'grass', 'gravity', 'great', 'green', 'grid', 'grief', 'grit', 'grocery', 'group', 'grow', 'grunt', 'guard', 'guess', 'guide', 'guilt', 'guitar', 'gun', 'gym', 'habit', 'hair', 'half', 'hammer', 'hamster', 'hand', 'happy', 'harbor', 'hard', 'harsh', 'harvest', 'hat', 'have', 'hawk', 'hazard', 'head', 'health', 'heart', 'heavy', 'hedgehog', 'height', 'hello', 'helmet', 'help', 'hen', 'hero', 'hidden', 'high', 'hill', 'hint', 'hip', 'hire', 'history', 'hobby', 'hockey', 'hold', 'hole', 'holiday', 'hollow', 'home', 'honey', 'hood', 'hope', 'horn', 'horror', 'horse', 'hospital', 'host', 'hotel', 'hour', 'hover', 'hub', 'huge', 'human', 'humble', 'humor', 'hundred', 'hungry', 'hunt', 'hurdle', 'hurry', 'hurt', 'husband', 'hybrid', 'ice', 'icon', 'idea', 'identify', 'idle', 'ignore', 'ill', 'illegal', 'illness', 'image', 'imitate', 'immense', 'immune', 'impact', 'impose', 'improve', 'impulse', 'inch', 'include', 'income', 'increase', 'index', 'indicate', 'indoor', 'industry', 'infant', 'inflict', 'inform', 'inhale', 'inherit', 'initial', 'inject', 'injury', 'inmate', 'inner', 'innocent', 'input', 'inquiry', 'insane', 'insect', 'inside', 'inspire', 'install', 'intact', 'interest', 'into', 'invest', 'invite', 'involve', 'iron', 'island', 'isolate', 'issue', 'item', 'ivory', 'jacket', 'jaguar', 'jar', 'jazz', 'jealous', 'jeans', 'jelly', 'jewel', 'job', 'join', 'joke', 'journey', 'joy', 'judge', 'juice', 'jump', 'jungle', 'junior', 'junk', 'just', 'kangaroo', 'keen', 'keep', 'ketchup', 'key', 'kick', 'kid', 'kidney', 'kind', 'kingdom', 'kiss', 'kit', 'kitchen', 'kite', 'kitten', 'kiwi', 'knee', 'knife', 'knock', 'know', 'lab', 'label', 'labor', 'ladder', 'lady', 'lake', 'lamp', 'language', 'laptop', 'large', 'later', 'latin', 'laugh', 'laundry', 'lava', 'law', 'lawn', 'lawsuit', 'layer', 'lazy', 'leader', 'leaf', 'learn', 'leave', 'lecture', 'left', 'leg', 'legal', 'legend', 'leisure', 'lemon', 'lend', 'length', 'lens', 'leopard', 'lesson', 'letter', 'level', 'liar', 'liberty', 'library', 'license', 'life', 'lift', 'light', 'like', 'limb', 'limit', 'link', 'lion', 'liquid', 'list', 'little', 'live', 'lizard', 'load', 'loan', 'lobster', 'local', 'lock', 'logic', 'lonely', 'long', 'loop', 'lottery', 'loud', 'lounge', 'love', 'loyal', 'lucky', 'luggage', 'lumber', 'lunar', 'lunch', 'luxury', 'lyrics', 'machine', 'mad', 'magic', 'magnet', 'maid', 'mail', 'main', 'major', 'make', 'mammal', 'man', 'manage', 'mandate', 'mango', 'mansion', 'manual', 'maple', 'marble', 'march', 'margin', 'marine', 'market', 'marriage', 'mask', 'mass', 'master', 'match', 'material', 'math', 'matrix', 'matter', 'maximum', 'maze', 'meadow', 'mean', 'measure', 'meat', 'mechanic', 'medal', 'media', 'melody', 'melt', 'member', 'memory', 'mention', 'menu', 'mercy', 'merge', 'merit', 'merry', 'mesh', 'message', 'metal', 'method', 'middle', 'midnight', 'milk', 'million', 'mimic', 'mind', 'minimum', 'minor', 'minute', 'miracle', 'mirror', 'misery', 'miss', 'mistake', 'mix', 'mixed', 'mixture', 'mobile', 'model', 'modify', 'mom', 'moment', 'monitor', 'monkey', 'monster', 'month', 'moon', 'moral', 'more', 'morning', 'mosquito', 'mother', 'motion', 'motor', 'mountain', 'mouse', 'move', 'movie', 'much', 'muffin', 'mule', 'multiply', 'muscle', 'museum', 'mushroom', 'music', 'must', 'mutual', 'myself', 'mystery', 'myth', 'naive', 'name', 'napkin', 'narrow', 'nasty', 'nation', 'nature', 'near', 'neck', 'need', 'negative', 'neglect', 'neither', 'nephew', 'nerve', 'nest', 'net', 'network', 'neutral', 'never', 'news', 'next', 'nice', 'night', 'noble', 'noise', 'nominee', 'noodle', 'normal', 'north', 'nose', 'notable', 'note', 'nothing', 'notice', 'novel', 'now', 'nuclear', 'number', 'nurse', 'nut', 'oak', 'obey', 'object', 'oblige', 'obscure', 'observe', 'obtain', 'obvious', 'occur', 'ocean', 'october', 'odor', 'off', 'offer', 'office', 'often', 'oil', 'okay', 'old', 'olive', 'olympic', 'omit', 'once', 'one', 'onion', 'online', 'only', 'open', 'opera', 'opinion', 'oppose', 'option', 'orange', 'orbit', 'orchard', 'order', 'ordinary', 'organ', 'orient', 'original', 'orphan', 'ostrich', 'other', 'outdoor', 'outer', 'output', 'outside', 'oval', 'oven', 'over', 'own', 'owner', 'oxygen', 'oyster', 'ozone', 'pact', 'paddle', 'page', 'pair', 'palace', 'palm', 'panda', 'panel', 'panic', 'panther', 'paper', 'parade', 'parent', 'park', 'parrot', 'party', 'pass', 'patch', 'path', 'patient', 'patrol', 'pattern', 'pause', 'pave', 'payment', 'peace', 'peanut', 'pear', 'peasant', 'pelican', 'pen', 'penalty', 'pencil', 'people', 'pepper', 'perfect', 'permit', 'person', 'pet', 'phone', 'photo', 'phrase', 'physical', 'piano', 'picnic', 'picture', 'piece', 'pig', 'pigeon', 'pill', 'pilot', 'pink', 'pioneer', 'pipe', 'pistol', 'pitch', 'pizza', 'place', 'planet', 'plastic', 'plate', 'play', 'please', 'pledge', 'pluck', 'plug', 'plunge', 'poem', 'poet', 'point', 'polar', 'pole', 'police', 'pond', 'pony', 'pool', 'popular', 'portion', 'position', 'possible', 'post', 'potato', 'pottery', 'poverty', 'powder', 'power', 'practice', 'praise', 'predict', 'prefer', 'prepare', 'present', 'pretty', 'prevent', 'price', 'pride', 'primary', 'print', 'priority', 'prison', 'private', 'prize', 'problem', 'process', 'produce', 'profit', 'program', 'project', 'promote', 'proof', 'property', 'prosper', 'protect', 'proud', 'provide', 'public', 'pudding', 'pull', 'pulp', 'pulse', 'pumpkin', 'punch', 'pupil', 'puppy', 'purchase', 'purity', 'purpose', 'purse', 'push', 'put', 'puzzle', 'pyramid', 'quality', 'quantum', 'quarter', 'question', 'quick', 'quit', 'quiz', 'quote', 'rabbit', 'raccoon', 'race', 'rack', 'radar', 'radio', 'rail', 'rain', 'raise', 'rally', 'ramp', 'ranch', 'random', 'range', 'rapid', 'rare', 'rate', 'rather', 'raven', 'raw', 'razor', 'ready', 'real', 'reason', 'rebel', 'rebuild', 'recall', 'receive', 'recipe', 'record', 'recycle', 'reduce', 'reflect', 'reform', 'refuse', 'region', 'regret', 'regular', 'reject', 'relax', 'release', 'relief', 'rely', 'remain', 'remember', 'remind', 'remove', 'render', 'renew', 'rent', 'reopen', 'repair', 'repeat', 'replace', 'report', 'require', 'rescue', 'resemble', 'resist', 'resource', 'response', 'result', 'retire', 'retreat', 'return', 'reunion', 'reveal', 'review', 'reward', 'rhythm', 'rib', 'ribbon', 'rice', 'rich', 'ride', 'ridge', 'rifle', 'right', 'rigid', 'ring', 'riot', 'ripple', 'risk', 'ritual', 'rival', 'river', 'road', 'roast', 'robot', 'robust', 'rocket', 'romance', 'roof', 'rookie', 'room', 'rose', 'rotate', 'rough', 'round', 'route', 'royal', 'rubber', 'rude', 'rug', 'rule', 'run', 'runway', 'rural', 'sad', 'saddle', 'sadness', 'safe', 'sail', 'salad', 'salmon', 'salon', 'salt', 'salute', 'same', 'sample', 'sand', 'satisfy', 'satoshi', 'sauce', 'sausage', 'save', 'say', 'scale', 'scan', 'scare', 'scatter', 'scene', 'scheme', 'school', 'science', 'scissors', 'scorpion', 'scout', 'scrap', 'screen', 'script', 'scrub', 'sea', 'search', 'season', 'seat', 'second', 'secret', 'section', 'security', 'seed', 'seek', 'segment', 'select', 'sell', 'seminar', 'senior', 'sense', 'sentence', 'series', 'service', 'session', 'settle', 'setup', 'seven', 'shadow', 'shaft', 'shallow', 'share', 'shed', 'shell', 'sheriff', 'shield', 'shift', 'shine', 'ship', 'shiver', 'shock', 'shoe', 'shoot', 'shop', 'short', 'shoulder', 'shove', 'shrimp', 'shrug', 'shuffle', 'shy', 'sibling', 'sick', 'side', 'siege', 'sight', 'sign', 'silent', 'silk', 'silly', 'silver', 'similar', 'simple', 'since', 'sing', 'siren', 'sister', 'situate', 'six', 'size', 'skate', 'sketch', 'ski', 'skill', 'skin', 'skirt', 'skull', 'slab', 'slam', 'sleep', 'slender', 'slice', 'slide', 'slight', 'slim', 'slogan', 'slot', 'slow', 'slush', 'small', 'smart', 'smile', 'smoke', 'smooth', 'snack', 'snake', 'snap', 'sniff', 'snow', 'soap', 'soccer', 'social', 'sock', 'soda', 'soft', 'solar', 'soldier', 'solid', 'solution', 'solve', 'someone', 'song', 'soon', 'sorry', 'sort', 'soul', 'sound', 'soup', 'source', 'south', 'space', 'spare', 'spatial', 'spawn', 'speak', 'special', 'speed', 'spell', 'spend', 'sphere', 'spice', 'spider', 'spike', 'spin', 'spirit', 'split', 'spoil', 'sponsor', 'spoon', 'sport', 'spot', 'spray', 'spread', 'spring', 'spy', 'square', 'squeeze', 'squirrel', 'stable', 'stadium', 'staff', 'stage', 'stairs', 'stamp', 'stand', 'start', 'state', 'stay', 'steak', 'steel', 'stem', 'step', 'stereo', 'stick', 'still', 'sting', 'stock', 'stomach', 'stone', 'stool', 'story', 'stove', 'strategy', 'street', 'strike', 'strong', 'struggle', 'student', 'stuff', 'stumble', 'style', 'subject', 'submit', 'subway', 'success', 'such', 'sudden', 'suffer', 'sugar', 'suggest', 'suit', 'summer', 'sun', 'sunny', 'sunset', 'super', 'supply', 'supreme', 'sure', 'surface', 'surge', 'surprise', 'surround', 'survey', 'suspect', 'sustain', 'swallow', 'swamp', 'swap', 'swarm', 'swear', 'sweet', 'swift', 'swim', 'swing', 'switch', 'sword', 'symbol', 'symptom', 'syrup', 'system', 'table', 'tackle', 'tag', 'tail', 'talent', 'talk', 'tank', 'tape', 'target', 'task', 'taste', 'tattoo', 'taxi', 'teach', 'team', 'tell', 'ten', 'tenant', 'tennis', 'tent', 'term', 'test', 'text', 'thank', 'that', 'theme', 'then', 'theory', 'there', 'they', 'thing', 'this', 'thought', 'three', 'thrive', 'throw', 'thumb', 'thunder', 'ticket', 'tide', 'tiger', 'tilt', 'timber', 'time', 'tiny', 'tip', 'tired', 'tissue', 'title', 'toast', 'tobacco', 'today', 'toddler', 'toe', 'together', 'toilet', 'token', 'tomato', 'tomorrow', 'tone', 'tongue', 'tonight', 'tool', 'tooth', 'top', 'topic', 'topple', 'torch', 'tornado', 'tortoise', 'toss', 'total', 'tourist', 'toward', 'tower', 'town', 'toy', 'track', 'trade', 'traffic', 'tragic', 'train', 'transfer', 'trap', 'trash', 'travel', 'tray', 'treat', 'tree', 'trend', 'trial', 'tribe', 'trick', 'trigger', 'trim', 'trip', 'trophy', 'trouble', 'truck', 'true', 'truly', 'trumpet', 'trust', 'truth', 'try', 'tube', 'tuition', 'tumble', 'tuna', 'tunnel', 'turkey', 'turn', 'turtle', 'twelve', 'twenty', 'twice', 'twin', 'twist', 'two', 'type', 'typical', 'ugly', 'umbrella', 'unable', 'unaware', 'uncle', 'uncover', 'under', 'undo', 'unfair', 'unfold', 'unhappy', 'uniform', 'unique', 'unit', 'universe', 'unknown', 'unlock', 'until', 'unusual', 'unveil', 'update', 'upgrade', 'uphold', 'upon', 'upper', 'upset', 'urban', 'urge', 'usage', 'use', 'used', 'useful', 'useless', 'usual', 'utility', 'vacant', 'vacuum', 'vague', 'valid', 'valley', 'valve', 'van', 'vanish', 'vapor', 'various', 'vast', 'vault', 'vehicle', 'velvet', 'vendor', 'venture', 'venue', 'verb', 'verify', 'version', 'very', 'vessel', 'veteran', 'viable', 'vibrant', 'vicious', 'victory', 'video', 'view', 'village', 'vintage', 'violin', 'virtual', 'virus', 'visa', 'visit', 'visual', 'vital', 'vivid', 'vocal', 'voice', 'void', 'volcano', 'volume', 'vote', 'voyage', 'wage', 'wagon', 'wait', 'walk', 'wall', 'walnut', 'want', 'warfare', 'warm', 'warrior', 'wash', 'wasp', 'waste', 'water', 'wave', 'way', 'wealth', 'weapon', 'wear', 'weasel', 'weather', 'web', 'wedding', 'weekend', 'weird', 'welcome', 'west', 'wet', 'whale', 'what', 'wheat', 'wheel', 'when', 'where', 'whip', 'whisper', 'wide', 'width', 'wife', 'wild', 'will', 'win', 'window', 'wine', 'wing', 'wink', 'winner', 'winter', 'wire', 'wisdom', 'wise', 'wish', 'witness', 'wolf', 'woman', 'wonder', 'wood', 'wool', 'word', 'work', 'world', 'worry', 'worth', 'wrap', 'wreck', 'wrestle', 'wrist', 'write', 'wrong', 'yard', 'year', 'yellow', 'you', 'young', 'youth', 'zebra', 'zero', 'zone', 'zoo'];
@@ -96467,8 +97132,11 @@ var english = ['abandon', 'ability', 'able', 'about', 'above', 'absent', 'absorb
 module.exports = english;
 
 /***/ }),
-/* 317 */
+/* 321 */
 /***/ (function(module, exports) {
+
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
 'use string';
 
@@ -96477,10 +97145,13 @@ var french = ['abaisser', 'abandon', 'abdiquer', 'abeille', 'abolir', 'aborder',
 module.exports = french;
 
 /***/ }),
-/* 318 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var italian = ['abaco', 'abbaglio', 'abbinato', 'abete', 'abisso', 'abolire', 'abrasivo', 'abrogato', 'accadere', 'accenno', 'accusato', 'acetone', 'achille', 'acido', 'acqua', 'acre', 'acrilico', 'acrobata', 'acuto', 'adagio', 'addebito', 'addome', 'adeguato', 'aderire', 'adipe', 'adottare', 'adulare', 'affabile', 'affetto', 'affisso', 'affranto', 'aforisma', 'afoso', 'africano', 'agave', 'agente', 'agevole', 'aggancio', 'agire', 'agitare', 'agonismo', 'agricolo', 'agrumeto', 'aguzzo', 'alabarda', 'alato', 'albatro', 'alberato', 'albo', 'albume', 'alce', 'alcolico', 'alettone', 'alfa', 'algebra', 'aliante', 'alibi', 'alimento', 'allagato', 'allegro', 'allievo', 'allodola', 'allusivo', 'almeno', 'alogeno', 'alpaca', 'alpestre', 'altalena', 'alterno', 'alticcio', 'altrove', 'alunno', 'alveolo', 'alzare', 'amalgama', 'amanita', 'amarena', 'ambito', 'ambrato', 'ameba', 'america', 'ametista', 'amico', 'ammasso', 'ammenda', 'ammirare', 'ammonito', 'amore', 'ampio', 'ampliare', 'amuleto', 'anacardo', 'anagrafe', 'analista', 'anarchia', 'anatra', 'anca', 'ancella', 'ancora', 'andare', 'andrea', 'anello', 'angelo', 'angolare', 'angusto', 'anima', 'annegare', 'annidato', 'anno', 'annuncio', 'anonimo', 'anticipo', 'anzi', 'apatico', 'apertura', 'apode', 'apparire', 'appetito', 'appoggio', 'approdo', 'appunto', 'aprile', 'arabica', 'arachide', 'aragosta', 'araldica', 'arancio', 'aratura', 'arazzo', 'arbitro', 'archivio', 'ardito', 'arenile', 'argento', 'argine', 'arguto', 'aria', 'armonia', 'arnese', 'arredato', 'arringa', 'arrosto', 'arsenico', 'arso', 'artefice', 'arzillo', 'asciutto', 'ascolto', 'asepsi', 'asettico', 'asfalto', 'asino', 'asola', 'aspirato', 'aspro', 'assaggio', 'asse', 'assoluto', 'assurdo', 'asta', 'astenuto', 'astice', 'astratto', 'atavico', 'ateismo', 'atomico', 'atono', 'attesa', 'attivare', 'attorno', 'attrito', 'attuale', 'ausilio', 'austria', 'autista', 'autonomo', 'autunno', 'avanzato', 'avere', 'avvenire', 'avviso', 'avvolgere', 'azione', 'azoto', 'azzimo', 'azzurro', 'babele', 'baccano', 'bacino', 'baco', 'badessa', 'badilata', 'bagnato', 'baita', 'balcone', 'baldo', 'balena', 'ballata', 'balzano', 'bambino', 'bandire', 'baraonda', 'barbaro', 'barca', 'baritono', 'barlume', 'barocco', 'basilico', 'basso', 'batosta', 'battuto', 'baule', 'bava', 'bavosa', 'becco', 'beffa', 'belgio', 'belva', 'benda', 'benevole', 'benigno', 'benzina', 'bere', 'berlina', 'beta', 'bibita', 'bici', 'bidone', 'bifido', 'biga', 'bilancia', 'bimbo', 'binocolo', 'biologo', 'bipede', 'bipolare', 'birbante', 'birra', 'biscotto', 'bisesto', 'bisnonno', 'bisonte', 'bisturi', 'bizzarro', 'blando', 'blatta', 'bollito', 'bonifico', 'bordo', 'bosco', 'botanico', 'bottino', 'bozzolo', 'braccio', 'bradipo', 'brama', 'branca', 'bravura', 'bretella', 'brevetto', 'brezza', 'briglia', 'brillante', 'brindare', 'broccolo', 'brodo', 'bronzina', 'brullo', 'bruno', 'bubbone', 'buca', 'budino', 'buffone', 'buio', 'bulbo', 'buono', 'burlone', 'burrasca', 'bussola', 'busta', 'cadetto', 'caduco', 'calamaro', 'calcolo', 'calesse', 'calibro', 'calmo', 'caloria', 'cambusa', 'camerata', 'camicia', 'cammino', 'camola', 'campale', 'canapa', 'candela', 'cane', 'canino', 'canotto', 'cantina', 'capace', 'capello', 'capitolo', 'capogiro', 'cappero', 'capra', 'capsula', 'carapace', 'carcassa', 'cardo', 'carisma', 'carovana', 'carretto', 'cartolina', 'casaccio', 'cascata', 'caserma', 'caso', 'cassone', 'castello', 'casuale', 'catasta', 'catena', 'catrame', 'cauto', 'cavillo', 'cedibile', 'cedrata', 'cefalo', 'celebre', 'cellulare', 'cena', 'cenone', 'centesimo', 'ceramica', 'cercare', 'certo', 'cerume', 'cervello', 'cesoia', 'cespo', 'ceto', 'chela', 'chiaro', 'chicca', 'chiedere', 'chimera', 'china', 'chirurgo', 'chitarra', 'ciao', 'ciclismo', 'cifrare', 'cigno', 'cilindro', 'ciottolo', 'circa', 'cirrosi', 'citrico', 'cittadino', 'ciuffo', 'civetta', 'civile', 'classico', 'clinica', 'cloro', 'cocco', 'codardo', 'codice', 'coerente', 'cognome', 'collare', 'colmato', 'colore', 'colposo', 'coltivato', 'colza', 'coma', 'cometa', 'commando', 'comodo', 'computer', 'comune', 'conciso', 'condurre', 'conferma', 'congelare', 'coniuge', 'connesso', 'conoscere', 'consumo', 'continuo', 'convegno', 'coperto', 'copione', 'coppia', 'copricapo', 'corazza', 'cordata', 'coricato', 'cornice', 'corolla', 'corpo', 'corredo', 'corsia', 'cortese', 'cosmico', 'costante', 'cottura', 'covato', 'cratere', 'cravatta', 'creato', 'credere', 'cremoso', 'crescita', 'creta', 'criceto', 'crinale', 'crisi', 'critico', 'croce', 'cronaca', 'crostata', 'cruciale', 'crusca', 'cucire', 'cuculo', 'cugino', 'cullato', 'cupola', 'curatore', 'cursore', 'curvo', 'cuscino', 'custode', 'dado', 'daino', 'dalmata', 'damerino', 'daniela', 'dannoso', 'danzare', 'datato', 'davanti', 'davvero', 'debutto', 'decennio', 'deciso', 'declino', 'decollo', 'decreto', 'dedicato', 'definito', 'deforme', 'degno', 'delegare', 'delfino', 'delirio', 'delta', 'demenza', 'denotato', 'dentro', 'deposito', 'derapata', 'derivare', 'deroga', 'descritto', 'deserto', 'desiderio', 'desumere', 'detersivo', 'devoto', 'diametro', 'dicembre', 'diedro', 'difeso', 'diffuso', 'digerire', 'digitale', 'diluvio', 'dinamico', 'dinnanzi', 'dipinto', 'diploma', 'dipolo', 'diradare', 'dire', 'dirotto', 'dirupo', 'disagio', 'discreto', 'disfare', 'disgelo', 'disposto', 'distanza', 'disumano', 'dito', 'divano', 'divelto', 'dividere', 'divorato', 'doblone', 'docente', 'doganale', 'dogma', 'dolce', 'domato', 'domenica', 'dominare', 'dondolo', 'dono', 'dormire', 'dote', 'dottore', 'dovuto', 'dozzina', 'drago', 'druido', 'dubbio', 'dubitare', 'ducale', 'duna', 'duomo', 'duplice', 'duraturo', 'ebano', 'eccesso', 'ecco', 'eclissi', 'economia', 'edera', 'edicola', 'edile', 'editoria', 'educare', 'egemonia', 'egli', 'egoismo', 'egregio', 'elaborato', 'elargire', 'elegante', 'elencato', 'eletto', 'elevare', 'elfico', 'elica', 'elmo', 'elsa', 'eluso', 'emanato', 'emblema', 'emesso', 'emiro', 'emotivo', 'emozione', 'empirico', 'emulo', 'endemico', 'enduro', 'energia', 'enfasi', 'enoteca', 'entrare', 'enzima', 'epatite', 'epilogo', 'episodio', 'epocale', 'eppure', 'equatore', 'erario', 'erba', 'erboso', 'erede', 'eremita', 'erigere', 'ermetico', 'eroe', 'erosivo', 'errante', 'esagono', 'esame', 'esanime', 'esaudire', 'esca', 'esempio', 'esercito', 'esibito', 'esigente', 'esistere', 'esito', 'esofago', 'esortato', 'esoso', 'espanso', 'espresso', 'essenza', 'esso', 'esteso', 'estimare', 'estonia', 'estroso', 'esultare', 'etilico', 'etnico', 'etrusco', 'etto', 'euclideo', 'europa', 'evaso', 'evidenza', 'evitato', 'evoluto', 'evviva', 'fabbrica', 'faccenda', 'fachiro', 'falco', 'famiglia', 'fanale', 'fanfara', 'fango', 'fantasma', 'fare', 'farfalla', 'farinoso', 'farmaco', 'fascia', 'fastoso', 'fasullo', 'faticare', 'fato', 'favoloso', 'febbre', 'fecola', 'fede', 'fegato', 'felpa', 'feltro', 'femmina', 'fendere', 'fenomeno', 'fermento', 'ferro', 'fertile', 'fessura', 'festivo', 'fetta', 'feudo', 'fiaba', 'fiducia', 'fifa', 'figurato', 'filo', 'finanza', 'finestra', 'finire', 'fiore', 'fiscale', 'fisico', 'fiume', 'flacone', 'flamenco', 'flebo', 'flemma', 'florido', 'fluente', 'fluoro', 'fobico', 'focaccia', 'focoso', 'foderato', 'foglio', 'folata', 'folclore', 'folgore', 'fondente', 'fonetico', 'fonia', 'fontana', 'forbito', 'forchetta', 'foresta', 'formica', 'fornaio', 'foro', 'fortezza', 'forzare', 'fosfato', 'fosso', 'fracasso', 'frana', 'frassino', 'fratello', 'freccetta', 'frenata', 'fresco', 'frigo', 'frollino', 'fronde', 'frugale', 'frutta', 'fucilata', 'fucsia', 'fuggente', 'fulmine', 'fulvo', 'fumante', 'fumetto', 'fumoso', 'fune', 'funzione', 'fuoco', 'furbo', 'furgone', 'furore', 'fuso', 'futile', 'gabbiano', 'gaffe', 'galateo', 'gallina', 'galoppo', 'gambero', 'gamma', 'garanzia', 'garbo', 'garofano', 'garzone', 'gasdotto', 'gasolio', 'gastrico', 'gatto', 'gaudio', 'gazebo', 'gazzella', 'geco', 'gelatina', 'gelso', 'gemello', 'gemmato', 'gene', 'genitore', 'gennaio', 'genotipo', 'gergo', 'ghepardo', 'ghiaccio', 'ghisa', 'giallo', 'gilda', 'ginepro', 'giocare', 'gioiello', 'giorno', 'giove', 'girato', 'girone', 'gittata', 'giudizio', 'giurato', 'giusto', 'globulo', 'glutine', 'gnomo', 'gobba', 'golf', 'gomito', 'gommone', 'gonfio', 'gonna', 'governo', 'gracile', 'grado', 'grafico', 'grammo', 'grande', 'grattare', 'gravoso', 'grazia', 'greca', 'gregge', 'grifone', 'grigio', 'grinza', 'grotta', 'gruppo', 'guadagno', 'guaio', 'guanto', 'guardare', 'gufo', 'guidare', 'ibernato', 'icona', 'identico', 'idillio', 'idolo', 'idra', 'idrico', 'idrogeno', 'igiene', 'ignaro', 'ignorato', 'ilare', 'illeso', 'illogico', 'illudere', 'imballo', 'imbevuto', 'imbocco', 'imbuto', 'immane', 'immerso', 'immolato', 'impacco', 'impeto', 'impiego', 'importo', 'impronta', 'inalare', 'inarcare', 'inattivo', 'incanto', 'incendio', 'inchino', 'incisivo', 'incluso', 'incontro', 'incrocio', 'incubo', 'indagine', 'india', 'indole', 'inedito', 'infatti', 'infilare', 'inflitto', 'ingaggio', 'ingegno', 'inglese', 'ingordo', 'ingrosso', 'innesco', 'inodore', 'inoltrare', 'inondato', 'insano', 'insetto', 'insieme', 'insonnia', 'insulina', 'intasato', 'intero', 'intonaco', 'intuito', 'inumidire', 'invalido', 'invece', 'invito', 'iperbole', 'ipnotico', 'ipotesi', 'ippica', 'iride', 'irlanda', 'ironico', 'irrigato', 'irrorare', 'isolato', 'isotopo', 'isterico', 'istituto', 'istrice', 'italia', 'iterare', 'labbro', 'labirinto', 'lacca', 'lacerato', 'lacrima', 'lacuna', 'laddove', 'lago', 'lampo', 'lancetta', 'lanterna', 'lardoso', 'larga', 'laringe', 'lastra', 'latenza', 'latino', 'lattuga', 'lavagna', 'lavoro', 'legale', 'leggero', 'lembo', 'lentezza', 'lenza', 'leone', 'lepre', 'lesivo', 'lessato', 'lesto', 'letterale', 'leva', 'levigato', 'libero', 'lido', 'lievito', 'lilla', 'limatura', 'limitare', 'limpido', 'lineare', 'lingua', 'liquido', 'lira', 'lirica', 'lisca', 'lite', 'litigio', 'livrea', 'locanda', 'lode', 'logica', 'lombare', 'londra', 'longevo', 'loquace', 'lorenzo', 'loto', 'lotteria', 'luce', 'lucidato', 'lumaca', 'luminoso', 'lungo', 'lupo', 'luppolo', 'lusinga', 'lusso', 'lutto', 'macabro', 'macchina', 'macero', 'macinato', 'madama', 'magico', 'maglia', 'magnete', 'magro', 'maiolica', 'malafede', 'malgrado', 'malinteso', 'malsano', 'malto', 'malumore', 'mana', 'mancia', 'mandorla', 'mangiare', 'manifesto', 'mannaro', 'manovra', 'mansarda', 'mantide', 'manubrio', 'mappa', 'maratona', 'marcire', 'maretta', 'marmo', 'marsupio', 'maschera', 'massaia', 'mastino', 'materasso', 'matricola', 'mattone', 'maturo', 'mazurca', 'meandro', 'meccanico', 'mecenate', 'medesimo', 'meditare', 'mega', 'melassa', 'melis', 'melodia', 'meninge', 'meno', 'mensola', 'mercurio', 'merenda', 'merlo', 'meschino', 'mese', 'messere', 'mestolo', 'metallo', 'metodo', 'mettere', 'miagolare', 'mica', 'micelio', 'michele', 'microbo', 'midollo', 'miele', 'migliore', 'milano', 'milite', 'mimosa', 'minerale', 'mini', 'minore', 'mirino', 'mirtillo', 'miscela', 'missiva', 'misto', 'misurare', 'mitezza', 'mitigare', 'mitra', 'mittente', 'mnemonico', 'modello', 'modifica', 'modulo', 'mogano', 'mogio', 'mole', 'molosso', 'monastero', 'monco', 'mondina', 'monetario', 'monile', 'monotono', 'monsone', 'montato', 'monviso', 'mora', 'mordere', 'morsicato', 'mostro', 'motivato', 'motosega', 'motto', 'movenza', 'movimento', 'mozzo', 'mucca', 'mucosa', 'muffa', 'mughetto', 'mugnaio', 'mulatto', 'mulinello', 'multiplo', 'mummia', 'munto', 'muovere', 'murale', 'musa', 'muscolo', 'musica', 'mutevole', 'muto', 'nababbo', 'nafta', 'nanometro', 'narciso', 'narice', 'narrato', 'nascere', 'nastrare', 'naturale', 'nautica', 'naviglio', 'nebulosa', 'necrosi', 'negativo', 'negozio', 'nemmeno', 'neofita', 'neretto', 'nervo', 'nessuno', 'nettuno', 'neutrale', 'neve', 'nevrotico', 'nicchia', 'ninfa', 'nitido', 'nobile', 'nocivo', 'nodo', 'nome', 'nomina', 'nordico', 'normale', 'norvegese', 'nostrano', 'notare', 'notizia', 'notturno', 'novella', 'nucleo', 'nulla', 'numero', 'nuovo', 'nutrire', 'nuvola', 'nuziale', 'oasi', 'obbedire', 'obbligo', 'obelisco', 'oblio', 'obolo', 'obsoleto', 'occasione', 'occhio', 'occidente', 'occorrere', 'occultare', 'ocra', 'oculato', 'odierno', 'odorare', 'offerta', 'offrire', 'offuscato', 'oggetto', 'oggi', 'ognuno', 'olandese', 'olfatto', 'oliato', 'oliva', 'ologramma', 'oltre', 'omaggio', 'ombelico', 'ombra', 'omega', 'omissione', 'ondoso', 'onere', 'onice', 'onnivoro', 'onorevole', 'onta', 'operato', 'opinione', 'opposto', 'oracolo', 'orafo', 'ordine', 'orecchino', 'orefice', 'orfano', 'organico', 'origine', 'orizzonte', 'orma', 'ormeggio', 'ornativo', 'orologio', 'orrendo', 'orribile', 'ortensia', 'ortica', 'orzata', 'orzo', 'osare', 'oscurare', 'osmosi', 'ospedale', 'ospite', 'ossa', 'ossidare', 'ostacolo', 'oste', 'otite', 'otre', 'ottagono', 'ottimo', 'ottobre', 'ovale', 'ovest', 'ovino', 'oviparo', 'ovocito', 'ovunque', 'ovviare', 'ozio', 'pacchetto', 'pace', 'pacifico', 'padella', 'padrone', 'paese', 'paga', 'pagina', 'palazzina', 'palesare', 'pallido', 'palo', 'palude', 'pandoro', 'pannello', 'paolo', 'paonazzo', 'paprica', 'parabola', 'parcella', 'parere', 'pargolo', 'pari', 'parlato', 'parola', 'partire', 'parvenza', 'parziale', 'passivo', 'pasticca', 'patacca', 'patologia', 'pattume', 'pavone', 'peccato', 'pedalare', 'pedonale', 'peggio', 'peloso', 'penare', 'pendice', 'penisola', 'pennuto', 'penombra', 'pensare', 'pentola', 'pepe', 'pepita', 'perbene', 'percorso', 'perdonato', 'perforare', 'pergamena', 'periodo', 'permesso', 'perno', 'perplesso', 'persuaso', 'pertugio', 'pervaso', 'pesatore', 'pesista', 'peso', 'pestifero', 'petalo', 'pettine', 'petulante', 'pezzo', 'piacere', 'pianta', 'piattino', 'piccino', 'picozza', 'piega', 'pietra', 'piffero', 'pigiama', 'pigolio', 'pigro', 'pila', 'pilifero', 'pillola', 'pilota', 'pimpante', 'pineta', 'pinna', 'pinolo', 'pioggia', 'piombo', 'piramide', 'piretico', 'pirite', 'pirolisi', 'pitone', 'pizzico', 'placebo', 'planare', 'plasma', 'platano', 'plenario', 'pochezza', 'poderoso', 'podismo', 'poesia', 'poggiare', 'polenta', 'poligono', 'pollice', 'polmonite', 'polpetta', 'polso', 'poltrona', 'polvere', 'pomice', 'pomodoro', 'ponte', 'popoloso', 'porfido', 'poroso', 'porpora', 'porre', 'portata', 'posa', 'positivo', 'possesso', 'postulato', 'potassio', 'potere', 'pranzo', 'prassi', 'pratica', 'precluso', 'predica', 'prefisso', 'pregiato', 'prelievo', 'premere', 'prenotare', 'preparato', 'presenza', 'pretesto', 'prevalso', 'prima', 'principe', 'privato', 'problema', 'procura', 'produrre', 'profumo', 'progetto', 'prolunga', 'promessa', 'pronome', 'proposta', 'proroga', 'proteso', 'prova', 'prudente', 'prugna', 'prurito', 'psiche', 'pubblico', 'pudica', 'pugilato', 'pugno', 'pulce', 'pulito', 'pulsante', 'puntare', 'pupazzo', 'pupilla', 'puro', 'quadro', 'qualcosa', 'quasi', 'querela', 'quota', 'raccolto', 'raddoppio', 'radicale', 'radunato', 'raffica', 'ragazzo', 'ragione', 'ragno', 'ramarro', 'ramingo', 'ramo', 'randagio', 'rantolare', 'rapato', 'rapina', 'rappreso', 'rasatura', 'raschiato', 'rasente', 'rassegna', 'rastrello', 'rata', 'ravveduto', 'reale', 'recepire', 'recinto', 'recluta', 'recondito', 'recupero', 'reddito', 'redimere', 'regalato', 'registro', 'regola', 'regresso', 'relazione', 'remare', 'remoto', 'renna', 'replica', 'reprimere', 'reputare', 'resa', 'residente', 'responso', 'restauro', 'rete', 'retina', 'retorica', 'rettifica', 'revocato', 'riassunto', 'ribadire', 'ribelle', 'ribrezzo', 'ricarica', 'ricco', 'ricevere', 'riciclato', 'ricordo', 'ricreduto', 'ridicolo', 'ridurre', 'rifasare', 'riflesso', 'riforma', 'rifugio', 'rigare', 'rigettato', 'righello', 'rilassato', 'rilevato', 'rimanere', 'rimbalzo', 'rimedio', 'rimorchio', 'rinascita', 'rincaro', 'rinforzo', 'rinnovo', 'rinomato', 'rinsavito', 'rintocco', 'rinuncia', 'rinvenire', 'riparato', 'ripetuto', 'ripieno', 'riportare', 'ripresa', 'ripulire', 'risata', 'rischio', 'riserva', 'risibile', 'riso', 'rispetto', 'ristoro', 'risultato', 'risvolto', 'ritardo', 'ritegno', 'ritmico', 'ritrovo', 'riunione', 'riva', 'riverso', 'rivincita', 'rivolto', 'rizoma', 'roba', 'robotico', 'robusto', 'roccia', 'roco', 'rodaggio', 'rodere', 'roditore', 'rogito', 'rollio', 'romantico', 'rompere', 'ronzio', 'rosolare', 'rospo', 'rotante', 'rotondo', 'rotula', 'rovescio', 'rubizzo', 'rubrica', 'ruga', 'rullino', 'rumine', 'rumoroso', 'ruolo', 'rupe', 'russare', 'rustico', 'sabato', 'sabbiare', 'sabotato', 'sagoma', 'salasso', 'saldatura', 'salgemma', 'salivare', 'salmone', 'salone', 'saltare', 'saluto', 'salvo', 'sapere', 'sapido', 'saporito', 'saraceno', 'sarcasmo', 'sarto', 'sassoso', 'satellite', 'satira', 'satollo', 'saturno', 'savana', 'savio', 'saziato', 'sbadiglio', 'sbalzo', 'sbancato', 'sbarra', 'sbattere', 'sbavare', 'sbendare', 'sbirciare', 'sbloccato', 'sbocciato', 'sbrinare', 'sbruffone', 'sbuffare', 'scabroso', 'scadenza', 'scala', 'scambiare', 'scandalo', 'scapola', 'scarso', 'scatenare', 'scavato', 'scelto', 'scenico', 'scettro', 'scheda', 'schiena', 'sciarpa', 'scienza', 'scindere', 'scippo', 'sciroppo', 'scivolo', 'sclerare', 'scodella', 'scolpito', 'scomparto', 'sconforto', 'scoprire', 'scorta', 'scossone', 'scozzese', 'scriba', 'scrollare', 'scrutinio', 'scuderia', 'scultore', 'scuola', 'scuro', 'scusare', 'sdebitare', 'sdoganare', 'seccatura', 'secondo', 'sedano', 'seggiola', 'segnalato', 'segregato', 'seguito', 'selciato', 'selettivo', 'sella', 'selvaggio', 'semaforo', 'sembrare', 'seme', 'seminato', 'sempre', 'senso', 'sentire', 'sepolto', 'sequenza', 'serata', 'serbato', 'sereno', 'serio', 'serpente', 'serraglio', 'servire', 'sestina', 'setola', 'settimana', 'sfacelo', 'sfaldare', 'sfamato', 'sfarzoso', 'sfaticato', 'sfera', 'sfida', 'sfilato', 'sfinge', 'sfocato', 'sfoderare', 'sfogo', 'sfoltire', 'sforzato', 'sfratto', 'sfruttato', 'sfuggito', 'sfumare', 'sfuso', 'sgabello', 'sgarbato', 'sgonfiare', 'sgorbio', 'sgrassato', 'sguardo', 'sibilo', 'siccome', 'sierra', 'sigla', 'signore', 'silenzio', 'sillaba', 'simbolo', 'simpatico', 'simulato', 'sinfonia', 'singolo', 'sinistro', 'sino', 'sintesi', 'sinusoide', 'sipario', 'sisma', 'sistole', 'situato', 'slitta', 'slogatura', 'sloveno', 'smarrito', 'smemorato', 'smentito', 'smeraldo', 'smilzo', 'smontare', 'smottato', 'smussato', 'snellire', 'snervato', 'snodo', 'sobbalzo', 'sobrio', 'soccorso', 'sociale', 'sodale', 'soffitto', 'sogno', 'soldato', 'solenne', 'solido', 'sollazzo', 'solo', 'solubile', 'solvente', 'somatico', 'somma', 'sonda', 'sonetto', 'sonnifero', 'sopire', 'soppeso', 'sopra', 'sorgere', 'sorpasso', 'sorriso', 'sorso', 'sorteggio', 'sorvolato', 'sospiro', 'sosta', 'sottile', 'spada', 'spalla', 'spargere', 'spatola', 'spavento', 'spazzola', 'specie', 'spedire', 'spegnere', 'spelatura', 'speranza', 'spessore', 'spettrale', 'spezzato', 'spia', 'spigoloso', 'spillato', 'spinoso', 'spirale', 'splendido', 'sportivo', 'sposo', 'spranga', 'sprecare', 'spronato', 'spruzzo', 'spuntino', 'squillo', 'sradicare', 'srotolato', 'stabile', 'stacco', 'staffa', 'stagnare', 'stampato', 'stantio', 'starnuto', 'stasera', 'statuto', 'stelo', 'steppa', 'sterzo', 'stiletto', 'stima', 'stirpe', 'stivale', 'stizzoso', 'stonato', 'storico', 'strappo', 'stregato', 'stridulo', 'strozzare', 'strutto', 'stuccare', 'stufo', 'stupendo', 'subentro', 'succoso', 'sudore', 'suggerito', 'sugo', 'sultano', 'suonare', 'superbo', 'supporto', 'surgelato', 'surrogato', 'sussurro', 'sutura', 'svagare', 'svedese', 'sveglio', 'svelare', 'svenuto', 'svezia', 'sviluppo', 'svista', 'svizzera', 'svolta', 'svuotare', 'tabacco', 'tabulato', 'tacciare', 'taciturno', 'tale', 'talismano', 'tampone', 'tannino', 'tara', 'tardivo', 'targato', 'tariffa', 'tarpare', 'tartaruga', 'tasto', 'tattico', 'taverna', 'tavolata', 'tazza', 'teca', 'tecnico', 'telefono', 'temerario', 'tempo', 'temuto', 'tendone', 'tenero', 'tensione', 'tentacolo', 'teorema', 'terme', 'terrazzo', 'terzetto', 'tesi', 'tesserato', 'testato', 'tetro', 'tettoia', 'tifare', 'tigella', 'timbro', 'tinto', 'tipico', 'tipografo', 'tiraggio', 'tiro', 'titanio', 'titolo', 'titubante', 'tizio', 'tizzone', 'toccare', 'tollerare', 'tolto', 'tombola', 'tomo', 'tonfo', 'tonsilla', 'topazio', 'topologia', 'toppa', 'torba', 'tornare', 'torrone', 'tortora', 'toscano', 'tossire', 'tostatura', 'totano', 'trabocco', 'trachea', 'trafila', 'tragedia', 'tralcio', 'tramonto', 'transito', 'trapano', 'trarre', 'trasloco', 'trattato', 'trave', 'treccia', 'tremolio', 'trespolo', 'tributo', 'tricheco', 'trifoglio', 'trillo', 'trincea', 'trio', 'tristezza', 'triturato', 'trivella', 'tromba', 'trono', 'troppo', 'trottola', 'trovare', 'truccato', 'tubatura', 'tuffato', 'tulipano', 'tumulto', 'tunisia', 'turbare', 'turchino', 'tuta', 'tutela', 'ubicato', 'uccello', 'uccisore', 'udire', 'uditivo', 'uffa', 'ufficio', 'uguale', 'ulisse', 'ultimato', 'umano', 'umile', 'umorismo', 'uncinetto', 'ungere', 'ungherese', 'unicorno', 'unificato', 'unisono', 'unitario', 'unte', 'uovo', 'upupa', 'uragano', 'urgenza', 'urlo', 'usanza', 'usato', 'uscito', 'usignolo', 'usuraio', 'utensile', 'utilizzo', 'utopia', 'vacante', 'vaccinato', 'vagabondo', 'vagliato', 'valanga', 'valgo', 'valico', 'valletta', 'valoroso', 'valutare', 'valvola', 'vampata', 'vangare', 'vanitoso', 'vano', 'vantaggio', 'vanvera', 'vapore', 'varano', 'varcato', 'variante', 'vasca', 'vedetta', 'vedova', 'veduto', 'vegetale', 'veicolo', 'velcro', 'velina', 'velluto', 'veloce', 'venato', 'vendemmia', 'vento', 'verace', 'verbale', 'vergogna', 'verifica', 'vero', 'verruca', 'verticale', 'vescica', 'vessillo', 'vestale', 'veterano', 'vetrina', 'vetusto', 'viandante', 'vibrante', 'vicenda', 'vichingo', 'vicinanza', 'vidimare', 'vigilia', 'vigneto', 'vigore', 'vile', 'villano', 'vimini', 'vincitore', 'viola', 'vipera', 'virgola', 'virologo', 'virulento', 'viscoso', 'visione', 'vispo', 'vissuto', 'visura', 'vita', 'vitello', 'vittima', 'vivanda', 'vivido', 'viziare', 'voce', 'voga', 'volatile', 'volere', 'volpe', 'voragine', 'vulcano', 'zampogna', 'zanna', 'zappato', 'zattera', 'zavorra', 'zefiro', 'zelante', 'zelo', 'zenzero', 'zerbino', 'zibetto', 'zinco', 'zircone', 'zitto', 'zolla', 'zotico', 'zucchero', 'zufolo', 'zulu', 'zuppa'];
@@ -96489,10 +97160,13 @@ module.exports = italian;
 
 
 /***/ }),
-/* 319 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var japanese = ['あいこくしん', 'あいさつ', 'あいだ', 'あおぞら', 'あかちゃん', 'あきる', 'あけがた', 'あける', 'あこがれる', 'あさい', 'あさひ', 'あしあと', 'あじわう', 'あずかる', 'あずき', 'あそぶ', 'あたえる', 'あたためる', 'あたりまえ', 'あたる', 'あつい', 'あつかう', 'あっしゅく', 'あつまり', 'あつめる', 'あてな', 'あてはまる', 'あひる', 'あぶら', 'あぶる', 'あふれる', 'あまい', 'あまど', 'あまやかす', 'あまり', 'あみもの', 'あめりか', 'あやまる', 'あゆむ', 'あらいぐま', 'あらし', 'あらすじ', 'あらためる', 'あらゆる', 'あらわす', 'ありがとう', 'あわせる', 'あわてる', 'あんい', 'あんがい', 'あんこ', 'あんぜん', 'あんてい', 'あんない', 'あんまり', 'いいだす', 'いおん', 'いがい', 'いがく', 'いきおい', 'いきなり', 'いきもの', 'いきる', 'いくじ', 'いくぶん', 'いけばな', 'いけん', 'いこう', 'いこく', 'いこつ', 'いさましい', 'いさん', 'いしき', 'いじゅう', 'いじょう', 'いじわる', 'いずみ', 'いずれ', 'いせい', 'いせえび', 'いせかい', 'いせき', 'いぜん', 'いそうろう', 'いそがしい', 'いだい', 'いだく', 'いたずら', 'いたみ', 'いたりあ', 'いちおう', 'いちじ', 'いちど', 'いちば', 'いちぶ', 'いちりゅう', 'いつか', 'いっしゅん', 'いっせい', 'いっそう', 'いったん', 'いっち', 'いってい', 'いっぽう', 'いてざ', 'いてん', 'いどう', 'いとこ', 'いない', 'いなか', 'いねむり', 'いのち', 'いのる', 'いはつ', 'いばる', 'いはん', 'いびき', 'いひん', 'いふく', 'いへん', 'いほう', 'いみん', 'いもうと', 'いもたれ', 'いもり', 'いやがる', 'いやす', 'いよかん', 'いよく', 'いらい', 'いらすと', 'いりぐち', 'いりょう', 'いれい', 'いれもの', 'いれる', 'いろえんぴつ', 'いわい', 'いわう', 'いわかん', 'いわば', 'いわゆる', 'いんげんまめ', 'いんさつ', 'いんしょう', 'いんよう', 'うえき', 'うえる', 'うおざ', 'うがい', 'うかぶ', 'うかべる', 'うきわ', 'うくらいな', 'うくれれ', 'うけたまわる', 'うけつけ', 'うけとる', 'うけもつ', 'うける', 'うごかす', 'うごく', 'うこん', 'うさぎ', 'うしなう', 'うしろがみ', 'うすい', 'うすぎ', 'うすぐらい', 'うすめる', 'うせつ', 'うちあわせ', 'うちがわ', 'うちき', 'うちゅう', 'うっかり', 'うつくしい', 'うったえる', 'うつる', 'うどん', 'うなぎ', 'うなじ', 'うなずく', 'うなる', 'うねる', 'うのう', 'うぶげ', 'うぶごえ', 'うまれる', 'うめる', 'うもう', 'うやまう', 'うよく', 'うらがえす', 'うらぐち', 'うらない', 'うりあげ', 'うりきれ', 'うるさい', 'うれしい', 'うれゆき', 'うれる', 'うろこ', 'うわき', 'うわさ', 'うんこう', 'うんちん', 'うんてん', 'うんどう', 'えいえん', 'えいが', 'えいきょう', 'えいご', 'えいせい', 'えいぶん', 'えいよう', 'えいわ', 'えおり', 'えがお', 'えがく', 'えきたい', 'えくせる', 'えしゃく', 'えすて', 'えつらん', 'えのぐ', 'えほうまき', 'えほん', 'えまき', 'えもじ', 'えもの', 'えらい', 'えらぶ', 'えりあ', 'えんえん', 'えんかい', 'えんぎ', 'えんげき', 'えんしゅう', 'えんぜつ', 'えんそく', 'えんちょう', 'えんとつ', 'おいかける', 'おいこす', 'おいしい', 'おいつく', 'おうえん', 'おうさま', 'おうじ', 'おうせつ', 'おうたい', 'おうふく', 'おうべい', 'おうよう', 'おえる', 'おおい', 'おおう', 'おおどおり', 'おおや', 'おおよそ', 'おかえり', 'おかず', 'おがむ', 'おかわり', 'おぎなう', 'おきる', 'おくさま', 'おくじょう', 'おくりがな', 'おくる', 'おくれる', 'おこす', 'おこなう', 'おこる', 'おさえる', 'おさない', 'おさめる', 'おしいれ', 'おしえる', 'おじぎ', 'おじさん', 'おしゃれ', 'おそらく', 'おそわる', 'おたがい', 'おたく', 'おだやか', 'おちつく', 'おっと', 'おつり', 'おでかけ', 'おとしもの', 'おとなしい', 'おどり', 'おどろかす', 'おばさん', 'おまいり', 'おめでとう', 'おもいで', 'おもう', 'おもたい', 'おもちゃ', 'おやつ', 'おやゆび', 'およぼす', 'おらんだ', 'おろす', 'おんがく', 'おんけい', 'おんしゃ', 'おんせん', 'おんだん', 'おんちゅう', 'おんどけい', 'かあつ', 'かいが', 'がいき', 'がいけん', 'がいこう', 'かいさつ', 'かいしゃ', 'かいすいよく', 'かいぜん', 'かいぞうど', 'かいつう', 'かいてん', 'かいとう', 'かいふく', 'がいへき', 'かいほう', 'かいよう', 'がいらい', 'かいわ', 'かえる', 'かおり', 'かかえる', 'かがく', 'かがし', 'かがみ', 'かくご', 'かくとく', 'かざる', 'がぞう', 'かたい', 'かたち', 'がちょう', 'がっきゅう', 'がっこう', 'がっさん', 'がっしょう', 'かなざわし', 'かのう', 'がはく', 'かぶか', 'かほう', 'かほご', 'かまう', 'かまぼこ', 'かめれおん', 'かゆい', 'かようび', 'からい', 'かるい', 'かろう', 'かわく', 'かわら', 'がんか', 'かんけい', 'かんこう', 'かんしゃ', 'かんそう', 'かんたん', 'かんち', 'がんばる', 'きあい', 'きあつ', 'きいろ', 'ぎいん', 'きうい', 'きうん', 'きえる', 'きおう', 'きおく', 'きおち', 'きおん', 'きかい', 'きかく', 'きかんしゃ', 'ききて', 'きくばり', 'きくらげ', 'きけんせい', 'きこう', 'きこえる', 'きこく', 'きさい', 'きさく', 'きさま', 'きさらぎ', 'ぎじかがく', 'ぎしき', 'ぎじたいけん', 'ぎじにってい', 'ぎじゅつしゃ', 'きすう', 'きせい', 'きせき', 'きせつ', 'きそう', 'きぞく', 'きぞん', 'きたえる', 'きちょう', 'きつえん', 'ぎっちり', 'きつつき', 'きつね', 'きてい', 'きどう', 'きどく', 'きない', 'きなが', 'きなこ', 'きぬごし', 'きねん', 'きのう', 'きのした', 'きはく', 'きびしい', 'きひん', 'きふく', 'きぶん', 'きぼう', 'きほん', 'きまる', 'きみつ', 'きむずかしい', 'きめる', 'きもだめし', 'きもち', 'きもの', 'きゃく', 'きやく', 'ぎゅうにく', 'きよう', 'きょうりゅう', 'きらい', 'きらく', 'きりん', 'きれい', 'きれつ', 'きろく', 'ぎろん', 'きわめる', 'ぎんいろ', 'きんかくじ', 'きんじょ', 'きんようび', 'ぐあい', 'くいず', 'くうかん', 'くうき', 'くうぐん', 'くうこう', 'ぐうせい', 'くうそう', 'ぐうたら', 'くうふく', 'くうぼ', 'くかん', 'くきょう', 'くげん', 'ぐこう', 'くさい', 'くさき', 'くさばな', 'くさる', 'くしゃみ', 'くしょう', 'くすのき', 'くすりゆび', 'くせげ', 'くせん', 'ぐたいてき', 'くださる', 'くたびれる', 'くちこみ', 'くちさき', 'くつした', 'ぐっすり', 'くつろぐ', 'くとうてん', 'くどく', 'くなん', 'くねくね', 'くのう', 'くふう', 'くみあわせ', 'くみたてる', 'くめる', 'くやくしょ', 'くらす', 'くらべる', 'くるま', 'くれる', 'くろう', 'くわしい', 'ぐんかん', 'ぐんしょく', 'ぐんたい', 'ぐんて', 'けあな', 'けいかく', 'けいけん', 'けいこ', 'けいさつ', 'げいじゅつ', 'けいたい', 'げいのうじん', 'けいれき', 'けいろ', 'けおとす', 'けおりもの', 'げきか', 'げきげん', 'げきだん', 'げきちん', 'げきとつ', 'げきは', 'げきやく', 'げこう', 'げこくじょう', 'げざい', 'けさき', 'げざん', 'けしき', 'けしごむ', 'けしょう', 'げすと', 'けたば', 'けちゃっぷ', 'けちらす', 'けつあつ', 'けつい', 'けつえき', 'けっこん', 'けつじょ', 'けっせき', 'けってい', 'けつまつ', 'げつようび', 'げつれい', 'けつろん', 'げどく', 'けとばす', 'けとる', 'けなげ', 'けなす', 'けなみ', 'けぬき', 'げねつ', 'けねん', 'けはい', 'げひん', 'けぶかい', 'げぼく', 'けまり', 'けみかる', 'けむし', 'けむり', 'けもの', 'けらい', 'けろけろ', 'けわしい', 'けんい', 'けんえつ', 'けんお', 'けんか', 'げんき', 'けんげん', 'けんこう', 'けんさく', 'けんしゅう', 'けんすう', 'げんそう', 'けんちく', 'けんてい', 'けんとう', 'けんない', 'けんにん', 'げんぶつ', 'けんま', 'けんみん', 'けんめい', 'けんらん', 'けんり', 'こあくま', 'こいぬ', 'こいびと', 'ごうい', 'こうえん', 'こうおん', 'こうかん', 'ごうきゅう', 'ごうけい', 'こうこう', 'こうさい', 'こうじ', 'こうすい', 'ごうせい', 'こうそく', 'こうたい', 'こうちゃ', 'こうつう', 'こうてい', 'こうどう', 'こうない', 'こうはい', 'ごうほう', 'ごうまん', 'こうもく', 'こうりつ', 'こえる', 'こおり', 'ごかい', 'ごがつ', 'ごかん', 'こくご', 'こくさい', 'こくとう', 'こくない', 'こくはく', 'こぐま', 'こけい', 'こける', 'ここのか', 'こころ', 'こさめ', 'こしつ', 'こすう', 'こせい', 'こせき', 'こぜん', 'こそだて', 'こたい', 'こたえる', 'こたつ', 'こちょう', 'こっか', 'こつこつ', 'こつばん', 'こつぶ', 'こてい', 'こてん', 'ことがら', 'ことし', 'ことば', 'ことり', 'こなごな', 'こねこね', 'このまま', 'このみ', 'このよ', 'ごはん', 'こひつじ', 'こふう', 'こふん', 'こぼれる', 'ごまあぶら', 'こまかい', 'ごますり', 'こまつな', 'こまる', 'こむぎこ', 'こもじ', 'こもち', 'こもの', 'こもん', 'こやく', 'こやま', 'こゆう', 'こゆび', 'こよい', 'こよう', 'こりる', 'これくしょん', 'ころっけ', 'こわもて', 'こわれる', 'こんいん', 'こんかい', 'こんき', 'こんしゅう', 'こんすい', 'こんだて', 'こんとん', 'こんなん', 'こんびに', 'こんぽん', 'こんまけ', 'こんや', 'こんれい', 'こんわく', 'ざいえき', 'さいかい', 'さいきん', 'ざいげん', 'ざいこ', 'さいしょ', 'さいせい', 'ざいたく', 'ざいちゅう', 'さいてき', 'ざいりょう', 'さうな', 'さかいし', 'さがす', 'さかな', 'さかみち', 'さがる', 'さぎょう', 'さくし', 'さくひん', 'さくら', 'さこく', 'さこつ', 'さずかる', 'ざせき', 'さたん', 'さつえい', 'ざつおん', 'ざっか', 'ざつがく', 'さっきょく', 'ざっし', 'さつじん', 'ざっそう', 'さつたば', 'さつまいも', 'さてい', 'さといも', 'さとう', 'さとおや', 'さとし', 'さとる', 'さのう', 'さばく', 'さびしい', 'さべつ', 'さほう', 'さほど', 'さます', 'さみしい', 'さみだれ', 'さむけ', 'さめる', 'さやえんどう', 'さゆう', 'さよう', 'さよく', 'さらだ', 'ざるそば', 'さわやか', 'さわる', 'さんいん', 'さんか', 'さんきゃく', 'さんこう', 'さんさい', 'ざんしょ', 'さんすう', 'さんせい', 'さんそ', 'さんち', 'さんま', 'さんみ', 'さんらん', 'しあい', 'しあげ', 'しあさって', 'しあわせ', 'しいく', 'しいん', 'しうち', 'しえい', 'しおけ', 'しかい', 'しかく', 'じかん', 'しごと', 'しすう', 'じだい', 'したうけ', 'したぎ', 'したて', 'したみ', 'しちょう', 'しちりん', 'しっかり', 'しつじ', 'しつもん', 'してい', 'してき', 'してつ', 'じてん', 'じどう', 'しなぎれ', 'しなもの', 'しなん', 'しねま', 'しねん', 'しのぐ', 'しのぶ', 'しはい', 'しばかり', 'しはつ', 'しはらい', 'しはん', 'しひょう', 'しふく', 'じぶん', 'しへい', 'しほう', 'しほん', 'しまう', 'しまる', 'しみん', 'しむける', 'じむしょ', 'しめい', 'しめる', 'しもん', 'しゃいん', 'しゃうん', 'しゃおん', 'じゃがいも', 'しやくしょ', 'しゃくほう', 'しゃけん', 'しゃこ', 'しゃざい', 'しゃしん', 'しゃせん', 'しゃそう', 'しゃたい', 'しゃちょう', 'しゃっきん', 'じゃま', 'しゃりん', 'しゃれい', 'じゆう', 'じゅうしょ', 'しゅくはく', 'じゅしん', 'しゅっせき', 'しゅみ', 'しゅらば', 'じゅんばん', 'しょうかい', 'しょくたく', 'しょっけん', 'しょどう', 'しょもつ', 'しらせる', 'しらべる', 'しんか', 'しんこう', 'じんじゃ', 'しんせいじ', 'しんちく', 'しんりん', 'すあげ', 'すあし', 'すあな', 'ずあん', 'すいえい', 'すいか', 'すいとう', 'ずいぶん', 'すいようび', 'すうがく', 'すうじつ', 'すうせん', 'すおどり', 'すきま', 'すくう', 'すくない', 'すける', 'すごい', 'すこし', 'ずさん', 'すずしい', 'すすむ', 'すすめる', 'すっかり', 'ずっしり', 'ずっと', 'すてき', 'すてる', 'すねる', 'すのこ', 'すはだ', 'すばらしい', 'ずひょう', 'ずぶぬれ', 'すぶり', 'すふれ', 'すべて', 'すべる', 'ずほう', 'すぼん', 'すまい', 'すめし', 'すもう', 'すやき', 'すらすら', 'するめ', 'すれちがう', 'すろっと', 'すわる', 'すんぜん', 'すんぽう', 'せあぶら', 'せいかつ', 'せいげん', 'せいじ', 'せいよう', 'せおう', 'せかいかん', 'せきにん', 'せきむ', 'せきゆ', 'せきらんうん', 'せけん', 'せこう', 'せすじ', 'せたい', 'せたけ', 'せっかく', 'せっきゃく', 'ぜっく', 'せっけん', 'せっこつ', 'せっさたくま', 'せつぞく', 'せつだん', 'せつでん', 'せっぱん', 'せつび', 'せつぶん', 'せつめい', 'せつりつ', 'せなか', 'せのび', 'せはば', 'せびろ', 'せぼね', 'せまい', 'せまる', 'せめる', 'せもたれ', 'せりふ', 'ぜんあく', 'せんい', 'せんえい', 'せんか', 'せんきょ', 'せんく', 'せんげん', 'ぜんご', 'せんさい', 'せんしゅ', 'せんすい', 'せんせい', 'せんぞ', 'せんたく', 'せんちょう', 'せんてい', 'せんとう', 'せんぬき', 'せんねん', 'せんぱい', 'ぜんぶ', 'ぜんぽう', 'せんむ', 'せんめんじょ', 'せんもん', 'せんやく', 'せんゆう', 'せんよう', 'ぜんら', 'ぜんりゃく', 'せんれい', 'せんろ', 'そあく', 'そいとげる', 'そいね', 'そうがんきょう', 'そうき', 'そうご', 'そうしん', 'そうだん', 'そうなん', 'そうび', 'そうめん', 'そうり', 'そえもの', 'そえん', 'そがい', 'そげき', 'そこう', 'そこそこ', 'そざい', 'そしな', 'そせい', 'そせん', 'そそぐ', 'そだてる', 'そつう', 'そつえん', 'そっかん', 'そつぎょう', 'そっけつ', 'そっこう', 'そっせん', 'そっと', 'そとがわ', 'そとづら', 'そなえる', 'そなた', 'そふぼ', 'そぼく', 'そぼろ', 'そまつ', 'そまる', 'そむく', 'そむりえ', 'そめる', 'そもそも', 'そよかぜ', 'そらまめ', 'そろう', 'そんかい', 'そんけい', 'そんざい', 'そんしつ', 'そんぞく', 'そんちょう', 'ぞんび', 'ぞんぶん', 'そんみん', 'たあい', 'たいいん', 'たいうん', 'たいえき', 'たいおう', 'だいがく', 'たいき', 'たいぐう', 'たいけん', 'たいこ', 'たいざい', 'だいじょうぶ', 'だいすき', 'たいせつ', 'たいそう', 'だいたい', 'たいちょう', 'たいてい', 'だいどころ', 'たいない', 'たいねつ', 'たいのう', 'たいはん', 'だいひょう', 'たいふう', 'たいへん', 'たいほ', 'たいまつばな', 'たいみんぐ', 'たいむ', 'たいめん', 'たいやき', 'たいよう', 'たいら', 'たいりょく', 'たいる', 'たいわん', 'たうえ', 'たえる', 'たおす', 'たおる', 'たおれる', 'たかい', 'たかね', 'たきび', 'たくさん', 'たこく', 'たこやき', 'たさい', 'たしざん', 'だじゃれ', 'たすける', 'たずさわる', 'たそがれ', 'たたかう', 'たたく', 'ただしい', 'たたみ', 'たちばな', 'だっかい', 'だっきゃく', 'だっこ', 'だっしゅつ', 'だったい', 'たてる', 'たとえる', 'たなばた', 'たにん', 'たぬき', 'たのしみ', 'たはつ', 'たぶん', 'たべる', 'たぼう', 'たまご', 'たまる', 'だむる', 'ためいき', 'ためす', 'ためる', 'たもつ', 'たやすい', 'たよる', 'たらす', 'たりきほんがん', 'たりょう', 'たりる', 'たると', 'たれる', 'たれんと', 'たろっと', 'たわむれる', 'だんあつ', 'たんい', 'たんおん', 'たんか', 'たんき', 'たんけん', 'たんご', 'たんさん', 'たんじょうび', 'だんせい', 'たんそく', 'たんたい', 'だんち', 'たんてい', 'たんとう', 'だんな', 'たんにん', 'だんねつ', 'たんのう', 'たんぴん', 'だんぼう', 'たんまつ', 'たんめい', 'だんれつ', 'だんろ', 'だんわ', 'ちあい', 'ちあん', 'ちいき', 'ちいさい', 'ちえん', 'ちかい', 'ちから', 'ちきゅう', 'ちきん', 'ちけいず', 'ちけん', 'ちこく', 'ちさい', 'ちしき', 'ちしりょう', 'ちせい', 'ちそう', 'ちたい', 'ちたん', 'ちちおや', 'ちつじょ', 'ちてき', 'ちてん', 'ちぬき', 'ちぬり', 'ちのう', 'ちひょう', 'ちへいせん', 'ちほう', 'ちまた', 'ちみつ', 'ちみどろ', 'ちめいど', 'ちゃんこなべ', 'ちゅうい', 'ちゆりょく', 'ちょうし', 'ちょさくけん', 'ちらし', 'ちらみ', 'ちりがみ', 'ちりょう', 'ちるど', 'ちわわ', 'ちんたい', 'ちんもく', 'ついか', 'ついたち', 'つうか', 'つうじょう', 'つうはん', 'つうわ', 'つかう', 'つかれる', 'つくね', 'つくる', 'つけね', 'つける', 'つごう', 'つたえる', 'つづく', 'つつじ', 'つつむ', 'つとめる', 'つながる', 'つなみ', 'つねづね', 'つのる', 'つぶす', 'つまらない', 'つまる', 'つみき', 'つめたい', 'つもり', 'つもる', 'つよい', 'つるぼ', 'つるみく', 'つわもの', 'つわり', 'てあし', 'てあて', 'てあみ', 'ていおん', 'ていか', 'ていき', 'ていけい', 'ていこく', 'ていさつ', 'ていし', 'ていせい', 'ていたい', 'ていど', 'ていねい', 'ていひょう', 'ていへん', 'ていぼう', 'てうち', 'ておくれ', 'てきとう', 'てくび', 'でこぼこ', 'てさぎょう', 'てさげ', 'てすり', 'てそう', 'てちがい', 'てちょう', 'てつがく', 'てつづき', 'でっぱ', 'てつぼう', 'てつや', 'でぬかえ', 'てぬき', 'てぬぐい', 'てのひら', 'てはい', 'てぶくろ', 'てふだ', 'てほどき', 'てほん', 'てまえ', 'てまきずし', 'てみじか', 'てみやげ', 'てらす', 'てれび', 'てわけ', 'てわたし', 'でんあつ', 'てんいん', 'てんかい', 'てんき', 'てんぐ', 'てんけん', 'てんごく', 'てんさい', 'てんし', 'てんすう', 'でんち', 'てんてき', 'てんとう', 'てんない', 'てんぷら', 'てんぼうだい', 'てんめつ', 'てんらんかい', 'でんりょく', 'でんわ', 'どあい', 'といれ', 'どうかん', 'とうきゅう', 'どうぐ', 'とうし', 'とうむぎ', 'とおい', 'とおか', 'とおく', 'とおす', 'とおる', 'とかい', 'とかす', 'ときおり', 'ときどき', 'とくい', 'とくしゅう', 'とくてん', 'とくに', 'とくべつ', 'とけい', 'とける', 'とこや', 'とさか', 'としょかん', 'とそう', 'とたん', 'とちゅう', 'とっきゅう', 'とっくん', 'とつぜん', 'とつにゅう', 'とどける', 'ととのえる', 'とない', 'となえる', 'となり', 'とのさま', 'とばす', 'どぶがわ', 'とほう', 'とまる', 'とめる', 'ともだち', 'ともる', 'どようび', 'とらえる', 'とんかつ', 'どんぶり', 'ないかく', 'ないこう', 'ないしょ', 'ないす', 'ないせん', 'ないそう', 'なおす', 'ながい', 'なくす', 'なげる', 'なこうど', 'なさけ', 'なたでここ', 'なっとう', 'なつやすみ', 'ななおし', 'なにごと', 'なにもの', 'なにわ', 'なのか', 'なふだ', 'なまいき', 'なまえ', 'なまみ', 'なみだ', 'なめらか', 'なめる', 'なやむ', 'ならう', 'ならび', 'ならぶ', 'なれる', 'なわとび', 'なわばり', 'にあう', 'にいがた', 'にうけ', 'におい', 'にかい', 'にがて', 'にきび', 'にくしみ', 'にくまん', 'にげる', 'にさんかたんそ', 'にしき', 'にせもの', 'にちじょう', 'にちようび', 'にっか', 'にっき', 'にっけい', 'にっこう', 'にっさん', 'にっしょく', 'にっすう', 'にっせき', 'にってい', 'になう', 'にほん', 'にまめ', 'にもつ', 'にやり', 'にゅういん', 'にりんしゃ', 'にわとり', 'にんい', 'にんか', 'にんき', 'にんげん', 'にんしき', 'にんずう', 'にんそう', 'にんたい', 'にんち', 'にんてい', 'にんにく', 'にんぷ', 'にんまり', 'にんむ', 'にんめい', 'にんよう', 'ぬいくぎ', 'ぬかす', 'ぬぐいとる', 'ぬぐう', 'ぬくもり', 'ぬすむ', 'ぬまえび', 'ぬめり', 'ぬらす', 'ぬんちゃく', 'ねあげ', 'ねいき', 'ねいる', 'ねいろ', 'ねぐせ', 'ねくたい', 'ねくら', 'ねこぜ', 'ねこむ', 'ねさげ', 'ねすごす', 'ねそべる', 'ねだん', 'ねつい', 'ねっしん', 'ねつぞう', 'ねったいぎょ', 'ねぶそく', 'ねふだ', 'ねぼう', 'ねほりはほり', 'ねまき', 'ねまわし', 'ねみみ', 'ねむい', 'ねむたい', 'ねもと', 'ねらう', 'ねわざ', 'ねんいり', 'ねんおし', 'ねんかん', 'ねんきん', 'ねんぐ', 'ねんざ', 'ねんし', 'ねんちゃく', 'ねんど', 'ねんぴ', 'ねんぶつ', 'ねんまつ', 'ねんりょう', 'ねんれい', 'のいず', 'のおづま', 'のがす', 'のきなみ', 'のこぎり', 'のこす', 'のこる', 'のせる', 'のぞく', 'のぞむ', 'のたまう', 'のちほど', 'のっく', 'のばす', 'のはら', 'のべる', 'のぼる', 'のみもの', 'のやま', 'のらいぬ', 'のらねこ', 'のりもの', 'のりゆき', 'のれん', 'のんき', 'ばあい', 'はあく', 'ばあさん', 'ばいか', 'ばいく', 'はいけん', 'はいご', 'はいしん', 'はいすい', 'はいせん', 'はいそう', 'はいち', 'ばいばい', 'はいれつ', 'はえる', 'はおる', 'はかい', 'ばかり', 'はかる', 'はくしゅ', 'はけん', 'はこぶ', 'はさみ', 'はさん', 'はしご', 'ばしょ', 'はしる', 'はせる', 'ぱそこん', 'はそん', 'はたん', 'はちみつ', 'はつおん', 'はっかく', 'はづき', 'はっきり', 'はっくつ', 'はっけん', 'はっこう', 'はっさん', 'はっしん', 'はったつ', 'はっちゅう', 'はってん', 'はっぴょう', 'はっぽう', 'はなす', 'はなび', 'はにかむ', 'はぶらし', 'はみがき', 'はむかう', 'はめつ', 'はやい', 'はやし', 'はらう', 'はろうぃん', 'はわい', 'はんい', 'はんえい', 'はんおん', 'はんかく', 'はんきょう', 'ばんぐみ', 'はんこ', 'はんしゃ', 'はんすう', 'はんだん', 'ぱんち', 'ぱんつ', 'はんてい', 'はんとし', 'はんのう', 'はんぱ', 'はんぶん', 'はんぺん', 'はんぼうき', 'はんめい', 'はんらん', 'はんろん', 'ひいき', 'ひうん', 'ひえる', 'ひかく', 'ひかり', 'ひかる', 'ひかん', 'ひくい', 'ひけつ', 'ひこうき', 'ひこく', 'ひさい', 'ひさしぶり', 'ひさん', 'びじゅつかん', 'ひしょ', 'ひそか', 'ひそむ', 'ひたむき', 'ひだり', 'ひたる', 'ひつぎ', 'ひっこし', 'ひっし', 'ひつじゅひん', 'ひっす', 'ひつぜん', 'ぴったり', 'ぴっちり', 'ひつよう', 'ひてい', 'ひとごみ', 'ひなまつり', 'ひなん', 'ひねる', 'ひはん', 'ひびく', 'ひひょう', 'ひほう', 'ひまわり', 'ひまん', 'ひみつ', 'ひめい', 'ひめじし', 'ひやけ', 'ひやす', 'ひよう', 'びょうき', 'ひらがな', 'ひらく', 'ひりつ', 'ひりょう', 'ひるま', 'ひるやすみ', 'ひれい', 'ひろい', 'ひろう', 'ひろき', 'ひろゆき', 'ひんかく', 'ひんけつ', 'ひんこん', 'ひんしゅ', 'ひんそう', 'ぴんち', 'ひんぱん', 'びんぼう', 'ふあん', 'ふいうち', 'ふうけい', 'ふうせん', 'ぷうたろう', 'ふうとう', 'ふうふ', 'ふえる', 'ふおん', 'ふかい', 'ふきん', 'ふくざつ', 'ふくぶくろ', 'ふこう', 'ふさい', 'ふしぎ', 'ふじみ', 'ふすま', 'ふせい', 'ふせぐ', 'ふそく', 'ぶたにく', 'ふたん', 'ふちょう', 'ふつう', 'ふつか', 'ふっかつ', 'ふっき', 'ふっこく', 'ぶどう', 'ふとる', 'ふとん', 'ふのう', 'ふはい', 'ふひょう', 'ふへん', 'ふまん', 'ふみん', 'ふめつ', 'ふめん', 'ふよう', 'ふりこ', 'ふりる', 'ふるい', 'ふんいき', 'ぶんがく', 'ぶんぐ', 'ふんしつ', 'ぶんせき', 'ふんそう', 'ぶんぽう', 'へいあん', 'へいおん', 'へいがい', 'へいき', 'へいげん', 'へいこう', 'へいさ', 'へいしゃ', 'へいせつ', 'へいそ', 'へいたく', 'へいてん', 'へいねつ', 'へいわ', 'へきが', 'へこむ', 'べにいろ', 'べにしょうが', 'へらす', 'へんかん', 'べんきょう', 'べんごし', 'へんさい', 'へんたい', 'べんり', 'ほあん', 'ほいく', 'ぼうぎょ', 'ほうこく', 'ほうそう', 'ほうほう', 'ほうもん', 'ほうりつ', 'ほえる', 'ほおん', 'ほかん', 'ほきょう', 'ぼきん', 'ほくろ', 'ほけつ', 'ほけん', 'ほこう', 'ほこる', 'ほしい', 'ほしつ', 'ほしゅ', 'ほしょう', 'ほせい', 'ほそい', 'ほそく', 'ほたて', 'ほたる', 'ぽちぶくろ', 'ほっきょく', 'ほっさ', 'ほったん', 'ほとんど', 'ほめる', 'ほんい', 'ほんき', 'ほんけ', 'ほんしつ', 'ほんやく', 'まいにち', 'まかい', 'まかせる', 'まがる', 'まける', 'まこと', 'まさつ', 'まじめ', 'ますく', 'まぜる', 'まつり', 'まとめ', 'まなぶ', 'まぬけ', 'まねく', 'まほう', 'まもる', 'まゆげ', 'まよう', 'まろやか', 'まわす', 'まわり', 'まわる', 'まんが', 'まんきつ', 'まんぞく', 'まんなか', 'みいら', 'みうち', 'みえる', 'みがく', 'みかた', 'みかん', 'みけん', 'みこん', 'みじかい', 'みすい', 'みすえる', 'みせる', 'みっか', 'みつかる', 'みつける', 'みてい', 'みとめる', 'みなと', 'みなみかさい', 'みねらる', 'みのう', 'みのがす', 'みほん', 'みもと', 'みやげ', 'みらい', 'みりょく', 'みわく', 'みんか', 'みんぞく', 'むいか', 'むえき', 'むえん', 'むかい', 'むかう', 'むかえ', 'むかし', 'むぎちゃ', 'むける', 'むげん', 'むさぼる', 'むしあつい', 'むしば', 'むじゅん', 'むしろ', 'むすう', 'むすこ', 'むすぶ', 'むすめ', 'むせる', 'むせん', 'むちゅう', 'むなしい', 'むのう', 'むやみ', 'むよう', 'むらさき', 'むりょう', 'むろん', 'めいあん', 'めいうん', 'めいえん', 'めいかく', 'めいきょく', 'めいさい', 'めいし', 'めいそう', 'めいぶつ', 'めいれい', 'めいわく', 'めぐまれる', 'めざす', 'めした', 'めずらしい', 'めだつ', 'めまい', 'めやす', 'めんきょ', 'めんせき', 'めんどう', 'もうしあげる', 'もうどうけん', 'もえる', 'もくし', 'もくてき', 'もくようび', 'もちろん', 'もどる', 'もらう', 'もんく', 'もんだい', 'やおや', 'やける', 'やさい', 'やさしい', 'やすい', 'やすたろう', 'やすみ', 'やせる', 'やそう', 'やたい', 'やちん', 'やっと', 'やっぱり', 'やぶる', 'やめる', 'ややこしい', 'やよい', 'やわらかい', 'ゆうき', 'ゆうびんきょく', 'ゆうべ', 'ゆうめい', 'ゆけつ', 'ゆしゅつ', 'ゆせん', 'ゆそう', 'ゆたか', 'ゆちゃく', 'ゆでる', 'ゆにゅう', 'ゆびわ', 'ゆらい', 'ゆれる', 'ようい', 'ようか', 'ようきゅう', 'ようじ', 'ようす', 'ようちえん', 'よかぜ', 'よかん', 'よきん', 'よくせい', 'よくぼう', 'よけい', 'よごれる', 'よさん', 'よしゅう', 'よそう', 'よそく', 'よっか', 'よてい', 'よどがわく', 'よねつ', 'よやく', 'よゆう', 'よろこぶ', 'よろしい', 'らいう', 'らくがき', 'らくご', 'らくさつ', 'らくだ', 'らしんばん', 'らせん', 'らぞく', 'らたい', 'らっか', 'られつ', 'りえき', 'りかい', 'りきさく', 'りきせつ', 'りくぐん', 'りくつ', 'りけん', 'りこう', 'りせい', 'りそう', 'りそく', 'りてん', 'りねん', 'りゆう', 'りゅうがく', 'りよう', 'りょうり', 'りょかん', 'りょくちゃ', 'りょこう', 'りりく', 'りれき', 'りろん', 'りんご', 'るいけい', 'るいさい', 'るいじ', 'るいせき', 'るすばん', 'るりがわら', 'れいかん', 'れいぎ', 'れいせい', 'れいぞうこ', 'れいとう', 'れいぼう', 'れきし', 'れきだい', 'れんあい', 'れんけい', 'れんこん', 'れんさい', 'れんしゅう', 'れんぞく', 'れんらく', 'ろうか', 'ろうご', 'ろうじん', 'ろうそく', 'ろくが', 'ろこつ', 'ろじうら', 'ろしゅつ', 'ろせん', 'ろてん', 'ろめん', 'ろれつ', 'ろんぎ', 'ろんぱ', 'ろんぶん', 'ろんり', 'わかす', 'わかめ', 'わかやま', 'わかれる', 'わしつ', 'わじまし', 'わすれもの', 'わらう', 'われる'];
@@ -96501,10 +97175,13 @@ module.exports = japanese;
 
 
 /***/ }),
-/* 320 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 
 
 var spanish = ['ábaco', 'abdomen', 'abeja', 'abierto', 'abogado', 'abono', 'aborto', 'abrazo', 'abrir', 'abuelo', 'abuso', 'acabar', 'academia', 'acceso', 'acción', 'aceite', 'acelga', 'acento', 'aceptar', 'ácido', 'aclarar', 'acné', 'acoger', 'acoso', 'activo', 'acto', 'actriz', 'actuar', 'acudir', 'acuerdo', 'acusar', 'adicto', 'admitir', 'adoptar', 'adorno', 'aduana', 'adulto', 'aéreo', 'afectar', 'afición', 'afinar', 'afirmar', 'ágil', 'agitar', 'agonía', 'agosto', 'agotar', 'agregar', 'agrio', 'agua', 'agudo', 'águila', 'aguja', 'ahogo', 'ahorro', 'aire', 'aislar', 'ajedrez', 'ajeno', 'ajuste', 'alacrán', 'alambre', 'alarma', 'alba', 'álbum', 'alcalde', 'aldea', 'alegre', 'alejar', 'alerta', 'aleta', 'alfiler', 'alga', 'algodón', 'aliado', 'aliento', 'alivio', 'alma', 'almeja', 'almíbar', 'altar', 'alteza', 'altivo', 'alto', 'altura', 'alumno', 'alzar', 'amable', 'amante', 'amapola', 'amargo', 'amasar', 'ámbar', 'ámbito', 'ameno', 'amigo', 'amistad', 'amor', 'amparo', 'amplio', 'ancho', 'anciano', 'ancla', 'andar', 'andén', 'anemia', 'ángulo', 'anillo', 'ánimo', 'anís', 'anotar', 'antena', 'antiguo', 'antojo', 'anual', 'anular', 'anuncio', 'añadir', 'añejo', 'año', 'apagar', 'aparato', 'apetito', 'apio', 'aplicar', 'apodo', 'aporte', 'apoyo', 'aprender', 'aprobar', 'apuesta', 'apuro', 'arado', 'araña', 'arar', 'árbitro', 'árbol', 'arbusto', 'archivo', 'arco', 'arder', 'ardilla', 'arduo', 'área', 'árido', 'aries', 'armonía', 'arnés', 'aroma', 'arpa', 'arpón', 'arreglo', 'arroz', 'arruga', 'arte', 'artista', 'asa', 'asado', 'asalto', 'ascenso', 'asegurar', 'aseo', 'asesor', 'asiento', 'asilo', 'asistir', 'asno', 'asombro', 'áspero', 'astilla', 'astro', 'astuto', 'asumir', 'asunto', 'atajo', 'ataque', 'atar', 'atento', 'ateo', 'ático', 'atleta', 'átomo', 'atraer', 'atroz', 'atún', 'audaz', 'audio', 'auge', 'aula', 'aumento', 'ausente', 'autor', 'aval', 'avance', 'avaro', 'ave', 'avellana', 'avena', 'avestruz', 'avión', 'aviso', 'ayer', 'ayuda', 'ayuno', 'azafrán', 'azar', 'azote', 'azúcar', 'azufre', 'azul', 'baba', 'babor', 'bache', 'bahía', 'baile', 'bajar', 'balanza', 'balcón', 'balde', 'bambú', 'banco', 'banda', 'baño', 'barba', 'barco', 'barniz', 'barro', 'báscula', 'bastón', 'basura', 'batalla', 'batería', 'batir', 'batuta', 'baúl', 'bazar', 'bebé', 'bebida', 'bello', 'besar', 'beso', 'bestia', 'bicho', 'bien', 'bingo', 'blanco', 'bloque', 'blusa', 'boa', 'bobina', 'bobo', 'boca', 'bocina', 'boda', 'bodega', 'boina', 'bola', 'bolero', 'bolsa', 'bomba', 'bondad', 'bonito', 'bono', 'bonsái', 'borde', 'borrar', 'bosque', 'bote', 'botín', 'bóveda', 'bozal', 'bravo', 'brazo', 'brecha', 'breve', 'brillo', 'brinco', 'brisa', 'broca', 'broma', 'bronce', 'brote', 'bruja', 'brusco', 'bruto', 'buceo', 'bucle', 'bueno', 'buey', 'bufanda', 'bufón', 'búho', 'buitre', 'bulto', 'burbuja', 'burla', 'burro', 'buscar', 'butaca', 'buzón', 'caballo', 'cabeza', 'cabina', 'cabra', 'cacao', 'cadáver', 'cadena', 'caer', 'café', 'caída', 'caimán', 'caja', 'cajón', 'cal', 'calamar', 'calcio', 'caldo', 'calidad', 'calle', 'calma', 'calor', 'calvo', 'cama', 'cambio', 'camello', 'camino', 'campo', 'cáncer', 'candil', 'canela', 'canguro', 'canica', 'canto', 'caña', 'cañón', 'caoba', 'caos', 'capaz', 'capitán', 'capote', 'captar', 'capucha', 'cara', 'carbón', 'cárcel', 'careta', 'carga', 'cariño', 'carne', 'carpeta', 'carro', 'carta', 'casa', 'casco', 'casero', 'caspa', 'castor', 'catorce', 'catre', 'caudal', 'causa', 'cazo', 'cebolla', 'ceder', 'cedro', 'celda', 'célebre', 'celoso', 'célula', 'cemento', 'ceniza', 'centro', 'cerca', 'cerdo', 'cereza', 'cero', 'cerrar', 'certeza', 'césped', 'cetro', 'chacal', 'chaleco', 'champú', 'chancla', 'chapa', 'charla', 'chico', 'chiste', 'chivo', 'choque', 'choza', 'chuleta', 'chupar', 'ciclón', 'ciego', 'cielo', 'cien', 'cierto', 'cifra', 'cigarro', 'cima', 'cinco', 'cine', 'cinta', 'ciprés', 'circo', 'ciruela', 'cisne', 'cita', 'ciudad', 'clamor', 'clan', 'claro', 'clase', 'clave', 'cliente', 'clima', 'clínica', 'cobre', 'cocción', 'cochino', 'cocina', 'coco', 'código', 'codo', 'cofre', 'coger', 'cohete', 'cojín', 'cojo', 'cola', 'colcha', 'colegio', 'colgar', 'colina', 'collar', 'colmo', 'columna', 'combate', 'comer', 'comida', 'cómodo', 'compra', 'conde', 'conejo', 'conga', 'conocer', 'consejo', 'contar', 'copa', 'copia', 'corazón', 'corbata', 'corcho', 'cordón', 'corona', 'correr', 'coser', 'cosmos', 'costa', 'cráneo', 'cráter', 'crear', 'crecer', 'creído', 'crema', 'cría', 'crimen', 'cripta', 'crisis', 'cromo', 'crónica', 'croqueta', 'crudo', 'cruz', 'cuadro', 'cuarto', 'cuatro', 'cubo', 'cubrir', 'cuchara', 'cuello', 'cuento', 'cuerda', 'cuesta', 'cueva', 'cuidar', 'culebra', 'culpa', 'culto', 'cumbre', 'cumplir', 'cuna', 'cuneta', 'cuota', 'cupón', 'cúpula', 'curar', 'curioso', 'curso', 'curva', 'cutis', 'dama', 'danza', 'dar', 'dardo', 'dátil', 'deber', 'débil', 'década', 'decir', 'dedo', 'defensa', 'definir', 'dejar', 'delfín', 'delgado', 'delito', 'demora', 'denso', 'dental', 'deporte', 'derecho', 'derrota', 'desayuno', 'deseo', 'desfile', 'desnudo', 'destino', 'desvío', 'detalle', 'detener', 'deuda', 'día', 'diablo', 'diadema', 'diamante', 'diana', 'diario', 'dibujo', 'dictar', 'diente', 'dieta', 'diez', 'difícil', 'digno', 'dilema', 'diluir', 'dinero', 'directo', 'dirigir', 'disco', 'diseño', 'disfraz', 'diva', 'divino', 'doble', 'doce', 'dolor', 'domingo', 'don', 'donar', 'dorado', 'dormir', 'dorso', 'dos', 'dosis', 'dragón', 'droga', 'ducha', 'duda', 'duelo', 'dueño', 'dulce', 'dúo', 'duque', 'durar', 'dureza', 'duro', 'ébano', 'ebrio', 'echar', 'eco', 'ecuador', 'edad', 'edición', 'edificio', 'editor', 'educar', 'efecto', 'eficaz', 'eje', 'ejemplo', 'elefante', 'elegir', 'elemento', 'elevar', 'elipse', 'élite', 'elixir', 'elogio', 'eludir', 'embudo', 'emitir', 'emoción', 'empate', 'empeño', 'empleo', 'empresa', 'enano', 'encargo', 'enchufe', 'encía', 'enemigo', 'enero', 'enfado', 'enfermo', 'engaño', 'enigma', 'enlace', 'enorme', 'enredo', 'ensayo', 'enseñar', 'entero', 'entrar', 'envase', 'envío', 'época', 'equipo', 'erizo', 'escala', 'escena', 'escolar', 'escribir', 'escudo', 'esencia', 'esfera', 'esfuerzo', 'espada', 'espejo', 'espía', 'esposa', 'espuma', 'esquí', 'estar', 'este', 'estilo', 'estufa', 'etapa', 'eterno', 'ética', 'etnia', 'evadir', 'evaluar', 'evento', 'evitar', 'exacto', 'examen', 'exceso', 'excusa', 'exento', 'exigir', 'exilio', 'existir', 'éxito', 'experto', 'explicar', 'exponer', 'extremo', 'fábrica', 'fábula', 'fachada', 'fácil', 'factor', 'faena', 'faja', 'falda', 'fallo', 'falso', 'faltar', 'fama', 'familia', 'famoso', 'faraón', 'farmacia', 'farol', 'farsa', 'fase', 'fatiga', 'fauna', 'favor', 'fax', 'febrero', 'fecha', 'feliz', 'feo', 'feria', 'feroz', 'fértil', 'fervor', 'festín', 'fiable', 'fianza', 'fiar', 'fibra', 'ficción', 'ficha', 'fideo', 'fiebre', 'fiel', 'fiera', 'fiesta', 'figura', 'fijar', 'fijo', 'fila', 'filete', 'filial', 'filtro', 'fin', 'finca', 'fingir', 'finito', 'firma', 'flaco', 'flauta', 'flecha', 'flor', 'flota', 'fluir', 'flujo', 'flúor', 'fobia', 'foca', 'fogata', 'fogón', 'folio', 'folleto', 'fondo', 'forma', 'forro', 'fortuna', 'forzar', 'fosa', 'foto', 'fracaso', 'frágil', 'franja', 'frase', 'fraude', 'freír', 'freno', 'fresa', 'frío', 'frito', 'fruta', 'fuego', 'fuente', 'fuerza', 'fuga', 'fumar', 'función', 'funda', 'furgón', 'furia', 'fusil', 'fútbol', 'futuro', 'gacela', 'gafas', 'gaita', 'gajo', 'gala', 'galería', 'gallo', 'gamba', 'ganar', 'gancho', 'ganga', 'ganso', 'garaje', 'garza', 'gasolina', 'gastar', 'gato', 'gavilán', 'gemelo', 'gemir', 'gen', 'género', 'genio', 'gente', 'geranio', 'gerente', 'germen', 'gesto', 'gigante', 'gimnasio', 'girar', 'giro', 'glaciar', 'globo', 'gloria', 'gol', 'golfo', 'goloso', 'golpe', 'goma', 'gordo', 'gorila', 'gorra', 'gota', 'goteo', 'gozar', 'grada', 'gráfico', 'grano', 'grasa', 'gratis', 'grave', 'grieta', 'grillo', 'gripe', 'gris', 'grito', 'grosor', 'grúa', 'grueso', 'grumo', 'grupo', 'guante', 'guapo', 'guardia', 'guerra', 'guía', 'guiño', 'guion', 'guiso', 'guitarra', 'gusano', 'gustar', 'haber', 'hábil', 'hablar', 'hacer', 'hacha', 'hada', 'hallar', 'hamaca', 'harina', 'haz', 'hazaña', 'hebilla', 'hebra', 'hecho', 'helado', 'helio', 'hembra', 'herir', 'hermano', 'héroe', 'hervir', 'hielo', 'hierro', 'hígado', 'higiene', 'hijo', 'himno', 'historia', 'hocico', 'hogar', 'hoguera', 'hoja', 'hombre', 'hongo', 'honor', 'honra', 'hora', 'hormiga', 'horno', 'hostil', 'hoyo', 'hueco', 'huelga', 'huerta', 'hueso', 'huevo', 'huida', 'huir', 'humano', 'húmedo', 'humilde', 'humo', 'hundir', 'huracán', 'hurto', 'icono', 'ideal', 'idioma', 'ídolo', 'iglesia', 'iglú', 'igual', 'ilegal', 'ilusión', 'imagen', 'imán', 'imitar', 'impar', 'imperio', 'imponer', 'impulso', 'incapaz', 'índice', 'inerte', 'infiel', 'informe', 'ingenio', 'inicio', 'inmenso', 'inmune', 'innato', 'insecto', 'instante', 'interés', 'íntimo', 'intuir', 'inútil', 'invierno', 'ira', 'iris', 'ironía', 'isla', 'islote', 'jabalí', 'jabón', 'jamón', 'jarabe', 'jardín', 'jarra', 'jaula', 'jazmín', 'jefe', 'jeringa', 'jinete', 'jornada', 'joroba', 'joven', 'joya', 'juerga', 'jueves', 'juez', 'jugador', 'jugo', 'juguete', 'juicio', 'junco', 'jungla', 'junio', 'juntar', 'júpiter', 'jurar', 'justo', 'juvenil', 'juzgar', 'kilo', 'koala', 'labio', 'lacio', 'lacra', 'lado', 'ladrón', 'lagarto', 'lágrima', 'laguna', 'laico', 'lamer', 'lámina', 'lámpara', 'lana', 'lancha', 'langosta', 'lanza', 'lápiz', 'largo', 'larva', 'lástima', 'lata', 'látex', 'latir', 'laurel', 'lavar', 'lazo', 'leal', 'lección', 'leche', 'lector', 'leer', 'legión', 'legumbre', 'lejano', 'lengua', 'lento', 'leña', 'león', 'leopardo', 'lesión', 'letal', 'letra', 'leve', 'leyenda', 'libertad', 'libro', 'licor', 'líder', 'lidiar', 'lienzo', 'liga', 'ligero', 'lima', 'límite', 'limón', 'limpio', 'lince', 'lindo', 'línea', 'lingote', 'lino', 'linterna', 'líquido', 'liso', 'lista', 'litera', 'litio', 'litro', 'llaga', 'llama', 'llanto', 'llave', 'llegar', 'llenar', 'llevar', 'llorar', 'llover', 'lluvia', 'lobo', 'loción', 'loco', 'locura', 'lógica', 'logro', 'lombriz', 'lomo', 'lonja', 'lote', 'lucha', 'lucir', 'lugar', 'lujo', 'luna', 'lunes', 'lupa', 'lustro', 'luto', 'luz', 'maceta', 'macho', 'madera', 'madre', 'maduro', 'maestro', 'mafia', 'magia', 'mago', 'maíz', 'maldad', 'maleta', 'malla', 'malo', 'mamá', 'mambo', 'mamut', 'manco', 'mando', 'manejar', 'manga', 'maniquí', 'manjar', 'mano', 'manso', 'manta', 'mañana', 'mapa', 'máquina', 'mar', 'marco', 'marea', 'marfil', 'margen', 'marido', 'mármol', 'marrón', 'martes', 'marzo', 'masa', 'máscara', 'masivo', 'matar', 'materia', 'matiz', 'matriz', 'máximo', 'mayor', 'mazorca', 'mecha', 'medalla', 'medio', 'médula', 'mejilla', 'mejor', 'melena', 'melón', 'memoria', 'menor', 'mensaje', 'mente', 'menú', 'mercado', 'merengue', 'mérito', 'mes', 'mesón', 'meta', 'meter', 'método', 'metro', 'mezcla', 'miedo', 'miel', 'miembro', 'miga', 'mil', 'milagro', 'militar', 'millón', 'mimo', 'mina', 'minero', 'mínimo', 'minuto', 'miope', 'mirar', 'misa', 'miseria', 'misil', 'mismo', 'mitad', 'mito', 'mochila', 'moción', 'moda', 'modelo', 'moho', 'mojar', 'molde', 'moler', 'molino', 'momento', 'momia', 'monarca', 'moneda', 'monja', 'monto', 'moño', 'morada', 'morder', 'moreno', 'morir', 'morro', 'morsa', 'mortal', 'mosca', 'mostrar', 'motivo', 'mover', 'móvil', 'mozo', 'mucho', 'mudar', 'mueble', 'muela', 'muerte', 'muestra', 'mugre', 'mujer', 'mula', 'muleta', 'multa', 'mundo', 'muñeca', 'mural', 'muro', 'músculo', 'museo', 'musgo', 'música', 'muslo', 'nácar', 'nación', 'nadar', 'naipe', 'naranja', 'nariz', 'narrar', 'nasal', 'natal', 'nativo', 'natural', 'náusea', 'naval', 'nave', 'navidad', 'necio', 'néctar', 'negar', 'negocio', 'negro', 'neón', 'nervio', 'neto', 'neutro', 'nevar', 'nevera', 'nicho', 'nido', 'niebla', 'nieto', 'niñez', 'niño', 'nítido', 'nivel', 'nobleza', 'noche', 'nómina', 'noria', 'norma', 'norte', 'nota', 'noticia', 'novato', 'novela', 'novio', 'nube', 'nuca', 'núcleo', 'nudillo', 'nudo', 'nuera', 'nueve', 'nuez', 'nulo', 'número', 'nutria', 'oasis', 'obeso', 'obispo', 'objeto', 'obra', 'obrero', 'observar', 'obtener', 'obvio', 'oca', 'ocaso', 'océano', 'ochenta', 'ocho', 'ocio', 'ocre', 'octavo', 'octubre', 'oculto', 'ocupar', 'ocurrir', 'odiar', 'odio', 'odisea', 'oeste', 'ofensa', 'oferta', 'oficio', 'ofrecer', 'ogro', 'oído', 'oír', 'ojo', 'ola', 'oleada', 'olfato', 'olivo', 'olla', 'olmo', 'olor', 'olvido', 'ombligo', 'onda', 'onza', 'opaco', 'opción', 'ópera', 'opinar', 'oponer', 'optar', 'óptica', 'opuesto', 'oración', 'orador', 'oral', 'órbita', 'orca', 'orden', 'oreja', 'órgano', 'orgía', 'orgullo', 'oriente', 'origen', 'orilla', 'oro', 'orquesta', 'oruga', 'osadía', 'oscuro', 'osezno', 'oso', 'ostra', 'otoño', 'otro', 'oveja', 'óvulo', 'óxido', 'oxígeno', 'oyente', 'ozono', 'pacto', 'padre', 'paella', 'página', 'pago', 'país', 'pájaro', 'palabra', 'palco', 'paleta', 'pálido', 'palma', 'paloma', 'palpar', 'pan', 'panal', 'pánico', 'pantera', 'pañuelo', 'papá', 'papel', 'papilla', 'paquete', 'parar', 'parcela', 'pared', 'parir', 'paro', 'párpado', 'parque', 'párrafo', 'parte', 'pasar', 'paseo', 'pasión', 'paso', 'pasta', 'pata', 'patio', 'patria', 'pausa', 'pauta', 'pavo', 'payaso', 'peatón', 'pecado', 'pecera', 'pecho', 'pedal', 'pedir', 'pegar', 'peine', 'pelar', 'peldaño', 'pelea', 'peligro', 'pellejo', 'pelo', 'peluca', 'pena', 'pensar', 'peñón', 'peón', 'peor', 'pepino', 'pequeño', 'pera', 'percha', 'perder', 'pereza', 'perfil', 'perico', 'perla', 'permiso', 'perro', 'persona', 'pesa', 'pesca', 'pésimo', 'pestaña', 'pétalo', 'petróleo', 'pez', 'pezuña', 'picar', 'pichón', 'pie', 'piedra', 'pierna', 'pieza', 'pijama', 'pilar', 'piloto', 'pimienta', 'pino', 'pintor', 'pinza', 'piña', 'piojo', 'pipa', 'pirata', 'pisar', 'piscina', 'piso', 'pista', 'pitón', 'pizca', 'placa', 'plan', 'plata', 'playa', 'plaza', 'pleito', 'pleno', 'plomo', 'pluma', 'plural', 'pobre', 'poco', 'poder', 'podio', 'poema', 'poesía', 'poeta', 'polen', 'policía', 'pollo', 'polvo', 'pomada', 'pomelo', 'pomo', 'pompa', 'poner', 'porción', 'portal', 'posada', 'poseer', 'posible', 'poste', 'potencia', 'potro', 'pozo', 'prado', 'precoz', 'pregunta', 'premio', 'prensa', 'preso', 'previo', 'primo', 'príncipe', 'prisión', 'privar', 'proa', 'probar', 'proceso', 'producto', 'proeza', 'profesor', 'programa', 'prole', 'promesa', 'pronto', 'propio', 'próximo', 'prueba', 'público', 'puchero', 'pudor', 'pueblo', 'puerta', 'puesto', 'pulga', 'pulir', 'pulmón', 'pulpo', 'pulso', 'puma', 'punto', 'puñal', 'puño', 'pupa', 'pupila', 'puré', 'quedar', 'queja', 'quemar', 'querer', 'queso', 'quieto', 'química', 'quince', 'quitar', 'rábano', 'rabia', 'rabo', 'ración', 'radical', 'raíz', 'rama', 'rampa', 'rancho', 'rango', 'rapaz', 'rápido', 'rapto', 'rasgo', 'raspa', 'rato', 'rayo', 'raza', 'razón', 'reacción', 'realidad', 'rebaño', 'rebote', 'recaer', 'receta', 'rechazo', 'recoger', 'recreo', 'recto', 'recurso', 'red', 'redondo', 'reducir', 'reflejo', 'reforma', 'refrán', 'refugio', 'regalo', 'regir', 'regla', 'regreso', 'rehén', 'reino', 'reír', 'reja', 'relato', 'relevo', 'relieve', 'relleno', 'reloj', 'remar', 'remedio', 'remo', 'rencor', 'rendir', 'renta', 'reparto', 'repetir', 'reposo', 'reptil', 'res', 'rescate', 'resina', 'respeto', 'resto', 'resumen', 'retiro', 'retorno', 'retrato', 'reunir', 'revés', 'revista', 'rey', 'rezar', 'rico', 'riego', 'rienda', 'riesgo', 'rifa', 'rígido', 'rigor', 'rincón', 'riñón', 'río', 'riqueza', 'risa', 'ritmo', 'rito', 'rizo', 'roble', 'roce', 'rociar', 'rodar', 'rodeo', 'rodilla', 'roer', 'rojizo', 'rojo', 'romero', 'romper', 'ron', 'ronco', 'ronda', 'ropa', 'ropero', 'rosa', 'rosca', 'rostro', 'rotar', 'rubí', 'rubor', 'rudo', 'rueda', 'rugir', 'ruido', 'ruina', 'ruleta', 'rulo', 'rumbo', 'rumor', 'ruptura', 'ruta', 'rutina', 'sábado', 'saber', 'sabio', 'sable', 'sacar', 'sagaz', 'sagrado', 'sala', 'saldo', 'salero', 'salir', 'salmón', 'salón', 'salsa', 'salto', 'salud', 'salvar', 'samba', 'sanción', 'sandía', 'sanear', 'sangre', 'sanidad', 'sano', 'santo', 'sapo', 'saque', 'sardina', 'sartén', 'sastre', 'satán', 'sauna', 'saxofón', 'sección', 'seco', 'secreto', 'secta', 'sed', 'seguir', 'seis', 'sello', 'selva', 'semana', 'semilla', 'senda', 'sensor', 'señal', 'señor', 'separar', 'sepia', 'sequía', 'ser', 'serie', 'sermón', 'servir', 'sesenta', 'sesión', 'seta', 'setenta', 'severo', 'sexo', 'sexto', 'sidra', 'siesta', 'siete', 'siglo', 'signo', 'sílaba', 'silbar', 'silencio', 'silla', 'símbolo', 'simio', 'sirena', 'sistema', 'sitio', 'situar', 'sobre', 'socio', 'sodio', 'sol', 'solapa', 'soldado', 'soledad', 'sólido', 'soltar', 'solución', 'sombra', 'sondeo', 'sonido', 'sonoro', 'sonrisa', 'sopa', 'soplar', 'soporte', 'sordo', 'sorpresa', 'sorteo', 'sostén', 'sótano', 'suave', 'subir', 'suceso', 'sudor', 'suegra', 'suelo', 'sueño', 'suerte', 'sufrir', 'sujeto', 'sultán', 'sumar', 'superar', 'suplir', 'suponer', 'supremo', 'sur', 'surco', 'sureño', 'surgir', 'susto', 'sutil', 'tabaco', 'tabique', 'tabla', 'tabú', 'taco', 'tacto', 'tajo', 'talar', 'talco', 'talento', 'talla', 'talón', 'tamaño', 'tambor', 'tango', 'tanque', 'tapa', 'tapete', 'tapia', 'tapón', 'taquilla', 'tarde', 'tarea', 'tarifa', 'tarjeta', 'tarot', 'tarro', 'tarta', 'tatuaje', 'tauro', 'taza', 'tazón', 'teatro', 'techo', 'tecla', 'técnica', 'tejado', 'tejer', 'tejido', 'tela', 'teléfono', 'tema', 'temor', 'templo', 'tenaz', 'tender', 'tener', 'tenis', 'tenso', 'teoría', 'terapia', 'terco', 'término', 'ternura', 'terror', 'tesis', 'tesoro', 'testigo', 'tetera', 'texto', 'tez', 'tibio', 'tiburón', 'tiempo', 'tienda', 'tierra', 'tieso', 'tigre', 'tijera', 'tilde', 'timbre', 'tímido', 'timo', 'tinta', 'tío', 'típico', 'tipo', 'tira', 'tirón', 'titán', 'títere', 'título', 'tiza', 'toalla', 'tobillo', 'tocar', 'tocino', 'todo', 'toga', 'toldo', 'tomar', 'tono', 'tonto', 'topar', 'tope', 'toque', 'tórax', 'torero', 'tormenta', 'torneo', 'toro', 'torpedo', 'torre', 'torso', 'tortuga', 'tos', 'tosco', 'toser', 'tóxico', 'trabajo', 'tractor', 'traer', 'tráfico', 'trago', 'traje', 'tramo', 'trance', 'trato', 'trauma', 'trazar', 'trébol', 'tregua', 'treinta', 'tren', 'trepar', 'tres', 'tribu', 'trigo', 'tripa', 'triste', 'triunfo', 'trofeo', 'trompa', 'tronco', 'tropa', 'trote', 'trozo', 'truco', 'trueno', 'trufa', 'tubería', 'tubo', 'tuerto', 'tumba', 'tumor', 'túnel', 'túnica', 'turbina', 'turismo', 'turno', 'tutor', 'ubicar', 'úlcera', 'umbral', 'unidad', 'unir', 'universo', 'uno', 'untar', 'uña', 'urbano', 'urbe', 'urgente', 'urna', 'usar', 'usuario', 'útil', 'utopía', 'uva', 'vaca', 'vacío', 'vacuna', 'vagar', 'vago', 'vaina', 'vajilla', 'vale', 'válido', 'valle', 'valor', 'válvula', 'vampiro', 'vara', 'variar', 'varón', 'vaso', 'vecino', 'vector', 'vehículo', 'veinte', 'vejez', 'vela', 'velero', 'veloz', 'vena', 'vencer', 'venda', 'veneno', 'vengar', 'venir', 'venta', 'venus', 'ver', 'verano', 'verbo', 'verde', 'vereda', 'verja', 'verso', 'verter', 'vía', 'viaje', 'vibrar', 'vicio', 'víctima', 'vida', 'vídeo', 'vidrio', 'viejo', 'viernes', 'vigor', 'vil', 'villa', 'vinagre', 'vino', 'viñedo', 'violín', 'viral', 'virgo', 'virtud', 'visor', 'víspera', 'vista', 'vitamina', 'viudo', 'vivaz', 'vivero', 'vivir', 'vivo', 'volcán', 'volumen', 'volver', 'voraz', 'votar', 'voto', 'voz', 'vuelo', 'vulgar', 'yacer', 'yate', 'yegua', 'yema', 'yerno', 'yeso', 'yodo', 'yoga', 'yogur', 'zafiro', 'zanja', 'zapato', 'zarza', 'zona', 'zorro', 'zumo', 'zurdo'];

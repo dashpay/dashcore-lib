@@ -55788,7 +55788,7 @@ function ProRegTxPayload(options) {
     this.scriptPayout = options.scriptPayout;
     this.inputsHash = options.inputsHash;
     this.payloadSig = options.payloadSig;
-    this.payloadSigSize = this.payloadSig.length * 2
+    this.payloadSig ? this.payloadSigSize = constants.BLS_SIGNATURE_SIZE : this.payloadSigSize = 0;
     this.protocolVersion = options.protocolVersion;
   }
 }
@@ -55825,7 +55825,6 @@ ProRegTxPayload.fromBuffer = function fromBuffer(rawPayload) {
   if (payload.payloadSigSize > 0) {
     payload.payloadSig = payloadBufferReader.read(payload.payloadSigSize).toString('hex');
   }
-
   if (!payloadBufferReader.finished()) {
     throw new Error('Failed to parse payload: raw payload is bigger than expected.');
   }
@@ -55940,7 +55939,7 @@ ProRegTxPayload.prototype.toBuffer = function toBuffer(options) {
     .write(Buffer.from(this.scriptPayout, 'hex'))
     .write(Buffer.from(this.inputsHash, 'hex'));
 
-  if (!skipSignature) {
+  if (!skipSignature && this.payloadSig) {
     payloadBufferWriter.writeVarintNum(Buffer.from(this.payloadSig, 'hex').length);
     payloadBufferWriter.write(Buffer.from(this.payloadSig, 'hex'));
   } else {

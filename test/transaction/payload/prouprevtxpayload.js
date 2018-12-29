@@ -42,6 +42,7 @@ describe('ProUpRevTxPayload', function () {
       expect(payload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(payload.reason).to.be.equal(validProUpRevTxPayloadJSON.reason);
       expect(payload.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
+      expect(payload.payloadSig).to.be.equal(validProUpRevTxPayloadJSON.payloadSig);
 
     });
 
@@ -67,6 +68,7 @@ describe('ProUpRevTxPayload', function () {
       expect(payload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(payload.reason).to.be.equal(validProUpRevTxPayloadJSON.reason);
       expect(payload.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
+      expect(payload.payloadSig).to.be.equal(validProUpRevTxPayloadJSON.payloadSig);
     });
 
     after(function () {
@@ -92,6 +94,7 @@ describe('ProUpRevTxPayload', function () {
       expect(payloadJSON.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(payloadJSON.reason).to.be.equal(validProUpRevTxPayloadJSON.reason);
       expect(payloadJSON.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
+      expect(payloadJSON.payloadSig).to.be.equal(validProUpRevTxPayloadJSON.payloadSig);
     });
   });
 
@@ -114,6 +117,7 @@ describe('ProUpRevTxPayload', function () {
       expect(restoredPayload.proTXHash).to.be.equal(validProUpRevTxPayloadJSON.proTXHash);
       expect(restoredPayload.reason).to.be.equal(validProUpRevTxPayloadJSON.reason);
       expect(restoredPayload.inputsHash).to.be.equal(validProUpRevTxPayloadJSON.inputsHash);
+      expect(restoredPayload.payloadSig).to.be.equal(validProUpRevTxPayloadJSON.payloadSig);
     });
 
     it('Should call #validate', function () {

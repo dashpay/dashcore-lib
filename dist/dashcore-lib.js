@@ -55789,7 +55789,6 @@ function ProRegTxPayload(options) {
     this.inputsHash = options.inputsHash;
     this.payloadSig = options.payloadSig;
     this.payloadSig ? this.payloadSigSize = constants.BLS_SIGNATURE_SIZE : this.payloadSigSize = 0;
-    this.protocolVersion = options.protocolVersion;
   }
 }
 

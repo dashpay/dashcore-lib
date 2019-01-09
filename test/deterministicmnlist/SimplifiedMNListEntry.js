@@ -84,7 +84,29 @@ describe('SimplifiedMNListEntry', function () {
 
       expect(entryWithSameKeys.length).to.be.equal(entryWithDifferentKeys.length);
       expect(entryWithNoAddress.length).to.be.equal(entryWithDifferentKeys.length);
-    })
+    });
+  });
+  describe('fromObject', function() {
+    it('Should create an instance from a JSONObject', function () {
+      var entry = SimplifiedMNListEntry.fromObject(smlEntryJSON);
+
+      expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
+      expect(entry.toBuffer().toString('hex')).to.be.equal(smlEntryHex);
+    });
+  });
+  describe('toObject', function () {
+    it('Should serialize SMLEntry to JSON object', function () {
+      var entry = new SimplifiedMNListEntry(smlEntryHex);
+
+      expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
+    });
+  });
+  describe('fromHexString', function () {
+    it('Should be able to create an entry from a hex string', function () {
+      var entry = SimplifiedMNListEntry.fromHexString(smlEntryHex);
+
+      expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
+    });
   });
   describe('calculateHash', function () {
     it('Should get correct hash for an entry with ip address', function() {

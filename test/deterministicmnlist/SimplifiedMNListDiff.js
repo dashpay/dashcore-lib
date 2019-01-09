@@ -1,7 +1,7 @@
 /* eslint-disable */
 // TODO: Remove previous line and work through linting issues at next edit
 
-var SimplifiedMNListDiff = require('../../lib/deterministcmnlist/SimplifiedMNListDiff');
+var SimplifiedMNListDiff = require('../../lib/deterministicmnlist/SimplifiedMNListDiff');
 var expect = require('chai').expect;
 var sinon = require('sinon');
 

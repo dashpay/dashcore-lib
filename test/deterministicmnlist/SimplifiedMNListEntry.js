@@ -41,6 +41,7 @@ var smlEntryFromCore = {
   "keyIDVoting": "68976be39d5ef1d43761123f497c96cf4226da87",
   "isValid": true
 };
+var smlEntryFromCoreHex = "bfddb9d5eb05ffc2fa5573d09549f23ea9e1cd7ecb650f3eb16ea0f95cade5320c30771d54f702cdcc27c59ed99b19a36f0fae289fe666a5c51e43601900000000000000000000000000ffff5fb733929c3f1326ddac1044e0219dba7dccf6b43d1deed3e897717ca06757243b02516cfa67e24026f7a317cf575b40c10e7f6bf7f087da2642cf967c493f126137d4f15e9de36b976801";
 var smlEntryFromCoreHash = "30e8c7bf6dbaabae94e5ef622d7454bf9630aa5f99a0d0611f324df667b74a1f";
 
 describe('SimplifiedMNListEntry', function () {
@@ -68,14 +69,14 @@ describe('SimplifiedMNListEntry', function () {
   });
   describe('fromBuffer', function () {
     it('Should be able to parse data from a buffer when ip address is present', function () {
-      var entry = SimplifiedMNListEntry.fromBuffer(Buffer.from(smlEntryWithDifferentKeysHex, 'hex'));
+      var entry = SimplifiedMNListEntry.fromBuffer(Buffer.from(smlEntryFromCoreHex, 'hex'));
       var entryJSON = entry.toObject();
-      expect(entryJSON).to.be.deep.equal(smlEntryWithDifferentKeys);
+      expect(entryJSON).to.be.deep.equal(smlEntryFromCore);
     });
     it('Should be able to parse data from a buffer when ip address is not present', function () {
-      var entry = SimplifiedMNListEntry.fromBuffer(Buffer.from(smlEntryWithDifferentKeysHex, 'hex'));
+      var entry = SimplifiedMNListEntry.fromBuffer(Buffer.from(smlEntryFromCoreHex, 'hex'));
       var entryJSON = entry.toObject();
-      expect(entryJSON).to.be.deep.equal(smlEntryWithDifferentKeys);
+      expect(entryJSON).to.be.deep.equal(smlEntryFromCore);
     });
   });
   describe('toBuffer', function () {
@@ -106,6 +107,9 @@ describe('SimplifiedMNListEntry', function () {
   describe('calculateHash', function () {
     it('Should get correct hash', function() {
       var entry = new SimplifiedMNListEntry(smlEntryFromCore);
+      var serialized = entry.toBuffer().toString('hex');
+      expect(serialized.length).to.be.equal(smlEntryFromCoreHex.length);
+      expect(entry.toBuffer().toString('hex')).to.be.equal(smlEntryFromCoreHex);
       expect(entry.calculateHash().toString('hex')).to.be.equal(smlEntryFromCoreHash);
     });
   });

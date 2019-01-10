@@ -43,6 +43,7 @@ describe('merkleTree', function () {
       // Last element of the tree is root
       expect(root).to.be.deep.equal(expectedTree[5]);
 
+      // Test that resulted buffer is decoupled from the tree
       root.reverse();
       expect(root).to.be.not.deep.equal(expectedTree[5]);
     });

@@ -9,7 +9,6 @@ var DashcoreLib = require('../../../index');
 var CoinbasePayload = DashcoreLib.Transaction.Payload.CoinbasePayload;
 
 var merkleRootMNList = 'e83c76065797d4542f1cd02e00d02093bea6fb53f5ad6aaa160fd3ccb30001b9';
-console.log(merkleRootMNList);
 
 var validCoinbasePayloadJSON = {
   version: 10,
@@ -18,7 +17,7 @@ var validCoinbasePayloadJSON = {
 };
 // Contains same data as JSON above
 // 0a00 is 16-bit unsigned 10, 14000000 is 32 bit unsigned 20, everything else is a hash.
-var validCoinbasePayloadHexString = '0a0014000000e83c76065797d4542f1cd02e00d02093bea6fb53f5ad6aaa160fd3ccb30001b9';
+var validCoinbasePayloadHexString = '0a0014000000b90100b3ccd30f16aa6aadf553fba6be9320d0002ed01c2f54d4975706763ce8';
 var validCoinbasePayloadBuffer = Buffer.from(validCoinbasePayloadHexString, 'hex');
 var validCoinbasePayload = CoinbasePayload.fromJSON(validCoinbasePayloadJSON);
 
@@ -60,7 +59,7 @@ describe('CoinbasePayload', function () {
     });
 
     it('Should return instance of CoinbasePayload and call #validate on it', function() {
-      var payload = CoinbasePayload.fromBuffer(validCoinbasePayloadBuffer);
+      var payload = CoinbasePayload.fromJSON(validCoinbasePayloadJSON);
 
       expect(payload).to.be.an.instanceOf(CoinbasePayload);
       expect(payload.version).to.be.equal(10);

@@ -1,3 +1,6 @@
+# ignore JetBrains IDE project specific files
+.idea
+
 # do not track dependencies
 node_modules
 

@@ -58,9 +58,6 @@ describe('SimplifiedMNList', function() {
       expect(mnList.mnList).to.be.deep.equal(mnListDiffJSON.mnList);
     });
   });
-  describe('applyDiffAndVerify', function () {
-
-  });
   describe('deleteMNs', function () {
 
   });

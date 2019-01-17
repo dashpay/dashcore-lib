@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 var SMNListFixture = require('../fixtures/mnList');
 var SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList');
-var Transaction = require('../../lib/transaction');
+var constants = require('../../lib/constants');
 
 describe('SimplifiedMNList', function() {
   describe('constructor', function () {
@@ -62,8 +62,16 @@ describe('SimplifiedMNList', function() {
         mnList.applyDiff(SMNListFixture.getThirdDiff());
       }).to.throw('Merkle root from the diff doesn\'t match calculated merkle root after diff is applied');
     });
-    it('Should set base block hash on the first call', function () {
-      throw new Error('Not implemented');
+    it("Should set base block hash on the first call and don't change it on any further calls", function () {
+      var mnList = new SimplifiedMNList();
+      expect(mnList.baseBlockHash).to.be.equal(constants.NULL_HASH);
+
+      mnList.applyDiff(SMNListFixture.getFirstDiff());
+      expect(mnList.baseBlockHash).to.be.equal(SMNListFixture.getFirstDiff().baseBlockHash);
+
+      mnList.applyDiff(SMNListFixture.getSecondDiff());
+      // Should be equal to the block hash from the first diff
+      expect(mnList.baseBlockHash).to.be.equal(SMNListFixture.getFirstDiff().baseBlockHash);
     });
   });
   describe('calculateMerkleRoot', function () {

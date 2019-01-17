@@ -5,7 +5,7 @@ var SMNListFixture = require('../fixtures/mnList');
 var SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList');
 var constants = require('../../lib/constants');
 
-describe('SimplifiedMNList', function() {
+describe('SimplifiedMNList', function () {
   describe('constructor', function () {
     it('Should call applyDiff with the first argument passed to the constructor', function () {
       var spy = sinon.spy(SimplifiedMNList.prototype, "applyDiff");
@@ -34,13 +34,15 @@ describe('SimplifiedMNList', function() {
       expect(mnList.mnList.length).to.be.equal(diff.mnList.length);
       // Since mn list is sorted and diff isn't, we need to check the list that way
       mnList.mnList.forEach(function (entry) {
-        var diffIndex = diff.mnList.findIndex(function (diffEntry) { return diffEntry.proRegTxHash === entry.proRegTxHash });
+        var diffIndex = diff.mnList.findIndex(function (diffEntry) {
+          return diffEntry.proRegTxHash === entry.proRegTxHash
+        });
         // toObject since diff is just JSON, while entry in the list is an instance of SimplifiedMNListEntry
         expect(entry.toObject()).to.be.deep.equal(diff.mnList[diffIndex]);
       });
       expect(mnList.calculateMerkleRoot()).to.be.equal(diff.merkleRootMNList);
     });
-    it('Should update entries', function() {
+    it('Should update entries', function () {
       var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
       var mnsCountInTheFirstDiff = SMNListFixture.getFirstDiff().mnList.length;
       var mnsCountInTheSecondDiff = SMNListFixture.getSecondDiff().mnList.length;
@@ -99,7 +101,9 @@ describe('SimplifiedMNList', function() {
       expect(validMNs).to.be.an('Array');
       expect(mnList.mnList.length).to.be.equal(100);
       expect(validMNs.length).to.be.equal(95);
-      expect(mnList.mnList.filter(function(entry) { return !entry.isValid }).length).to.be.equal(5);
+      expect(mnList.mnList.filter(function (entry) {
+        return !entry.isValid
+      }).length).to.be.equal(5);
       validMNs.forEach(function (mnListEntry) {
         expect(mnListEntry.isValid).to.be.true;
       });
@@ -136,7 +140,9 @@ describe('SimplifiedMNList', function() {
     it('Should throw if no diffs were applied to it', function () {
       var mnList = new SimplifiedMNList();
 
-      expect(function () { mnList.toSimplifiedMNListDiff() }).to.throw("Can't convert MN list to diff - cbTx is missing");
+      expect(function () {
+        mnList.toSimplifiedMNListDiff()
+      }).to.throw("Can't convert MN list to diff - cbTx is missing");
     })
   });
 });

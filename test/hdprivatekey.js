@@ -10,7 +10,6 @@ var expect = require('chai').expect;
 var bitcore = require('..');
 var errors = bitcore.errors;
 var hdErrors = errors.HDPrivateKey;
-var buffer = require('buffer');
 var Networks = bitcore.Networks;
 var BufferUtil = bitcore.util.buffer;
 var HDPrivateKey = bitcore.HDPrivateKey;
@@ -143,7 +142,7 @@ describe('HDPrivate key interface', function() {
   });
 
   it('returns InvalidLength if data of invalid length is given to getSerializedError', function() {
-    var b58s = Base58Check.encode(new buffer.Buffer('onestring'));
+    var b58s = Base58Check.encode(Buffer.from('onestring'));
     expect(
       HDPrivateKey.getSerializedError(b58s) instanceof hdErrors.InvalidLength
     ).to.equal(true);

@@ -202,7 +202,7 @@ describe('Signature', function() {
 
     it('should parse this signature from script_valid.json', function() {
       var sighex = '304502203e4516da7253cf068effec6b95c41221c0cf3a8e6ccb8cbf1725b562e9afde2c022100ab1e3da73d67e32045a20e0b999e049978ea8d6ee5480d485fcf2ce0d03b2ef051';
-      var sig = Buffer(sighex, 'hex');
+      var sig = Buffer.from(sighex, 'hex');
       var parsed = Signature.parseDER(sig, false);
       should.exist(parsed);
     });

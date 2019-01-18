@@ -24,8 +24,8 @@ var dataBlocks = require('../data/bitcoind/blocks');
 describe('Block', function() {
 
   var blockhex = data.blockhex;
-  var blockbuf = new Buffer(blockhex, 'hex');
-  var bh = BlockHeader.fromBuffer(new Buffer(data.blockheaderhex, 'hex'));
+  var blockbuf = Buffer.from(blockhex, 'hex');
+  var bh = BlockHeader.fromBuffer(Buffer.from(data.blockheaderhex, 'hex'));
   var txs = [];
   JSON.parse(dataJson).transactions.forEach(function(tx) {
     txs.push(new Transaction().fromObject(tx));
@@ -33,10 +33,10 @@ describe('Block', function() {
   var json = dataJson;
 
   var genesishex = '010000000000000000000000000000000000000000000000000000000000000000000000c762a6567f3cc092f0684bb62b7e00a84890b990f07cc71a6bb58d64b98e02e0022ddb52f0ff0f1ec23fb9010101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff6204ffff001d01044c5957697265642030392f4a616e2f3230313420546865204772616e64204578706572696d656e7420476f6573204c6976653a204f76657273746f636b2e636f6d204973204e6f7720416363657074696e6720426974636f696e73ffffffff0100f2052a010000004341040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9ac00000000';
-  var genesisbuf = new Buffer(genesishex, 'hex');
+  var genesisbuf = Buffer.from(genesishex, 'hex');
   var genesisidhex = '00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6';
   var blockOneHex = '02000000b67a40f3cd5804437a108f105533739c37e6229bc1adcab385140b59fd0f0000a71c1aade44bf8425bec0deb611c20b16da3442818ef20489ca1e2512be43eef814cdb52f0ff0f1edbf701000101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff0a510101062f503253482fffffffff0100743ba40b000000232103a69850243c993c0645a6e8b38c774174174cc766cd3ec2140afd24d831b84c41ac00000000';
-  var blockOneBuf = new Buffer(blockOneHex, 'hex');
+  var blockOneBuf = Buffer.from(blockOneHex, 'hex');
   var blockOneId = '000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343';
 
   it('should make a new block', function() {
@@ -63,7 +63,7 @@ describe('Block', function() {
 
     it('should properly deserialize blocks', function() {
       dataBlocks.forEach(function(block) {
-        var b = Block.fromBuffer(new Buffer(block.data, 'hex'));
+        var b = Block.fromBuffer(Buffer.from(block.data, 'hex'));
         b.transactions.length.should.equal(block.transactions);
       });
     });
@@ -216,7 +216,7 @@ describe('Block', function() {
 
     it('should return the correct hash of the genesis block', function() {
       var block = Block.fromBuffer(genesisbuf);
-      var blockhash = new Buffer(Array.apply([], new Buffer(genesisidhex, 'hex')).reverse());
+      var blockhash = Buffer.from(Array.apply([], Buffer.from(genesisidhex, 'hex')).reverse());
       block._getHash().toString('hex').should.equal(blockhash.toString('hex'));
     });
   });

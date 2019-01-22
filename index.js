@@ -40,6 +40,7 @@ bitcore.util.buffer = require('./lib/util/buffer');
 bitcore.util.js = require('./lib/util/js');
 bitcore.util.preconditions = require('./lib/util/preconditions');
 bitcore.util.hashUtil = require('./lib/util/hashutil');
+bitcore.util.merkleTree = require('./lib/util/merkletree');
 
 // errors thrown by the library
 bitcore.errors = require('./lib/errors');
@@ -48,6 +49,7 @@ bitcore.errors = require('./lib/errors');
 bitcore.Address = require('./lib/address');
 bitcore.Block = require('./lib/block');
 bitcore.MerkleBlock = require('./lib/block/merkleblock');
+bitcore.SimplifiedMNList = require('./lib/deterministicmnlist/SimplifiedMNList');
 bitcore.SimplifiedMNListDiff = require('./lib/deterministicmnlist/SimplifiedMNListDiff');
 bitcore.SimplifiedMNListEntry = require('./lib/deterministicmnlist/SimplifiedMNListEntry');
 bitcore.BlockHeader = require('./lib/block/blockheader');

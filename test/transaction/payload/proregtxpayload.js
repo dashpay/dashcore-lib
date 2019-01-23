@@ -21,16 +21,16 @@ describe('ProRegTxPayload', function () {
 
   describe('.fromBuffer', function () {
     it('Should return instance of ProRegTxPayload and call #validate on it', function () {
-      var payload = ProRegTxPayload.fromBuffer(proRegTxFixture.getProRegTxBuffer());
+      var payload = ProRegTxPayload.fromBuffer(proRegTxFixture.getProRegPayloadBuffer());
 
       expect(payload.toJSON({
         network: 'testnet',
         skipSignature: true
-      })).to.be.deep.equal(proRegTxFixture.getProRegTxJSON());
+      })).to.be.deep.equal(proRegTxFixture.getProRegPayloadJSON());
     });
 
     it('Should throw in case if there is some unexpected information in raw payload', function () {
-      var payloadWithAdditionalZeros = Buffer.from(proRegTxFixture.getProRegTxHex() + '0000', 'hex');
+      var payloadWithAdditionalZeros = Buffer.from(proRegTxFixture.getProRegPayloadHex() + '0000', 'hex');
 
       expect(function () {
         ProRegTxPayload.fromBuffer(payloadWithAdditionalZeros)
@@ -40,41 +40,41 @@ describe('ProRegTxPayload', function () {
 
   describe('.fromJSON', function () {
     it('Should return instance of ProRegTxPayload and call #validate on it', function () {
-      var payload = ProRegTxPayload.fromJSON(proRegTxFixture.getProRegTxJSON());
+      var payload = ProRegTxPayload.fromJSON(proRegTxFixture.getProRegPayloadJSON());
       var restoredJSON = payload.toJSON({network: 'testnet'});
 
-      expect(restoredJSON).to.be.deep.equal(proRegTxFixture.getProRegTxJSON());
+      expect(restoredJSON).to.be.deep.equal(proRegTxFixture.getProRegPayloadJSON());
     });
   });
 
-  describe('.toJSON', function () {
+  describe('#toJSON', function () {
     it('Should be able to serialize payload JSON', function () {
-      var payload = ProRegTxPayload.fromBuffer(proRegTxFixture.getProRegTxBuffer());
+      var payload = ProRegTxPayload.fromBuffer(proRegTxFixture.getProRegPayloadBuffer());
 
       var payloadJSON = payload.toJSON({network: 'testnet', skipSignature: true});
-      expect(payloadJSON).to.be.deep.equal(proRegTxFixture.getProRegTxJSON());
+      expect(payloadJSON).to.be.deep.equal(proRegTxFixture.getProRegPayloadJSON());
 
       var restoredPayloadHex = ProRegTxPayload.fromJSON(payload.toJSON()).toBuffer().toString('hex');
-      expect(restoredPayloadHex).to.be.equal(proRegTxFixture.getProRegTxHex());
+      expect(restoredPayloadHex).to.be.equal(proRegTxFixture.getProRegPayloadHex());
     });
 
     it('Should call #validate', function () {
-      var payload = ProRegTxPayload.fromJSON(proRegTxFixture.getProRegTxJSON());
+      var payload = ProRegTxPayload.fromJSON(proRegTxFixture.getProRegPayloadJSON());
       ProRegTxPayload.prototype.validate.reset();
       payload.toJSON();
       expect(payload.validate.callCount).to.be.equal(1);
     });
   });
 
-  describe('.toBuffer', function () {
+  describe('#toBuffer', function () {
     it('Should be able to serialize payload to Buffer', function () {
-      var restoredPayload = ProRegTxPayload.fromBuffer(Buffer.from(proRegTxFixture.getProRegTxHex(), 'hex'));
+      var restoredPayload = ProRegTxPayload.fromBuffer(Buffer.from(proRegTxFixture.getProRegPayloadHex(), 'hex'));
 
-      expect(restoredPayload.toBuffer().toString('hex')).to.be.equal(proRegTxFixture.getProRegTxHex());
+      expect(restoredPayload.toBuffer().toString('hex')).to.be.equal(proRegTxFixture.getProRegPayloadHex());
     });
 
     it('Should call #validate', function () {
-      var payload = ProRegTxPayload.fromJSON(proRegTxFixture.getProRegTxJSON());
+      var payload = ProRegTxPayload.fromJSON(proRegTxFixture.getProRegPayloadJSON());
       ProRegTxPayload.prototype.validate.reset();
       payload.toBuffer();
       expect(payload.validate.callCount).to.be.equal(1);

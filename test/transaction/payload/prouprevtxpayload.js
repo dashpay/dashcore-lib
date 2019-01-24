@@ -21,7 +21,7 @@ describe('ProUpRevTxPayload', function () {
 
   describe('.fromBuffer', function () {
     it('Should return instance of ProUpRevTxPayload and call #validate on it', function() {
-      ProUpRevTxPayload.prototype.validate.reset();
+      ProUpRevTxPayload.prototype.validate.resetHistory();
       var payload = ProUpRevTxPayload.fromBuffer(proUpRevTxFixture.getProUpRevPayloadBuffer());
       expect(payload.validate.callCount).to.be.equal(1);
 
@@ -74,7 +74,7 @@ describe('ProUpRevTxPayload', function () {
 
     it('Should call #validate', function () {
       var payload = ProUpRevTxPayload.fromJSON(proUpRevTxFixture.getProUpRevPayloadJSON());
-      ProUpRevTxPayload.prototype.validate.reset();
+      ProUpRevTxPayload.prototype.validate.resetHistory();
       payload.toBuffer();
       expect(payload.validate.callCount).to.be.equal(1);
     });

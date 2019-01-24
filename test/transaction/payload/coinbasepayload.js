@@ -195,7 +195,7 @@ describe('CoinbasePayload', function () {
     });
     it('Should call #validate', function () {
       var payload = CoinbasePayload.fromJSON(validCoinbasePayloadJSON);
-      CoinbasePayload.prototype.validate.reset();
+      CoinbasePayload.prototype.validate.resetHistory();
       payload.toJSON();
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -222,7 +222,7 @@ describe('CoinbasePayload', function () {
     });
     it('Should call #validate', function () {
       var payload = CoinbasePayload.fromJSON(validCoinbasePayloadJSON);
-      CoinbasePayload.prototype.validate.reset();
+      CoinbasePayload.prototype.validate.resetHistory();
       payload.toBuffer();
       expect(payload.validate.callCount).to.be.equal(1);
     });

@@ -60,7 +60,7 @@ describe('ProRegTxPayload', function () {
 
     it('Should call #validate', function () {
       var payload = ProRegTxPayload.fromJSON(proRegTxFixture.getProRegPayloadJSON());
-      ProRegTxPayload.prototype.validate.reset();
+      ProRegTxPayload.prototype.validate.resetHistory();
       payload.toJSON();
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -75,7 +75,7 @@ describe('ProRegTxPayload', function () {
 
     it('Should call #validate', function () {
       var payload = ProRegTxPayload.fromJSON(proRegTxFixture.getProRegPayloadJSON());
-      ProRegTxPayload.prototype.validate.reset();
+      ProRegTxPayload.prototype.validate.resetHistory();
       payload.toBuffer();
       expect(payload.validate.callCount).to.be.equal(1);
     });

@@ -375,7 +375,7 @@ describe('SubTxCloseAccountPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = SubTxCloseAccountPayload.fromJSON(validSubTxCloseAccountPayloadJSON);
-      SubTxCloseAccountPayload.prototype.validate.reset();
+      SubTxCloseAccountPayload.prototype.validate.resetHistory();
       payload.toJSON({ skipSignature: true });
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -403,7 +403,7 @@ describe('SubTxCloseAccountPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = SubTxCloseAccountPayload.fromJSON(validSubTxCloseAccountPayloadJSONsigned);
-      SubTxCloseAccountPayload.prototype.validate.reset();
+      SubTxCloseAccountPayload.prototype.validate.resetHistory();
       payload.toJSON();
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -432,7 +432,7 @@ describe('SubTxCloseAccountPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = SubTxCloseAccountPayload.fromJSON(validSubTxCloseAccountPayloadJSON);
-      SubTxCloseAccountPayload.prototype.validate.reset();
+      SubTxCloseAccountPayload.prototype.validate.resetHistory();
       payload.toBuffer({ skipSignature: true });
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -462,7 +462,7 @@ describe('SubTxCloseAccountPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = SubTxCloseAccountPayload.fromJSON(validSubTxCloseAccountPayloadJSONsigned);
-      SubTxCloseAccountPayload.prototype.validate.reset();
+      SubTxCloseAccountPayload.prototype.validate.resetHistory();
       payload.toBuffer();
       expect(payload.validate.callCount).to.be.equal(1);
     });

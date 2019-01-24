@@ -58,7 +58,7 @@ describe('ProTxUpServPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = ProTxUpServPayload.fromJSON(proUpServTxFixture.getProUpServPayloadJSON());
-      ProTxUpServPayload.prototype.validate.reset();
+      ProTxUpServPayload.prototype.validate.resetHistory();
       payload.toJSON();
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -72,7 +72,7 @@ describe('ProTxUpServPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = ProTxUpServPayload.fromJSON(proUpServTxFixture.getProUpServPayloadJSON());
-      ProTxUpServPayload.prototype.validate.reset();
+      ProTxUpServPayload.prototype.validate.resetHistory();
       payload.toBuffer();
       expect(payload.validate.callCount).to.be.equal(1);
     });

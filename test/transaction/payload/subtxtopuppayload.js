@@ -80,7 +80,7 @@ describe('SubTxTopupPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = SubTxTopupPayload.fromJSON(validSubTxTopupPayloadJSON);
-      SubTxTopupPayload.prototype.validate.reset();
+      SubTxTopupPayload.prototype.validate.resetHistory();
       payload.toJSON();
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -106,7 +106,7 @@ describe('SubTxTopupPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = SubTxTopupPayload.fromJSON(validSubTxTopupPayloadJSON);
-      SubTxTopupPayload.prototype.validate.reset();
+      SubTxTopupPayload.prototype.validate.resetHistory();
       payload.toBuffer();
       expect(payload.validate.callCount).to.be.equal(1);
     });

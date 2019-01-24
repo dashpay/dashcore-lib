@@ -426,7 +426,7 @@ describe('SubTxResetKeyPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = SubTxResetKeyPayload.fromJSON(validSubTxResetKeyPayloadJSON);
-      SubTxResetKeyPayload.prototype.validate.reset();
+      SubTxResetKeyPayload.prototype.validate.resetHistory();
       payload.toJSON({ skipSignature: true });
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -456,7 +456,7 @@ describe('SubTxResetKeyPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = SubTxResetKeyPayload.fromJSON(validSubTxResetKeyPayloadJSONsigned);
-      SubTxResetKeyPayload.prototype.validate.reset();
+      SubTxResetKeyPayload.prototype.validate.resetHistory();
       payload.toJSON();
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -487,7 +487,7 @@ describe('SubTxResetKeyPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = SubTxResetKeyPayload.fromJSON(validSubTxResetKeyPayloadJSON);
-      SubTxResetKeyPayload.prototype.validate.reset();
+      SubTxResetKeyPayload.prototype.validate.resetHistory();
       payload.toBuffer({ skipSignature: true });
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -519,7 +519,7 @@ describe('SubTxResetKeyPayload', function () {
     });
     it('Should call #validate', function () {
       var payload = SubTxResetKeyPayload.fromJSON(validSubTxResetKeyPayloadJSONsigned);
-      SubTxResetKeyPayload.prototype.validate.reset();
+      SubTxResetKeyPayload.prototype.validate.resetHistory();
       payload.toBuffer();
       expect(payload.validate.callCount).to.be.equal(1);
     });

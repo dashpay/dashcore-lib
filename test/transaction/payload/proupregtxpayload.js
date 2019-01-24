@@ -69,7 +69,7 @@ describe('ProUpRegTxPayload', function () {
 
     it('Should call #validate', function () {
       var payload = ProUpRegTxPayload.fromJSON(proUpRegTxFixture.getProUpRegPayloadJSON());
-      ProUpRegTxPayload.prototype.validate.reset();
+      ProUpRegTxPayload.prototype.validate.resetHistory();
       payload.toBuffer();
       expect(payload.validate.callCount).to.be.equal(1);
     });

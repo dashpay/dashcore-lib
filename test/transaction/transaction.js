@@ -278,6 +278,79 @@ describe('Transaction', function() {
     satoshis: 1e8
   };
 
+  var doubleUTxoWith1BTC = [{
+    address: fromAddress,
+    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
+    outputIndex: 1,
+    script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+    satoshis: 1e8
+  }, {
+    address: fromAddress,
+    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58459',
+    outputIndex: 1,
+    script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+    satoshis: 1e8
+  }]
+
+  var quadrupleUTxoWith1BTC = [{
+    address: fromAddress,
+    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
+    outputIndex: 1,
+    script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+    satoshis: 1e8
+  }, {
+    address: fromAddress,
+    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58459',
+    outputIndex: 1,
+    script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+    satoshis: 1e8
+  },{
+    address: fromAddress,
+    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58460',
+    outputIndex: 1,
+    script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+    satoshis: 1e8
+  },{
+    address: fromAddress,
+    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58461',
+    outputIndex: 1,
+    script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+    satoshis: 1e8
+  }];
+  var quintupleUtxoWith1BTC =
+    [{
+      address: fromAddress,
+      txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
+      outputIndex: 1,
+      script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+      satoshis: 1e8
+    }, {
+      address: fromAddress,
+      txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58459',
+      outputIndex: 1,
+      script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+      satoshis: 1e8
+    },{
+      address: fromAddress,
+      txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58460',
+      outputIndex: 1,
+      script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+      satoshis: 1e8
+    },{
+      address: fromAddress,
+      txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58461',
+      outputIndex: 1,
+      script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+      satoshis: 1e8
+    },{
+      address: fromAddress,
+      txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58462',
+      outputIndex: 1,
+      script: Script.buildPublicKeyHashOut(fromAddress).toString(),
+      satoshis: 1e8
+    }];
+
+
   var tenth = 1e7;
   var fourth = 25e6;
   var half = 5e7;
@@ -1672,6 +1745,45 @@ describe('Transaction', function() {
         expect(transaction.extraPayload.verifySignature(randomPubKeyId)).to.be.false;
       });
 
+    });
+
+    describe('isSimpleTransaction', function() {
+      it('Should return true if a transaction is qualified to be a simple transaction', function () {
+        var transaction = new Transaction()
+          .from(simpleUtxoWith1BTC)
+          .to([{address: toAddress, satoshis: 50000}])
+          .fee(15000)
+          .change(changeAddress)
+          .sign(privateKey);
+
+        var transactionDouble = new Transaction()
+          .from(doubleUTxoWith1BTC)
+          .to([{address: toAddress, satoshis: 50000}])
+          .fee(15000)
+          .change(changeAddress)
+          .sign(privateKey);
+
+        var transactionQuadruple = new Transaction()
+          .from(quadrupleUTxoWith1BTC)
+          .to([{address: toAddress, satoshis: 50000}])
+          .fee(15000)
+          .change(changeAddress)
+          .sign(privateKey);
+
+        expect(transaction.isSimpleTransaction()).to.be.true;
+        expect(transactionDouble.isSimpleTransaction()).to.be.true;
+        expect(transactionQuadruple.isSimpleTransaction()).to.be.true;
+      });
+      it('Should return false if a transaction is not qualified to be a simple transaction', function() {
+        var transactionQuintuple = new Transaction()
+          .from(quintupleUtxoWith1BTC)
+          .to([{address: toAddress, satoshis: 50000}])
+          .fee(15000)
+          .change(changeAddress)
+          .sign(privateKey);
+
+        expect(transactionQuintuple.isSimpleTransaction()).to.be.false;
+      });
     });
 
   });

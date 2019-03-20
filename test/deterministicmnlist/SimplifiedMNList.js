@@ -4,6 +4,7 @@ var sinon = require('sinon');
 var SMNListFixture = require('../fixtures/mnList');
 var SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList');
 var constants = require('../../lib/constants');
+var Networks = require('../../lib/networks');
 
 describe('SimplifiedMNList', function () {
   describe('constructor', function () {
@@ -121,7 +122,7 @@ describe('SimplifiedMNList', function () {
         originalMNList.applyDiff(SMNListFixture.getSecondDiff());
         expect(originalMNList.mnList.length).to.be.equal(122);
 
-        var diff = originalMNList.toSimplifiedMNListDiff();
+        var diff = originalMNList.toSimplifiedMNListDiff(Networks.testnet);
 
         var restoredMNList = new SimplifiedMNList(diff);
         expect(restoredMNList.baseBlockHash).to.be.equal(originalMNList.baseBlockHash);

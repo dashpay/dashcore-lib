@@ -3,13 +3,14 @@
 
 var SimplifiedMNListEntry = require('../../lib/deterministicmnlist/SimplifiedMNListEntry');
 var expect = require('chai').expect;
+var Networks = require('../../lib/networks');
 
 var smlEntryJSON = {
   "proRegTxHash": "32e5ad5cf9a06eb13e0f65cb7ecde1a93ef24995d07355fac2ff05ebd5b9ddbf",
   "confirmedHash": "0000001960431ec5a566e69f28ae0f6fa3199bd99ec527cccd02f7541d77300c",
   "service": "95.183.51.146:39999",
   "pubKeyOperator": "1326ddac1044e0219dba7dccf6b43d1deed3e897717ca06757243b02516cfa67e24026f7a317cf575b40c10e7f6bf7f0",
-  "keyIDVoting": "68976be39d5ef1d43761123f497c96cf4226da87",
+  "votingAddress": "yYhmQPak2w5L8KSwVw9R5wpqzPbAJ1fK7v",
   "isValid": true
 };
 var smlEntryHex = "bfddb9d5eb05ffc2fa5573d09549f23ea9e1cd7ecb650f3eb16ea0f95cade5320c30771d54f702cdcc27c59ed99b19a36f0fae289fe666a5c51e43601900000000000000000000000000ffff5fb733929c3f1326ddac1044e0219dba7dccf6b43d1deed3e897717ca06757243b02516cfa67e24026f7a317cf575b40c10e7f6bf7f087da2642cf967c493f126137d4f15e9de36b976801";
@@ -20,7 +21,7 @@ var smlEntryWithoutAddress = {
   "confirmedHash": "000000000ca93e850827b361743c25c8508e6e42efaaa331cc1b54326d9fd179",
   "service": "[0:0:0:0:0:0:0:0]:0",
   "pubKeyOperator": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-  "keyIDVoting": "428c680677c45b1c2a50a2cca57e0ad0409f5d59",
+  "votingAddress": "yUTy9Fb2ULXdgyqYtMMbuUWpFLaDgUqT3f",
   "isValid": false
 };
 var smlEntryWithoutAddressHex = '6f8a813df204873df003d6efc44e1906eaf6180a762513b1c91252826ce0591679d19f6d32541bcc31a3aaef426e8e50c8253c7461b32708853ea90c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000595d9f40d00a7ea5cca2502a1c5bc47706688c4200';
@@ -33,30 +34,30 @@ describe('SimplifiedMNListEntry', function () {
       expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
     });
     it('Should create an entry object from a buffer', function () {
-      var entry = new SimplifiedMNListEntry(Buffer.from(smlEntryHex, 'hex'));
+      var entry = new SimplifiedMNListEntry(Buffer.from(smlEntryHex, 'hex'), Networks.testnet);
       expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
     });
     it('Should create an entry object from a hex string', function () {
-      var entry = new SimplifiedMNListEntry(smlEntryHex);
+      var entry = new SimplifiedMNListEntry(smlEntryHex, Networks.testnet);
       expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
     });
     it('Should copy an instance if SimplifiedMNListEntry is passed', function () {
       var entry1 = new SimplifiedMNListEntry(smlEntryJSON);
       var entry2 = new SimplifiedMNListEntry(entry1);
-      entry1.keyIDVoting = 'something';
+      entry1.votingAddress = 'something';
       expect(entry2.toObject()).to.be.deep.equal(smlEntryJSON);
-      expect(entry1.keyIDVoting).to.be.equal('something');
-      expect(entry2.keyIDVoting).to.be.equal('68976be39d5ef1d43761123f497c96cf4226da87');
+      expect(entry1.votingAddress).to.be.equal('something');
+      expect(entry2.votingAddress).to.be.equal('yYhmQPak2w5L8KSwVw9R5wpqzPbAJ1fK7v');
     });
   });
   describe('fromBuffer', function () {
     it('Should be able to parse data from a buffer when ip address is present', function () {
-      var entry = SimplifiedMNListEntry.fromBuffer(Buffer.from(smlEntryHex, 'hex'));
+      var entry = SimplifiedMNListEntry.fromBuffer(Buffer.from(smlEntryHex, 'hex'), Networks.testnet);
       var entryJSON = entry.toObject();
       expect(entryJSON).to.be.deep.equal(smlEntryJSON);
     });
     it('Should be able to parse data from a buffer when ip address is not present', function () {
-      var entry = SimplifiedMNListEntry.fromBuffer(Buffer.from(smlEntryHex, 'hex'));
+      var entry = SimplifiedMNListEntry.fromBuffer(Buffer.from(smlEntryHex, 'hex'), Networks.testnet);
       var entryJSON = entry.toObject();
       expect(entryJSON).to.be.deep.equal(smlEntryJSON);
     });
@@ -96,14 +97,14 @@ describe('SimplifiedMNListEntry', function () {
   });
   describe('toObject', function () {
     it('Should serialize SMLEntry to JSON object', function () {
-      var entry = new SimplifiedMNListEntry(smlEntryHex);
+      var entry = new SimplifiedMNListEntry(smlEntryHex, Networks.testnet);
 
       expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
     });
   });
   describe('fromHexString', function () {
     it('Should be able to create an entry from a hex string', function () {
-      var entry = SimplifiedMNListEntry.fromHexString(smlEntryHex);
+      var entry = SimplifiedMNListEntry.fromHexString(smlEntryHex, Networks.testnet);
 
       expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
     });

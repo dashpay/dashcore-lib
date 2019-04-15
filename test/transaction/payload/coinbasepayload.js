@@ -8,16 +8,18 @@ var DashcoreLib = require('../../../index');
 
 var CoinbasePayload = DashcoreLib.Transaction.Payload.CoinbasePayload;
 
-var merkleRootMNList = 'e83c76065797d4542f1cd02e00d02093bea6fb53f5ad6aaa160fd3ccb30001b9';
+var merkleRootMNList = 'a1d4f77f5c85a9d56293878edda45ba6fb3e433e6b9bc278c0f4c5799748b975';
+var merkleRootQuorums = '9491099bb93b789d8628acce8f8a84c0f4af8196d3dd6c2427aca0ee702fcc90';
 
 var validCoinbasePayloadJSON = {
-  version: 10,
-  height: 20,
-  merkleRootMNList: merkleRootMNList
+  version: 2,
+  height: 80672,
+  merkleRootMNList: merkleRootMNList,
+  merkleRootQuorums: merkleRootQuorums
 };
 // Contains same data as JSON above
-// 0a00 is 16-bit unsigned 10, 14000000 is 32 bit unsigned 20, everything else is a hash.
-var validCoinbasePayloadHexString = '0a0014000000b90100b3ccd30f16aa6aadf553fba6be9320d0002ed01c2f54d4975706763ce8';
+// 0200 is 16-bit unsigned 2, 203b0100 is 32 bit unsigned 80672, everything else is a hash.
+var validCoinbasePayloadHexString = '0200203b010075b9489779c5f4c078c29b6b3e433efba65ba4dd8e879362d5a9855c7ff7d4a190cc2f70eea0ac27246cddd39681aff4c0848a8fceac28869d783bb99b099194';
 var validCoinbasePayloadBuffer = Buffer.from(validCoinbasePayloadHexString, 'hex');
 var validCoinbasePayload = CoinbasePayload.fromJSON(validCoinbasePayloadJSON);
 
@@ -37,9 +39,10 @@ describe('CoinbasePayload', function () {
       var payload = CoinbasePayload.fromBuffer(validCoinbasePayloadBuffer);
 
       expect(payload).to.be.an.instanceOf(CoinbasePayload);
-      expect(payload.version).to.be.equal(10);
-      expect(payload.height).to.be.equal(20);
+      expect(payload.version).to.be.equal(2);
+      expect(payload.height).to.be.equal(80672);
       expect(payload.merkleRootMNList).to.be.equal(merkleRootMNList);
+      expect(payload.merkleRootQuorums).to.be.equal(merkleRootQuorums);
       expect(payload.validate.callCount).to.be.equal(1);
     });
 
@@ -62,8 +65,8 @@ describe('CoinbasePayload', function () {
       var payload = CoinbasePayload.fromJSON(validCoinbasePayloadJSON);
 
       expect(payload).to.be.an.instanceOf(CoinbasePayload);
-      expect(payload.version).to.be.equal(10);
-      expect(payload.height).to.be.equal(20);
+      expect(payload.version).to.be.equal(2);
+      expect(payload.height).to.be.equal(80672);
       expect(payload.merkleRootMNList).to.be.equal(merkleRootMNList);
       expect(payload.validate.callCount).to.be.equal(1);
     });
@@ -173,6 +176,41 @@ describe('CoinbasePayload', function () {
         payload.validate()
       }).not.to.throw;
     });
+      it('Should allow only sha256 hash as merkleRootQuorums', function () {
+        var payload = validCoinbasePayload.copy();
+
+        if (payload.version >= 2) {
+          payload.merkleRootQuorums = -1;
+
+          expect(function () {
+            payload.validate()
+          }).to.throw('Invalid Argument: expect merkleRootQuorums to be a hex string');
+
+          payload.merkleRootQuorums = 1.5;
+
+          expect(function () {
+            payload.validate()
+          }).to.throw('Invalid Argument: expect merkleRootQuorums to be a hex string');
+
+          payload.merkleRootQuorums = '12';
+
+          expect(function () {
+            payload.validate()
+          }).to.throw('Invalid Argument: Invalid merkleRootQuorums size');
+
+          payload.merkleRootQuorums = Buffer.from('0a0f', 'hex');
+
+          expect(function () {
+            payload.validate()
+          }).to.throw('Invalid Argument: expect merkleRootQuorums to be a hex string');
+
+          payload.merkleRootQuorums = merkleRootMNList;
+
+          expect(function () {
+            payload.validate()
+          }).not.to.throw;
+        }
+      });
   });
 
   describe('#toJSON', function () {

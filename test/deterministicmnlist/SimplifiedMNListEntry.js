@@ -125,4 +125,11 @@ describe('SimplifiedMNListEntry', function () {
       expect(entry.calculateHash().toString('hex')).to.be.equal(smlEntryWithoutAddressHash);
     });
   });
+  describe('getIp', function () {
+    it('Should get the ip address', function() {
+      var entry = new SimplifiedMNListEntry(smlEntryJSON);
+      var ip = entry.getIp();
+      expect(ip).to.be.equal('95.183.51.146');
+    });
+  });
 });

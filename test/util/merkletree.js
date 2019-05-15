@@ -56,23 +56,22 @@ describe('merkleTree', function () {
     });
   });
   describe('calculateTreeWidth', function () {
-    it('Should calculate tree width properly', function () {
-      var width = calculateTreeWidth(3, 0);
-      expect(width).to.be.equal(3);
-      width = calculateTreeWidth(3, 1);
-      expect(width).to.be.equal(2);
-      width = calculateTreeWidth(3, 2);
-      expect(width).to.be.equal(1);
-      width = calculateTreeWidth(10, 0);
-      expect(width).to.be.equal(10);
-      width = calculateTreeWidth(10, 1);
-      expect(width).to.be.equal(5);
-      width = calculateTreeWidth(10, 2);
-      expect(width).to.be.equal(3);
-      width = calculateTreeWidth(10, 3);
-      expect(width).to.be.equal(2);
-      width = calculateTreeWidth(10, 4);
-      expect(width).to.be.equal(1);
+    var calculateTreeWidthTestCases = [
+      {elementsCount: 10, height: 0, expectedWidth: 10},
+      {elementsCount: 10, height: 1, expectedWidth: 5},
+      {elementsCount: 10, height: 2, expectedWidth: 3},
+      {elementsCount: 10, height: 3, expectedWidth: 2},
+      {elementsCount: 10, height: 4, expectedWidth: 1},
+      {elementsCount: 10, height: 5, expectedWidth: 1},
+      {elementsCount: 10, height: 6, expectedWidth: 1}
+    ];
+    calculateTreeWidthTestCases.forEach(function (args) {
+      var testCaseName = 'For tree with ' + args.elementsCount + ' elements, width at height '
+        + args.height + ' should be equal to ' + args.expectedWidth;
+      it(testCaseName, function () {
+        var width = calculateTreeWidth(args.elementsCount, args.height);
+        expect(width).to.be.equal(args.expectedWidth);
+      });
     });
   });
   describe('calculateHashAtHeight', function () {

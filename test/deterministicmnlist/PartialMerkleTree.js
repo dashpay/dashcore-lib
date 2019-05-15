@@ -30,8 +30,8 @@ describe('PartialMerkleTree', function () {
         var partialTree = PartialMerkleTree.build(testCase.transactionHashes, testCase.matches);
 
         expect(partialTree.totalTransactions).to.be.equal(testCase.expectedPartialTree.totalTransactions);
-        expect(partialTree.merkleHashes).to.be.equal(testCase.expectedPartialTree.merkleHashes);
-        expect(partialTree.merkleFlags).to.be.equal(testCase.expectedPartialTree.merkleFlags);
+        expect(partialTree.merkleHashes).to.be.depp.equal(testCase.expectedPartialTree.merkleHashes);
+        expect(partialTree.merkleFlags).to.be.deep.equal(testCase.expectedPartialTree.merkleFlags);
       });
     });
     it('Should construct the same partial merkle tree as dashcore', function () {

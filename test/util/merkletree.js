@@ -81,9 +81,13 @@ describe('merkleTree', function () {
       // 3 on the level 1, 2 on the level 2, and 1 on the level 3.
       // This means, that 0 hash on the level 1 should be equal to hash of the first two
       // hashes on the level 0, meaning:
-      // 23dbf3cce3a67c80aca61592b210ea63191b8fe3ad0368583016d8a6622bdf4f =
-      // hash(bf3ae3deccfdee0ebf03fc924aea3dad4b1068acdd27e98d9e6cc9a140e589d1 +
-      // 9ecb5c68a93c51e8db403f97b83a910edf0878c70b7d7ee02422c0f7c7c9885f);
+      // 5f616a1319f9d10fc444a5fabd3fc4e60161f5b63471bdddeca1e8a25b833db2 =
+      // hash(reverse(bf3ae3deccfdee0ebf03fc924aea3dad4b1068acdd27e98d9e6cc9a140e589d1) +
+      // reverse(9ecb5c68a93c51e8db403f97b83a910edf0878c70b7d7ee02422c0f7c7c9885f));
+      //
+      // Note: Original bitcoin's core has a very strange merkle algorithm, where all
+      // hashes always get reversed, so result would be a little bit different from
+      // what may be expected
       var hashes = [
         'bf3ae3deccfdee0ebf03fc924aea3dad4b1068acdd27e98d9e6cc9a140e589d1',
         '9ecb5c68a93c51e8db403f97b83a910edf0878c70b7d7ee02422c0f7c7c9885f',
@@ -92,28 +96,13 @@ describe('merkleTree', function () {
         'f2f8af2e212a3db4b88dc59b2271f9600376d126bf17d4f3c413cf22586c3457',
         '0fe0981234cf8077f113327052876bd9f997965f9012b0723dd891903a27f7a1'
       ].map(function (hash) { return Buffer.from(hash, 'hex'); });
-      var expectedLevel1 = [
-        '23dbf3cce3a67c80aca61592b210ea63191b8fe3ad0368583016d8a6622bdf4f',
-        'deb86b0ba69692110bfd4d932597b1957dd09d42325e898d45f4eea36338dd00',
-        'f5b3ac9195d345e1d7a88a7ee21a7b98b2c20c59d086575d839c24a36171469f'
-      ];
-      // Not that because level1 has odd count of nodes, the last element of the next level
-      // will be the hash of the last element concatenated with itself, meaning:
-      // 551dab9393d103b5024f1fc0a08a3d34f12456560910c8f1a7223e92e8a5e860 =
-      // hash(f5b3ac9195d345e1d7a88a7ee21a7b98b2c20c59d086575d839c24a36171469f +
-      // f5b3ac9195d345e1d7a88a7ee21a7b98b2c20c59d086575d839c24a36171469f);
-      var expectedLevel2 = [
-        '7adb5cef319d9355e98505676d52f52590cfc2218dc3994afa617e067920ab05',
-        '551dab9393d103b5024f1fc0a08a3d34f12456560910c8f1a7223e92e8a5e860'
-      ];
-      var expectedRoot = 'b431c3eb9f7072910e2a7b9e33c45ea12ecc33647eb25c4c69cf24af93e0d589';
 
-      var height1position0hash = calculateHashAtHeight(hashes.length, 1, 0, hashes).toString('hex');
-      expect(height1position0hash).to.be.equal(expectedLevel1[0]);
-      var height2position2hash = calculateHashAtHeight(hashes.length, 2, 1, hashes).toString('hex');
-      expect(height2position2hash).to.be.equal(expectedLevel2[1]);
-      var actualRoot = calculateHashAtHeight(hashes.length, 3, 0, hashes).toString('hex');
-      expect(actualRoot).to.be.equal(expectedRoot);
+      var height1position0hash = calculateHashAtHeight(1, 0, hashes).toString('hex');
+      expect(height1position0hash).to.be.equal('5f616a1319f9d10fc444a5fabd3fc4e60161f5b63471bdddeca1e8a25b833db2');
+      var height2position2hash = calculateHashAtHeight(2, 1, hashes).toString('hex');
+      expect(height2position2hash).to.be.equal('82734783f7f853307a856f23566c1907d734905aa8021c6621e46c2fc810e0dc');
+      var actualRoot = calculateHashAtHeight(3, 0, hashes).toString('hex');
+      expect(actualRoot).to.be.equal('5e91c568f9812b9efbaf33c9ceceb32b1f947ef7e749e73e698257a77acb963e');
     });
   });
 });

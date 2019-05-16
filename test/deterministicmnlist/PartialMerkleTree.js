@@ -27,7 +27,10 @@ describe('PartialMerkleTree', function () {
 
     testCases.forEach(function(testCase, index) {
       it('Should construct the same partial merkle tree as dashcore, case #' + (index + 1), function () {
-        var partialTree = PartialMerkleTree.build(testCase.transactionHashes, testCase.matches);
+        var partialTree = new PartialMerkleTree({
+          transactionHashes: testCase.transactionHashes,
+          filterMatches: testCase.matches
+        });
 
         expect(partialTree.totalTransactions).to.be.equal(testCase.expectedPartialTree.totalTransactions);
         expect(partialTree.merkleHashes).to.be.deep.equal(testCase.expectedPartialTree.merkleHashes);

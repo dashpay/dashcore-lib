@@ -53,6 +53,32 @@ describe('Trigger', function() {
     }).to.throw(errors.GovObject.Trigger.invalidEBH);
   });
 
+  // test for mismatched number of addresses / amounts / hashes
+  it('should return error if mismatched addresses / amounts / hashes', function() {
+    var trigger = new Trigger();
+    trigger.network = 'testnet';
+    trigger.event_block_height = 110976;
+    trigger.payment_addresses = 'yXGeNPQXYFXhLAN1ZKrAjxzzBnZ2JZNKnh';
+    trigger.payment_amounts = '10.00000000|12.00000000';
+    trigger.proposal_hashes = '20596d41ac6c9f6bfb9a02e43cd77ef1ed1a0e9d70857e5110e6aa9de0ce12fb|6767927761890eefaa6f80542aad6981fb966eed7c1deaf616464a739d81b8d7';
+    trigger.type = 2;
+    expect(function() {
+      return trigger.serialize();
+    }).to.throw(errors.GovObject.Trigger.fieldsMismatch);
+
+    trigger.payment_addresses = 'yXGeNPQXYFXhLAN1ZKrAjxzzBnZ2JZNKnh|yXBj864aMJ4bNM3uTWrs6ebXdRBsTbeA9y';
+    trigger.payment_amounts = '10.00000000';
+    expect(function() {
+      return trigger.serialize();
+    }).to.throw(errors.GovObject.Trigger.fieldsMismatch);
+
+    trigger.payment_amounts = '10.00000000|12.00000000';
+    trigger.proposal_hashes = '6767927761890eefaa6f80542aad6981fb966eed7c1deaf616464a739d81b8d7';
+    expect(function() {
+      return trigger.serialize();
+    }).to.throw(errors.GovObject.Trigger.fieldsMismatch);
+  });
+
   it('should create a new trigger from a hex string', function() {
     var Trigger = bitcore.GovObject.Trigger;
     var trigger = new Trigger(expectedHex);

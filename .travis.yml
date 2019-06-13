@@ -1,5 +1,7 @@
 language: node_js
 sudo: required
+services:
+  - xvfb
 addons:
  chrome: stable
 branches:
@@ -10,7 +12,6 @@ node_js:
 - '8'
 before_install:
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
 install:
   - npm install

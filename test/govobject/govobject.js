@@ -319,7 +319,7 @@ describe('GovObject', function(){
       new GovObject(govObject.toBuffer()).should.not.equal(govObject);
 
       var reader = new BufferReader(govObject.toBuffer());
-      var fromBuff =govFromBuffer.fromBufferReader(reader);
+      var fromBuff = govFromBuffer.fromBufferReader(reader);
       fromBuff.should.deep.equal(govObject);
       fromBuff.should.not.equal(govObject);
     })

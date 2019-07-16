@@ -3,7 +3,10 @@
 
 'use strict';
 
-var should = require('chai').should();
+var chai = require('chai');
+
+var should = chai.should();
+var expect = chai.expect;
 
 var bitcore = require('../..');
 var MerkleBlock = bitcore.MerkleBlock;
@@ -202,6 +205,54 @@ describe('MerkleBlock', function() {
     });
 
   });
+
+  describe('getMatchedTransactionHashes', function () {
+    var getMatchedTransactionsTestCases = [
+      {
+        filterMatches: [true, false, false, false, false],
+        expectedMatchedTransactionHashes: [
+          '7622a8766251223eecf7820bbb116f4889c48cc9942d08f4687033e8f59431ab',
+        ]
+      },
+      {
+        filterMatches: [true, false, true, false, false],
+        expectedMatchedTransactionHashes: [
+          '7622a8766251223eecf7820bbb116f4889c48cc9942d08f4687033e8f59431ab',
+          'a13000f587c512c01bc53f844966b5c72622098031431eb919e2b82507215391'
+        ]
+      },
+      {
+        filterMatches: [false, false, false, false, true],
+        expectedMatchedTransactionHashes: [
+          '7262476912a96b9a6226cfa3a8f231ba3e2b1f75c396e88367e532c79c43c95b'
+        ]
+      }
+    ];
+    getMatchedTransactionsTestCases.forEach(function(testCase, index) {
+      it('should return an array of matched transactions, case #' + index, function () {
+        var transactionHashHexes = [
+          '7622a8766251223eecf7820bbb116f4889c48cc9942d08f4687033e8f59431ab',
+          '94a469e14ef925159b1154081ace607c7b0f4d342d3e62c5fef0d3ce56dbe7d4',
+          'a13000f587c512c01bc53f844966b5c72622098031431eb919e2b82507215391',
+          '3f3517ee8fa95621fe8abdd81c1e0dfb50e21dd4c5a3c01eee2c47cf664821b6',
+          '7262476912a96b9a6226cfa3a8f231ba3e2b1f75c396e88367e532c79c43c95b'
+        ];
+        var transactionHashes = transactionHashHexes.map(function (hash) {
+          return Buffer.from(hash, 'hex');
+        });
+
+        var merkleBlock = MerkleBlock.build(
+          data.JSON[1].header,
+          transactionHashes,
+          testCase.filterMatches
+        );
+
+        var actualMatchedTransactionHashes = merkleBlock.getMatchedTransactionHashes();
+        expect(actualMatchedTransactionHashes.length).to.be.equal(testCase.expectedMatchedTransactionHashes.length);
+        expect(actualMatchedTransactionHashes).to.be.deep.equal(testCase.expectedMatchedTransactionHashes);
+      });
+    });
+  })
 
 });
 

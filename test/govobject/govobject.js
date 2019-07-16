@@ -300,6 +300,30 @@ describe('GovObject', function(){
 
     })
 
+    it('should create a trigger govObject from a buffer', () => {
+      var govObject = new GovObject;
+      var jsonTrigger = {
+        event_block_height: 110976,
+        network: 'testnet',
+        payment_addresses: 'yXGeNPQXYFXhLAN1ZKrAjxzzBnZ2JZNKnh|yXBj864aMJ4bNM3uTWrs6ebXdRBsTbeA9y',
+        payment_amounts: '10.00000000|12.00000000',
+        proposal_hashes: '20596d41ac6c9f6bfb9a02e43cd77ef1ed1a0e9d70857e5110e6aa9de0ce12fb|6767927761890eefaa6f80542aad6981fb966eed7c1deaf616464a739d81b8d7',
+        type: 2,
+      };
+      var govObject = govObject.fromObject(jsonTrigger);
+
+      var govFromBuffer = new GovObject;
+      govFromBuffer.fromBuffer(govObject.toBuffer()).should.deep.equal(govObject);
+      govFromBuffer.fromBuffer(govObject.toBuffer()).should.not.equal(govObject);
+      new GovObject(govObject.toBuffer()).should.deep.equal(govObject);
+      new GovObject(govObject.toBuffer()).should.not.equal(govObject);
+
+      var reader = new BufferReader(govObject.toBuffer());
+      var fromBuff = govFromBuffer.fromBufferReader(reader);
+      fromBuff.should.deep.equal(govObject);
+      fromBuff.should.not.equal(govObject);
+    })
+
   });
 });
 var expectedHex = "7b22656e645f65706f6368223a313736303035343430302c226e616d65223a225465737450726f706f73616c222c227061796d656e745f61646472657373223a22795847654e505158594658684c414e315a4b72416a787a7a426e5a324a5a4e4b6e68222c227061796d656e745f616d6f756e74223a31302c2273746172745f65706f6368223a313434343433353230302c2274797065223a312c2275726c223a22687474703a2f2f7777772e646173682e6f7267227d";

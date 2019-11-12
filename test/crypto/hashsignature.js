@@ -1,3 +1,4 @@
+/* eslint-disable */
 var chai = require('chai');
 var HashSigner = require('../../lib/crypto/hashsignature');
 var PrivateKey = require('../../lib/privatekey');

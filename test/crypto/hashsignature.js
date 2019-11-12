@@ -22,6 +22,7 @@ describe('HashSigner', function() {
 
       expect(isVerified).to.be.true;
     });
+
     it('Signature should not be verifiable against different data', function () {
       var data = Buffer.from('fafafa', 'hex');
       var incorrectData = Buffer.from('fefefe', 'hex');
@@ -31,6 +32,7 @@ describe('HashSigner', function() {
 
       expect(isVerified).to.be.false;
     });
+
     it('Signature should not be verifiable against different publicKeyId', function () {
       var data = Buffer.from('fafafa', 'hex');
       var incorrectPubKeyId = new PrivateKey().publicKey._getID();

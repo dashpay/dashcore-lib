@@ -31,6 +31,9 @@ var proUpRegTxFixture = require('../fixtures/payload/proupregtxpayload');
 var proUpRevTxFixture = require('../fixtures/payload/prouprevtxpayload');
 var proUpServFixture = require('../fixtures/payload/proupservpayload');
 
+var WrongOutPointError = errors.WrongOutPointError;
+var WrongPublicKeyHashError = errors.WrongPublicKeyHashError;
+
 describe('Transaction', function() {
 
   it('should serialize and deserialize correctly a given transaction', function() {
@@ -1551,7 +1554,7 @@ describe('Transaction', function() {
           )
           .addBurnOutput(10000, Buffer.alloc(30))
           .to("yT9Lms2ATYLd3QLA4pVpg3mQ5KiHB9Dp1b", 34518076547 - 11000);
-      }).to.throw('Expect public key hash to be 20 bytes long');
+      }).to.throw(WrongPublicKeyHashError, 'Expect public key hash to be 20 bytes long');
     });
   });
 
@@ -1604,7 +1607,7 @@ describe('Transaction', function() {
           .addBurnOutput(10000, Buffer.from(publicKeyHash, 'hex'))
           .to("yT9Lms2ATYLd3QLA4pVpg3mQ5KiHB9Dp1b", 34518076547 - 11000)
           .getOutPointBuffer(10);
-      }).to.throw("There's no output with such index in the transaction");
+      }).to.throw(WrongOutPointError, "There's no output with such index in the transaction");
     });
   });
 
@@ -1624,7 +1627,7 @@ describe('Transaction', function() {
     it('Should throw an error if the outpoint buffer has the wrong size ', function () {
       expect(function () {
         Transaction.parseOutPointBuffer(Buffer.alloc(25));
-      }).to.throw('OutPoint buffer length expected to be 36 bytes');
+      }).to.throw(WrongOutPointError, 'OutPoint buffer length expected to be 36 bytes');
     });
   });
 

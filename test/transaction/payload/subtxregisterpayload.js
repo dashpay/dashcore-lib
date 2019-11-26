@@ -209,7 +209,7 @@ describe('SubTxRegisterPayload', function() {
       }).to.throw('Invalid Argument: expect pubKeyId to be a Buffer but got undefined');
     });
   });
-  describe('#verifySignature', function () {
+  describe('#verifyHashSignature', function () {
     it('Should verify signature if pubKeyId is a Buffer', function () {
       var payload = new SubTxRegisterPayload()
         .setUserName('test')

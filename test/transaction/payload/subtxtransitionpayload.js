@@ -247,7 +247,7 @@ describe('SubTxTransitionPayload', function() {
       }).to.throw('Invalid Argument: Invalid regTxId size');
     });
   });
-  describe('#verifySignature', function () {
+  describe('#verifyHashSignature', function () {
     it('Should verify signature if pubKeyId is a Buffer', function () {
       var payload = validPayloadFixture.copy().sign(privateKey);
       expect(payload.verifySignature(pubKeyId)).to.be.true;

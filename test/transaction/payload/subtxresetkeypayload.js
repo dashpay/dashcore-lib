@@ -370,7 +370,7 @@ describe('SubTxResetKeyPayload', function () {
       }).to.throw('Invalid Argument for creditFee, expected number but got undefined');
     });
   });
-  describe('#verifySignature', function () {
+  describe('#verifyHashSignature', function () {
     it('Should verify signature if pubKeyId is a Buffer', function () {
       var payload = new SubTxResetKeyPayload()
         .setRegTxHash(subTxHash)

@@ -402,7 +402,7 @@ describe('Transaction', function() {
           return tx.isFullySigned();
         }).to.throw(errors.Transaction.UnableToVerifySignature);
       });
-      it('fails when Inputs are not subclassed and verifySignature is called', function() {
+      it('fails when Inputs are not subclassed and verifyHashSignature is called', function() {
         var tx = new Transaction(tx_1_hex);
         expect(function() {
           return tx.isValidSignature({

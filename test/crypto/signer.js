@@ -1,13 +1,13 @@
 /* eslint-disable */
 var chai = require('chai');
-var HashSigner = require('../../lib/crypto/hashsignature');
+var Signer = require('../../lib/crypto/signer');
 var PrivateKey = require('../../lib/privatekey');
 var PublicKey = require('../../lib/publickey');
 
 var expect = chai.expect;
 
 describe('HashSigner', function() {
-  describe('signData', function () {
+  describe('sign', function () {
     var privateKeyString;
     var publicKeyString;
     var publicKey;
@@ -21,11 +21,11 @@ describe('HashSigner', function() {
     it('Should sign and verify the data', function () {
       var data = Buffer.from('fafafa', 'hex');
 
-      var signature = HashSigner.signData(data, privateKeyString);
+      var signature = Signer.sign(data, privateKeyString);
 
       expect(signature).to.be.an.instanceOf(Buffer);
 
-      var isVerified = HashSigner.verifyDataSignature(data, signature, publicKey);
+      var isVerified = Signer.verifySignature(data, signature, publicKey);
 
       expect(isVerified).to.be.true;
     });
@@ -34,8 +34,8 @@ describe('HashSigner', function() {
       var data = Buffer.from('fafafa', 'hex');
       var incorrectData = Buffer.from('fefefe', 'hex');
 
-      var signature = HashSigner.signData(data, privateKeyString);
-      var isVerified = HashSigner.verifyDataSignature(incorrectData, signature, publicKey);
+      var signature = Signer.sign(data, privateKeyString);
+      var isVerified = Signer.verifySignature(incorrectData, signature, publicKey);
 
       expect(isVerified).to.be.false;
     });
@@ -44,13 +44,13 @@ describe('HashSigner', function() {
       var data = Buffer.from('fafafa', 'hex');
       var incorrectPubKey = new PrivateKey().toPublicKey();
 
-      var signature = HashSigner.signData(data, privateKeyString);
-      var isVerified = HashSigner.verifyDataSignature(data, signature, incorrectPubKey);
+      var signature = Signer.sign(data, privateKeyString);
+      var isVerified = Signer.verifySignature(data, signature, incorrectPubKey);
 
       expect(isVerified).to.be.false;
     });
   });
-  describe('verifyDataSignature', function() {
+  describe('verifySignature', function() {
     var privateKey;
     var pkBuffer;
     var pkHex;
@@ -68,9 +68,9 @@ describe('HashSigner', function() {
       pkBuffer = privateKey.toBuffer();
       pkHex = privateKey.toString();
       messageBuffer = Buffer.from("Hello world!");
-      compactSig = HashSigner.signData(messageBuffer, privateKey);
-      sig2 = HashSigner.signData(messageBuffer, new PrivateKey(pkBuffer));
-      sig3 = HashSigner.signData(messageBuffer, new PrivateKey(pkHex));
+      compactSig = Signer.sign(messageBuffer, privateKey);
+      sig2 = Signer.sign(messageBuffer, new PrivateKey(pkBuffer));
+      sig3 = Signer.sign(messageBuffer, new PrivateKey(pkHex));
       pubKey = privateKey.toPublicKey();
       uncompressedPubKey = new PublicKey({
         x: pubKey.toObject().x,
@@ -88,11 +88,11 @@ describe('HashSigner', function() {
       expect(uncompressedPubKey.toObject().compressed).to.be.false;
       expect(uncompressedPubKey.toString().length).to.be.equal(130);
 
-      var verified = HashSigner.verifyDataSignature(messageBuffer, compactSig, uncompressedPubKey);
+      var verified = Signer.verifySignature(messageBuffer, compactSig, uncompressedPubKey);
       expect(verified).to.be.true;
-      verified = HashSigner.verifyDataSignature(messageBuffer, sig2, uncompressedPubKey);
+      verified = Signer.verifySignature(messageBuffer, sig2, uncompressedPubKey);
       expect(verified).to.be.true;
-      verified = HashSigner.verifyDataSignature(messageBuffer, sig3, uncompressedPubKey);
+      verified = Signer.verifySignature(messageBuffer, sig3, uncompressedPubKey);
       expect(verified).to.be.true;
     });
 
@@ -100,18 +100,18 @@ describe('HashSigner', function() {
       expect(compressedPubKey.toObject().compressed).to.be.true;
       expect(compressedPubKey.toString().length).to.be.equal(66);
 
-      var verified = HashSigner.verifyDataSignature(messageBuffer, compactSig, compressedPubKey);
+      var verified = Signer.verifySignature(messageBuffer, compactSig, compressedPubKey);
       expect(verified).to.be.true;
-      verified = HashSigner.verifyDataSignature(messageBuffer, sig2, compressedPubKey);
+      verified = Signer.verifySignature(messageBuffer, sig2, compressedPubKey);
       expect(verified).to.be.true;
-      verified = HashSigner.verifyDataSignature(messageBuffer, sig3, compressedPubKey);
+      verified = Signer.verifySignature(messageBuffer, sig3, compressedPubKey);
       expect(verified).to.be.true;
     });
 
     it("Shouldn't verify against another pubkey", function () {
       var differentPubKey = new PrivateKey().toPublicKey();
 
-      var verified = HashSigner.verifyDataSignature(messageBuffer, compactSig, differentPubKey);
+      var verified = Signer.verifySignature(messageBuffer, compactSig, differentPubKey);
       expect(verified).to.be.false;
     });
   });

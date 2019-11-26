@@ -18,7 +18,7 @@ describe('HashSigner', function() {
       publicKey = new PublicKey(publicKeyString);
     });
 
-    it('Should sign and verify the data', function () {
+    it('should sign and verify the data', function () {
       var data = Buffer.from('fafafa', 'hex');
 
       var signature = Signer.sign(data, privateKeyString);
@@ -84,7 +84,7 @@ describe('HashSigner', function() {
       });
     });
 
-    it('Should verify against signature with an uncompressed key', function () {
+    it('should verify against signature with an uncompressed key', function () {
       expect(uncompressedPubKey.toObject().compressed).to.be.false;
       expect(uncompressedPubKey.toString().length).to.be.equal(130);
 
@@ -96,7 +96,7 @@ describe('HashSigner', function() {
       expect(verified).to.be.true;
     });
 
-    it('Should verify against signature with a compressed key', function () {
+    it('should verify against signature with a compressed key', function () {
       expect(compressedPubKey.toObject().compressed).to.be.true;
       expect(compressedPubKey.toString().length).to.be.equal(66);
 
@@ -108,7 +108,7 @@ describe('HashSigner', function() {
       expect(verified).to.be.true;
     });
 
-    it("Shouldn't verify against another pubkey", function () {
+    it("shouldn't verify against another pubkey", function () {
       var differentPubKey = new PrivateKey().toPublicKey();
 
       var verified = Signer.verifySignature(messageBuffer, compactSig, differentPubKey);

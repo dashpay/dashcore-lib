@@ -31,6 +31,9 @@ var proUpRegTxFixture = require('../fixtures/payload/proupregtxpayload');
 var proUpRevTxFixture = require('../fixtures/payload/prouprevtxpayload');
 var proUpServFixture = require('../fixtures/payload/proupservpayload');
 
+var WrongOutPointError = errors.WrongOutPointError;
+var WrongPublicKeyHashError = errors.WrongPublicKeyHashError;
+
 describe('Transaction', function() {
 
   it('should serialize and deserialize correctly a given transaction', function() {
@@ -1505,6 +1508,126 @@ describe('Transaction', function() {
       expect(function () {
         var transaction = new Transaction().setType(123367);
       }).to.throw('Unknown special transaction type');
+    });
+  });
+
+  describe('addBurnOutput', function () {
+
+    it('Should add burn output with a public key hash', function () {
+      var publicKeyHash = 'b8e2d839dd21088b78bebfea3e3e632181197982';
+
+      var transaction = new Transaction()
+        .from(  {
+            "txid": "51c8cc5d5f375983eb37891d66da4656aa2617ef3f82073a34dc7a76331486ff",
+            "vout": 0,
+            "address": "yT9Lms2ATYLd3QLA4pVpg3mQ5KiHB9Dp1b",
+            "scriptPubKey": "210316dd99f0c194577d9f60ebfc889bdaf013f7bfd990acdf71b26d5eef14597c96ac",
+            "amount": 345.18076547,
+            "confirmations": 337,
+            "spendable": true,
+            "solvable": true,
+            "ps_rounds": -2
+          }
+        )
+        .addBurnOutput(10000, Buffer.from(publicKeyHash, 'hex'))
+        .to("yT9Lms2ATYLd3QLA4pVpg3mQ5KiHB9Dp1b", 34518076547 - 11000);
+
+      var restoredPubKey = transaction.outputs[0].script.chunks[1].buf.toString('hex');
+      expect(transaction.outputs[0].satoshis).to.be.equal(10000);
+      expect(restoredPubKey).to.be.equal(publicKeyHash);
+    });
+
+    it("Should throw an error if second param is not a hash", function () {
+      expect(function() {
+        new Transaction()
+          .from(  {
+              "txid": "51c8cc5d5f375983eb37891d66da4656aa2617ef3f82073a34dc7a76331486ff",
+              "vout": 0,
+              "address": "yT9Lms2ATYLd3QLA4pVpg3mQ5KiHB9Dp1b",
+              "scriptPubKey": "210316dd99f0c194577d9f60ebfc889bdaf013f7bfd990acdf71b26d5eef14597c96ac",
+              "amount": 345.18076547,
+              "confirmations": 337,
+              "spendable": true,
+              "solvable": true,
+              "ps_rounds": -2
+            }
+          )
+          .addBurnOutput(10000, Buffer.alloc(30))
+          .to("yT9Lms2ATYLd3QLA4pVpg3mQ5KiHB9Dp1b", 34518076547 - 11000);
+      }).to.throw('Expect public key hash to be 20 bytes long');
+    });
+  });
+
+  describe('getOutPointBuffer', function () {
+    it('Should return an outpoint buffer', function () {
+      var publicKeyHash = 'b8e2d839dd21088b78bebfea3e3e632181197982';
+      var txHash = 'fbf921b1431c7916f2089999a6c1006c35edfd3f746eaa8da41b014bef754a7a';
+      var indexHex = '00000000';
+
+      var transaction = new Transaction()
+        .from(  {
+            "txid": "51c8cc5d5f375983eb37891d66da4656aa2617ef3f82073a34dc7a76331486ff",
+            "vout": 0,
+            "address": "yT9Lms2ATYLd3QLA4pVpg3mQ5KiHB9Dp1b",
+            "scriptPubKey": "210316dd99f0c194577d9f60ebfc889bdaf013f7bfd990acdf71b26d5eef14597c96ac",
+            "amount": 345.18076547,
+            "confirmations": 337,
+            "spendable": true,
+            "solvable": true,
+            "ps_rounds": -2
+          }
+        )
+        .addBurnOutput(10000, Buffer.from(publicKeyHash, 'hex'))
+        .to("yT9Lms2ATYLd3QLA4pVpg3mQ5KiHB9Dp1b", 34518076547 - 11000);
+
+      expect(transaction.hash).to.be.equal(txHash);
+
+      var outPointBuffer = transaction.getOutPointBuffer(0);
+
+      expect(outPointBuffer.toString('hex')).to.be.equal(txHash + indexHex);
+      expect(outPointBuffer.length).to.be.equal(36);
+    });
+
+    it('Should not allow to get the outpoint for a non-existing output', function () {
+      expect(function () {
+        var publicKeyHash = 'b8e2d839dd21088b78bebfea3e3e632181197982';
+        new Transaction()
+          .from(  {
+              "txid": "51c8cc5d5f375983eb37891d66da4656aa2617ef3f82073a34dc7a76331486ff",
+              "vout": 0,
+              "address": "yT9Lms2ATYLd3QLA4pVpg3mQ5KiHB9Dp1b",
+              "scriptPubKey": "210316dd99f0c194577d9f60ebfc889bdaf013f7bfd990acdf71b26d5eef14597c96ac",
+              "amount": 345.18076547,
+              "confirmations": 337,
+              "spendable": true,
+              "solvable": true,
+              "ps_rounds": -2
+            }
+          )
+          .addBurnOutput(10000, Buffer.from(publicKeyHash, 'hex'))
+          .to("yT9Lms2ATYLd3QLA4pVpg3mQ5KiHB9Dp1b", 34518076547 - 11000)
+          .getOutPointBuffer(10);
+      }).to.throw("There's no output with such index in the transaction");
+    });
+  });
+
+  describe('parseOutPointBuffer', function () {
+    it('Should return transaction hash and the output index', function () {
+      var txHash = 'fbf921b1431c7916f2089999a6c1006c35edfd3f746eaa8da41b014bef754a7a';
+      var outPointHex = txHash + '04000000';
+      var outpointBuffer = Buffer.from(outPointHex, 'hex');
+
+      var parsedOutPoint = Transaction.parseOutPointBuffer(outpointBuffer);
+
+      expect(parsedOutPoint.transactionHash).to.be.equal('fbf921b1431c7916f2089999a6c1006c35edfd3f746eaa8da41b014bef754a7a');
+      // '04000000' corresponds to unsigned 32-bit integer 4.
+      expect(parsedOutPoint.outputIndex).to.be.equal(4);
+    });
+
+    it('Should throw an error if the outpoint buffer has the wrong size ', function () {
+      expect(function () {
+        Transaction.parseOutPointBuffer(Buffer.alloc(25));
+      }).to.throw('OutPoint buffer length expected to be 36 bytes');
     });
   });
 

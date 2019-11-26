@@ -60,7 +60,7 @@ describe('HashSigner', function() {
       compressed: true
     });
 
-    it('Should verify against signature done by uncompressed key', function () {
+    it('Should verify against signature with an uncompressed key', function () {
       expect(uncompressedPubKey.toObject().compressed).to.be.false;
       expect(uncompressedPubKey.toString().length).to.be.equal(130);
 
@@ -68,7 +68,7 @@ describe('HashSigner', function() {
       expect(verified).to.be.true;
     });
 
-    it('Should verify against signature done by compressed key', function () {
+    it('Should verify against signature with a compressed key', function () {
       expect(compressedPubKey.toObject().compressed).to.be.true;
       expect(compressedPubKey.toString().length).to.be.equal(66);
 

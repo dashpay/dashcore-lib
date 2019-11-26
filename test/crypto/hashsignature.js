@@ -64,7 +64,7 @@ describe('HashSigner', function() {
 
 
     beforeEach(function () {
-      privateKey = new PrivateKey();
+      privateKey = new PrivateKey('032f352abd3fb62c3c5b543bb6eae515a1b99a202b367ab9c6e155ba689d0ff4');
       pkBuffer = privateKey.toBuffer();
       pkHex = privateKey.toString();
       messageBuffer = Buffer.from("Hello world!");

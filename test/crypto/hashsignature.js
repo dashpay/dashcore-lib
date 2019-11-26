@@ -46,8 +46,12 @@ describe('HashSigner', function() {
   });
   describe('verifyDataSignatureWithPubKey', function() {
     var privateKey = new PrivateKey();
+    var pkBuffer = privateKey.toBuffer();
+    var pkHex = privateKey.toString();
     var messageBuffer = Buffer.from("Hello world!");
     var compactSig = HashSigner.signData(messageBuffer, privateKey);
+    var sig2 = HashSigner.signData(messageBuffer, new PrivateKey(pkBuffer));
+    var sig3 = HashSigner.signData(messageBuffer, new PrivateKey(pkHex));
     var pubKey = privateKey.toPublicKey();
     var uncompressedPubKey = new PublicKey({
       x: pubKey.toObject().x,
@@ -66,6 +70,10 @@ describe('HashSigner', function() {
 
       var verified = HashSigner.verifyDataSignatureWithPubKey(messageBuffer, compactSig, uncompressedPubKey);
       expect(verified).to.be.true;
+      verified = HashSigner.verifyDataSignatureWithPubKey(messageBuffer, sig2, uncompressedPubKey);
+      expect(verified).to.be.true;
+      verified = HashSigner.verifyDataSignatureWithPubKey(messageBuffer, sig3, uncompressedPubKey);
+      expect(verified).to.be.true;
     });
 
     it('Should verify against signature with a compressed key', function () {
@@ -73,6 +81,10 @@ describe('HashSigner', function() {
       expect(compressedPubKey.toString().length).to.be.equal(66);
 
       var verified = HashSigner.verifyDataSignatureWithPubKey(messageBuffer, compactSig, compressedPubKey);
+      expect(verified).to.be.true;
+      verified = HashSigner.verifyDataSignatureWithPubKey(messageBuffer, sig2, compressedPubKey);
+      expect(verified).to.be.true;
+      verified = HashSigner.verifyDataSignatureWithPubKey(messageBuffer, sig3, compressedPubKey);
       expect(verified).to.be.true;
     });
 

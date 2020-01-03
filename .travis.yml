@@ -1,24 +1,34 @@
-language: node_js
 sudo: required
-services:
-  - xvfb
-addons:
- chrome: stable
-branches:
- only:
-   - develop
-   - master
+dist: bionic
+language: node_js
+
+# Support Active LTS versions of Node.js
 node_js:
-- '8'
+  - '10'
+  - '12'
+
+addons:
+  chrome: stable
+  firefox: latest
+
+env:
+  - MOZ_HEADLESS=1
+
+branches:
+  only:
+    - develop
+    - master
+
 before_install:
-  - export DISPLAY=:99.0
+  # Login to NPM registry
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+
 install:
-  - npm install
+  - npm ci
+
 before_script:
   - npm run lint
-after_script:
-  - gulp coveralls
+
 deploy:
   - provider: script
     skip_cleanup: true

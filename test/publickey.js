@@ -129,8 +129,23 @@ describe('PublicKey', function() {
     });
   });
 
+  describe('#id', function() {
+    it('should return Public Key hash', function() {
+      var pk = new PublicKey('041ff0fe0f7b15ffaa85ff9f4744d539139c252a49710fb053bb9f2b933173ff9a7baad41d04514751e6851f5304fd243751703bed21b914f6be218c0fa354a341');
 
-  describe('#getValidationError', function(){
+      pk.hash.should.deep.equal(pk._getID());
+    });
+  });
+
+  describe('#hash', function() {
+    it('should return Public Key hash', function() {
+      var pk = new PublicKey('041ff0fe0f7b15ffaa85ff9f4744d539139c252a49710fb053bb9f2b933173ff9a7baad41d04514751e6851f5304fd243751703bed21b914f6be218c0fa354a341');
+
+      pk.hash.should.deep.equal(pk._getID());
+    });
+  });
+
+  describe('#getValidationError', function() {
 
     it('should recieve an invalid point error', function() {
       var error = PublicKey.getValidationError(invalidPoint);

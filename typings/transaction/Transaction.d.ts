@@ -2,9 +2,9 @@ import {Script} from "../script/Script";
 import {Address} from "../Address";
 import {Input} from "./input/Input";
 import {PrivateKey} from "../PrivateKey";
-import PublicKey from "../PublicKey";
+import {PublicKey} from "../PublicKey";
 import {Output} from "./Output";
-import Signature from "../crypto/Signature";
+import {Signature} from "../crypto/Signature";
 import {AbstractPayload} from "./payload/AbstractPayload";
 import {bitcore} from "../bitcore";
 

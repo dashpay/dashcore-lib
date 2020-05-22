@@ -1,6 +1,6 @@
 import { BufferReader } from "../buffer/BufferReader"
 import { BufferWriter } from "../buffer/BufferWriter"
-import BN from "../crypto/BN"
+import {BN} from "../crypto/BN"
 
 /**
  * Instantiate a BlockHeader from a Buffer, JSON object, or Object with
@@ -13,8 +13,11 @@ import BN from "../crypto/BN"
 export class BlockHeader {
     constructor();
 
+    id: string;
+    hash: string;
+
     /**
-     * @param {Object} - A plain JavaScript object
+     * @param {Object} obj - A plain JavaScript object
      * @returns {BlockHeader} - An instance of block header
      */
     static fromObject(obj: any): BlockHeader;
@@ -26,19 +29,19 @@ export class BlockHeader {
     static fromRawBlock(data: Buffer | string): BlockHeader;
 
     /**
-     * @param {Buffer} - A buffer of the block header
+     * @param {Buffer} buf - A buffer of the block header
      * @returns {BlockHeader} - An instance of block header
      */
     static fromBuffer(buf: Buffer): BlockHeader;
 
     /**
-     * @param {string} - A hex encoded buffer of the block header
+     * @param {string} str - A hex encoded buffer of the block header
      * @returns {BlockHeader} - An instance of block header
      */
     static fromString(str: string): BlockHeader;
 
     /**
-     * @param {BufferReader} - A BufferReader of the block header
+     * @param {BufferReader} br - A BufferReader of the block header
      * @returns {BlockHeader} - An instance of block header
      */
     static fromBufferReader(br: BufferReader): BlockHeader;
@@ -48,6 +51,12 @@ export class BlockHeader {
      * @returns {Object} - A plain object of the BlockHeader
      */
     toObject(): any;
+
+    /**
+     * @function
+     * @returns {Object} - A plain object of the BlockHeader
+     */
+    toJSON(): any;
 
     /**
      * @returns {Buffer} - A Buffer of the BlockHeader
@@ -60,7 +69,7 @@ export class BlockHeader {
     toString(): string;
 
     /**
-     * @param {BufferWriter} - An existing instance BufferWriter
+     * @param {BufferWriter} bw - An existing instance BufferWriter
      * @returns {BufferWriter} - An instance of BufferWriter representation of the BlockHeader
      */
     toBufferWriter(bw: BufferWriter): BufferWriter;

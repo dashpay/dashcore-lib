@@ -50,13 +50,13 @@ export class MerkleBlock {
     static build(header: BlockHeader | any, transactionHashes: Buffer[], filterMatches: boolean[]): MerkleBlock;
 
     /**
-     * @param {Buffer} - MerkleBlock data in a Buffer object
+     * @param {Buffer} buf - MerkleBlock data in a Buffer object
      * @returns {MerkleBlock} - A MerkleBlock object
      */
     static fromBuffer(buf: Buffer): MerkleBlock;
 
     /**
-     * @param {BufferReader} - MerkleBlock data in a BufferReader object
+     * @param {BufferReader} br - MerkleBlock data in a BufferReader object
      * @returns {MerkleBlock} - A MerkleBlock object
      */
     static fromBufferReader(br: BufferReader): MerkleBlock;
@@ -67,7 +67,7 @@ export class MerkleBlock {
     toBuffer(): Buffer;
 
     /**
-     * @param {BufferWriter} - An existing instance of BufferWriter
+     * @param {BufferWriter} bw - An existing instance of BufferWriter
      * @returns {BufferWriter} - An instance of BufferWriter representation of the MerkleBlock
      */
     toBufferWriter(bw: BufferWriter): BufferWriter;
@@ -77,6 +77,12 @@ export class MerkleBlock {
      * @returns {Object} - A plain object with the MerkleBlock properties
      */
     toObject(): any;
+
+    /**
+     * @function
+     * @returns {Object} - A plain object with the MerkleBlock properties
+     */
+    toJSON(): any;
 
     /**
      * Verify that the MerkleBlock is valid
@@ -90,7 +96,7 @@ export class MerkleBlock {
     getMatchedTransactionHashes(): string[];
 
     /**
-     * @param {Object} - A plain JavaScript object
+     * @param {Object} obj - A plain JavaScript object
      * @returns {Block} - An instance of block
      */
     static fromObject(obj: any): Block;

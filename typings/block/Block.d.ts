@@ -12,8 +12,11 @@ import {BufferWriter} from '../buffer/BufferWriter';
 export class Block {
     constructor(arg: any);
 
+    id: string;
+    hash: string;
+
     /**
-     * @param {Object} - A plain JavaScript object
+     * @param {Object} obj - A plain JavaScript object
      * @returns {Block} - An instance of block
      */
     static fromObject(obj: any): Block;
@@ -49,6 +52,12 @@ export class Block {
     toObject(): any;
 
     /**
+     * @function
+     * @returns {Object} - A plain object with the block properties
+     */
+    toJSON(): any;
+
+    /**
      * @returns {Buffer} - A buffer of the block
      */
     toBuffer(): Buffer;
@@ -59,7 +68,7 @@ export class Block {
     toString(): string;
 
     /**
-     * @param {BufferWriter} - An existing instance of BufferWriter
+     * @param {BufferWriter} bw - An existing instance of BufferWriter
      * @returns {BufferWriter} - An instance of BufferWriter representation of the Block
      */
     toBufferWriter(bw: BufferWriter): BufferWriter;

@@ -24,8 +24,18 @@
  * @returns {URI} A new valid and frozen instance of URI
  * @constructor
  */
+import {Address} from "./Address";
+import {Network} from "./Network";
+
 export class URI {
     constructor(data: string | any, knownParams?: string[]);
+
+    extras: Object;
+    knownParams: any[];
+    address: Address;
+    network: Network;
+    amount: Number;
+    message: any;
 
     /**
      * Instantiate a URI from a String
@@ -86,6 +96,18 @@ export class URI {
      * @returns {Object} Amount represented in satoshis
      */
     _parseAmount(amount: string): any;
+
+    /**
+     * @function
+     * @returns {Object} - A plain object with the URI properties
+     */
+    toObject(): any;
+
+    /**
+     * @function
+     * @returns {Object} - A plain object with the URI properties
+     */
+    toJSON(): any;
 
     /**
      * Will return a string representation of the URI

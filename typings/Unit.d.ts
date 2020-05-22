@@ -108,6 +108,14 @@ export class Unit {
     toMicros(): number;
 
     /**
+     * Returns the value represented in bits
+     *
+     * @function
+     * @returns {Number} The value converted to bits
+     */
+    toBits(): number;
+
+    /**
      * Returns the value represented in satoshis
      *
      * @returns {Number} The value converted to satoshis
@@ -136,6 +144,14 @@ export class Unit {
      * @returns {Object} An object with the keys: amount and code
      */
     toObject(): any;
+
+    /**
+     * Returns a plain object representation of the Unit
+     *
+     * @function
+     * @returns {Object} An object with the keys: amount and code
+     */
+    toJSON(): any;
 
     /**
      * Returns a string formatted for the console

@@ -29,6 +29,11 @@ import { BN } from "./crypto/BN";
 export class PrivateKey {
     constructor(data: string, network: Network | string);
 
+    readonly bn: BN;
+    readonly compressed: boolean;
+    readonly network: Network;
+    readonly publicKey: PublicKey;
+
     /**
      * Internal helper to instantiate PrivateKey internal `info` object from
      * different kinds of arguments passed to the constructor.
@@ -149,6 +154,12 @@ export class PrivateKey {
      * @returns {Object} A plain object representation
      */
     toObject(): any;
+
+    /**
+     * @function
+     * @returns {Object} A plain object representation
+     */
+    toJSON(): any;
 
     /**
      * Will return a string formatted for the console

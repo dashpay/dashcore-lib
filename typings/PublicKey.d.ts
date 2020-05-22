@@ -2,7 +2,7 @@ import {Address} from "./Address"
 import {Network} from "./Network"
 import {PrivateKey} from "./PrivateKey"
 import {Point} from "./crypto/Point"
-import Signature from "./crypto/Signature";
+import {Signature} from "./crypto/Signature";
 import {Transaction} from "./transaction/Transaction";
 
 /**
@@ -35,6 +35,12 @@ export class PublicKey {
         network?: Network;
         compressed?: string;
     });
+
+    id: string;
+    hash: string;
+    readonly network: Network;
+    readonly compressed: Boolean;
+    readonly point: Point;
 
     /**
      * Internal function to differentiate between arguments passed to the constructor
@@ -111,12 +117,26 @@ export class PublicKey {
     toObject(): any;
 
     /**
+     * @function
+     * @returns {Object} A plain object of the PublicKey
+     */
+    toJSON(): any;
+
+    /**
      * Will output the PublicKey to a DER Buffer
      *
      * @function
      * @returns {Buffer} A DER hex encoded buffer
      */
     toBuffer(): Buffer;
+
+    /**
+     * Will output the PublicKey to a DER Buffer
+     *
+     * @function
+     * @returns {Buffer} A DER hex encoded buffer
+     */
+    toDER(): Buffer;
 
     /**
      * Will return a sha256 + ripemd160 hash of the serialized public key

@@ -39,6 +39,9 @@ import {Script} from "./script/Script"
 export class Address {
     constructor(data: any, network: Network | string | number, type?: string);
 
+    readonly hashBuffer: Buffer;
+    readonly network: Network;
+    readonly type: string;
     /**
      * Internal function used to split different kinds of arguments of the constructor
      * @param {*} data - The encoded data in various formats
@@ -223,6 +226,13 @@ export class Address {
      * @returns {Object} A plain object with the address information
      */
     toObject(): any;
+
+    /**
+     * @function
+     * @returns {Object} A plain object with the address information
+     */
+    toJSON(): any;
+
 
     /**
      * Will return a string representation of the address

@@ -345,6 +345,8 @@ export class Transaction {
      */
     sortInputs(sortingFunction: (...params: any[]) => any): Transaction;
 
+    removeInput(txId, outputIndex): void;
+
     /**
      * Sign the transaction using one or more private keys.
      *
@@ -356,6 +358,9 @@ export class Transaction {
      * @return {Transaction} this, for chaining
      */
     sign(privateKey: any[] | string | PrivateKey, sigtype?: number): Transaction;
+
+    getSignatures(): any[];
+    canHaveNoUtxo(): boolean;
 
     /**
      * Add a signature to the transaction
@@ -373,6 +378,9 @@ export class Transaction {
         publicKey: PublicKey;
         signature: Signature;
     }): Transaction;
+
+    isFullySigned(): boolean;
+    isValidSignature(): boolean;
 
     /**
      * @returns {bool} whether the signature is valid for this transaction input
@@ -441,4 +449,37 @@ export class Transaction {
      * @return {Number}
      */
     getExtraPayloadSize(): number;
+
+    /**
+     * @function
+     * @returns {Object} A plain object with the address information
+     */
+    toObject(): any;
+
+    /**
+     * @function
+     * @returns {Object} A plain object with the address information
+     */
+    toJSON(): any;
+
+    /**
+     * @param {Number} fundingAmount
+     * @return {Transaction}
+     */
+    addFundingOutput(fundingAmount: Number ): Transaction;
+
+    /**
+     * @param {Number} satoshisToBurn
+     * @param {Buffer} publicKeyHash
+     * @return {Transaction}
+     */
+    addBurnOutput(satoshisToBurn: Number, publicKeyHash: Buffer): Transaction;
+
+    /**
+     * Gives an OutPoint buffer for the output at a given index
+     *
+     * @param {Number} outputIndex
+     * @return {Buffer}
+     */
+    getOutPointBuffer(outputIndex: number): Buffer;
 }

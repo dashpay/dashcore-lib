@@ -1,10 +1,11 @@
-import BN from "./BN";
+import {BN} from "./BN";
 /**
  *
  * Instantiate a valid secp256k1 Point from the X and Y coordinates.
  *
  * @param {BN|String} x - The X coordinate
  * @param {BN|String} y - The Y coordinate
+ * @param {Boolean} isRed - Force redgomery representation when loading from JSON
  * @link https://github.com/indutny/elliptic
  * @augments elliptic.curve.point
  * @throws {Error} A validation error if exists
@@ -13,7 +14,7 @@ import BN from "./BN";
  */
 // @ts-ignore
 export class Point extends elliptic.curve.point {
-    constructor(x: BN | string, y: BN | string);
+    constructor(x: BN | string, y: BN | string, isRed: Boolean);
 
     /**
      *

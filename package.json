@@ -96,6 +96,7 @@
     "type": "git",
     "url": "https://github.com/dashevo/dashcore-lib.git"
   },
+  "types": "index.d.ts",
   "bugs": {
     "url": "https://github.com/dashevo/dashcore-lib/issues"
   },

@@ -16,7 +16,7 @@ import {Address} from "../Address";
  * @param {number=} data.satoshis alias for `amount`, but expressed in satoshis (1 BTC = 1e8 satoshis)
  * @param {string|Address=} data.address the associated address to the script, if provided
  */
-export default class UnspentOutput {
+export class UnspentOutput {
     constructor(data: {
         txid: string;
         txId?: string;

@@ -22,7 +22,7 @@ export type ProUpRevTransactionPayloadJSON = {
  * @property {string} inputsHash uint256    32    Hash of all the outpoints of the transaction inputs
  * @property {string} payloadSig BLSSig Signature of the hash of the ProTx fields. Signed by the Operator.
  */
-export default class ProUpRevTxPayload {
+export class ProUpRevTxPayload {
     /**
      * Serializes ProUpRevTxPayload payload
      * @param {ProUpRevTransactionPayloadJSON} transitionPayloadJSON

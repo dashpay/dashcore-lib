@@ -13,7 +13,7 @@ export type SubTxTopupPayloadJSON = {
  * @property {number} version
  * @property {string} regTxHash
  */
-export default class SubTxTopupPayload {
+export class SubTxTopupPayload {
     /**
      * Parse raw transition payload
      * @param {Buffer} rawPayload

@@ -26,7 +26,7 @@ export type ProUpServTxPayloadJSON = {
  * @property {string} [scriptOperatorPayout] Payee script (p2pkh/p2sh)
  * @property {string} [payloadSig] BLSSig Signature of the hash of the ProUpServTx fields. Signed by the Operator.
  */
-export default class ProUpServTxPayload {
+export class ProUpServTxPayload {
     /**
      * Parse raw transition payload
      * @param {Buffer} rawPayload

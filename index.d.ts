@@ -326,42 +326,29 @@ declare module "@dashevo/dashcore-lib"  {
     export import Proposal = _Proposal.Proposal;
     export import Trigger = _Trigger.Trigger;
 
-    export import Mnemonic = _Trigger.Mnemonic;
+    export import Mnemonic = _Mnemonic.Mnemonic;
 
-    import * as _GovObject from './typings/govobject/GovObject';
-    import * as _Proposal from './typings/govobject/Proposal';
-    import * as _Trigger from './typings/govobject/Trigger';
+    export import Script = _Script.Script;
 
-    import * as _Mnemonic from './typings/mnemonic/Mnemonic';
+    export import Input = _Input.Input;
+    export import MultiSigInput = _MultiSigInput.MultiSigInput;
+    export import MultiSigScriptHashInput = _MultiSigScriptHashInput.MultiSigScriptHashInput;
 
-    import * as _Script from './typings/script/Script';
+    export import AbstractPayload = _AbstractPayload.AbstractPayload;
+    export import CoinbasePayload = _CoinbasePayload.CoinbasePayload;
+    export import CommitmentTxPayload = _CommitmentTxPayload.CommitmentTxPayload;
+    export import ProRegTxPayload = _ProRegTxPayload.ProRegTxPayload;
+    export import ProUpRegTxPayload = _ProUpRegTxPayload.ProUpRegTxPayload;
+    export import ProUpRevTxPayload = _ProUpRevTxPayload.ProUpRevTxPayload;
+    export import ProUpServTxPayload = _ProUpServTxPayload.ProUpServTxPayload;
+    export import SubTxCloseAccountPayload = _SubTxCloseAccountPayload.SubTxCloseAccountPayload;
+    export import SubTxRegisterPayload = _SubTxRegisterPayload.SubTxRegisterPayload;
+    export import SubTxResetKeyPayload = _SubTxResetKeyPayload.SubTxResetKeyPayload;
+    export import SubTxTopupPayload = _SubTxTopupPayload.SubTxTopupPayload;
+    export import SubTxTransitionPayload = _SubTxTransitionPayload.SubTxTransitionPayload;
 
-    import * as _Input from './typings/transaction/input/Input';
-    import * as _MultiSigInput from './typings/transaction/input/MultiSigInput';
-    import * as _MultiSigScriptHashInput from './typings/transaction/input/MultiSigScriptHashInput';
-
-    import * as _AbstractPayload from './typings/transaction/payload/AbstractPayload';
-    import * as _CoinbasePayload from './typings/transaction/payload/CoinbasePayload';
-    import * as _CommitmentTxPayload from './typings/transaction/payload/CommitmentTxPayload';
-    import * as _ProRegTxPayload from './typings/transaction/payload/ProRegTxPayload';
-    import * as _ProUpRegTxPayload from './typings/transaction/payload/ProUpRegTxPayload';
-    import * as _ProUpRevTxPayload from './typings/transaction/payload/ProUpRevTxPayload';
-    import * as _ProUpServTxPayload from './typings/transaction/payload/ProUpServTxPayload';
-    import * as _SubTxCloseAccountPayload from './typings/transaction/payload/SubTxCloseAccountPayload';
-    import * as _SubTxRegisterPayload from './typings/transaction/payload/SubTxRegisterPayload';
-    import * as _SubTxResetKeyPayload from './typings/transaction/payload/SubTxResetKeyPayload';
-    import * as _SubTxTopupPayload from './typings/transaction/payload/SubTxTopupPayload';
-    import * as _SubTxTransitionPayload from './typings/transaction/payload/SubTxTransitionPayload';
-
-    import * as _Output from './typings/transaction/Output';
-    import * as _Transaction from './typings/transaction/Transaction';
-    import * as _TransactionSignature from './typings/transaction/TransactionSignature';
-    import * as _UnspentOutput from './typings/transaction/UnspentOutput';
-
-    // @ts-ignore
-    // export import Script = _Script.Script;
-    // @ts-ignore
-    // export import Transaction = _Transaction;
-
-    // export import BN = _BN.default;
+    export import Output = _Output.Output;
+    export import Transaction = _Transaction.Transaction;
+    export import TransactionSignature = _TransactionSignature.TransactionSignature;
+    export import UnspentOutput = _UnspentOutput.UnspentOutput;
 }

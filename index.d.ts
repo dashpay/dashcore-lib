@@ -1,5 +1,6 @@
 import * as _Address from './typings/Address';
 import * as _bitcore from './typings/bitcore';
+import * as _BloomFilter from './typings/BloomFilter';
 import * as _HDPrivateKey from './typings/HDPrivateKey';
 import * as _HDPublicKey from './typings/HDPublicKey';
 import * as _Message from './typings/Message';
@@ -299,6 +300,7 @@ declare module "@dashevo/dashcore-lib"  {
     // @ts-ignore
     export import Address = _Address.Address;
     export import bitcore = _bitcore.bitcore;
+    export import BloomFilter = _BloomFilter.BloomFilter;
     export import HDPrivateKey = _HDPrivateKey.HDPrivateKey;
     export import HDPublicKey = _HDPublicKey.HDPublicKey;
     export import Message = _Message.Message;

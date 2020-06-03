@@ -9,6 +9,16 @@ import {Address} from "./Address";
 export class Message {
     constructor(message: string);
 
+    message: string;
+
+    static MAGIC_BYTES: Buffer;
+
+    /**
+     * Return a Buffer hash prefixed with MAGIC_BYTES
+     * @return {Buffer}
+     */
+    magicHash(): Buffer;
+
     /**
      * Will sign a message with a given Bitcoin private key.
      *

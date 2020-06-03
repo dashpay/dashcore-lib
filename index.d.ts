@@ -4,6 +4,7 @@ import * as _HDPrivateKey from './typings/HDPrivateKey';
 import * as _HDPublicKey from './typings/HDPublicKey';
 import * as _Message from './typings/Message';
 import * as _Network from './typings/Network';
+import * as _Opcode from './typings/Opcode';
 import * as _PrivateKey from './typings/PrivateKey';
 import * as _PublicKey from './typings/PublicKey';
 import * as _Unit from './typings/Unit';
@@ -302,6 +303,7 @@ declare module "@dashevo/dashcore-lib"  {
     export import HDPublicKey = _HDPublicKey.HDPublicKey;
     export import Message = _Message.Message;
     export import Network = _Network.Network;
+    export import Opcode = _Opcode.Opcode;
     export import PrivateKey = _PrivateKey.PrivateKey;
     export import PublicKey = _PublicKey.PublicKey;
     export import Unit = _Unit.Unit;

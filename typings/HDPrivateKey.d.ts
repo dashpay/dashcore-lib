@@ -1,4 +1,6 @@
 import {Network} from "./Network";
+import {PublicKey} from "./PublicKey";
+import {HDPublicKey} from "./HDPublicKey";
 /**
  * Represents an instance of an hierarchically derived private key.
  *
@@ -9,6 +11,14 @@ import {Network} from "./Network";
  */
 export class HDPrivateKey {
     constructor(arg: string | Buffer | any);
+
+    readonly hdPublicKey: HDPublicKey;
+    readonly xpubkey: string;
+    readonly xprivkey: string;
+    readonly network: Network;
+    readonly depth: Number;
+    readonly publicKey: PublicKey;
+    readonly fingerPrint: Buffer;
 
     /**
      * Verifies that a given path is valid.
@@ -54,8 +64,9 @@ export class HDPrivateKey {
      *
      * @param {string|number} arg
      * @param {boolean?} hardened
+     * @return HDPrivateKey
      */
-    derive(arg: string | number, hardened: boolean): void;
+    derive(arg: string | number, hardened: boolean): HDPrivateKey;
 
     /**
      * WARNING: This method will not be officially supported until v1.0.0.
@@ -85,8 +96,9 @@ export class HDPrivateKey {
      *
      * @param {string|number} arg
      * @param {boolean?} hardened
+     * @return HDPrivateKey
      */
-    deriveChild(arg: string | number, hardened: boolean): void;
+    deriveChild(arg: string | number, hardened: boolean): HDPrivateKey;
 
     /**
      * WARNING: This method will not be officially supported until v1.0.0
@@ -199,7 +211,23 @@ export class HDPrivateKey {
      * @function
      * @return {Object}
      */
-    toObject(): any;
+    toObject(): Object;
+
+    /**
+     * Creates an HDPrivateKey from a string representation
+     *
+     * @param {String} arg
+     * @return {HDPrivateKey}
+     */
+    static fromString(arg: String): HDPrivateKey;
+
+    /**
+     * Creates an HDPrivateKey from an object
+     *
+     * @param {Object} arg
+     * @return {HDPrivateKey}
+     */
+    static fromObject(arg: Buffer): HDPrivateKey;
 
     /**
      * Build a HDPrivateKey from a buffer
@@ -212,7 +240,7 @@ export class HDPrivateKey {
     /**
      * Returns a buffer representation of the HDPrivateKey
      *
-     * @return {string}
+     * @return {Buffer}
      */
-    toBuffer(): string;
+    toBuffer(): Buffer;
 }

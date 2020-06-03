@@ -1,5 +1,6 @@
 import {Network} from "./Network";
 import {bitcore} from "./bitcore";
+import {PublicKey} from "./PublicKey";
 /**
  * The representation of an hierarchically derived public key.
  *
@@ -11,6 +12,11 @@ import {bitcore} from "./bitcore";
 export class HDPublicKey {
     constructor(arg: any | string | Buffer);
 
+    readonly xpubkey: string;
+    readonly network: Network;
+    readonly depth: Number;
+    readonly publicKey: PublicKey;
+    readonly fingerPrint: Buffer;
     /**
      * Verifies that a given path is valid.
      *
@@ -43,8 +49,10 @@ export class HDPublicKey {
      * ```
      *
      * @param {string|number} arg
+     * @param {boolean?} hardened
+     * @return HDPublicKey
      */
-    derive(arg: string | number): void;
+    derive(arg: string | number, hardened: boolean): HDPublicKey;
 
     /**
      * WARNING: This method will not be officially supported until v1.0.0.
@@ -70,8 +78,10 @@ export class HDPublicKey {
      * ```
      *
      * @param {string|number} arg
+     * @param {boolean?} hardened
+     * @return HDPublicKey
      */
-    deriveChild(arg: string | number): void;
+    deriveChild(arg: string | number, hardened: boolean): HDPublicKey;
 
     /**
      * Verifies that a given serialized public key in base58 with checksum format
@@ -153,10 +163,23 @@ export class HDPublicKey {
      *
      * returns {object}
      */
-    toObject: any;
+    toObject(): object;
 
     /**
-     * Create a HDPublicKey from a buffer argument
+     * Creates an HDPublicKey from a string representation
+     * @param {String} arg
+     * @return {HDPublicKey}
+     */
+    static fromString(arg: String): HDPublicKey;
+
+    /**
+     * Creates an HDPublicKey from an object
+     * @param {Object} arg
+     * @return {HDPublicKey}
+     */
+    static fromObject(arg: Buffer): HDPublicKey;
+    /**
+     * Create an HDPublicKey from a buffer argument
      *
      * @param {Buffer} arg
      * @return {HDPublicKey}

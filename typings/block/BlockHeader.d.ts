@@ -1,8 +1,6 @@
 import { BufferReader } from "../buffer/BufferReader"
 import { BufferWriter } from "../buffer/BufferWriter"
 import {BN} from "../crypto/BN"
-import {Script} from "../script/Script";
-import {Address} from "../Address";
 
 export namespace BlockHeader {
     /**

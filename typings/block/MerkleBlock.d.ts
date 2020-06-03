@@ -1,4 +1,3 @@
-import { Block } from "./Block";
 import { BlockHeader } from "./BlockHeader";
 import { BufferReader } from "../buffer/BufferReader"
 import { BufferWriter } from "../buffer/BufferWriter"

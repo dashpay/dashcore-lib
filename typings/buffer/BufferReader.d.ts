@@ -1,11 +1,11 @@
+import {BN} from "../crypto/BN";
+
 /**
  *
  * @param buf
  * @returns {BufferReader}
  * @constructor
  */
-import {BN} from "../crypto/BN";
-
 export class BufferReader {
     constructor(buf: any);
 

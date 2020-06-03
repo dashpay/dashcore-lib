@@ -25,6 +25,7 @@ import {Network} from "../Network";
 export class Mnemonic {
     constructor(data?: any, wordlist?: any[]);
 
+    phrase: string;
     /**
      * Will return a boolean if the mnemonic is valid
      *

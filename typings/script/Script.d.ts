@@ -1,8 +1,7 @@
 import {Address} from "../Address"
-import Network from "../Network"
-import PrivateKey from "../PrivateKey"
-import PublicKey from "../PublicKey"
-import Signature from "../crypto/Signature"
+import {Network} from "../Network"
+import {PublicKey} from "../PublicKey"
+import {Signature} from "../crypto/Signature"
 
 /**
  * A Bitcoin transaction script. Each transaction's inputs and outputs
@@ -15,6 +14,8 @@ import Signature from "../crypto/Signature"
  */
 export class Script {
     constructor(from: any | string | Buffer);
+
+    chunks: any[];
 
     /**
      * @returns {boolean} if this is a pay to pubkey hash output script

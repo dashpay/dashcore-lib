@@ -41,6 +41,17 @@ export namespace Transaction {
 export class Transaction {
     constructor(serialized: any);
 
+    version: number;
+    id: string;
+    hash: string;
+    nLockTime: number;
+    type: number;
+    inputs: Input[];
+    inputAmount: number;
+    outputs: Output[];
+    outputAmount: number;
+    extraPayload?: AbstractPayload;
+
     /**
      * Create a 'shallow' copy of the transaction, by serializing and deserializing
      * it dropping any additional information that inputs and outputs may have hold
@@ -379,8 +390,20 @@ export class Transaction {
         signature: Signature;
     }): Transaction;
 
+    /**
+     * Check whether the transaction is fully signed
+     *
+     * @return {boolean}
+     */
     isFullySigned(): boolean;
-    isValidSignature(): boolean;
+
+    /**
+     * Check whether the signature is valid
+     *
+     * @param signature
+     * @return {Boolean}
+     */
+    isValidSignature(signature): boolean;
 
     /**
      * @returns {bool} whether the signature is valid for this transaction input
@@ -391,19 +414,23 @@ export class Transaction {
      * Check that a transaction passes basic sanity tests. If not, return a string
      * describing the error. This function contains the same logic as
      * CheckTransaction in bitcoin core.
+     *
+     * @return {Boolean|String} true or reason for failure as a string
      */
-    verify(): void;
+    verify(): Boolean|String;
 
     /**
      * Analogous to bitcoind's IsCoinBase function in transaction.h
+     * @returns {boolean}
      */
-    isCoinbase(): void;
+    isCoinbase(): boolean;
 
     /**
      * Determines if this transaction can be replaced in the mempool with another
      * transaction that provides a sufficiently higher fee (RBF).
+     * @returns {boolean}
      */
-    isRBF(): void;
+    isRBF(): boolean;
 
     /**
      * Enable this transaction to be replaced in the mempool (RBF) if a transaction

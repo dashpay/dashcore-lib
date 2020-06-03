@@ -29,6 +29,12 @@ export class UnspentOutput {
         address: string | Address;
     });
 
+    txId: string;
+    address: Address;
+    outputIndex: number;
+    satoshis: number;
+    script: Script;
+
     /**
      * Provide an informative output when displaying this object in the console
      *

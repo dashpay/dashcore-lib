@@ -5,16 +5,16 @@ import {Transaction} from "../transaction/Transaction";
 
 export namespace Block {
     /**
-     * @typedef {Object} Block.fromObject
-     * @property {Transaction.toObject[]} transactions
-     * @property {BlockHeader.toObject} header
+     * @typedef {Object} Block.fromObjectParams
+     * @property {Transaction.toObjectParams[]} transactions
+     * @property {BlockHeader.toObjectParams} header
      */
-    type fromObject = {
+    type fromObjectParams = {
         transactions: Transaction[];
-        header: BlockHeader.toObject;
+        header: BlockHeader.toObjectParams;
     };
     /**
-     * @typedef {Object} BlockHeader.toObject
+     * @typedef {Object} Block.toObjectParams
      * @property {string} string
      * @property {number} version
      * @property {string} prevHash
@@ -23,7 +23,7 @@ export namespace Block {
      * @property {number} bits
      * @property {number} nonce
      */
-    type toObject = {
+    type toObjectParams = {
         hash: string;
         version: number;
         prevHash: string;
@@ -43,7 +43,7 @@ export namespace Block {
  * Instantiate a Block from a Buffer, JSON object, or Object with
  * the properties of the Block
  *
- * @param {Buffer|Block.fromObject} arg - A Buffer, JSON string, or Object
+ * @param {Buffer|Block.fromObjectParams} arg - A Buffer, JSON string, or Object
  * @returns {Block}
  * @constructor
  */
@@ -55,10 +55,10 @@ export class Block {
     header: BlockHeader;
     transactions: Transaction[];
     /**
-     * @property {Block.fromObject} obj - A plain JavaScript object
+     * @property {Block.fromObjectParams} obj - A plain JavaScript object
      * @returns {Block} - An instance of block
      */
-    static fromObject(obj: Block.fromObject): Block;
+    static fromObject(obj: Block.fromObjectParams): Block;
 
     /**
      * @param {BufferReader} br A buffer reader of the block
@@ -86,9 +86,9 @@ export class Block {
 
     /**
      * @function
-     * @returns {Block.toObject} - A plain object with the block properties
+     * @returns {Block.toObjectParams} - A plain object with the block properties
      */
-    toObject(): {header: BlockHeader.toObject, transactions: Transaction.toObject[]};
+    toObject(): {header: BlockHeader.toObjectParams, transactions: Transaction.toObject[]};
 
     /**
      * @function

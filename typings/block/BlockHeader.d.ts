@@ -4,7 +4,7 @@ import {BN} from "../crypto/BN"
 
 export namespace BlockHeader {
     /**
-     * @typedef {Object} BlockHeader.fromObject
+     * @typedef {Object} BlockHeader.fromObjectParams
      * @property {(string)} string
      * @property {number} version
      * @property {(string|Buffer|ArrayBuffer|SharedArrayBuffer)} prevHash
@@ -13,7 +13,7 @@ export namespace BlockHeader {
      * @property {number} bits
      * @property {number} nonce
      */
-    type fromObject = {
+    type fromObjectParams = {
         hash: string;
         version: number;
         prevHash: string|Buffer;
@@ -23,7 +23,7 @@ export namespace BlockHeader {
         nonce: number;
     };
     /**
-     * @typedef {Object} BlockHeader.toObject
+     * @typedef {Object} BlockHeader.toObjectParams
      * @property {(string)} string
      * @property {number} version
      * @property {(string)} prevHash
@@ -32,7 +32,7 @@ export namespace BlockHeader {
      * @property {number} bits
      * @property {number} nonce
      */
-    type toObject = {
+    type toObjectParams = {
         hash: string;
         version: number;
         prevHash: string;
@@ -47,7 +47,7 @@ export namespace BlockHeader {
  * Instantiate a BlockHeader from a Buffer, JSON object, or Object with
  * the properties of the BlockHeader
  *
- * @param {Buffer|BlockHeader.fromObject} - A Buffer, JSON string, or Object
+ * @param {Buffer|BlockHeader.fromObjectParams} - A Buffer, JSON string, or Object
  * @returns {BlockHeader} - An instance of block header
  * @constructor
  */
@@ -64,10 +64,10 @@ export class BlockHeader {
     nonce: number;
 
     /**
-     * @param {BlockHeader.fromObject} obj - A plain JavaScript object
+     * @param {BlockHeader.fromObjectParams} obj - A plain JavaScript object
      * @returns {BlockHeader} - An instance of block header
      */
-    static fromObject(obj: BlockHeader.fromObject): BlockHeader;
+    static fromObject(obj: BlockHeader.fromObjectParams): BlockHeader;
 
     /**
      * @param {Buffer|string} data Raw block binary data or buffer

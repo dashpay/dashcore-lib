@@ -10,24 +10,24 @@ import {bitcore} from "../bitcore";
 
 export namespace Transaction {
     /**
-     * @typedef {Object} Transaction.fromObject
+     * @typedef {Object} Transaction.fromObjectParams
      * @property {string} prevTxId
      * @property {number} outputIndex
      * @property {(Buffer|string|Script)} script
      * @property {number} satoshis
      */
-    type fromObject = {
+    type fromObjectParams = {
         prevTxId: string;
         outputIndex: number;
         script: Buffer | string | Script;
         satoshis: number;
     };
     /**
-     * @typedef {Object} Transaction.toObject
+     * @typedef {Object} Transaction.toObjectParams
      * @property {(string|Address)} address
      * @property {number} satoshis
      */
-    type toObject = {
+    type toObjectParams = {
         address: string | Address;
         satoshis: number;
     };
@@ -171,11 +171,11 @@ export class Transaction {
      *                  ['03000...', '02000...'], 2);
      * ```
      *
-     * @param {(Array<Transaction.fromObject>|Transaction.fromObject)} utxo
+     * @param {(Array<Transaction.fromObjectParams>|Transaction.fromObjectParams)} utxo
      * @param {Array=} pubkeys
      * @param {number=} threshold
      */
-    from(utxo: Transaction.fromObject[] | Transaction.fromObject, pubkeys?: any[], threshold?: number): void;
+    from(utxo: Transaction.fromObjectParams[] | Transaction.fromObjectParams, pubkeys?: any[], threshold?: number): void;
 
     /**
      * Add an input to this transaction. The input must be an instance of the `Input` class.
@@ -247,11 +247,11 @@ export class Transaction {
      * Beware that this resets all the signatures for inputs (in further versions,
      * SIGHASH_SINGLE or SIGHASH_NONE signatures will not be reset).
      *
-     * @param {(string|Address|Array.<Transaction.toObject>)} address
+     * @param {(string|Address|Array.<Transaction.toObjectParams>)} address
      * @param {number} amount in satoshis
      * @return {Transaction} this, for chaining
      */
-    to(address: string | Address | Transaction.toObject[], amount: number): Transaction;
+    to(address: string | Address | Transaction.toObjectParams[], amount: number): Transaction;
 
     /**
      * Add an OP_RETURN output to the transaction.

@@ -36,8 +36,8 @@ export class PublicKey {
         compressed?: string;
     });
 
-    id: string;
-    hash: string;
+    id: Buffer;
+    hash: Buffer;
     readonly network: Network;
     readonly compressed: Boolean;
     readonly point: Point;

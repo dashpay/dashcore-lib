@@ -1,20 +1,5 @@
 import {BN} from "../crypto/BN";
 
-export namespace BufferWriter {
-    /**
-     * Return a new buffer based on on BN argument
-     * @param {BN} bn
-     * @return Buffer
-     */
-    export function varintBufBN(): Buffer;
-
-    /**
-     * Return a varInt buffer based on input number
-     * @param {number} n - a number
-     * @return Buffer
-     */
-    export function varintBufNum(n: number): Buffer;
-}
 /**
  *
  * @param obj
@@ -118,4 +103,18 @@ export class BufferWriter {
      * @return {BufferWriter}
      */
     writeVarintBN(bn: BN): BufferWriter;
+
+    /**
+     * Return a new buffer based on on BN argument
+     * @param {BN} bn
+     * @return Buffer
+     */
+    static varintBufBN(): Buffer;
+
+    /**
+     * Return a varInt buffer based on input number
+     * @param {number} n - a number
+     * @return Buffer
+     */
+    static varintBufNum(n: number): Buffer;
 }

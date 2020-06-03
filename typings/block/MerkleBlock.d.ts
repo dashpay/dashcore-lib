@@ -97,8 +97,8 @@ export class MerkleBlock {
 
     /**
      * @param {Object} obj - A plain JavaScript object
-     * @returns {Block} - An instance of block
+     * @returns {MerkleBlock} - An instance of block
      */
-    static fromObject(obj: any): Block;
+    static fromObject(obj: any): MerkleBlock;
 }
 

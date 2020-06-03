@@ -1,11 +1,49 @@
 import {BufferReader} from '../buffer/BufferReader';
 import {BufferWriter} from '../buffer/BufferWriter';
+import {BlockHeader} from "./BlockHeader";
+import {Transaction} from "../transaction/Transaction";
+
+export namespace Block {
+    /**
+     * @typedef {Object} Block.fromObject
+     * @property {Transaction.toObject[]} transactions
+     * @property {BlockHeader.toObject} header
+     */
+    type fromObject = {
+        transactions: Transaction[];
+        header: BlockHeader.toObject;
+    };
+    /**
+     * @typedef {Object} BlockHeader.toObject
+     * @property {string} string
+     * @property {number} version
+     * @property {string} prevHash
+     * @property {string} merkleRoot
+     * @property {number} time
+     * @property {number} bits
+     * @property {number} nonce
+     */
+    type toObject = {
+        hash: string;
+        version: number;
+        prevHash: string;
+        merkleRoot: string;
+        time: number;
+        bits: number;
+        nonce: number;
+    };
+
+    type Values = {
+        START_OF_BLOCK: number;
+        NULL_HASH: Buffer;
+    }
+}
 
 /**
  * Instantiate a Block from a Buffer, JSON object, or Object with
  * the properties of the Block
  *
- * @param {*} - A Buffer, JSON string, or Object
+ * @param {Buffer|Block.fromObject} arg - A Buffer, JSON string, or Object
  * @returns {Block}
  * @constructor
  */
@@ -14,12 +52,13 @@ export class Block {
 
     id: string;
     hash: string;
-
+    header: BlockHeader;
+    transactions: Transaction[];
     /**
-     * @param {Object} obj - A plain JavaScript object
+     * @property {Block.fromObject} obj - A plain JavaScript object
      * @returns {Block} - An instance of block
      */
-    static fromObject(obj: any): Block;
+    static fromObject(obj: Block.fromObject): Block;
 
     /**
      * @param {BufferReader} br A buffer reader of the block
@@ -47,9 +86,9 @@ export class Block {
 
     /**
      * @function
-     * @returns {Object} - A plain object with the block properties
+     * @returns {Block.toObject} - A plain object with the block properties
      */
-    toObject(): any;
+    toObject(): {header: BlockHeader.toObject, transactions: Transaction.toObject[]};
 
     /**
      * @function
@@ -75,17 +114,17 @@ export class Block {
 
     /**
      * Will iterate through each transaction and return an array of hashes
-     * @returns {Array} - An array with transaction hashes
+     * @returns {Buffer[]} - An array with transaction hashes
      */
-    getTransactionHashes(): any[];
+    getTransactionHashes(): Buffer[];
 
     /**
      * Will build a merkle tree of all the transactions, ultimately arriving at
      * a single point, the merkle root.
      * @link https://en.bitcoin.it/wiki/Protocol_specification#Merkle_Trees
-     * @returns {Array} - An array with each level of the tree after the other.
+     * @returns {Buffer[]} - An array with each level of the tree after the other.
      */
-    getMerkleTree(): any[];
+    getMerkleTree(): Buffer[];
 
     /**
      * Calculates the merkleRoot from the transactions.

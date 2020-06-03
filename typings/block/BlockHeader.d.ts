@@ -1,12 +1,55 @@
 import { BufferReader } from "../buffer/BufferReader"
 import { BufferWriter } from "../buffer/BufferWriter"
 import {BN} from "../crypto/BN"
+import {Script} from "../script/Script";
+import {Address} from "../Address";
+
+export namespace BlockHeader {
+    /**
+     * @typedef {Object} BlockHeader.fromObject
+     * @property {(string)} string
+     * @property {number} version
+     * @property {(string|Buffer|ArrayBuffer|SharedArrayBuffer)} prevHash
+     * @property {(string|Buffer)} merkleRoot
+     * @property {number} time
+     * @property {number} bits
+     * @property {number} nonce
+     */
+    type fromObject = {
+        hash: string;
+        version: number;
+        prevHash: string|Buffer;
+        merkleRoot: string|Buffer;
+        time: number;
+        bits: number;
+        nonce: number;
+    };
+    /**
+     * @typedef {Object} BlockHeader.toObject
+     * @property {(string)} string
+     * @property {number} version
+     * @property {(string)} prevHash
+     * @property {(string)} merkleRoot
+     * @property {number} time
+     * @property {number} bits
+     * @property {number} nonce
+     */
+    type toObject = {
+        hash: string;
+        version: number;
+        prevHash: string;
+        merkleRoot: string;
+        time: number;
+        bits: number;
+        nonce: number;
+    };
+}
 
 /**
  * Instantiate a BlockHeader from a Buffer, JSON object, or Object with
  * the properties of the BlockHeader
  *
- * @param {*} - A Buffer, JSON string, or Object
+ * @param {Buffer|BlockHeader.fromObject} - A Buffer, JSON string, or Object
  * @returns {BlockHeader} - An instance of block header
  * @constructor
  */
@@ -15,12 +58,18 @@ export class BlockHeader {
 
     id: string;
     hash: string;
+    version: number;
+    prevHash: string|Buffer;
+    merkleRoot: string|Buffer;
+    time: number;
+    bits: number;
+    nonce: number;
 
     /**
-     * @param {Object} obj - A plain JavaScript object
+     * @param {BlockHeader.fromObject} obj - A plain JavaScript object
      * @returns {BlockHeader} - An instance of block header
      */
-    static fromObject(obj: any): BlockHeader;
+    static fromObject(obj: BlockHeader.fromObject): BlockHeader;
 
     /**
      * @param {Buffer|string} data Raw block binary data or buffer

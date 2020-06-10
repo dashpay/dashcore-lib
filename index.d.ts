@@ -22,6 +22,7 @@ import * as _BufferReader from './typings/buffer/BufferReader';
 import * as _BN from './typings/crypto/BN';
 import * as _Point from './typings/crypto/Point';
 import * as _Signature from './typings/crypto/Signature';
+import * as _Hash from './typings/crypto/Hash';
 
 import * as _SimplifiedMNListDiff from './typings/deterministicmnlist/SimplifiedMNListDiff';
 import * as _SimplifiedMNListEntry from './typings/deterministicmnlist/SimplifiedMNListEntry';
@@ -248,6 +249,13 @@ declare module "@dashevo/dashcore-lib"  {
          * @return {boolean} true if the string is the hex representation of a number
          */
         function isHexa(value: string): boolean;
+    }
+
+    export namespace crypto {
+        export import BN = _BN.BN;
+        export import Point = _Point.Point;
+        export import Signature = _Signature.Signature;
+        export import Hash = _Hash.Hash;
     }
 
     /**

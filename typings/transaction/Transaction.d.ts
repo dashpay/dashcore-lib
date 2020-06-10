@@ -39,7 +39,7 @@ export namespace Transaction {
  * @constructor
  */
 export class Transaction {
-    constructor(serialized: any);
+    constructor(serialized: string | Buffer | Object | Transaction | undefined);
 
     version: number;
     id: string;

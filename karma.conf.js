@@ -20,7 +20,6 @@ var karmaConfig = {
     },
     module: {
       rules: [
-        { test: /\.json$/, use: "json-loader" },
         { test: /\.dat$/, use: "raw-loader" },
         { enforce:'post', loader: "transform-loader?brfs" },
       ],

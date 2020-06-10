@@ -2,7 +2,7 @@
 // TODO: Remove previous line and work through linting issues at next edit
 
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 
 const commonJSConfig = {
   entry: ['./index.js'],
@@ -27,9 +27,10 @@ const uglifiedConfig = Object.assign({}, commonJSConfig, {
     library: 'dashcore',
     libraryTarget: 'umd',
   },
-  plugins: [
-    new UglifyJsPlugin()
-  ]
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
 })
 
 module.exports = [rawConfig, uglifiedConfig];

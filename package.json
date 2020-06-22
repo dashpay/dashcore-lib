@@ -109,7 +109,6 @@
     "@types/node": "^12.12.47",
     "bitset": "^5.1.1",
     "bloom-filter": "^0.2.0",
-    "bls-signatures": "0.1.9",
     "bn.js": "=4.11.8",
     "bs58": "=4.0.1",
     "elliptic": "=6.4.1",

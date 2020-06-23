@@ -53,12 +53,12 @@ describe('SimplifiedMNList', function () {
       mnList.applyDiff(SMNListFixture.getSecondDiff());
 
       // Check that there are masternodes to be deleted
-      //expect(mnsDeleted).to.be.equal(76);
+      expect(mnsDeleted).to.be.equal(76);
       // Check that there are masternodes to be updated - resulting list should be shorter than two diff - deleted count
-      //expect(mnsCountInTheFirstDiff + mnsCountInTheSecondDiff - mnsDeleted).to.be.above(mnList.mnList.length);
-      //expect(mnList.mnList.length).to.be.equal(SMNListFixture.getFirstTwoDiffsCombined().mnList.length);
+      expect(mnsCountInTheFirstDiff + mnsCountInTheSecondDiff - mnsDeleted).to.be.above(mnList.mnList.length);
+      expect(mnList.mnList.length).to.be.equal(SMNListFixture.getFirstTwoDiffsCombined().mnList.length);
       // Check that calculated merkle root is the same as merkle root in the latest applied diff
-      //expect(mnList.calculateMerkleRoot()).to.be.equal(SMNListFixture.getSecondDiff().merkleRootMNList);
+      expect(mnList.calculateMerkleRoot()).to.be.equal(SMNListFixture.getSecondDiff().merkleRootMNList);
     });
     it("Should throw an error if calculated merkle root doesn't match merkle root in the diff", function () {
       var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());

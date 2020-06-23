@@ -43,7 +43,7 @@ describe('Networks', function() {
   it('should be able to define a custom Network', function() {
     var custom = {
       name: 'customnet',
-      aliases: ['mynet'],
+      alias: ['mynet'],
       pubkeyhash: 0x10,
       privatekey: 0x90,
       scripthash: 0x08,
@@ -94,7 +94,7 @@ describe('Networks', function() {
     networks.remove(custom);
   });
 
-  var constants = ['name', 'aliases', 'pubkeyhash', 'scripthash', 'xpubkey', 'xprivkey'];
+  var constants = ['name', 'alias', 'pubkeyhash', 'scripthash', 'xpubkey', 'xprivkey'];
 
   constants.forEach(function(key){
     it('should have constant '+key+' for livenet and testnet', function(){

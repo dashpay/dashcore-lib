@@ -1,9 +1,9 @@
 # Dashcore Library
 
-[![NPM Version](https://img.shields.io/npm/v/@dashevo/dashcore-lib)](https://img.shields.io/npm/v/@dashevo/dashcore-lib)
-[![Build Status](https://img.shields.io/travis/com/dashevo/dashcore-lib.svg?branch=master&style=flat-square)](https://travis-ci.com/dashevo/dashcore-lib)
-[![Release Date](https://img.shields.io/github/release-date/dashevo/dashcore-lib)](https://img.shields.io/github/release-date/dashevo/dashcore-lib)
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+[![NPM Version](https://img.shields.io/npm/v/@dashevo/dashcore-lib)](https://www.npmjs.com/package/@dashevo/dashcore-lib)
+[![Build Status](https://img.shields.io/travis/com/dashevo/dashcore-lib)](https://travis-ci.com/dashevo/dashcore-lib)
+[![Release Date](https://img.shields.io/github/release-date/dashevo/dashcore-lib)](https://github.com/dashevo/dashcore-lib/releases/latest)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen)](https://github.com/RichardLitt/standard-readme)
 
 A pure and powerful JavaScript Dash library.
 

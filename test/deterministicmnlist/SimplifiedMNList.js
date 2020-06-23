@@ -139,18 +139,6 @@ describe('SimplifiedMNList', function () {
         expect(restoredMNList.cbTxMerkleTree).to.be.deep.equal(originalMNList.cbTxMerkleTree);
       }
     );
-    describe('deterministic sorting of quorums', function () {
-      it('Should be able to correctly sort quorums', function () {
-        var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
-        var unsortedQuorumList = MNList.quorumList;
-        var sortedQuorumList = MNList.sortQuorums(unsortedQuorumList);
-        var sortedQuorumListFixture = SMNListFixture.getSortedHashes();
-        var reversedSortedHashes = sortedQuorumList.map(function(quorum) {
-          return new QuorumEntry(quorum).calculateHash().toString('hex');
-        });
-        expect(reversedSortedHashes).to.be.deep.equal(sortedQuorumListFixture);
-      });
-    });
     it('Should throw if no diffs were applied to it', function () {
       var mnList = new SimplifiedMNList();
 
@@ -158,5 +146,22 @@ describe('SimplifiedMNList', function () {
         mnList.toSimplifiedMNListDiff()
       }).to.throw("Can't convert MN list to diff - cbTx is missing");
     })
+  });
+  describe('Quorums', function () {
+    it('Should be able to correctly sort quorums', function () {
+      var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      var unsortedQuorumList = MNList.quorumList;
+      var sortedQuorumList = MNList.sortQuorums(unsortedQuorumList);
+      var sortedQuorumListFixture = SMNListFixture.getSortedHashes();
+      var reversedSortedHashes = sortedQuorumList.map(function(quorum) {
+        return new QuorumEntry(quorum).calculateHash().toString('hex');
+      });
+      expect(reversedSortedHashes).to.be.deep.equal(sortedQuorumListFixture);
+    });
+    it('Should verify quorum', function () {
+      var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      var result = MNList.verifyQuorums();
+      expect(result).to.be.true;
+    });
   });
 });

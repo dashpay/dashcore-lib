@@ -3,6 +3,7 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 var SMNListFixture = require('../fixtures/mnList');
 var SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList');
+var QuorumEntry = require('../../lib/deterministicmnlist/QuorumEntry');
 var constants = require('../../lib/constants');
 var Networks = require('../../lib/networks');
 
@@ -52,7 +53,7 @@ describe('SimplifiedMNList', function () {
       mnList.applyDiff(SMNListFixture.getSecondDiff());
 
       // Check that there are masternodes to be deleted
-      expect(mnsDeleted).to.be.equal(1);
+      expect(mnsDeleted).to.be.equal(76);
       // Check that there are masternodes to be updated - resulting list should be shorter than two diff - deleted count
       expect(mnsCountInTheFirstDiff + mnsCountInTheSecondDiff - mnsDeleted).to.be.above(mnList.mnList.length);
       expect(mnList.mnList.length).to.be.equal(SMNListFixture.getFirstTwoDiffsCombined().mnList.length);
@@ -100,11 +101,11 @@ describe('SimplifiedMNList', function () {
 
       var validMNs = mnList.getValidMasternodesList();
       expect(validMNs).to.be.an('Array');
-      expect(mnList.mnList.length).to.be.equal(100);
-      expect(validMNs.length).to.be.equal(95);
+      expect(mnList.mnList.length).to.be.equal(371);
+      expect(validMNs.length).to.be.equal(273);
       expect(mnList.mnList.filter(function (entry) {
         return !entry.isValid
-      }).length).to.be.equal(5);
+      }).length).to.be.equal(98);
       validMNs.forEach(function (mnListEntry) {
         expect(mnListEntry.isValid).to.be.true;
       });
@@ -120,7 +121,7 @@ describe('SimplifiedMNList', function () {
       function () {
         var originalMNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
         originalMNList.applyDiff(SMNListFixture.getSecondDiff());
-        expect(originalMNList.mnList.length).to.be.equal(122);
+        expect(originalMNList.mnList.length).to.be.equal(350);
 
         var diff = originalMNList.toSimplifiedMNListDiff(Networks.testnet);
 
@@ -145,5 +146,22 @@ describe('SimplifiedMNList', function () {
         mnList.toSimplifiedMNListDiff()
       }).to.throw("Can't convert MN list to diff - cbTx is missing");
     })
+  });
+  describe('Quorums', function () {
+    it('Should be able to correctly sort quorums', function () {
+      var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      var unsortedQuorumList = MNList.quorumList;
+      var sortedQuorumList = MNList.sortQuorums(unsortedQuorumList);
+      var sortedQuorumListFixture = SMNListFixture.getSortedHashes();
+      var reversedSortedHashes = sortedQuorumList.map(function(quorum) {
+        return new QuorumEntry(quorum).calculateHash().toString('hex');
+      });
+      expect(reversedSortedHashes).to.be.deep.equal(sortedQuorumListFixture);
+    });
+    it('Should verify quorum', function () {
+      var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      var result = MNList.verifyQuorums();
+      expect(result).to.be.true;
+    });
   });
 });

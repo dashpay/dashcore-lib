@@ -19,15 +19,15 @@ branches:
     - develop
     - master
 
-before_install:
-  # Login to NPM registry
-  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
-
 install:
   - npm ci
 
 before_script:
   - npm run lint
+
+before_deploy:
+  # Login to NPM registry
+  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
 
 deploy:
   - provider: script
@@ -36,3 +36,4 @@ deploy:
     on:
       repo: dashevo/dashcore-lib
       branch: master
+      node_js: '12'

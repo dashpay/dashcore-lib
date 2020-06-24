@@ -36,4 +36,5 @@ deploy:
     on:
       repo: dashevo/dashcore-lib
       branch: master
+      tags: true
       node_js: '12'

@@ -67,6 +67,8 @@ describe('QuorumEntry', function () {
     });
     it('Should verify an aggregated member signature', function () {
       var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      mnList.applyDiff(SMNListFixture.getSecondDiff());
+      mnList.applyDiff(SMNListFixture.getThirdDiff());
       var entry = new QuorumEntry(quorumEntryJSON);
       var res = entry.isValidMemberSig(mnList);
       expect(res).to.be.true;

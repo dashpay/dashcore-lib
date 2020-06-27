@@ -10,25 +10,25 @@ var merkleUtils = require('../../lib//util/merkletree');
 
 var quorumEntryJSON = {
   "version": 1,
-  "llmqType": 2,
-  "quorumHash": "0000000007697fd69a799bfa26576a177e817bc0e45b9fcfbf48b362b05aeff2",
-  "signersCount": 400,
-  "signers": "bf7fffaffedffef77fef7ffffffcbdffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
-  "validMembersCount": 400,
-  "validMembers": "bf7fffaffedffef77fef7ffffffcbfffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
-  "quorumPublicKey": "03a3fbbe99d80a9be8fc59fd4fe43dfbeba9119b688e97493664716cdf15ae47fad70fea7cb93f20fba10d689f9e3c02",
-  "quorumVvecHash": "bede6b120304eb31d173678bb54ffcb0ab91f8d72d5af78b5047f76e393a26a2",
-  "quorumSig": "9944c544e03a478b401b65cabbb24338872613f7d58ff13ab038ab86418ec70ef1734ff43e965ccb83e02da83b10d44c0f23c630752cfb29b402149a1fc3fad0760e6341a4a1031efad2983c8637d2a461e9bcaf935b7a4dfa225ed2f7771c75",
-  "membersSig": "92eda5c13583577719bea9337b4b9b6286ac11a072de0955b0dc5a012280bb557a53f9643cee7730dabe2d3a4a19042813ef5d39ae92d0015554954011c1e12bc688d4d7672ac33c4001e0dedbfe5d0316f2ad23206d478964ca62d75f50e4d0"
+  "llmqType": 1,
+  "quorumHash": "0000000000c1c305a88441ce9a27a51fbad94555e50aaf6b61f84866bf56b160",
+  "signersCount": 50,
+  "signers": "ffffffffffff03",
+  "validMembersCount": 50,
+  "validMembers": "ffffffffffff03",
+  "quorumPublicKey": "8fe19adca131e5a5dbbfb5ae4022abb6838edc3ac13820affe7086ffe7e4d99b9374a18bd558b878f726fd9c5299b5c3",
+  "quorumVvecHash": "97ba33c3abbbf740f66c712db3e8886678f96cc5d9c57ef1769a072efea7daf3",
+  "quorumSig": "1527b12834578efb34480234293215cdaaba66ae31804ce57c8cf34ff0cf2b995a974d24c5f66bfe28ae7cd54c945fc8126465f4cf5a32e02d903be19d00e473fb93eaae9c28d9c80097e3410dbdd6e8dd223fde1a3be30a1fda688e0c9a087c",
+  "membersSig": "82ceec940dd23b3c50ace0645759d4cd7ea7f6153813018d265245e81bf7673b8c2d664e94f5f506655654ee39d2689a007d98513d274aae8dc31ebb0138756a768005774cc718ba55e18e9b442dbb638d54c7ff256e0d997e3544581497f5c0"
 };
 
-var quorumEntryHex = "010002f2ef5ab062b348bfcf9f5be4c07b817e176a5726fa9b799ad67f690700000000fd9001bf7fffaffedffef77fef7ffffffcbdffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000fd9001bf7fffaffedffef77fef7ffffffcbfffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f000000000003a3fbbe99d80a9be8fc59fd4fe43dfbeba9119b688e97493664716cdf15ae47fad70fea7cb93f20fba10d689f9e3c02a2263a396ef747508bf75a2dd7f891abb0fc4fb58b6773d131eb0403126bdebe9944c544e03a478b401b65cabbb24338872613f7d58ff13ab038ab86418ec70ef1734ff43e965ccb83e02da83b10d44c0f23c630752cfb29b402149a1fc3fad0760e6341a4a1031efad2983c8637d2a461e9bcaf935b7a4dfa225ed2f7771c7592eda5c13583577719bea9337b4b9b6286ac11a072de0955b0dc5a012280bb557a53f9643cee7730dabe2d3a4a19042813ef5d39ae92d0015554954011c1e12bc688d4d7672ac33c4001e0dedbfe5d0316f2ad23206d478964ca62d75f50e4d0";
-var quorumEntryHash = "082f5e29385f81704ef63c886aa20c2f8d69efd87d3937d6769285e2ead9ea0f";
-var commitmentHash = "df9562a0b2d79cd931712cd218304d9fba1c2b63206ada481ab05acd47bd1f38";
+var quorumEntryHex = "01000160b156bf6648f8616baf0ae55545d9ba1fa5279ace4184a805c3c1000000000032ffffffffffff0332ffffffffffff038fe19adca131e5a5dbbfb5ae4022abb6838edc3ac13820affe7086ffe7e4d99b9374a18bd558b878f726fd9c5299b5c3f3daa7fe2e079a76f17ec5d9c56cf9786688e8b32d716cf640f7bbabc333ba971527b12834578efb34480234293215cdaaba66ae31804ce57c8cf34ff0cf2b995a974d24c5f66bfe28ae7cd54c945fc8126465f4cf5a32e02d903be19d00e473fb93eaae9c28d9c80097e3410dbdd6e8dd223fde1a3be30a1fda688e0c9a087c82ceec940dd23b3c50ace0645759d4cd7ea7f6153813018d265245e81bf7673b8c2d664e94f5f506655654ee39d2689a007d98513d274aae8dc31ebb0138756a768005774cc718ba55e18e9b442dbb638d54c7ff256e0d997e3544581497f5c0";
+var quorumEntryHash = "9fc6855eae595e1cdafe7e80ddd1473d09ffa0958ef2c053c8c5383c39a65a83";
+var commitmentHash = "bc8c5dc5975ce6c4988ce8506ce6a4ec59b3232a8715aa2ffaeeebab8d71b533";
 
 describe('QuorumEntry', function () {
   describe('fromBuffer', function () {
-    it('Should be able to parse data from a buffer when ip address is present', function () {
+    it('Should be able to parse data from a buffer', function () {
       var entry = QuorumEntry.fromBuffer(Buffer.from(quorumEntryHex, 'hex'));
       var entryJSON = entry.toObject();
       expect(entryJSON).to.be.deep.equal(quorumEntryJSON)
@@ -68,7 +68,7 @@ describe('QuorumEntry', function () {
     it('Should verify an aggregated member signature', function () {
       var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
       mnList.applyDiff(SMNListFixture.getSecondDiff());
-      mnList.applyDiff(SMNListFixture.getThirdDiff());
+      mnList.applyDiff(SMNListFixture.getQuorumHashDiff());
       var entry = new QuorumEntry(quorumEntryJSON);
       var res = entry.isValidMemberSig(mnList);
       expect(res).to.be.true;

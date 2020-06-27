@@ -8202,6 +8202,41 @@ module.exports = {
       "merkleRootQuorums": "a0b03144516a6757be7417802b464020233b7170155a9246e7a5394707c70f85"
     };
   },
+  getQuorumHashDiff: function getQuorumHashDiff() {
+    return {
+      "baseBlockHash": "00000000033475ccbb5faa4a5369ba77dec9c63169bbf4b8e49d3f8815e54149",
+        "blockHash": "0000000000c1c305a88441ce9a27a51fbad94555e50aaf6b61f84866bf56b160",
+        "cbTxMerkleTree": "0100000001d53e75d8deab1bc204aecb501828ef8ddc41124d67e417b33259687c88e3c1970101",
+        "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff2603184803194d696e656420627920416e74506f6f6c20e4000b200a0b314900000040e2000000ffffffff02b562c63b000000001976a9142fd0e16c05bbbcdc388d4807b5cbe5f45389eb2d88acba62c63b000000001976a91488a060bc2dfe05780ae4dcb6c98b12436c35a93988ac000000004602001848030050eecd09d7493605ff411d17a6a2a1fbc703977bd9d9fec91e7d1f6c8a7632bfe8ef4f846598aac75c93a66cdc0943c457ea89587a00973902345b76d62b47bc",
+        "deletedMNs": [
+      ],
+        "mnList": [
+      ],
+        "deletedQuorums": [
+        {
+          "llmqType": 1,
+          "quorumHash": "000000000118567b7c0694aacf26d738b939344eccce0f521b8b4ca3b8e29b6e"
+        }
+      ],
+        "newQuorums": [
+        {
+          "version": 1,
+          "llmqType": 1,
+          "quorumHash": "000000000372bc858a6f26682f4f19a26d3934fc79cc0d0eb77cb86c37c8235e",
+          "signersCount": 50,
+          "signers": "ffffffffffff03",
+          "validMembersCount": 50,
+          "validMembers": "ffffffffffff03",
+          "quorumPublicKey": "89614abd88566d42a97b3054685327d98ae436954139ae6f32567411c97b6ee888ba3ebac78eb0fe2169ab756db106d7",
+          "quorumVvecHash": "f1ca473edf68b7a1e669008d58d8b20de6b674fe5e8b1dee4286a458a79c88c2",
+          "quorumSig": "91e176e1f613dbd66fa82218e3fc3d0fa8855885161c64b055b7a714e6e9e34f052f3d548d30010f43122a0da69e714a097dc7fe62cf8a974c114805f13c0bea2842e049b6cacbc41264db286b111f0a20328b9fcac4c7854601c65e4d4a3d41",
+          "membersSig": "096e735e94edb267c846808c0cd4388e543847de74539315bc21a4a57f8f71a0e72bc56097a863f4bc83a0507c8cd8f411338fe68f7b691dc091cceee36171a21c00ac1e581eaa21a52b351468dbff35186479f3bbb9f2b79f341bd06dd8aa27"
+        }
+      ],
+        "merkleRootMNList": "bf32768a6c1f7d1ec9fed9d97b9703c7fba1a2a6171d41ff053649d709cdee50",
+        "merkleRootQuorums": "bc472bd6765b34023997007a5889ea57c44309dc6ca6935cc7aa9865844fefe8"
+    }
+  },
   getFirstTwoDiffsCombined: function () {
     return {
       "baseBlockHash": "0000047d24635e347be3aaaeb66c26be94901a2f962feccd4f95090191f208c1",

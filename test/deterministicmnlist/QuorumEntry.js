@@ -1,9 +1,11 @@
 /* eslint-disable */
 // TODO: Remove previous line and work through linting issues at next edit
 
-var QuorumEntry = require('../../lib/deterministicmnlist/QuorumEntry');
 var BLS = require('bls-signatures');
 var expect = require('chai').expect;
+var QuorumEntry = require('../../lib/deterministicmnlist/QuorumEntry');
+var SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList');
+var SMNListFixture = require('../fixtures/mnList');
 var merkleUtils = require('../../lib//util/merkletree');
 
 var quorumEntryJSON = {
@@ -57,10 +59,16 @@ describe('QuorumEntry', function () {
       expect(entryCommitmentHash).to.be.deep.equal(Buffer.from(commitmentHash, 'hex'));
     });
   });
-  describe('verify threshold signature', function () {
+  describe('Quorum signatures', function () {
     it('Should verify a threshold signature', function () {
       var entry = new QuorumEntry(quorumEntryJSON);
       var res = entry.isValidQuorumSig();
+      expect(res).to.be.true;
+    });
+    it('Should verify an aggregated member signature', function () {
+      var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      var entry = new QuorumEntry(quorumEntryJSON);
+      var res = entry.isValidMemberSig(mnList);
       expect(res).to.be.true;
     });
   });

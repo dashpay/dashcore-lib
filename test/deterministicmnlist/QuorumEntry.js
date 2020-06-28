@@ -25,6 +25,7 @@ var quorumEntryJSON = {
 var quorumEntryHex = "01000160b156bf6648f8616baf0ae55545d9ba1fa5279ace4184a805c3c1000000000032ffffffffffff0332ffffffffffff038fe19adca131e5a5dbbfb5ae4022abb6838edc3ac13820affe7086ffe7e4d99b9374a18bd558b878f726fd9c5299b5c3f3daa7fe2e079a76f17ec5d9c56cf9786688e8b32d716cf640f7bbabc333ba971527b12834578efb34480234293215cdaaba66ae31804ce57c8cf34ff0cf2b995a974d24c5f66bfe28ae7cd54c945fc8126465f4cf5a32e02d903be19d00e473fb93eaae9c28d9c80097e3410dbdd6e8dd223fde1a3be30a1fda688e0c9a087c82ceec940dd23b3c50ace0645759d4cd7ea7f6153813018d265245e81bf7673b8c2d664e94f5f506655654ee39d2689a007d98513d274aae8dc31ebb0138756a768005774cc718ba55e18e9b442dbb638d54c7ff256e0d997e3544581497f5c0";
 var quorumEntryHash = "9fc6855eae595e1cdafe7e80ddd1473d09ffa0958ef2c053c8c5383c39a65a83";
 var commitmentHash = "bc8c5dc5975ce6c4988ce8506ce6a4ec59b3232a8715aa2ffaeeebab8d71b533";
+var selectionModifier = "c6a87d306a29918722342ddd612262356097b50b3d67476f073c33947aee32f0";
 
 describe('QuorumEntry', function () {
   describe('fromBuffer', function () {
@@ -59,7 +60,27 @@ describe('QuorumEntry', function () {
       expect(entryCommitmentHash).to.be.deep.equal(Buffer.from(commitmentHash, 'hex'));
     });
   });
-  describe('Quorum signatures', function () {
+  describe('quorum members', function () {
+    it('Should generate the correct selectionModifier', function () {
+      var entry = new QuorumEntry(quorumEntryJSON);
+      var res = entry.getSelectionModifier();
+      expect(res).to.be.deep.equal(Buffer.from(selectionModifier, 'hex'));
+    });
+    it('Should get the correct list of quorum members', function () {
+      var sortedMemberHashes = SMNListFixture.getSortedMemberProRegTxHashes();
+      var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      mnList.applyDiff(SMNListFixture.getSecondDiff());
+      mnList.applyDiff(SMNListFixture.getQuorumHashDiff());
+      var entry = new QuorumEntry(quorumEntryJSON);
+      var members = entry.getAllQuorumMembers(mnList);
+      var calculatedMemberHashes = [];
+      members.forEach(function (member) {
+        calculatedMemberHashes.push(member.proRegTxHash);
+      });
+      expect(calculatedMemberHashes).to.be.deep.equal(sortedMemberHashes);
+    });
+  });
+  describe('quorum signatures', function () {
     it('Should verify a threshold signature', function () {
       var entry = new QuorumEntry(quorumEntryJSON);
       var res = entry.isValidQuorumSig();

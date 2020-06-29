@@ -116,5 +116,15 @@ describe('QuorumEntry', function () {
       var res = entry.isValidMemberSig(mnList);
       expect(res).to.be.true;
     });
+    it('Should verify both signatures of the quorum and set isVerified to true', function () {
+      var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      mnList.applyDiff(SMNListFixture.getSecondDiff());
+      mnList.applyDiff(SMNListFixture.getQuorumHashDiff());
+      var entry = new QuorumEntry(quorumEntryJSON);
+      expect(entry.isVerified).to.be.false;
+      var res = entry.verify(mnList);
+      expect(res).to.be.true;
+      expect(entry.isVerified).to.be.true;
+    });
   });
 });

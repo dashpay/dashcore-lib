@@ -9,6 +9,9 @@ const commonJSConfig = {
   module: {
     rules: [],
   },
+  node: {
+    fs: "empty"
+  },
   target: 'web'
 };
 

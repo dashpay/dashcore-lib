@@ -71,6 +71,10 @@ describe('SimplifiedMNListDiff', function () {
       var diff = SimplifiedMNListDiff.fromObject(mnListDiffJSON);
       expect(diff.toObject()).to.be.deep.equal(mnListDiffJSON);
     });
+    it('Should be able to create an instance from object with specified network', function () {
+      var diff = SimplifiedMNListDiff.fromObject(mnListDiffJSON, 'testnet');
+      expect(diff.toObject()).to.be.deep.equal(mnListDiffJSON);
+    });
   });
   describe('toObject', function () {
     it('Should return an object with serialized diff data', function () {

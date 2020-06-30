@@ -36,8 +36,24 @@ describe('Networks', function() {
   });
 
   it('will get network based on string "regtest" value', function() {
+    networks.disableRegtest();
     var network = networks.get('regtest');
     network.should.equal(networks.testnet);
+    network.regtestEnabled.should.be.true;
+  });
+
+  it('will get network based on string "local" value', function() {
+    networks.disableRegtest();
+    var network = networks.get('local');
+    network.should.equal(networks.testnet);
+    network.regtestEnabled.should.be.true;
+  });
+
+  it('will get network based on string "evonet" value', function() {
+    networks.disableRegtest();
+    var network = networks.get('evonet');
+    network.should.equal(networks.testnet);
+    network.regtestEnabled.should.be.false;
   });
 
   it('should be able to define a custom Network', function() {

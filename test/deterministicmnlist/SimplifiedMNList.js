@@ -158,10 +158,50 @@ describe('SimplifiedMNList', function () {
       });
       expect(reversedSortedHashes).to.be.deep.equal(sortedQuorumListFixture);
     });
-    it('Should verify quorum', function () {
+    it('Should get a single quorum', function () {
       var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
-      var result = MNList.verifyQuorums();
-      expect(result).to.be.true;
+      var quorum = MNList.getQuorum(constants.LLMQ_TYPES.LLMQ_TYPE_400_60,'0000000007697fd69a799bfa26576a177e817bc0e45b9fcfbf48b362b05aeff2');
+      expect(quorum.quorumPublicKey).to.be.equal('03a3fbbe99d80a9be8fc59fd4fe43dfbeba9119b688e97493664716cdf15ae47fad70fea7cb93f20fba10d689f9e3c02');
+    });
+    it('Should not get a single quorum with wrong llmqType', function () {
+      var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      var quorum = MNList.getQuorum(constants.LLMQ_TYPES.LLMQ_TYPE_50_60,'0000000007697fd69a799bfa26576a177e817bc0e45b9fcfbf48b362b05aeff2');
+      expect(quorum).to.be.equal(undefined);
+    });
+    it('Should get all quorums', function () {
+      var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      var quorums = MNList.getQuorums();
+      expect(quorums.length).to.be.equal(25);
+    });
+    it('Should only get all unverified quorums', function () {
+      var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      var quorums = MNList.getUnverifiedQuorums();
+      expect(quorums.length).to.be.equal(25);
+      MNList.applyDiff(SMNListFixture.getSecondDiff());
+      MNList.applyDiff(SMNListFixture.getThirdDiff());
+      var quorumToVerify = MNList.getQuorum(constants.LLMQ_TYPES.LLMQ_TYPE_50_60, '0000000000c1c305a88441ce9a27a51fbad94555e50aaf6b61f84866bf56b160');
+      // now get the quorum diff to verify it with its corresponding mnList
+      var quorumMNList = new SimplifiedMNList(SMNListFixture.getFirstTwoDiffsCombined());
+      quorumMNList.applyDiff(SMNListFixture.getQuorumHashDiff());
+      var res = quorumToVerify.verify(quorumMNList);
+      expect(res).to.be.true;
+      quorums = MNList.getUnverifiedQuorums();
+      expect(quorums.length).to.be.equal(24);
+    });
+    it('Should only get all verified quorums', function () {
+      var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      var quorums = MNList.getVerifiedQuorums();
+      expect(quorums.length).to.be.equal(0);
+      MNList.applyDiff(SMNListFixture.getSecondDiff());
+      MNList.applyDiff(SMNListFixture.getThirdDiff());
+      var quorumToVerify = MNList.getQuorum(constants.LLMQ_TYPES.LLMQ_TYPE_50_60, '0000000000c1c305a88441ce9a27a51fbad94555e50aaf6b61f84866bf56b160');
+      // now get the quorum diff to verify it with its corresponding mnList
+      var quorumMNList = new SimplifiedMNList(SMNListFixture.getFirstTwoDiffsCombined());
+      quorumMNList.applyDiff(SMNListFixture.getQuorumHashDiff());
+      var res = quorumToVerify.verify(quorumMNList);
+      expect(res).to.be.true;
+      quorums = MNList.getVerifiedQuorums();
+      expect(quorums.length).to.be.equal(1);
     });
   });
 });

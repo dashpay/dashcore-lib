@@ -97,24 +97,30 @@ describe('QuorumEntry', function () {
   describe('quorum signatures', function () {
     it('Should verify a threshold signature', function () {
       var entry = new QuorumEntry(quorumEntryJSON);
-      var res = entry.isValidQuorumSig();
-      expect(res).to.be.true;
+      entry.isValidQuorumSig()
+        .then((res) => {
+          expect(res).to.be.true;
+        });
     });
     it('Should verify an aggregated member signature', function () {
       var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
       mnList.applyDiff(SMNListFixture.getSecondDiff());
       mnList.applyDiff(SMNListFixture.getQuorumHashDiff());
       var entry = new QuorumEntry(quorumEntryJSON);
-      var res = entry.isValidMemberSig(mnList);
-      expect(res).to.be.true;
+      entry.isValidMemberSig(mnList)
+        .then((res) => {
+          expect(res).to.be.true;
+        });
     });
     it('Should verify an aggregated member signature with not all members having signed', function () {
       var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
       mnList.applyDiff(SMNListFixture.getSecondDiff());
       mnList.applyDiff(SMNListFixture.getQuorumHashDiff2());
       var entry = new QuorumEntry(quorumEntryWithNonMaxSignersCount);
-      var res = entry.isValidMemberSig(mnList);
-      expect(res).to.be.true;
+      entry.isValidMemberSig(mnList)
+        .then((res) => {
+          expect(res).to.be.true;
+        });
     });
     it('Should verify both signatures of the quorum and set isVerified to true', function () {
       var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
@@ -122,9 +128,11 @@ describe('QuorumEntry', function () {
       mnList.applyDiff(SMNListFixture.getQuorumHashDiff());
       var entry = new QuorumEntry(quorumEntryJSON);
       expect(entry.isVerified).to.be.false;
-      var res = entry.verify(mnList);
-      expect(res).to.be.true;
-      expect(entry.isVerified).to.be.true;
+      entry.verify(mnList)
+        .then((res) => {
+          expect(res).to.be.true;
+          expect(entry.isVerified).to.be.true;
+        });
     });
   });
 });

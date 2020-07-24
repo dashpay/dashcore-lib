@@ -183,10 +183,13 @@ describe('SimplifiedMNList', function () {
       // now get the quorum diff to verify it with its corresponding mnList
       var quorumMNList = new SimplifiedMNList(SMNListFixture.getFirstTwoDiffsCombined());
       quorumMNList.applyDiff(SMNListFixture.getQuorumHashDiff());
-      var res = quorumToVerify.verify(quorumMNList);
-      expect(res).to.be.true;
-      quorums = MNList.getUnverifiedQuorums();
-      expect(quorums.length).to.be.equal(24);
+      quorumToVerify.verify(quorumMNList)
+        .then((res) => {
+          expect(res).to.be.true;
+          quorums = MNList.getUnverifiedQuorums();
+          expect(quorums.length).to.be.equal(24);
+        });
+
     });
     it('Should only get all verified quorums', function () {
       var MNList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
@@ -198,10 +201,12 @@ describe('SimplifiedMNList', function () {
       // now get the quorum diff to verify it with its corresponding mnList
       var quorumMNList = new SimplifiedMNList(SMNListFixture.getFirstTwoDiffsCombined());
       quorumMNList.applyDiff(SMNListFixture.getQuorumHashDiff());
-      var res = quorumToVerify.verify(quorumMNList);
-      expect(res).to.be.true;
-      quorums = MNList.getVerifiedQuorums();
-      expect(quorums.length).to.be.equal(1);
+      quorumToVerify.verify(quorumMNList)
+        .then((res) =>{
+          expect(res).to.be.true;
+          quorums = MNList.getVerifiedQuorums();
+          expect(quorums.length).to.be.equal(1);
+        });
     });
   });
 });

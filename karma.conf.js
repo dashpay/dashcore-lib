@@ -29,7 +29,7 @@ var karmaConfig = {
   port: 9876,
   colors: true,
   autoWatch: false,
-  browsers: ['FirefoxHeadless'],
+  browsers: ['ChromeHeadless', 'FirefoxHeadless'],
   singleRun: false,
   concurrency: Infinity,
   plugins: [

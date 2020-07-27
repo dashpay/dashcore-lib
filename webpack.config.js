@@ -3,6 +3,7 @@
 
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const commonJSConfig = {
   entry: ['./index.js'],
@@ -12,7 +13,17 @@ const commonJSConfig = {
   node: {
     fs: "empty"
   },
-  target: 'web'
+  target: 'web',
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'node_modules/bls-signatures/blsjs.wasm',
+          to: '.',
+        },
+      ],
+    }),
+  ],
 };
 
 const rawConfig = Object.assign({}, commonJSConfig, {

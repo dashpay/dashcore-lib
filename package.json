@@ -119,6 +119,7 @@
   "devDependencies": {
     "brfs": "^2.0.1",
     "chai": "^4.2.0",
+    "copy-webpack-plugin": "^6.0.3",
     "eslint": "^5.11.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.21.2",

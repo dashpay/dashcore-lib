@@ -8,7 +8,7 @@ var bls = require('../../lib/crypto/bls');
 
 describe('bls', () => {
   it('should return bls-signatures library', () => {
-    bls.getLib()
+    bls. getInstance()
       .then((blsInstance) => {
         expect(blsInstance).to.be.an('Object');
         expect(blsInstance.PublicKey).to.be.a('function');

@@ -183,7 +183,7 @@ describe('SimplifiedMNList', function () {
       // now get the quorum diff to verify it with its corresponding mnList
       var quorumMNList = new SimplifiedMNList(SMNListFixture.getFirstTwoDiffsCombined());
       quorumMNList.applyDiff(SMNListFixture.getQuorumHashDiff());
-      quorumToVerify.verify(quorumMNList)
+      return quorumToVerify.verify(quorumMNList)
         .then((res) => {
           expect(res).to.be.true;
           quorums = MNList.getUnverifiedQuorums();
@@ -201,7 +201,7 @@ describe('SimplifiedMNList', function () {
       // now get the quorum diff to verify it with its corresponding mnList
       var quorumMNList = new SimplifiedMNList(SMNListFixture.getFirstTwoDiffsCombined());
       quorumMNList.applyDiff(SMNListFixture.getQuorumHashDiff());
-      quorumToVerify.verify(quorumMNList)
+      return quorumToVerify.verify(quorumMNList)
         .then((res) =>{
           expect(res).to.be.true;
           quorums = MNList.getVerifiedQuorums();

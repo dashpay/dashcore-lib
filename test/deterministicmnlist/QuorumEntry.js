@@ -1,12 +1,10 @@
 /* eslint-disable */
 // TODO: Remove previous line and work through linting issues at next edit
 
-var BLS = require('bls-signatures');
 var expect = require('chai').expect;
 var QuorumEntry = require('../../lib/deterministicmnlist/QuorumEntry');
 var SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList');
 var SMNListFixture = require('../fixtures/mnList');
-var merkleUtils = require('../../lib//util/merkletree');
 
 var quorumEntryJSON = {
   "version": 1,
@@ -97,7 +95,7 @@ describe('QuorumEntry', function () {
   describe('quorum signatures', function () {
     it('Should verify a threshold signature', function () {
       var entry = new QuorumEntry(quorumEntryJSON);
-      entry.isValidQuorumSig()
+      return entry.isValidQuorumSig()
         .then((res) => {
           expect(res).to.be.true;
         });
@@ -107,7 +105,7 @@ describe('QuorumEntry', function () {
       mnList.applyDiff(SMNListFixture.getSecondDiff());
       mnList.applyDiff(SMNListFixture.getQuorumHashDiff());
       var entry = new QuorumEntry(quorumEntryJSON);
-      entry.isValidMemberSig(mnList)
+      return entry.isValidMemberSig(mnList)
         .then((res) => {
           expect(res).to.be.true;
         });
@@ -117,7 +115,7 @@ describe('QuorumEntry', function () {
       mnList.applyDiff(SMNListFixture.getSecondDiff());
       mnList.applyDiff(SMNListFixture.getQuorumHashDiff2());
       var entry = new QuorumEntry(quorumEntryWithNonMaxSignersCount);
-      entry.isValidMemberSig(mnList)
+      return entry.isValidMemberSig(mnList)
         .then((res) => {
           expect(res).to.be.true;
         });
@@ -128,7 +126,7 @@ describe('QuorumEntry', function () {
       mnList.applyDiff(SMNListFixture.getQuorumHashDiff());
       var entry = new QuorumEntry(quorumEntryJSON);
       expect(entry.isVerified).to.be.false;
-      entry.verify(mnList)
+      return entry.verify(mnList)
         .then((res) => {
           expect(res).to.be.true;
           expect(entry.isVerified).to.be.true;

@@ -8,6 +8,8 @@ var constants = require('../../lib/constants');
 var Networks = require('../../lib/networks');
 
 describe('SimplifiedMNList', function () {
+  this.timeout(5000);
+
   describe('constructor', function () {
     it('Should call applyDiff with the first argument passed to the constructor', function () {
       var spy = sinon.spy(SimplifiedMNList.prototype, "applyDiff");

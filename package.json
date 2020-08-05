@@ -3,6 +3,7 @@
   "version": "0.19.0-dev.1",
   "description": "A pure and powerful JavaScript Dash library.",
   "author": "Dash Core Group, Inc. <dev@dash.org>",
+  "browser": "dist/dashcore-lib.js",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
@@ -101,9 +102,6 @@
     "url": "https://github.com/dashevo/dashcore-lib/issues"
   },
   "homepage": "https://github.com/dashevo/dashcore-lib",
-  "browser": {
-    "request": "browser-request"
-  },
   "dependencies": {
     "@dashevo/x11-hash-js": "^1.0.2",
     "@types/node": "^12.12.47",

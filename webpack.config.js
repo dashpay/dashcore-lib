@@ -24,6 +24,11 @@ const commonJSConfig = {
       ],
     }),
   ],
+  resolve: {
+    alias: {
+      'request': 'browser-request',
+    },
+  },
 };
 
 const rawConfig = Object.assign({}, commonJSConfig, {

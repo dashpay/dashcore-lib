@@ -3,7 +3,7 @@
 
 'use strict';
 
-var bitcore = require('../..');
+var bitcore = require('../../index.js');
 var Random = bitcore.crypto.Random;
 var should = require('chai').should();
 var expect = require('chai').expect;
@@ -44,6 +44,6 @@ describe('Random', function() {
           bytes.length.should.equal(8);
 
           Buffer.isBuffer(bytes).should.equal(true);
-        });      
+        });
   });
 });

@@ -5,7 +5,7 @@
 
 var expect = require('chai').expect;
 var should = require('chai').should();
-var bitcore = require('..');
+var bitcore = require('../index.js');
 var networks = bitcore.Networks;
 
 describe('Networks', function() {

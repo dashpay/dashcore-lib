@@ -3,7 +3,7 @@
 
 'use strict';
 
-var bitcore = require('../..');
+var bitcore = require('../../index.js');
 var BN = require('../../lib/crypto/bn');
 var BufferReader = bitcore.encoding.BufferReader;
 var BufferWriter = bitcore.encoding.BufferWriter;

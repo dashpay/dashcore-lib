@@ -8,7 +8,7 @@ var chai = require('chai');
 var should = chai.should();
 var expect = chai.expect;
 
-var bitcore = require('../..');
+var bitcore = require('../../index.js');
 var MerkleBlock = bitcore.MerkleBlock;
 var BufferReader = bitcore.encoding.BufferReader;
 var BufferWriter = bitcore.encoding.BufferWriter;

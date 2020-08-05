@@ -5,7 +5,7 @@
 
 var should = require('chai').should();
 var sinon = require('sinon');
-var bitcore = require('../');
+var bitcore = require('../index.js');
 
 describe('#versionGuard', function() {
   it('global._dashcore should be defined', function() {

@@ -40,17 +40,17 @@ The code to do these validations looks like this:
 
 ```javascript
 // validate an address
-if (Address.isValid(input){
+if (Address.isValid(input)) {
   ...
 }
 
 // validate that an input field is a valid testnet address
-if (Address.isValid(input, Networks.testnet){
+if (Address.isValid(input, Networks.testnet)) {
   ...
 }
 
 // validate that an input field is a valid livenet pubkeyhash
-if (Address.isValid(input, Networks.livenet, Address.PayToPublicKeyHash){
+if (Address.isValid(input, Networks.livenet, Address.PayToPublicKeyHash)) {
   ...
 }
 

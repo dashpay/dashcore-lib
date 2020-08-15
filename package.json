@@ -1,6 +1,6 @@
 {
   "name": "@dashevo/dashcore-lib",
-  "version": "0.18.11",
+  "version": "0.18.12",
   "description": "A pure and powerful JavaScript Dash library.",
   "author": "Dash Core Group, Inc. <dev@dash.org>",
   "main": "index.js",
@@ -111,9 +111,9 @@
     "bloom-filter": "^0.2.0",
     "bn.js": "=4.11.8",
     "bs58": "=4.0.1",
-    "elliptic": "=6.4.1",
+    "elliptic": "^6.5.3",
     "inherits": "=2.0.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "unorm": "^1.6.0"
   },
   "devDependencies": {

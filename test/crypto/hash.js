@@ -4,7 +4,7 @@
 'use strict';
 
 require('chai').should();
-var bitcore = require('../..');
+var bitcore = require('../../index.js');
 var Hash = bitcore.crypto.Hash;
 
 describe('Hash', function() {

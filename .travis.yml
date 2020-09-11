@@ -28,6 +28,7 @@ before_script:
 before_deploy:
   # Login to NPM registry
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+  - npm run build
 
 deploy:
   - provider: script

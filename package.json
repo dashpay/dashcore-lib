@@ -5,6 +5,7 @@
   "author": "Dash Core Group, Inc. <dev@dash.org>",
   "browser": "dist/dashcore-lib.js",
   "main": "index.js",
+  "unpkg": "dist/dashcore-lib.min.js",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

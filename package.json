@@ -14,6 +14,13 @@
     "coverage": "nyc mocha --recursive",
     "build": "webpack --display-error-details"
   },
+  "files": [
+    "dist",
+    "docs",
+    "examples",
+    "lib",
+    "typings"
+  ],
   "contributors": [
     {
       "name": "Daniel Cousens",

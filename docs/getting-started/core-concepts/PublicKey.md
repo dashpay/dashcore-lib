@@ -1,7 +1,7 @@
 # Public Key
 Represents a Dash public key and is needed to be able to receive funds, as is usually represented as a Dash [Address](address.md). See the official [Bitcoin Wiki](https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses).
 
-A PublicKey in Dashcore is an immutable object and can be instantiated from a [Point](crypto.md), string, [PrivateKey](privatekey.md), Buffer or a [BN](crypto.md).
+A PublicKey in Dashcore is an immutable object and can be instantiated from a [Point](crypto.md), string, [PrivateKey](PrivateKey.md), Buffer or a [BN](crypto.md).
 
 ## Instantiate a Public Key
 Here is how to instantiate a public key:

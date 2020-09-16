@@ -37,7 +37,7 @@ assert(block.header.nonce);
 For more information about the specific properties of a block header please visit the [Block headers](https://dash-docs.github.io/en/developer-reference#block-headers) page on the Dash Developer Reference Wiki.
 
 ## Transactions
-The set of transactions in a block is an array of instances of [Transaction](transaction.md) and can be explored by iterating on the block's `transactions` member.
+The set of transactions in a block is an array of instances of [Transaction](Transaction.md) and can be explored by iterating on the block's `transactions` member.
 
 ```javascript
 for (var i in block.transactions) {

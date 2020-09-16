@@ -72,6 +72,59 @@ const pubkeyhash = Buffer.from('3c3fa3d4adcaf8f52d5b1843975e122548269937', 'hex'
 const address = Address.fromPublicKeyHash(pubkeyhash, 'livenet');
 ```
 
+## Address.fromScriptHash(hash, network)
+
+**Description**: Instantiate an address from a ripemd160 script hash
+
+Parameters: 
+
+| parameters                                | type            | required           | Description                                                                                                                                                                    |  
+|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **data**                                  | Buffer          | yes                | An instance of buffer of the hash                                                                                                                                 |
+| **network**                               | Network|String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+
+Returns : {Address} A new valid and frozen instance of an Address
+
+```js
+const scriptHash = Buffer.from('19a7d869032368fd1f1e26e5e73a4ad0e474960e', 'hex');
+const address = Address.fromScriptHash(scriptHash, 'livenet');
+```
+
+## Address.fromScript(hash, network)
+
+**Description**: Extract address from a Script. The script must be of one of the following types: p2pkh input, p2pkh output, p2sh input or p2sh output.
+This will analyze the script and extract address information from it. 
+If you want to transform any script to a p2sh Address paying to that script's hash instead, use Address.payingTo()
+
+Parameters: 
+
+| parameters                                | type            | required           | Description                                                                                                                                                                    |  
+|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **script**                                | Script          | yes                |  An instance of Script                                                                                                                                |
+| **network**                               | Network|String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+
+Returns : {Address} A new valid and frozen instance of an Address
+
+```js
+const script = new Script('OP_DUP OP_HASH160 20 0xc8e11b0eb0d2ad5362d894f048908341fa61b6e1 OP_EQUALVERIFY OP_CHECKSIG');
+const address = Address.fromScript(script);
+
+```
+
+## Address.payingTo(script, network)
+
+**Description**: Builds a p2sh address paying to script. This will hash the script and use that to create the address.
+
+Parameters: 
+
+| parameters                                | type            | required           | Description                                                                                                                                                                    |  
+|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **script**                                | Script          | yes                | An instance of Script                                                                                                                          |
+| **network**                               | Network|String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+
+Returns : {Address} A new valid and frozen instance of an Address
+
+
 ## .isPayToPublicKeyHash()
 
 **Description**: Returns true if an address is of pay to public key hash type

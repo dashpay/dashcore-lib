@@ -17,4 +17,13 @@
     - [Examples](getting-started/examples.md)
 - Usage
     - [Address](usage/Address.md)
+    - [Block](usage/Block.md)
+    - [BlockHeader](usage/BlockHeader.md)
+    - [BloomFilter](usage/BloomFilter.md)
+    - [HDPrivateKey](usage/HDPrivateKey.md)
+    - [HDPublicKey](usage/HDPublicKey.md)
+    - [Message](usage/Message.md)
+    - [Mnemonic](usage/Mnemonic.md)
+    - [Transaction](usage/Transaction.md)
+    - [URI](usage/URI.md)
 - [License](https://github.com/dashevo/dashcore-lib/blob/master/LICENSE)

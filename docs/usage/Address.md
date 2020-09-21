@@ -5,8 +5,8 @@ Parameters:
 
 | parameters                                | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **data**                                  | String|Buffer   | yes                | The encoded data in various format (PublicKey, PublicKeyHash, ScriptHash, Script, Buffer, Object or String)                                                                                                                                     |
-| **network**                               | Network|String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+| **data**                                  | String/Buffer   | yes                | The encoded data in various format (PublicKey, PublicKeyHash, ScriptHash, Script, Buffer, Object or String)                                                                                                                                     |
+| **network**                               | Network/String  | no[=livenet]       | The network as a Network instance or a string                                                              |
 | **type**                                  | string          | no                 | The type of address (script or pubkey) |
 
 Returns : A new valid and frozen instance of an Address
@@ -24,7 +24,7 @@ Parameters:
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **publicKeys**                            | Array           | yes                | a set of public keys to create an address                                                                                                                                     |
 | **threshold**                             | number          | yes                | the number of signatures needed to release the funds                                                             |
-| **network**                               | Network|String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+| **network**                               | Network/String  | no[=livenet]       | The network as a Network instance or a string                                                              |
 
 ```js
 const public1 = '02da5798ed0c055e31339eb9b5cef0d3c0ccdec84a62e2e255eb5c006d4f3e7f5b';
@@ -42,10 +42,10 @@ Returns :{Address} A new valid and frozen instance of an Address
 
 Parameters: 
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
+| parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **data**                                  | PublicKey           | yes            |                                                                                                                                      |
-| **network**                               | Network|String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+| **network**                               | Network/String  | no[=livenet]       | The network as a Network instance or a string                                                              |
 
 Returns : {Address} A new valid and frozen instance of an Address
 
@@ -60,10 +60,10 @@ const address = Address.fromPublicKey(pubkey);
 
 Parameters: 
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
+| parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **data**                                  | Buffer          | yes                | An instance of buffer of the hash                                                                                                                                    |
-| **network**                               | Network|String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+| **network**                               | Network/String  | no[=livenet]       | The network as a Network instance or a string                                                              |
 
 Returns : {Address} A new valid and frozen instance of an Address
 
@@ -78,10 +78,10 @@ const address = Address.fromPublicKeyHash(pubkeyhash, 'livenet');
 
 Parameters: 
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
+| parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **data**                                  | Buffer          | yes                | An instance of buffer of the hash                                                                                                                                 |
-| **network**                               | Network|String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+| **network**                               | Network/String  | no[=livenet]       | The network as a Network instance or a string                                                              |
 
 Returns : {Address} A new valid and frozen instance of an Address
 
@@ -98,10 +98,10 @@ If you want to transform any script to a p2sh Address paying to that script's ha
 
 Parameters: 
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
+| parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **script**                                | Script          | yes                |  An instance of Script                                                                                                                                |
-| **network**                               | Network|String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+| **network**                               | Network/String  | no[=livenet]       | The network as a Network instance or a string                                                              |
 
 Returns : {Address} A new valid and frozen instance of an Address
 
@@ -111,16 +111,28 @@ const address = Address.fromScript(script);
 
 ```
 
+## Address.fromObject(json)
+
+**Description**: Instantiate an address from an Object
+
+Parameters: 
+
+| parameter                                 | type            | required           | Description                                                                                                                                                                    |  
+|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **json**                                  | String/Object   | yes                | An JSON string or Object with keys: hash, network and type                                                                                                                              |
+
+Returns : {Address} A new valid and frozen instance of an Address
+
 ## Address.payingTo(script, network)
 
 **Description**: Builds a p2sh address paying to script. This will hash the script and use that to create the address.
 
 Parameters: 
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
+| parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **script**                                | Script          | yes                | An instance of Script                                                                                                                          |
-| **network**                               | Network|String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+| **network**                               | Network/String  | no[=livenet]       | The network as a Network instance or a string                                                              |
 
 Returns : {Address} A new valid and frozen instance of an Address
 
@@ -131,8 +143,7 @@ Returns : {Address} A new valid and frozen instance of an Address
 
 Parameters: 
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
-|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+**Parameters**: None.  
 
 Returns : {boolean}
 
@@ -140,8 +151,7 @@ Returns : {boolean}
 
 **Description**: Returns true if an address is of script hash type
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
-|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+**Parameters**: None.  
 
 Returns : {boolean}
 
@@ -149,40 +159,35 @@ Returns : {boolean}
 ## .toString()
 **Description**:Will return a string representation of the address
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
-|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+**Parameters**: None.  
 
-returns: {string} Dash address
+**Returns**: {string} Dash address
 
 ```js
 const address = new Address(...);
 address.toString() // XgBQcYbKff4q7cEs7AaxoPN2CAiBbFc2JT
 ```
 
-## .toJSON()
-## .toObject()
+## .toJSON() / .toObject()
 **Description**: Will return an object representation of the address
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
-|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+**Parameters**: None.  
 
-returns: {Object} A plain object with the address information
+**Returns**: {Object} A plain object with the address information
 
 ## .toBuffer()
 **Description**: Will return a buffer representation of the address
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
-|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+**Parameters**: None.  
 
-returns: {Buffer} Dash address buffer
+**Returns**: {Buffer} Dash address buffer
 
 ## .inspect()
 **Description**: Will return a string formatted for the console
 
-| parameters                                | type            | required           | Description                                                                                                                                                                    |  
-|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+**Parameters**: None.  
 
-returns: {string} Dash address
+**Returns**: {string} Dash address
 
 ```js
 const address = new Address(...);

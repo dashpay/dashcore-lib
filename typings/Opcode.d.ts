@@ -20,9 +20,10 @@ export class Opcode {
 
     /**
      * @memberOf Opcode
+     * @param {Opcode} opcode
      * @returns true if opcode is one of OP_0, OP_1, ..., OP_16
      */
-    static isSmallIntOp(): Boolean;
+    static isSmallIntOp(opcode): Boolean;
 
     /**
      * @returns map of the available opcodes
@@ -36,7 +37,7 @@ export class Opcode {
      */
     static smallInt(n: number): Buffer;
     /**
-     * Instantiate a PrivateKey from a Buffer with the DER or WIF representation
+     * Instantiate a Opcode from a Buffer
      *
      * @param {Buffer} buf
      * @return {Opcode}
@@ -44,7 +45,7 @@ export class Opcode {
     static fromBuffer(buf: Buffer): Opcode;
 
     /**
-     * Instantiate a Opcode from it's string format
+     * Instantiate a Opcode from a number
      *
      * @function
      * @param {number} num - The Opcode number

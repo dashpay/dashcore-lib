@@ -22,6 +22,8 @@
     - [BloomFilter](usage/BloomFilter.md)
     - [HDPrivateKey](usage/HDPrivateKey.md)
     - [HDPublicKey](usage/HDPublicKey.md)
+    - [PrivateKey](usage/PrivateKey.md)
+    - [PublicKey](usage/PublicKey.md)
     - [Message](usage/Message.md)
     - [Mnemonic](usage/Mnemonic.md)
     - [Transaction](usage/Transaction.md)

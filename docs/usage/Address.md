@@ -1,7 +1,7 @@
 **Usage**: `new Address(data, network, type)`  
 **Description**: Instantiate an address from an address String or Buffer, a public key or script hash Buffer.
 
-Parameters: 
+**Parameters**:
 
 | parameters                                | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -18,7 +18,7 @@ Returns : A new valid and frozen instance of an Address
 The addresses will be sorted lexicographically.   
 To create an address from unsorted public keys, use the Script#buildMultisigOut
 
-Parameters: 
+**Parameters**:
 
 | parameters                                | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -40,7 +40,7 @@ Returns :{Address} A new valid and frozen instance of an Address
 
 **Description**: Instantiate an address from a PublicKey instance.
 
-Parameters: 
+**Parameters**:
 
 | parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -58,7 +58,7 @@ const address = Address.fromPublicKey(pubkey);
 
 **Description**: Instantiate an address from a PublicKey instance.
 
-Parameters: 
+**Parameters**:
 
 | parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -76,7 +76,7 @@ const address = Address.fromPublicKeyHash(pubkeyhash, 'livenet');
 
 **Description**: Instantiate an address from a ripemd160 script hash
 
-Parameters: 
+**Parameters**:
 
 | parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -96,7 +96,7 @@ const address = Address.fromScriptHash(scriptHash, 'livenet');
 This will analyze the script and extract address information from it. 
 If you want to transform any script to a p2sh Address paying to that script's hash instead, use Address.payingTo()
 
-Parameters: 
+**Parameters**:
 
 | parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -115,7 +115,7 @@ const address = Address.fromScript(script);
 
 **Description**: Instantiate an address from an Object
 
-Parameters: 
+**Parameters**:
 
 | parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -127,7 +127,7 @@ Returns : {Address} A new valid and frozen instance of an Address
 
 **Description**: Builds a p2sh address paying to script. This will hash the script and use that to create the address.
 
-Parameters: 
+**Parameters**:
 
 | parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -136,25 +136,56 @@ Parameters:
 
 Returns : {Address} A new valid and frozen instance of an Address
 
+## Address.isValid(data, network, type)
+
+**Description**: Will return a boolean if an address is valid
+
+**Parameters**:
+
+| parameter                                 | type            | required           | Description                                                                                                                                                                    |  
+|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **data**                                  | Script          | yes                | The encoded data                                                                                                                          |
+| **network**                               | Network/String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+| **type**                                  | String          | no                 | The type of address: 'script' or 'pubkey'                                                              |
+
+Returns : {Boolean|String} if valid a boolean, else the corresponding error message
+
+## Address.getValidationError(data, network, type)
+**Description**: Will return a validation error if exists
+
+**Parameters**:
+
+| parameter                                 | type            | required           | Description                                                                                                                                                                    |  
+|-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **data**                                  | Script          | yes                | The encoded data                                                                                                                          |
+| **network**                               | Network/String  | no[=livenet]       | The network as a Network instance or a string                                                              |
+| **type**                                  | String          | no                 | The type of address: 'script' or 'pubkey'                                                              |
+
+**Returns**: {null|Error}  An error if exists
+
 
 ## .isPayToPublicKeyHash()
 
 **Description**: Returns true if an address is of pay to public key hash type
 
-Parameters: 
-
 **Parameters**: None.  
 
-Returns : {boolean}
+Returns : {boolean} - if it's a pay to public key hash type address
 
 ## .isPayToScriptHash()
 
-**Description**: Returns true if an address is of script hash type
+**Description**: Returns true if an address is of pay to script hash type
 
 **Parameters**: None.  
 
-Returns : {boolean}
+Returns : {boolean} - if it's a pay to script hash type address
 
+## .toBuffer()
+**Description**: Will return a buffer representation of the address
+
+**Parameters**: None.  
+
+**Returns**: {Buffer} Dash address buffer
 
 ## .toString()
 **Description**:Will return a string representation of the address
@@ -175,12 +206,6 @@ address.toString() // XgBQcYbKff4q7cEs7AaxoPN2CAiBbFc2JT
 
 **Returns**: {Object} A plain object with the address information
 
-## .toBuffer()
-**Description**: Will return a buffer representation of the address
-
-**Parameters**: None.  
-
-**Returns**: {Buffer} Dash address buffer
 
 ## .inspect()
 **Description**: Will return a string formatted for the console

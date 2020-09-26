@@ -49,6 +49,7 @@ bitcore.errors = require('./lib/errors');
 // main bitcoin library
 bitcore.Address = require('./lib/address');
 bitcore.Block = require('./lib/block');
+bitcore.ChainLock = require('./lib/chainlock/chainlock');
 bitcore.MerkleBlock = require('./lib/block/merkleblock');
 bitcore.SimplifiedMNList = require('./lib/deterministicmnlist/SimplifiedMNList');
 bitcore.SimplifiedMNListDiff = require('./lib/deterministicmnlist/SimplifiedMNListDiff');

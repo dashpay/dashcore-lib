@@ -1,4 +1,4 @@
-- Getting Stated
+- Getting Started
     - Core Concepts
         - [Address](getting-started/core-concepts/Address.md)
         - [Block](getting-started/core-concepts/Block.md)

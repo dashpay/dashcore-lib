@@ -56,7 +56,7 @@ const address = Address.fromPublicKey(pubkey);
 
 ## Address.fromPublicKeyHash(data, network)
 
-**Description**: Instantiate an address from a PublicKey instance.
+**Description**: Instantiate an address from a PublicKey hash.
 
 **Parameters**:
 
@@ -218,5 +218,4 @@ address.toString() // XgBQcYbKff4q7cEs7AaxoPN2CAiBbFc2JT
 const address = new Address(...);
 address.toInspect() // <Address: XgBQcYbKff4q7cEs7AaxoPN2CAiBbFc2JT, type: pubkeyhash, network: livenet>
 ```
-
 

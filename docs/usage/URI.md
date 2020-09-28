@@ -1,5 +1,5 @@
 **Usage**: `new URI(data)`  
-**Description**: Instantiate an URI from a Bitcoin URI String or an Object. A URI instance can be created with a Bitcoin URI string or an object.
+**Description**: Instantiate an URI from a Dash URI String or an Object. A URI instance can be created with a Dash URI string or an object.
 All instances of URI are valid, the static method isValid allows checking before instantiation.
 All standard parameters can be found as members of the class, the address is represented using an {Address} instance and the amount is represented in satoshis. Any other non-standard parameters can be found under the extra member.
 
@@ -12,7 +12,7 @@ All standard parameters can be found as members of the class, the address is rep
 
 ## URI.fromString(str)
 
-**Description**: Unstantiate a URI from an Object
+**Description**: Instantiate a URI from an Object
 
 **Parameters**:
 
@@ -25,7 +25,7 @@ All standard parameters can be found as members of the class, the address is rep
 
 ## URI.fromObject(data)
 
-**Description**: Unstantiate a URI from an Object
+**Description**: Instantiate a URI from an Object
 
 **Parameters**:
 
@@ -51,7 +51,7 @@ All standard parameters can be found as members of the class, the address is rep
 const isValid = URI.isValid('dash:XsV4GHVKGTjQFvwB7c6mYsGV3Mxf7iser6'); //true
 ```
 ## URI.parse(uri)
-**Description**: Convert a bitcoin URI string into a simple object.
+**Description**: Convert a Dash URI string into a simple object.
 
 **Parameters**:
 
@@ -67,6 +67,7 @@ Returns : {Object} An object with the parsed params
 **Parameters**: None.  
 
 **Returns**: {Object} A plain object with the URI properties
+
 ## .toString()
 **Description**: Will return a string representation of the URI
 
@@ -85,5 +86,4 @@ Returns : {Object} An object with the parsed params
 const uri = new URI(...);
 bluriock.toInspect() // <URI: dash:Xo4vyw1FtA88rYPYjbNT9kwhVokHHsSuPG>
 ```
-
 

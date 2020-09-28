@@ -15,14 +15,14 @@ Returns : {BloomFilter} A new instance of a BloomFilter
 const filter = new BloomFilter({
   vData: [], // the data of the filter
   nHashFucs: 3, // the number of hash functions to use
-  nTweak: 2147483649, // the seed used for the hash fuctions
+  nTweak: 2147483649, // the seed used for the hash functions
   nFlags: 0 // flags used to update the filter when matched
 });
 ```
 
 ## BloomFilter.create(numberOfElements, falsePositiveRate)
 
-**Description**: A conveniant method to initialize a filter from a number of elements and false positive rate.
+**Description**: A convenient method to initialize a filter from a number of elements and a false positive rate.
 
 Parameters: 
 

@@ -33,7 +33,7 @@
 **Returns**: {Boolean}
 
 ## HDPublicKey.getSerializedError(data, network)
-**Description**: Checks what's the error that causes the validation of a serialized public key in base58 with checksum to fail.
+**Description**: Checks what error causes the validation of a serialized public key in base58 with checksum to fail.
 
 | parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -91,7 +91,7 @@ Returns : {HDPublicKey} An instance of HDPublicKey
 ## .deriveChild(arg)
 **Description**: Get a derived child based on a string or number.   
 If the first argument is a string, it's parsed as the full path of derivation. Valid values for this argument include "m" (which returns the same public key), "m/0/1/40/2'/1000", where the ' quote means a hardened derivation.  
-If the first argument is a number, the child with that index will be derived. If the second argument is truthy, the hardened version will bederived. See the example usage for clarification.
+If the first argument is a number, the child with that index will be derived. If the second argument is truthy, the hardened version will be derived. See the example usage for clarification.
      
 **Parameters**: None.  
 
@@ -136,5 +136,4 @@ assert(child_0_1_2h.xpubkey === copy_of_child_0_1_2h);
 const hdPublicKey = new HDPublicKey(...);
 hdPublicKey.toInspect() // <HDPublicKey: xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi>
 ```
-
 

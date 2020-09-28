@@ -1869,46 +1869,6 @@ describe('Transaction', function() {
       });
 
     });
-
-    describe('isSimpleTransaction', function() {
-      it('Should return true if a transaction is qualified to be a simple transaction', function () {
-        var transaction = new Transaction()
-          .from(simpleUtxoWith1BTC)
-          .to([{address: toAddress, satoshis: 50000}])
-          .fee(15000)
-          .change(changeAddress)
-          .sign(privateKey);
-
-        var transactionDouble = new Transaction()
-          .from(doubleUTxoWith1BTC)
-          .to([{address: toAddress, satoshis: 50000}])
-          .fee(15000)
-          .change(changeAddress)
-          .sign(privateKey);
-
-        var transactionQuadruple = new Transaction()
-          .from(quadrupleUTxoWith1BTC)
-          .to([{address: toAddress, satoshis: 50000}])
-          .fee(15000)
-          .change(changeAddress)
-          .sign(privateKey);
-
-        expect(transaction.isSimpleTransaction()).to.be.true;
-        expect(transactionDouble.isSimpleTransaction()).to.be.true;
-        expect(transactionQuadruple.isSimpleTransaction()).to.be.true;
-      });
-      it('Should return false if a transaction is not qualified to be a simple transaction', function() {
-        var transactionQuintuple = new Transaction()
-          .from(quintupleUtxoWith1BTC)
-          .to([{address: toAddress, satoshis: 50000}])
-          .fee(15000)
-          .change(changeAddress)
-          .sign(privateKey);
-
-        expect(transactionQuintuple.isSimpleTransaction()).to.be.false;
-      });
-    });
-
   });
 
 });

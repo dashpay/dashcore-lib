@@ -175,11 +175,5 @@ console.log(transaction.getLockTime());
 // output similar to: Sun Nov 30 2025 00:00:00 GMT-0300 (ART)
 ```
 
-## Simple Transaction
-
-Since v0.13, simple transactions (having no more than 4 inputs), are entitled to an auto Instant Send upgrade (if mempool size is less than 10% full). 
-
-A method `isSimpleTransaction()` will simplify that verification for you.  
-
 ## Upcoming changes
 We're debating an API for Merge Avoidance, CoinJoin, Smart contracts, CoinSwap, and Stealth Addresses. We're expecting to have all of them by some time in 2015. Payment channel creation is available in the [dashcore-channel](https://github.com/dashevo/dashcore-channel) module.

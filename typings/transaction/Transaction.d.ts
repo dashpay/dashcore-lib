@@ -441,12 +441,6 @@ export class Transaction {
     enableRBF(): void;
 
     /**
-     * Returns true if this transaction is qualified to be a simple transaction to the network (<= 4 inputs).
-     * @returns {boolean}
-     */
-    isSimpleTransaction(): boolean;
-
-    /**
      * Set special transaction type and create an empty extraPayload
      * @param {number} type
      * @returns {Transaction}

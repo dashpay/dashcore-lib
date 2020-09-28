@@ -19,8 +19,8 @@
 
 **Returns** : {Transaction} An new copy instance of the provided transaction
 
-## Message.fromString(str)
-**Description**: Instantiate a Message from a string
+## Transaction.fromString(str)
+**Description**: Instantiate a Transaction from a string
 
 **Parameters**:
 
@@ -28,10 +28,10 @@
 |------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **str**                                  | Object          | yes                |  A string of the message                                                                                                            |
 
-Returns : {Message} An instance of Message
+Returns : {Transaction} An instance of Transaction
 
-## Message.fromJSON(obj)
-**Description**: Instantiate a Message from an object
+## Transaction.fromJSON(obj)
+**Description**: Instantiate a Transaction from an object
 
 **Parameters**:
 
@@ -39,7 +39,7 @@ Returns : {Message} An instance of Message
 |------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **obj**                                  | Object          | yes                | An JSON string or Object with keys: message                                                                                                            |
 
-**Returns** : {Message} An instance of Message
+**Returns** : {Transaction} An instance of Transaction
 
 
 ## .serialize(unsafe)
@@ -363,27 +363,6 @@ If there's no fee set and no change address, estimate the fee based on size.
 
 ## .isCoinbase()
 **Description**: Analogous to dashd's IsCoinBase function in transaction.h
-
-**Parameters**: None.
-
-**Returns**: boolean
-
-## .isRBF()
-**Description**: Determines if this transaction can be replaced in the mempool with another transaction that provides a sufficiently higher fee (RBF).
-
-**Parameters**: None.
-
-**Returns**: boolean
-
-## .enableRBF()
-**Description**:  Enable this transaction to be replaced in the mempool (RBF) if a transaction includes a sufficiently higher fee. It will set the sequenceNumber to DEFAULT_RBF_SEQNUMBER for all inputs if the sequence number does not already enable RBF.
-
-**Parameters**: None.
-
-**Returns**: void
-
-## .isSimpleTransaction()
-**Description**: Returns true if this transaction is qualified to be a simple transaction to the network (<= 4 inputs).
 
 **Parameters**: None.
 

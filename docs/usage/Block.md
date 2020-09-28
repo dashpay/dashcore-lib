@@ -44,7 +44,7 @@ Parameters:
 Returns : {Block} A instance of a Block
 
 ## Block.fromString(str)
-**Description**: Instantiate a block from a string representation
+**Description**: Instantiate a block from an Object
 
 Parameters: 
 
@@ -74,6 +74,12 @@ Returns : {Block} A instance of a Block
 **Returns**: {Buffer[]} An array with transaction hashes
 
 ## .toJSON() / .toObject()
+**Description**: Will return an object representation of the block
+
+**Parameters**: None.  
+
+**Returns**: {Object} A plain object with the Block properties
+
 ## .toBuffer()
 **Description**: Will return a buffer representation of the block
 
@@ -126,4 +132,5 @@ Returns : {Block} A instance of a Block
 const block = new Block(...);
 block.toInspect() // <Block: 00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6>
 ```
+
 

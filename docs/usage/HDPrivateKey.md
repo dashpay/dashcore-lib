@@ -1,5 +1,5 @@
 **Usage**: `new HDPrivateKey(data)`  
-**Description**: Instantiate an instance of a hierarchically derived private key (read more about HD in [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)).
+**Description**: Instantiate an instance of a hierarchically derived private key (read more about HD in the [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)).
 
 | parameters                                | type                   | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|------------------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -33,7 +33,7 @@
 **Returns**: {Boolean}
 
 ## HDPrivateKey.getSerializedError(data, network)
-**Description**: Checks what error causes the validation of a serialized private key in base58 with checksum to fail.
+**Description**: Checks what's the error that causes the validation of a serialized private key in base58 with checksum to fail.
 
 | parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -41,7 +41,7 @@
 | **network**                               | String/Network  | no                 | optional, if present, checks that the network provided matches the network serialized.                                                                                                                             |
 
 
-## HDPrivateKey.fromSeed(hexa, network)
+## HDPrivateKey.fromSeed(hex, network)
 
 **Description**: Verifies that a given serialized private key in base58 with checksum format is valid.
 
@@ -49,7 +49,7 @@
 
 | parameter                                 | type            | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|-----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **hexa**                                  | String/Buffer   | yes                | seed serialized as string a buffer                                                                                                                             |
+| **hex**                                   | String/Buffer   | yes                | seed serialized as string a buffer                                                                                                                             |
 | **network**                               | String/Network  | no                 |                                                                                                                        |
 
 **Returns**: {HDPrivateKey}
@@ -136,4 +136,5 @@ assert(child_0_1_2h.xprivkey === copy_of_child_0_1_2h);
 const hdPrivateKey = new HDPrivateKey(...);
 hdPrivateKey.toInspect() // <HDPrivateKey: xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi>
 ```
+
 

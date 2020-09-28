@@ -24,6 +24,7 @@ import * as _Point from './typings/crypto/Point';
 import * as _Signature from './typings/crypto/Signature';
 import * as _Hash from './typings/crypto/Hash';
 
+import * as _QuorumEntry from './typings/deterministicmnlist/QuorumEntry';
 import * as _SimplifiedMNListDiff from './typings/deterministicmnlist/SimplifiedMNListDiff';
 import * as _SimplifiedMNListEntry from './typings/deterministicmnlist/SimplifiedMNListEntry';
 

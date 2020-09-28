@@ -51,6 +51,7 @@ bitcore.Address = require('./lib/address');
 bitcore.Block = require('./lib/block');
 bitcore.ChainLock = require('./lib/chainlock/chainlock');
 bitcore.MerkleBlock = require('./lib/block/merkleblock');
+bitcore.QuorumEntry = require('./lib/deterministicmnlist/QuorumEntry');
 bitcore.SimplifiedMNList = require('./lib/deterministicmnlist/SimplifiedMNList');
 bitcore.SimplifiedMNListDiff = require('./lib/deterministicmnlist/SimplifiedMNListDiff');
 bitcore.SimplifiedMNListEntry = require('./lib/deterministicmnlist/SimplifiedMNListEntry');

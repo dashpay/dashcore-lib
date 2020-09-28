@@ -19,6 +19,8 @@ import * as _PartialMerkleTree from './typings/block/PartialMerkleTree';
 import * as _BufferWriter from './typings/buffer/BufferWriter';
 import * as _BufferReader from './typings/buffer/BufferReader';
 
+import * as _ChainLock from './typings/chainlock/ChainLock.d.ts';
+
 import * as _BN from './typings/crypto/BN';
 import * as _Point from './typings/crypto/Point';
 import * as _Signature from './typings/crypto/Signature';

@@ -81,7 +81,7 @@ Flags that can be used to skip tests:
 | **opts**                                  | Boolean/Object  | yes                | opts allows to skip certain tests. {see Transaction#serialize}.                                                                                                           |
 
 ## .lockUntilDate(time)
-**Description**: Sets nLockTime so that transaction is not valid until the desired date(a timestamp in seconds since UNIX epoch is also accepted)
+**Description**: Sets nLockTime so that transaction is not valid until the desired date (a timestamp in seconds since UNIX epoch is also accepted)
 
 **Parameters**:
 

@@ -426,21 +426,6 @@ export class Transaction {
     isCoinbase(): boolean;
 
     /**
-     * Determines if this transaction can be replaced in the mempool with another
-     * transaction that provides a sufficiently higher fee (RBF).
-     * @returns {boolean}
-     */
-    isRBF(): boolean;
-
-    /**
-     * Enable this transaction to be replaced in the mempool (RBF) if a transaction
-     * includes a sufficiently higher fee. It will set the sequenceNumber to
-     * DEFAULT_RBF_SEQNUMBER for all inputs if the sequence number does not
-     * already enable RBF.
-     */
-    enableRBF(): void;
-
-    /**
      * Set special transaction type and create an empty extraPayload
      * @param {number} type
      * @returns {Transaction}

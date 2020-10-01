@@ -80,6 +80,8 @@ You can also run just the Node.js tests with `npm run test:node`, just the brows
 
 ## Documentation
 
+### Concepts
+
 * [Addresses](docs/core-concepts/address.md)
 * [Block](docs/core-concepts/block.md)
 * [Crypto](docs/core-concepts/crypto.md)
@@ -96,7 +98,25 @@ You can also run just the Node.js tests with `npm run test:node`, just the brows
 * [URI](docs/core-concepts/uri.md)
 * [Governance Object / Proposal](docs/core-concepts/govobject/govobject.md)
 
-### Examples
+### How-to use
+
+* [Addresses](docs/usage/address.md)
+* [Block](docs/usage/block.md)
+* [BlockHeader](docs/usage/blockheader.md)
+* [Hierarchically-derived Private Key](docs/usage/hdprivatekey.md)
+* [Hierarchically-derived Public Key](docs/usage/hdpublickey.md)
+* [Message](docs/usage/message.md)
+* [Mnemonic](docs/usage/mnemonic.md)
+* [Opcode](docs/usage/opcode.md)
+* [PrivateKey](docs/usage/privatekey.md)
+* [PublicKey](docs/usage/publickey.md)
+* [Script](docs/usage/script.md)
+* [Transaction](docs/usage/transaction.md)
+* [Transaction Iput](docs/usage/transaction_input.md)
+* [Transaction Output](docs/usage/transaction_output.md)
+* [URI](docs/usage/uri.md)
+
+### Use Case Examples
 
 Some examples can be found [here](docs/examples.md), below is a list of direct links for some of them.
 

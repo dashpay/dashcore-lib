@@ -11,7 +11,7 @@
 **Returns**: {PublicKey} A new instance of a PublicKey
 
 ## PublicKey.fromPrivateKey(privkey)
-**Description**: Instantiate a PublicKey from an X Point
+**Description**: Instantiate a PublicKey from a private key
 
 **Parameters**: 
 
@@ -22,7 +22,7 @@
 **Returns**: {PublicKey} A new valid instance of PublicKey
 
 ## PublicKey.fromDER(buf, strict)
-**Description**: Instantiate a PublicKey from an X Point
+**Description**: Instantiate a PublicKey from a DER buffer
 
 **Parameters**: 
 
@@ -143,4 +143,3 @@
 const publicKey = new PublicKey(...);
 publicKey.toInspect() // <PublicKey: 041ff0fe0f7b15ffaa....>
 ```
-

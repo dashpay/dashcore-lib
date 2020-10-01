@@ -98,7 +98,7 @@ You can also run just the Node.js tests with `npm run test:node`, just the brows
 * [URI](docs/core-concepts/uri.md)
 * [Governance Object / Proposal](docs/core-concepts/govobject/govobject.md)
 
-### How-to use
+### How To Use
 
 * [Addresses](docs/usage/address.md)
 * [Block](docs/usage/block.md)

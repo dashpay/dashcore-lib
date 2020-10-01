@@ -1,5 +1,5 @@
 **Usage**: `new Opcode(data)`  
-**Description**: Instantiate a Opcode from it's Opcode string or number
+**Description**: Instantiate an Opcode from its Opcode string or number
 
 | parameters                                | type          | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|---------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -39,7 +39,7 @@
 
 | parameters                                | type           | required           | Description                                                                                                                                                                    |  
 |-------------------------------------------|----------------|--------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **num**                                   | Number         | yes                | A Buffer of the script                                               |
+| **num**                                   | Number         | yes                | A valid opcode number                                              |
  
 **Returns**: {Opcode} 
 

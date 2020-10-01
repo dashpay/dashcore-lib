@@ -80,21 +80,21 @@ You can also run just the Node.js tests with `npm run test:node`, just the brows
 
 ## Documentation
 
-* [Addresses](docs/address.md)
-* [Block](docs/block.md)
-* [Crypto](docs/crypto.md)
-* [Encoding](docs/encoding.md)
-* [Hierarchically-derived Private and Public Keys](docs/hierarchical.md)
-* [Mnemonic](docs/mnemonic.md)
-* [Networks](docs/networks.md)
-* [PrivateKey](docs/privatekey.md)
-* [PublicKey](docs/publickey.md)
-* [Script](docs/script.md)
-* [Transaction](docs/transaction.md)
-* [Using Different Units](docs/unit.md)
-* [Unspent Output](docs/unspentoutput.md)
-* [URI](docs/uri.md)
-* [Governance Object / Proposal](docs/govobject/govobject.md)
+* [Addresses](docs/core-concepts/address.md)
+* [Block](docs/core-concepts/block.md)
+* [Crypto](docs/core-concepts/crypto.md)
+* [Encoding](docs/core-concepts/encoding.md)
+* [Hierarchically-derived Private and Public Keys](docs/core-concepts/hierarchical.md)
+* [Mnemonic](docs/core-concepts/mnemonic.md)
+* [Networks](docs/core-concepts/networks.md)
+* [PrivateKey](docs/core-concepts/privatekey.md)
+* [PublicKey](docs/core-concepts/publickey.md)
+* [Script](docs/core-concepts/script.md)
+* [Transaction](docs/core-concepts/transaction.md)
+* [Using Different Units](docs/core-concepts/unit.md)
+* [Unspent Output](docs/core-concepts/unspentoutput.md)
+* [URI](docs/core-concepts/uri.md)
+* [Governance Object / Proposal](docs/core-concepts/govobject/govobject.md)
 
 ### Examples
 

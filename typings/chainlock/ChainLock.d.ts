@@ -35,9 +35,9 @@ export class ChainLock {
     /**
      * Verify that the signature is valid against the Quorum using quorumPublicKey
      * @param {QuorumEntry} quorumEntry - quorum entry to test signature against
-     * @returns {Boolean} - if the signature is valid for this quorum
+     * @returns {Promise<Boolean>} - if the signature is valid for this quorum
      */
-    verifySignatureAgainstQuorum(quorumEntry: QuorumEntry): Boolean;
+    verifySignatureAgainstQuorum(quorumEntry: QuorumEntry): Promise<Boolean>;
 
     /**
      * Validate Chainlock structure

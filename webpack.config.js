@@ -18,7 +18,7 @@ const commonJSConfig = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'node_modules/bls-signatures/blsjs.wasm',
+          from: 'node_modules/bls-signatures/blsjstmp.wasm',
           to: '.',
         },
       ],

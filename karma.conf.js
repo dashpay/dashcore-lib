@@ -11,7 +11,7 @@ var karmaConfig = {
   files: [
     src,
     tests,
-    { pattern: 'node_modules/bls-signatures/blsjs.wasm', included: false }
+    { pattern: 'node_modules/bls-signatures/blsjstmp.wasm', included: false }
   ],
   preprocessors: {},
   webpack: {
@@ -47,7 +47,7 @@ var karmaConfig = {
     },
   },
   proxies: {
-    '/base/blsjs.wasm': `/base/node_modules/bls-signatures/blsjs.wasm`,
+    '/base/blsjs.wasm': `/base/node_modules/bls-signatures/blsjstmp.wasm`,
   }
 };
 karmaConfig.preprocessors[src] = ['webpack'];

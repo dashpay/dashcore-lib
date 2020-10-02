@@ -305,6 +305,7 @@ declare module "@dashevo/dashcore-lib"  {
      */
     export function traverseAndBuildPartialTree(height: number, position: number, hashes: Buffer[], matches: boolean[]): any;
 
+    // @ts-ignore
     export import Address = _Address.Address;
     export import bitcore = _bitcore.bitcore;
     export import BloomFilter = _BloomFilter.BloomFilter;

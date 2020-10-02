@@ -11,7 +11,6 @@ var karmaConfig = {
   files: [
     src,
     tests,
-    { pattern: 'node_modules/bls-signatures/blsjstmp.wasm', included: false }
   ],
   preprocessors: {},
   webpack: {

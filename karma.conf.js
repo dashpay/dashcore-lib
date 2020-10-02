@@ -45,9 +45,6 @@ var karmaConfig = {
       base: 'Firefox',
       flags: ['-headless'],
     },
-  },
-  proxies: {
-    '/base/blsjs.wasm': `/base/node_modules/bls-signatures/blsjstmp.wasm`,
   }
 };
 karmaConfig.preprocessors[src] = ['webpack'];

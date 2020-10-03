@@ -75,7 +75,7 @@ transaction.applySignature(receivedSig);
 ```
 
 ## Adding inputs
-Transaction inputs are instances of either [Input](lib/transaction/input) or its subclasses. `Input` has some abstract methods, as there is no actual concept of a "signed input" in the Dash scripting system (just valid signatures for <tt>OP_CHECKSIG</tt> and similar opcodes). They are stored in the `input` property of `Transaction` instances.
+Transaction inputs are instances of either [Input](../../lib/transaction/input) or its subclasses. `Input` has some abstract methods, as there is no actual concept of a "signed input" in the Dash scripting system (just valid signatures for <tt>OP_CHECKSIG</tt> and similar opcodes). They are stored in the `input` property of `Transaction` instances.
 
 Dashcore contains two implementations of `Input`, one for spending _Pay to Public Key Hash_ outputs (called `PublicKeyHashInput`) and another to spend _Pay to Script Hash_ outputs for which the redeem script is a Multisig script (called `MultisigScriptHashInput`).
 
@@ -174,12 +174,6 @@ var transaction = new Transaction()
 console.log(transaction.getLockTime());
 // output similar to: Sun Nov 30 2025 00:00:00 GMT-0300 (ART)
 ```
-
-## Simple Transaction
-
-Since v0.13, simple transactions (having no more than 4 inputs), are entitled to an auto Instant Send upgrade (if mempool size is less than 10% full). 
-
-A method `isSimpleTransaction()` will simplify that verification for you.  
 
 ## Upcoming changes
 We're debating an API for Merge Avoidance, CoinJoin, Smart contracts, CoinSwap, and Stealth Addresses. We're expecting to have all of them by some time in 2015. Payment channel creation is available in the [dashcore-channel](https://github.com/dashevo/dashcore-channel) module.

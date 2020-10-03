@@ -106,7 +106,7 @@
     "@dashevo/x11-hash-js": "^1.0.2",
     "@types/node": "^12.12.47",
     "bloom-filter": "^0.2.0",
-    "bls-signatures": "^0.2.1",
+    "bls-signatures": "^0.2.4",
     "bn.js": "=4.11.8",
     "bs58": "=4.0.1",
     "elliptic": "^6.5.3",

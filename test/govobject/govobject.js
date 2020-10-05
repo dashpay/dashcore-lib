@@ -8,7 +8,7 @@ var expect = require('chai').expect;
 var _ = require('lodash');
 var sinon = require('sinon');
 
-var bitcore = require('../..');
+var bitcore = require('../../index.js');
 var GovObject = bitcore.GovObject;
 var Proposal = bitcore.GovObject.Proposal;
 var errors = bitcore.errors;

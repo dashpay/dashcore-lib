@@ -7,7 +7,7 @@ var should = require('chai').should();
 var expect = require('chai').expect;
 var _ = require('lodash');
 
-var bitcore = require('../../..');
+var bitcore = require('../../../index.js');
 var errors = bitcore.errors;
 var PrivateKey = bitcore.PrivateKey;
 var Address = bitcore.Address;

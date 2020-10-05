@@ -1,14 +1,15 @@
 {
   "name": "@dashevo/dashcore-lib",
-  "version": "0.18.11",
+  "version": "0.19.2",
   "description": "A pure and powerful JavaScript Dash library.",
   "author": "Dash Core Group, Inc. <dev@dash.org>",
+  "browser": "dist/dashcore-lib.js",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "npm run build && npm run test:node && npm run test:browser",
-    "test:node": "mocha $NODE_DEBUG_OPTION --no-timeouts --recursive",
+    "test:node": "mocha $NODE_DEBUG_OPTION --no-timeout --recursive",
     "test:browser": "karma start ./karma.conf.js --single-run",
     "coverage": "nyc mocha --recursive",
     "build": "webpack --display-error-details"
@@ -101,24 +102,22 @@
     "url": "https://github.com/dashevo/dashcore-lib/issues"
   },
   "homepage": "https://github.com/dashevo/dashcore-lib",
-  "browser": {
-    "request": "browser-request"
-  },
   "dependencies": {
     "@dashevo/x11-hash-js": "^1.0.2",
     "@types/node": "^12.12.47",
-    "bitset": "^5.1.1",
     "bloom-filter": "^0.2.0",
+    "bls-signatures": "^0.2.4",
     "bn.js": "=4.11.8",
     "bs58": "=4.0.1",
-    "elliptic": "=6.4.1",
+    "elliptic": "^6.5.3",
     "inherits": "=2.0.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "unorm": "^1.6.0"
   },
   "devDependencies": {
     "brfs": "^2.0.1",
     "chai": "^4.2.0",
+    "copy-webpack-plugin": "^6.0.3",
     "eslint": "^5.11.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.21.2",

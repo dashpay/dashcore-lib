@@ -1,9 +1,11 @@
 # Dashcore Library
 
-[![Build Status](https://img.shields.io/travis/dashevo/dashcore-lib.svg?branch=master)](https://travis-ci.org/dashevo/dashcore-lib)
-[![NPM Package](https://img.shields.io/npm/v/@dashevo/dashcore-lib.svg)](https://www.npmjs.org/package/@dashevo/dashcore-lib)
+[![NPM Version](https://img.shields.io/npm/v/@dashevo/dashcore-lib)](https://www.npmjs.com/package/@dashevo/dashcore-lib)
+[![Build Status](https://img.shields.io/travis/com/dashevo/dashcore-lib)](https://travis-ci.org/dashevo/dashcore-lib)
+[![Release Date](https://img.shields.io/github/release-date/dashevo/dashcore-lib)](https://github.com/dashevo/dashcore-lib/releases/latest)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen)](https://github.com/RichardLitt/standard-readme)
 
-> A pure and powerful JavaScript Dash library.
+A pure and powerful JavaScript Dash library.
 
 Dash is a powerful new peer-to-peer platform for the next generation of financial technology. The decentralized nature of the Dash network allows for highly resilient Dash infrastructure, and the developer community needs reliable, open-source tools to implement Dash apps and services.
 
@@ -56,7 +58,6 @@ Some functionality is implemented as a module that can be installed separately:
 * [Payment Protocol Support](https://github.com/dashevo/dashcore-payment-protocol)
 * [Peer to Peer Networking](https://github.com/dashevo/dashcore-p2p)
 * [Dash Core JSON-RPC](https://github.com/dashevo/dashd-rpc)
-* [Payment Channels](https://github.com/dashevo/dashcore-channel)
 * [Mnemonics](https://github.com/dashevo/dashcore-mnemonic)
 * [Elliptical Curve Integrated Encryption Scheme](https://github.com/dashevo/bitcore-ecies-dash)
 * [Signed Messages](https://github.com/dashevo/bitcore-message-dash)
@@ -100,7 +101,7 @@ You can also run just the Node.js tests with `npm run test:node`, just the brows
 Some examples can be found [here](docs/examples.md), below is a list of direct links for some of them.
 
 * [Generate a random address](docs/examples.md#generate-a-random-address)
-* [Generate an address from a SHA256 hash](docs/examples.md#generate-a-address-from-a-sha256-hash)
+* [Generate an address from a SHA256 hash](docs/examples.md#generate-an-address-from-a-sha256-hash)
 * [Import an address via WIF](docs/examples.md#import-an-address-via-wif)
 * [Create a Transaction](docs/examples.md#create-a-transaction)
 * [Sign a Dash message](docs/examples.md#sign-a-bitcoin-message)
@@ -119,4 +120,4 @@ Code released under [the MIT license](LICENSE).
 
 Copyright 2013-2017 BitPay, Inc. Bitcore is a trademark maintained by BitPay, Inc.  
 Copyright 2016-2017 The Dash Foundation, Inc.  
-Copyright 2017-2018 Dash Core Group, Inc.  
+Copyright 2017-2020 Dash Core Group, Inc.  

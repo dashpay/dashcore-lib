@@ -2,7 +2,6 @@
 // TODO: Remove previous line and work through linting issues at next edit
 
 'use strict';
-var path = require('path')
 
 var src = './index.js',
     tests = './test.spec.js';
@@ -11,7 +10,7 @@ var karmaConfig = {
   frameworks: ['mocha', 'chai'],
   files: [
     src,
-    tests
+    tests,
   ],
   preprocessors: {},
   webpack: {
@@ -45,7 +44,7 @@ var karmaConfig = {
       base: 'Firefox',
       flags: ['-headless'],
     },
-  },
+  }
 };
 karmaConfig.preprocessors[src] = ['webpack'];
 karmaConfig.preprocessors[tests] = ['webpack'];

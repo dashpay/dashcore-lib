@@ -4,7 +4,7 @@
 'use strict';
 
 var should = require('chai').should();
-var bitcore = require('../..');
+var bitcore = require('../../index.js');
 var Base58Check = bitcore.encoding.Base58Check;
 var Base58 = bitcore.encoding.Base58;
 

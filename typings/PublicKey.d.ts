@@ -26,12 +26,12 @@ import {Transaction} from "./transaction/Transaction";
  * @param {string} data - The encoded data in various formats
  * @param {Object} extra - additional options
  * @param {Network=} extra.network - Which network should the address for this public key be for
- * @param {String=} extra.compressed - If the public key is compressed
+ * @param {Boolean=} extra.compressed - If the public key is compressed
  * @returns {PublicKey} A new valid instance of a PublicKey
  * @constructor
  */
 export class PublicKey {
-    constructor(data: string, extra: {
+    constructor(data?: string, extra?: {
         network?: Network;
         compressed?: string;
     });

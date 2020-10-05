@@ -5,7 +5,7 @@ var should = chai.should();
 var expect = chai.expect;
 
 var bitcore = require('../../index');
-var ChainLock = bitcore.ChainLock;
+var ChainLock = bitcore.messages.ChainLock;
 var QuorumEntry = bitcore.QuorumEntry;
 
 describe('ChainLock', function () {
@@ -57,7 +57,7 @@ describe('ChainLock', function () {
 
 
   it('should have clsig a constant', function () {
-    expect(ChainLock.Constants.CLSIG_REQUESTID_PREFIX).to.deep.equal('clsig');
+    expect(ChainLock.CLSIG_REQUESTID_PREFIX).to.deep.equal('clsig');
   });
   describe('instantiation', function () {
     describe('fromBuffer', function () {

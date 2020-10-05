@@ -342,6 +342,10 @@ declare module "@dashevo/dashcore-lib"  {
     export import Proposal = _Proposal.Proposal;
     export import Trigger = _Trigger.Trigger;
 
+    export import ChainLock = _ChainLock.ChainLock;
+    export import QuorumEntry = _QuorumEntry.QuorumEntry;
+    export import SimplifiedMNList = _SimplifiedMNList.SimplifiedMNList;
+
     export import Mnemonic = _Mnemonic.Mnemonic;
 
     export import Script = _Script.Script;

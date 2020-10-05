@@ -1,6 +1,7 @@
 import {Network} from "./Network";
 import {PublicKey} from "./PublicKey";
 import {HDPublicKey} from "./HDPublicKey";
+import {PrivateKey} from "./PrivateKey";
 /**
  * Represents an instance of an hierarchically derived private key.
  *
@@ -18,6 +19,7 @@ export class HDPrivateKey {
     readonly network: Network;
     readonly depth: Number;
     readonly publicKey: PublicKey;
+    readonly privateKey: PrivateKey;
     readonly fingerPrint: Buffer;
 
     /**

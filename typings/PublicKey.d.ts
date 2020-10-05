@@ -31,7 +31,7 @@ import {Transaction} from "./transaction/Transaction";
  * @constructor
  */
 export class PublicKey {
-    constructor(data: string, extra: {
+    constructor(data?: string, extra?: {
         network?: Network;
         compressed?: string;
     });

@@ -4,7 +4,7 @@ var chai = require('chai');
 var should = chai.should();
 var expect = chai.expect;
 
-var bitcore = require('../..');
+var bitcore = require('../../index');
 var ChainLock = bitcore.ChainLock;
 var QuorumEntry = bitcore.QuorumEntry;
 

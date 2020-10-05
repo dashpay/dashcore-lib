@@ -26,7 +26,17 @@ npm install @dashevo/dashcore-lib
 
 ### Browser
 
-See the section below to generate your own bundle, or download the pre-generated [minified file](dist/dashcore-lib.min.js)
+#### CDN Standalone
+
+```html
+<script src="https://unpkg.com/@dashevo/dashcore-lib"></script>
+<script> 
+const { PrivateKey } = dashcore;
+const privateKey = new PrivateKey();
+const address = privateKey.toAddress().toString();
+...
+</script>
+```
 
 #### Building the Browser Bundle
 
@@ -36,7 +46,7 @@ To build a dashcore-lib full bundle for the browser:
 npm run build
 ```
 
-This will generate files named `dashcore-lib.js` and `dashcore-lib.min.js` in the `dist/` folder.
+This will generate a file named `dashcore-lib.min.js` in the `dist/` folder.
 
 ## Usage
 

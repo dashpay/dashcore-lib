@@ -27,7 +27,7 @@ import { BN } from "./crypto/BN";
  * @constructor
  */
 export class PrivateKey {
-    constructor(data: string, network: Network | string);
+    constructor(data?: string, network?: Network | string);
 
     readonly bn: BN;
     readonly compressed: boolean;

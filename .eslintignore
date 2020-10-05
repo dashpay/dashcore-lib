@@ -1,1 +1,9 @@
 dist/*
+test/*
+webpack.config.js
+test.spec.js
+lib/crypto/bls.js
+lib/deterministicmnlist/SimplifiedMNList.js
+lib/deterministicmnlist/QuorumEntry.js
+lib/util/bitarray.js
+lib/chainlock/chainlock.js

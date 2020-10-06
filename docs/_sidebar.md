@@ -13,6 +13,7 @@
     - [Unit](core-concepts/unit.md)
     - [UnspentOutput](core-concepts/unspentoutput.md)
     - [Uri](core-concepts/uri.md)
+    - [Governance Object](core-concepts/govobject/govobject.md)    
 - [Examples](examples.md)
 - Usage
     - [Address](usage/address.md)

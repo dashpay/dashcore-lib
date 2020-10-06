@@ -5,7 +5,7 @@ var should = chai.should();
 var expect = chai.expect;
 
 var bitcore = require('../../index');
-var ChainLock = bitcore.messages.ChainLock;
+var ChainLock = bitcore.ChainLock;
 var QuorumEntry = bitcore.QuorumEntry;
 
 describe('ChainLock', function () {

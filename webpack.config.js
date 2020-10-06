@@ -20,14 +20,6 @@ const commonJSConfig = {
   },
 };
 
-const rawConfig = Object.assign({}, commonJSConfig, {
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'dashcore-lib.js',
-    library: 'dashcore',
-    libraryTarget: 'umd',
-  }
-})
 const uglifiedConfig = Object.assign({}, commonJSConfig, {
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -37,8 +29,15 @@ const uglifiedConfig = Object.assign({}, commonJSConfig, {
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [new TerserPlugin({
+      terserOptions: {
+        output: {
+          comments: false,
+        },
+      },
+      extractComments: false,
+    })],
   },
 })
 
-module.exports = [rawConfig, uglifiedConfig];
+module.exports = [uglifiedConfig];

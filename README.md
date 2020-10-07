@@ -90,23 +90,43 @@ You can also run just the Node.js tests with `npm run test:node`, just the brows
 
 ## Documentation
 
-* [Addresses](docs/address.md)
-* [Block](docs/block.md)
-* [Crypto](docs/crypto.md)
-* [Encoding](docs/encoding.md)
-* [Hierarchically-derived Private and Public Keys](docs/hierarchical.md)
-* [Mnemonic](docs/mnemonic.md)
-* [Networks](docs/networks.md)
-* [PrivateKey](docs/privatekey.md)
-* [PublicKey](docs/publickey.md)
-* [Script](docs/script.md)
-* [Transaction](docs/transaction.md)
-* [Using Different Units](docs/unit.md)
-* [Unspent Output](docs/unspentoutput.md)
-* [URI](docs/uri.md)
-* [Governance Object / Proposal](docs/govobject/govobject.md)
+### Concepts
 
-### Examples
+* [Addresses](docs/core-concepts/address.md)
+* [Block](docs/core-concepts/block.md)
+* [Crypto](docs/core-concepts/crypto.md)
+* [Encoding](docs/core-concepts/encoding.md)
+* [Hierarchically-derived Private and Public Keys](docs/core-concepts/hierarchical.md)
+* [Mnemonic](docs/core-concepts/mnemonic.md)
+* [Networks](docs/core-concepts/networks.md)
+* [PrivateKey](docs/core-concepts/privatekey.md)
+* [PublicKey](docs/core-concepts/publickey.md)
+* [Script](docs/core-concepts/script.md)
+* [Transaction](docs/core-concepts/transaction.md)
+* [Using Different Units](docs/core-concepts/unit.md)
+* [Unspent Output](docs/core-concepts/unspentoutput.md)
+* [URI](docs/core-concepts/uri.md)
+* [Governance Object / Proposal](docs/core-concepts/govobject/govobject.md)
+
+### How To Use
+
+* [Addresses](docs/usage/address.md)
+* [Block](docs/usage/block.md)
+* [BlockHeader](docs/usage/blockheader.md)
+* [Hierarchically-derived Private Key](docs/usage/hdprivatekey.md)
+* [Hierarchically-derived Public Key](docs/usage/hdpublickey.md)
+* [Message](docs/usage/message.md)
+* [Mnemonic](docs/usage/mnemonic.md)
+* [Opcode](docs/usage/opcode.md)
+* [PrivateKey](docs/usage/privatekey.md)
+* [PublicKey](docs/usage/publickey.md)
+* [Script](docs/usage/script.md)
+* [Transaction](docs/usage/transaction.md)
+* [Transaction Iput](docs/usage/transaction_input.md)
+* [Transaction Output](docs/usage/transaction_output.md)
+* [URI](docs/usage/uri.md)
+
+### Use Case Examples
 
 Some examples can be found [here](docs/examples.md), below is a list of direct links for some of them.
 

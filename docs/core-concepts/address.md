@@ -2,14 +2,14 @@
 Represents a Dash address. Addresses are the most popular way to make Dash transactions. See [the Dash documentation](https://dash-docs.github.io/en/glossary/address) for technical background information.
 
 ## Instantiate an Address
-To be able to receive some funds an address is needed, but in order to spend them a private key is necessary. Please take a look at the [`PrivateKey`](PrivateKey.md) docs for more information about exporting and saving a key.
+To be able to receive some funds an address is needed, but in order to spend them a private key is necessary. Please take a look at the [`PrivateKey`](privatekey.md) docs for more information about exporting and saving a key.
 
 ```javascript
 var privateKey = new PrivateKey();
 var address = privateKey.toAddress();
 ```
 
-You can also instantiate an Address from a String, [PublicKey](PublicKey.md), or [HDPublicKey](hierarchical.md), in case you are not the owner of the private key.
+You can also instantiate an Address from a String, [PublicKey](publickey.md), or [HDPublicKey](hierarchical.md), in case you are not the owner of the private key.
 
 ```javascript
 // from a string
@@ -26,7 +26,7 @@ var publicKey = new PublicKey(privateKey);
 var address = new Address(publicKey, Networks.testnet);
 ```
 
-A pay-to-script-hash multisignature Address can be instantiated from an array of [PublicKeys](PublicKey.md).
+A pay-to-script-hash multisignature Address can be instantiated from an array of [PublicKeys](publickey.md).
 
 ```javascript
 // a 2-of-3 address from public keys

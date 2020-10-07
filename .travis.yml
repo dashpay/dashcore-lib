@@ -4,8 +4,8 @@ language: node_js
 
 # Support Active LTS versions of Node.js
 node_js:
-  - '10'
   - '12'
+  - '14'
 
 addons:
   chrome: stable
@@ -37,4 +37,4 @@ deploy:
     on:
       repo: dashevo/dashcore-lib
       branch: master
-      node_js: '12'
+      node_js: '14'

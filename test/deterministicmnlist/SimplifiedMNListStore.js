@@ -13,7 +13,7 @@ describe('SimplifiedMNListStore', function () {
       expect(SMLStore.baseBlockHash).to.be.equal(firstBlockHash);
     });
     it('Should create an SMLStore with 1st and 2nd diff', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff(), SMNListFixture.getSecondDiff()]);
+      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff(), SMNListFixture.getSecondStoreDiff()]);
       expect(SMLStore.baseBlockHash).to.be.equal(firstBlockHash);
     });
     it('Should initialize a SimplifiedMNListStore with options', function () {
@@ -72,14 +72,6 @@ describe('SimplifiedMNListStore', function () {
     it('Should get a SimplifiedMNList by block height with two diff', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
       SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
-      const height = SMLStore.getTipHeight();
-      const currentSML = SMLStore.getSMLbyHeight(height);
-      expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);
-    });
-    it('Should get a SimplifiedMNList by block height with three diff', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
-      SMLStore.addDiff(SMNListFixture.getThirdStoreDiff());
       const height = SMLStore.getTipHeight();
       const currentSML = SMLStore.getSMLbyHeight(height);
       expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);

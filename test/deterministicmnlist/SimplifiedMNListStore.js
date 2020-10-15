@@ -63,17 +63,11 @@ describe('SimplifiedMNListStore', function () {
     });
   });
   describe('get SML', function () {
-    it('Should get a SimplifiedMNList by block height with only base diff', function () {
+    it('Should get a SimplifiedMNList by block height', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
       const height = SMLStore.getTipHeight();
       const currentSML = SMLStore.getSMLbyHeight(height);
       expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);
-    });
-    it('Should get a SimplifiedMNList by block height with two diff', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff(), SMNListFixture.getSecondStoreDiff()]);
-      const height = SMLStore.getTipHeight();
-      const currentSML = SMLStore.getSMLbyHeight(height);
-      expect(height).to.equal(currentSML.blockHash);
     });
     it('Should get the current SML', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);

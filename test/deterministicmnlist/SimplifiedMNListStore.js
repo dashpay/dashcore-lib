@@ -90,9 +90,9 @@ describe('SimplifiedMNListStore', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
       SMLStore.addDiff(SMNListFixture.getSecondDiff());
       const height = SMLStore.getTipHeight();
-      const currentSMLByHeight = SMLStore.getSMLbyHeight(height);
+      const currentMerkleRootMNList = 'bf32768a6c1f7d1ec9fed9d97b9703c7fba1a2a6171d41ff053649d709cdee50';
       const currentSML = SMLStore.getCurrentSML();
-      expect(currentSMLByHeight.merkleRootMNList).to.be.equal(currentSML.merkleRootMNList);
+      expect(currentSML.merkleRootMNList).to.be.equal(currentMerkleRootMNList);
     });
     it('Should through an error when trying to get an SML at an unknown height', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);

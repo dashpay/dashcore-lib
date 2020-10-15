@@ -89,7 +89,6 @@ describe('SimplifiedMNListStore', function () {
     it('Should get the current SML', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
       SMLStore.addDiff(SMNListFixture.getSecondDiff());
-      SMLStore.addDiff(SMNListFixture.getThirdDiff());
       const height = SMLStore.getTipHeight();
       const currentSMLByHeight = SMLStore.getSMLbyHeight(height);
       const currentSML = SMLStore.getCurrentSML();

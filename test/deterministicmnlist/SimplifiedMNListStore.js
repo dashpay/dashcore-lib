@@ -73,12 +73,11 @@ describe('SimplifiedMNListStore', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff(), SMNListFixture.getSecondStoreDiff()]);
       const height = SMLStore.getTipHeight();
       const currentSML = SMLStore.getSMLbyHeight(height);
-      expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);
+      expect(height).to.equal(currentSML.blockHash);
     });
     it('Should get the current SML', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
       SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
-      const height = SMLStore.getTipHeight();
       const currentMerkleRootMNList = '57dc239d9740f4e0479599ff5eed69e101051ef340400e3e7b0b1fbf6d4aaf52';
       const currentSML = SMLStore.getCurrentSML();
       expect(currentSML.merkleRootMNList).to.be.equal(currentMerkleRootMNList);

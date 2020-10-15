@@ -54,11 +54,11 @@ describe('SimplifiedMNListStore', function () {
       expect(tipHash).to.equal(SMNListFixture.getThirdDiff().blockHash);
     });
     it('prune oldest diff and rebase store when reaching maxListsLimit', function () {
-      const newMerkleRootAfterPruning = SMNListFixture.getSecondDiff().merkleRootMNList;
+      const newMerkleRootAfterPruning = SMNListFixture.getSecondStoreDiff().merkleRootMNList;
       const options = { maxListsLimit: 2 };
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()], options);
-      SMLStore.addDiff(SMNListFixture.getSecondDiff());
-      SMLStore.addDiff(SMNListFixture.getThirdDiff());
+      SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
+      SMLStore.addDiff(SMNListFixture.getThirdStoreDiff());
       expect(SMLStore.baseSimplifiedMNList.merkleRootMNList).to.equal(newMerkleRootAfterPruning);
     });
   });
@@ -70,8 +70,7 @@ describe('SimplifiedMNListStore', function () {
       expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);
     });
     it('Should get a SimplifiedMNList by block height with two diff', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
+      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff(), SMNListFixture.getSecondStoreDiff()]);
       const height = SMLStore.getTipHeight();
       const currentSML = SMLStore.getSMLbyHeight(height);
       expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);

@@ -64,7 +64,7 @@ describe('SimplifiedMNListStore', function () {
       expect(SMLStore.baseSimplifiedMNList.merkleRootMNList).to.equal(newMerkleRootAfterPruning);
     });
   });
-  describe('get SML by height', function () {
+  describe('get SML', function () {
     it('Should get a SimplifiedMNList by block height with only base diff', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
       const height = SMLStore.getTipHeight();
@@ -85,6 +85,15 @@ describe('SimplifiedMNListStore', function () {
       const height = SMLStore.getTipHeight();
       const currentSML = SMLStore.getSMLbyHeight(height);
       expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);
+    });
+    it('Should get the current SML', function () {
+      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
+      SMLStore.addDiff(SMNListFixture.getSecondDiff());
+      SMLStore.addDiff(SMNListFixture.getThirdDiff());
+      const height = SMLStore.getTipHeight();
+      const currentSMLByHeight = SMLStore.getSMLbyHeight(height);
+      const currentSML = SMLStore.getCurrentSML();
+      expect(currentSMLByHeight.merkleRootMNList).to.be.equal(currentSML.merkleRootMNList);
     });
     it('Should through an error when trying to get an SML at an unknown height', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);

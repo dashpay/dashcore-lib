@@ -70,14 +70,21 @@ describe('SimplifiedMNListStore', function () {
       const currentSML = SMLStore.getSMLbyHeight(height);
       expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);
     });
-    /*
-  it('Should get a specific SimplifiedMNList by block height', function () {
-    // const mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
-    const height = 1111;
-    const SMLStore = new SimplifiedMNListStore(SMNListFixture.getFirstDiff());
-    const currentSML = SMLStore.getSMLbyHeight(height);
-    expect(currentSML.blockHash).to.equal(SMNListFixture.getFirstDiff().blockHash);
-  });
-  */
+    it('Should get a SimplifiedMNList by block height with three diff', function () {
+      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
+      SMLStore.addDiff(SMNListFixture.getSecondDiff());
+      SMLStore.addDiff(SMNListFixture.getThirdDiff());
+      const height = SMLStore.getTipHeight();
+      const currentSML = SMLStore.getSMLbyHeight(height);
+      expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);
+    });
+    it('Should through an error when trying to get an SML at an unknown height', function () {
+      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
+      SMLStore.addDiff(SMNListFixture.getSecondDiff());
+      const height = 11111;
+      expect(function () {
+        SMLStore.getSMLbyHeight(height);
+      }).to.throw('unable to construct SML at this height');
+    });
   });
 });

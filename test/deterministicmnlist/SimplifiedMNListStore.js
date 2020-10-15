@@ -19,8 +19,8 @@ describe('SimplifiedMNListStore', function () {
       expect(SMLStore.baseBlockHash).to.be.equal(SMNListFixture.getFirstDiff().baseBlockHash);
     });
     it('Should initialize a SimplifiedMNListStore with options', function () {
-     const optioms = { maxListsLimit: 20 };
-     const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()], optioms);
+     const options = { maxListsLimit: 20 };
+     const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()], options);
      expect(SMLStore.options.maxListsLimit).to.be.equal(20);
     });
   });
@@ -54,6 +54,14 @@ describe('SimplifiedMNListStore', function () {
       const newHeight = cbTx.extraPayload.height;
       expect(tipHeight).to.equal(newHeight);
       expect(tipHash).to.equal(SMNListFixture.getThirdDiff().blockHash);
+    });
+    it('prune oldest diff and rebase store when reaching maxListsLimit', function () {
+      const newMerkleRootAfterPruning = SMNListFixture.getSecondDiff().merkleRootMNList;
+      const options = { maxListsLimit: 2 };
+      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()], options);
+      SMLStore.addDiff(SMNListFixture.getSecondDiff());
+      SMLStore.addDiff(SMNListFixture.getThirdDiff());
+      expect(SMLStore.baseSimplifiedMNList.merkleRootMNList).to.equal(newMerkleRootAfterPruning);
     });
   });
   describe('get SML by height', function () {

@@ -71,30 +71,30 @@ describe('SimplifiedMNListStore', function () {
     });
     it('Should get a SimplifiedMNList by block height with two diff', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      SMLStore.addDiff(SMNListFixture.getSecondDiff());
+      SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
       const height = SMLStore.getTipHeight();
       const currentSML = SMLStore.getSMLbyHeight(height);
       expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);
     });
     it('Should get a SimplifiedMNList by block height with three diff', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      SMLStore.addDiff(SMNListFixture.getSecondDiff());
-      SMLStore.addDiff(SMNListFixture.getThirdDiff());
+      SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
+      SMLStore.addDiff(SMNListFixture.getThirdStoreDiff());
       const height = SMLStore.getTipHeight();
       const currentSML = SMLStore.getSMLbyHeight(height);
       expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);
     });
     it('Should get the current SML', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      SMLStore.addDiff(SMNListFixture.getSecondDiff());
+      SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
       const height = SMLStore.getTipHeight();
-      const currentMerkleRootMNList = 'bf32768a6c1f7d1ec9fed9d97b9703c7fba1a2a6171d41ff053649d709cdee50';
+      const currentMerkleRootMNList = '57dc239d9740f4e0479599ff5eed69e101051ef340400e3e7b0b1fbf6d4aaf52';
       const currentSML = SMLStore.getCurrentSML();
       expect(currentSML.merkleRootMNList).to.be.equal(currentMerkleRootMNList);
     });
     it('Should through an error when trying to get an SML at an unknown height', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      SMLStore.addDiff(SMNListFixture.getSecondDiff());
+      SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
       const height = 11111;
       expect(function () {
         SMLStore.getSMLbyHeight(height);

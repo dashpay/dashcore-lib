@@ -4,19 +4,21 @@ const SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList
 const SMNListFixture = require('../fixtures/mnList');
 const Transaction = require('../../lib/transaction');
 
+const firstBlockHash = SMNListFixture.getFirstDiff().baseBlockHash;
+
 describe('SimplifiedMNListStore', function () {
   describe('constructor', function () {
     it('Should create an SMLStore with just base diff', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      expect(SMLStore.baseBlockHash).to.be.equal(SMNListFixture.getFirstDiff().baseBlockHash);
+      expect(SMLStore.baseBlockHash).to.be.equal(firstBlockHash);
     });
     it('Should create an SMLStore with 1st and 2nd diff', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff(), SMNListFixture.getSecondDiff()]);
-      expect(SMLStore.baseBlockHash).to.be.equal(SMNListFixture.getFirstDiff().baseBlockHash);
+      expect(SMLStore.baseBlockHash).to.be.equal(firstBlockHash);
     });
     it('Should create an SMLStore with 3 diffs', function () {
       const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff(), SMNListFixture.getSecondDiff(), SMNListFixture.getThirdDiff()]);
-      expect(SMLStore.baseBlockHash).to.be.equal(SMNListFixture.getFirstDiff().baseBlockHash);
+      expect(SMLStore.baseBlockHash).to.be.equal(firstBlockHash);
     });
     it('Should initialize a SimplifiedMNListStore with options', function () {
      const options = { maxListsLimit: 20 };

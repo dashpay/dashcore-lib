@@ -5,6 +5,8 @@ var should = chai.should();
 var expect = chai.expect;
 
 var bitcore = require('../../index');
+var SimplifiedMNListStore = require('../../lib/deterministicmnlist/SimplifiedMNListStore');
+var SMNListFixture = require('../fixtures/mnList');
 var ChainLock = bitcore.ChainLock;
 var QuorumEntry = bitcore.QuorumEntry;
 
@@ -39,7 +41,7 @@ describe('ChainLock', function () {
       height: 84202,
       blockHash: '0000000007e0a65b763c0a4fb2274ff757abdbd19c9efe9de189f5828c70a5f4',
       signature: '0a43f1c3e5b3e8dbd670bca8d437dc25572f72d8e1e9be673e9ebbb606570307c3e5f5d073f7beb209dd7e0b8f96c751060ab3a7fb69a71d5ccab697b8cfa5a91038a6fecf76b7a827d75d17f01496302942aa5e2c7f4a48246efc8d3941bf6c'
-    }
+    };
     buf2 = Buffer.from(str2, 'hex');
     expectedHash2 = "3764ada6c32f09bb4f02295415b230657720f8be17d6fe046f0f8bf3db72b8e0";
     expectedRequestId2 = "6639d0da4a746f7260968e54be1b14fce8c5429f51bfe8762b58aae294e0925d";
@@ -49,7 +51,7 @@ describe('ChainLock', function () {
       height: 1177907,
       blockHash: Buffer.from('0000000000000027b4f24c02e3e81e41e2ec4db8f1c42ee1f3923340a22680ee', 'hex'),
       signature: Buffer.from('8ee1ecc07ee989230b68ccabaa95ef4c6435e642a61114595eb208cb8bfad5c8731d008c96e62519cb60a642c4999c880c4b92a73a99f6ff667b0961eb4b74fc1881c517cf807c8c4aed2c6f3010bb33b255ae75b7593c625e958f34bf8c02be', 'hex')
-    }
+    };
     str3 = '33f911000000000000000027b4f24c02e3e81e41e2ec4db8f1c42ee1f3923340a22680ee8ee1ecc07ee989230b68ccabaa95ef4c6435e642a61114595eb208cb8bfad5c8731d008c96e62519cb60a642c4999c880c4b92a73a99f6ff667b0961eb4b74fc1881c517cf807c8c4aed2c6f3010bb33b255ae75b7593c625e958f34bf8c02be';
 
     quorumEntryJSON = {
@@ -70,7 +72,7 @@ describe('ChainLock', function () {
 
     expectedRequestId3 = "f79d7cee1eea5839d91da7921920f19258e08b51c7cda01086e52d1b1d86510c";
 
-  })
+  });
 
 
   it('should have clsig a constant', function () {
@@ -81,7 +83,7 @@ describe('ChainLock', function () {
       it('should be able to parse data from a buffer', function () {
         var chainLock = ChainLock.fromBuffer(buf2);
         var chainLockStr = chainLock.toString();
-        expect(chainLockStr).to.be.deep.equal(str2)
+        expect(chainLockStr).to.be.deep.equal(str2);
         var chainLockJSON = chainLock.toObject();
         expect(chainLockJSON).to.be.deep.equal(object2)
       });
@@ -100,7 +102,7 @@ describe('ChainLock', function () {
         var chainLock = ChainLock.fromHex(str2);
         var chainLockJSON = chainLock.toObject();
         var chainLockBuffer = chainLock.toBuffer().toString('hex');
-        expect(chainLockJSON).to.be.deep.equal(object2)
+        expect(chainLockJSON).to.be.deep.equal(object2);
 
         expect(chainLockBuffer).to.be.deep.equal(buf2.toString('hex'))
       });
@@ -117,7 +119,7 @@ describe('ChainLock', function () {
 
   describe('validation', function () {
     describe('#verifySignatureAgainstQuorum', function () {
-      it('should verify signature', async function () {
+      it('should verify signature against single quorum', async function () {
         var chainLock = new ChainLock(buf2);
         var isValid = await chainLock.verifySignatureAgainstQuorum(quorum);
         expect(isValid).to.equal(false);
@@ -125,6 +127,15 @@ describe('ChainLock', function () {
         //FIXME: Neither DashJ nor DashSync or even dashd have any test vectors of successful verification
         // from chainlock hex and quorum. We don't yet have ability to unit test successful verify.
         // TODO: expect().to.equal(true).
+      });
+    });
+    describe('#verify', function () {
+      it('should verify signature against SMLStore', async function () {
+        var chainLock = new ChainLock(buf2);
+        var SMLdiffArray = [SMNListFixture.getChainlockDiff()];
+        var SMLStore = new SimplifiedMNListStore(SMLdiffArray);
+        var isValid = await chainLock.verify(SMLStore);
+        expect(isValid).to.equal(true);
       });
     })
   });
@@ -135,7 +146,7 @@ describe('ChainLock', function () {
         var hash = ChainLock.fromBuffer(buf2).getHash().toString('hex');
         expect(hash).to.deep.equal(expectedHash2);
       })
-    })
+    });
     describe('#getRequestId', function () {
       it('should compute the requestId', function () {
         var chainLock2 = new ChainLock(object2);
@@ -147,7 +158,7 @@ describe('ChainLock', function () {
         expect(requestId3).to.deep.equal(expectedRequestId3)
       })
     })
-  })
+  });
 
   describe('output', function () {
     describe('#copy', function () {

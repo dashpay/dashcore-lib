@@ -1,6 +1,5 @@
 const expect = require('chai').expect;
 const SimplifiedMNListStore = require('../../lib/deterministicmnlist/SimplifiedMNListStore');
-const SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList');
 const SMNListFixture = require('../fixtures/mnList');
 const Transaction = require('../../lib/transaction');
 

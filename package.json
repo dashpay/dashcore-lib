@@ -3,14 +3,13 @@
   "version": "0.19.2",
   "description": "A pure and powerful JavaScript Dash library.",
   "author": "Dash Core Group, Inc. <dev@dash.org>",
-  "browser": "dist/dashcore-lib.js",
   "main": "index.js",
   "unpkg": "dist/dashcore-lib.min.js",
   "scripts": {
     "prepublishOnly": "npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "npm run build && npm run test:node && npm run test:browser",
+    "test": "npm run test:node && npm run test:browser",
     "test:node": "mocha $NODE_DEBUG_OPTION --no-timeout --recursive",
     "test:browser": "karma start ./karma.conf.js --single-run",
     "coverage": "nyc mocha --recursive",
@@ -126,7 +125,6 @@
   "devDependencies": {
     "brfs": "^2.0.2",
     "chai": "^4.2.0",
-    "copy-webpack-plugin": "^6.0.3",
     "eslint": "^5.11.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.21.2",

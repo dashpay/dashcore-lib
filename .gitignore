@@ -10,3 +10,6 @@ coverage
 
 # ignore distribution files
 dist/
+
+# OS_X
+.DS_Store

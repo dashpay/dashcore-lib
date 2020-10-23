@@ -4,8 +4,8 @@ language: node_js
 
 # Support Active LTS versions of Node.js
 node_js:
-  - '10'
   - '12'
+  - '14'
 
 addons:
   chrome: stable
@@ -16,8 +16,9 @@ env:
 
 branches:
   only:
-    - develop
     - master
+    - /^v(0|[1-9]\d*)\.(0|[1-9]\d*)-dev$/
+    - /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
 
 install:
   - npm ci
@@ -36,4 +37,4 @@ deploy:
     on:
       repo: dashevo/dashcore-lib
       branch: master
-      node_js: '12'
+      node_js: '14'

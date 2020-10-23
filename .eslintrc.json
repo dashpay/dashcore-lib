@@ -1,3 +1,17 @@
 {
-  "extends": "airbnb-base"
+  "extends": "airbnb-base",
+  "rules": {
+    "no-underscore-dangle": 0,
+    "max-len": "warn",
+    "no-plusplus": 0,
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "class-methods-use-this": "off",
+    "curly": [
+      "error",
+      "all"
+    ]
+  }
 }

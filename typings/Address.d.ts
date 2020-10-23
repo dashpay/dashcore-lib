@@ -79,7 +79,7 @@ export class Address {
     /**
      * Creates a P2SH address from a set of public keys and a threshold.
      *
-     * The addresses will be sorted lexicographically, as that is the trend in bitcoin.
+     * The addresses will be sorted lexicographically.
      * To create an address from unsorted public keys, use the {@link Script#buildMultisigOut}
      * interface.
      *
@@ -156,7 +156,7 @@ export class Address {
     /**
      * Instantiate an address from an address string
      *
-     * @param {string} str - A string of the Bitcoin address
+     * @param {string} str - A string of the Dash address
      * @param {String|Network=} network - either a Network instance, 'livenet', or 'testnet'
      * @param {string=} type - The type of address: 'script' or 'pubkey'
      * @returns {Address} A new valid and frozen instance of an Address
@@ -217,17 +217,21 @@ export class Address {
     /**
      * Will return a buffer representation of the address
      *
-     * @returns {Buffer} Bitcoin address buffer
+     * @returns {Buffer} Dash address buffer
      */
     toBuffer(): Buffer;
 
     /**
+     * Will return an object representation of the address
+     *
      * @function
      * @returns {Object} A plain object with the address information
      */
     toObject(): any;
 
     /**
+     * Will return an object representation of the address
+     *
      * @function
      * @returns {Object} A plain object with the address information
      */
@@ -237,14 +241,14 @@ export class Address {
     /**
      * Will return a string representation of the address
      *
-     * @returns {string} Bitcoin address
+     * @returns {string} Dash address
      */
     toString(): string;
 
     /**
      * Will return a string formatted for the console
      *
-     * @returns {string} Bitcoin address
+     * @returns {string} Dash address
      */
     inspect(): string;
 }

@@ -20,6 +20,7 @@ global._dashcore = bitcore.version;
 // crypto
 bitcore.crypto = {};
 bitcore.crypto.BN = require('./lib/crypto/bn');
+bitcore.crypto.BLS = require('./lib/crypto/bls');
 bitcore.crypto.ECDSA = require('./lib/crypto/ecdsa');
 bitcore.crypto.Hash = require('./lib/crypto/hash');
 bitcore.crypto.Random = require('./lib/crypto/random');
@@ -49,7 +50,9 @@ bitcore.errors = require('./lib/errors');
 // main bitcoin library
 bitcore.Address = require('./lib/address');
 bitcore.Block = require('./lib/block');
+
 bitcore.MerkleBlock = require('./lib/block/merkleblock');
+bitcore.QuorumEntry = require('./lib/deterministicmnlist/QuorumEntry');
 bitcore.SimplifiedMNList = require('./lib/deterministicmnlist/SimplifiedMNList');
 bitcore.SimplifiedMNListDiff = require('./lib/deterministicmnlist/SimplifiedMNListDiff');
 bitcore.SimplifiedMNListEntry = require('./lib/deterministicmnlist/SimplifiedMNListEntry');
@@ -68,6 +71,8 @@ bitcore.Unit = require('./lib/unit');
 bitcore.Message = require('./lib/message');
 bitcore.Mnemonic = require('./lib/mnemonic');
 bitcore.BloomFilter = require('./lib/bloomfilter');
+
+bitcore.ChainLock = require('./lib/chainlock/chainlock');
 
 // dependencies, subject to change
 bitcore.deps = {};

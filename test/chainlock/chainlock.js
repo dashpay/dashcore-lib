@@ -22,7 +22,9 @@ describe('ChainLock', function () {
   var object3;
   var str3;
   var quorumEntryJSON;
+  var quorumEntryJSON4;
   var quorum;
+  var quorum4;
   var expectedRequestId3;
   var object4;
   var buf4;
@@ -76,6 +78,22 @@ describe('ChainLock', function () {
     quorum = new QuorumEntry(quorumEntryJSON);
 
     expectedRequestId3 = "0c51861d1b2de58610a0cdc7518be05892f1201992a71dd93958ea1eee7c9df7";
+
+    quorumEntryJSON4 = {
+      "version": 1,
+      "llmqType": 1,
+      "quorumHash": "00000a95d081a06e2ec67932b14b70b9d8ef3a586cd27ba288afe66d0fc069c2",
+      "signersCount": 50,
+      "signers": "ffffffffffff03",
+      "validMembersCount": 50,
+      "validMembers": "ffffffffffff03",
+      "quorumPublicKey": "86d0992f5c73b8f57101c34a0c4ebb17d962bb935a738c1ef1e2bb1c25034d8e4a0a2cc96e0ebc69a7bf3b8b67b2de5f",
+      "quorumVvecHash": "66db73de07442a06de20a171828abbd81589f8c6dc099cdc191d22f40aab1096",
+      "quorumSig": "1604a01eb78aa70fb28d12ab01fb9a3632036ff19fa249e5809e425ea09bda515a3d03d3c04901f8cb9ce35ef17cac4208dd21f3ffa4847a26c03357e5c2db2d0cd1b406e75389dc61effa4a8e30d287d4349cdb94d801ae3fe542c36460f2b8",
+      "membersSig": "140f5a4db1a3330b7dfdda8fe181137b2644577efd843a60401f0dbc7b0856782578bc9d6ab1a0b133596bcc158d781d02ed4db881cb4cc3260273dc90a53c1d1ce37930fa106c47db4cf7702b2e956dcafb7b180bea7aae2d662b7a6c217f27"
+    };
+
+    quorum4 = new QuorumEntry(quorumEntryJSON4);
 
     str4 = 'e80306000b2707507f03a51d11e072f9d14129b42ec758f314e22139789a1102cc080000061476c699fee312a29c0e7a604a5288237073e9317ac458f5772e0e40793fcca83ba72fe3b8f42f4cf1499c02764fb313b6661e873b084bb8e65cd087567060743fca85a73782a6f53503d4c336cc07b69780c6b9e98a4bfcce0d4b17d3d889';
     object4 = {
@@ -134,13 +152,9 @@ describe('ChainLock', function () {
   describe('validation', function () {
     describe('#verifySignatureAgainstQuorum', function () {
       it('should verify signature against single quorum', async function () {
-        var chainLock = new ChainLock(buf2);
-        var isValid = await chainLock.verifySignatureAgainstQuorum(quorum);
-        expect(isValid).to.equal(false);
-
-        //FIXME: Neither DashJ nor DashSync or even dashd have any test vectors of successful verification
-        // from chainlock hex and quorum. We don't yet have ability to unit test successful verify.
-        // TODO: expect().to.equal(true).
+        var chainLock = new ChainLock(buf4);
+        var isValid = await chainLock.verifySignatureAgainstQuorum(quorum4);
+        expect(isValid).to.equal(true);
       });
     });
     describe('#verify', function () {

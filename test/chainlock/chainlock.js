@@ -24,6 +24,11 @@ describe('ChainLock', function () {
   var quorumEntryJSON;
   var quorum;
   var expectedRequestId3;
+  var object4;
+  var buf4;
+  var str4;
+  var expectedHash4;
+  var expectedRequestId4;
 
   beforeEach(()=>{
     // Output from https://github.com/dashpay/dash/pull/3718 PR's description
@@ -44,7 +49,7 @@ describe('ChainLock', function () {
     };
     buf2 = Buffer.from(str2, 'hex');
     expectedHash2 = "3764ada6c32f09bb4f02295415b230657720f8be17d6fe046f0f8bf3db72b8e0";
-    expectedRequestId2 = "6639d0da4a746f7260968e54be1b14fce8c5429f51bfe8762b58aae294e0925d";
+    expectedRequestId2 = "5d92e094e2aa582b76e8bf519f42c5e8fc141bbe548e9660726f744adad03966";
 
     // DashSync test vectors : https://github.com/dashevo/dashsync-iOS/blob/master/Example/Tests/DSChainLockTests.m
     object3 = {
@@ -70,8 +75,17 @@ describe('ChainLock', function () {
 
     quorum = new QuorumEntry(quorumEntryJSON);
 
-    expectedRequestId3 = "f79d7cee1eea5839d91da7921920f19258e08b51c7cda01086e52d1b1d86510c";
+    expectedRequestId3 = "0c51861d1b2de58610a0cdc7518be05892f1201992a71dd93958ea1eee7c9df7";
 
+    str4 = 'e80306000b2707507f03a51d11e072f9d14129b42ec758f314e22139789a1102cc080000061476c699fee312a29c0e7a604a5288237073e9317ac458f5772e0e40793fcca83ba72fe3b8f42f4cf1499c02764fb313b6661e873b084bb8e65cd087567060743fca85a73782a6f53503d4c336cc07b69780c6b9e98a4bfcce0d4b17d3d889';
+    object4 = {
+      height: 394216,
+      blockHash: '000008cc02119a783921e214f358c72eb42941d1f972e0111da5037f5007270b',
+      signature: '061476c699fee312a29c0e7a604a5288237073e9317ac458f5772e0e40793fcca83ba72fe3b8f42f4cf1499c02764fb313b6661e873b084bb8e65cd087567060743fca85a73782a6f53503d4c336cc07b69780c6b9e98a4bfcce0d4b17d3d889'
+    };
+    buf4 = Buffer.from(str4, 'hex');
+    expectedHash4 = "d73841eb94c838a333614ce5f9410c2d3c98b62c5750c5b6d66eb77ef2c72439";
+    expectedRequestId4 = "430ac5edcd8862e9cd798d37bc6dc7074b4deb10e24eb9e602af57ca16ee7bab";
   });
 
 
@@ -131,13 +145,21 @@ describe('ChainLock', function () {
     });
     describe('#verify', function () {
       it('should verify signature against SMLStore', async function () {
-        var chainLock = new ChainLock(buf2);
-        var SMLdiffArray = [SMNListFixture.getChainlockDiff()];
+        var chainLock = new ChainLock(buf4);
+        var SMLdiffArray = [SMNListFixture.getChainlockDiff0(),
+          SMNListFixture.getChainlockDiff1(), SMNListFixture.getChainlockDiff2(),
+          SMNListFixture.getChainlockDiff3(), SMNListFixture.getChainlockDiff4(),
+          SMNListFixture.getChainlockDiff5(), SMNListFixture.getChainlockDiff6(),
+          SMNListFixture.getChainlockDiff7(), SMNListFixture.getChainlockDiff8(),
+          SMNListFixture.getChainlockDiff9(), SMNListFixture.getChainlockDiff10(),
+          SMNListFixture.getChainlockDiff11(), SMNListFixture.getChainlockDiff12(),
+          SMNListFixture.getChainlockDiff13(), SMNListFixture.getChainlockDiff14(),
+          SMNListFixture.getChainlockDiff15(), SMNListFixture.getChainlockDiff16()];
         var SMLStore = new SimplifiedMNListStore(SMLdiffArray);
         var isValid = await chainLock.verify(SMLStore);
         expect(isValid).to.equal(true);
       });
-    })
+    });
   });
 
   describe('computation', function () {

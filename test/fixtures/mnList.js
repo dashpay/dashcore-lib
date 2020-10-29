@@ -16211,6 +16211,49 @@ module.exports = {
       "merkleRootQuorums": "d97f162dcbb481ad5cbab241c6b3c19ff45b39137b621092febd3643c01cfc53"
     };
   },
+  getChainlockDiff17: function getChainlockDiff17() {
+    return {
+      "baseBlockHash": "000008cc02119a783921e214f358c72eb42941d1f972e0111da5037f5007270b",
+      "blockHash": "00000b890a200ac592ddfe9dc012c3a84b971f70fef02accd7a4b1b8d10ea802",
+      "cbTxMerkleTree": "0100000001c757b4a589ad72ea5b1f7307ce028ff23df0738070809c19419550ad0f1cb5d90101",
+      "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff0603e903060104ffffffff02eefccf31000000001976a9141ec5c66e9789c655ae068d35088b4073345fe0b088ac65fbb74a000000001976a914d9ff9ca5d6110cee1e62f82d3a790610df7a8f0188ac00000000460200e903060076f0fa94a217a4b87c23a4db952c583472964b6a2e894e8305a67f9ea575f8ff53fc1cc04336bdfe9210627b13395bf49fc1b3c641b2ba5cad81b4cb2d167fd9",
+      "deletedMNs": [
+      ],
+      "mnList": [
+      ],
+      "deletedQuorums": [
+      ],
+      "newQuorums": [
+      ],
+      "merkleRootMNList": "fff875a59e7fa605834e892e6a4b967234582c95dba4237cb8a417a294faf076",
+      "merkleRootQuorums": "d97f162dcbb481ad5cbab241c6b3c19ff45b39137b621092febd3643c01cfc53"
+    };
+  },
+  getChainlockDiff18: function getChainlockDiff18() {
+    return {
+      "baseBlockHash": "00000b890a200ac592ddfe9dc012c3a84b971f70fef02accd7a4b1b8d10ea802",
+      "blockHash": "0000094c7808b1159293b3b37c06bc86d8fea16aecb50cbc4ea913089ee875de",
+      "cbTxMerkleTree": "01000000014cd0251f4049c952ae2a5e9ebb57feeaa5a8cf3c105784824c6005c68eb4bbcf0101",
+      "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff0603ea03060104ffffffff02eefccf31000000001976a9140ddfb51fd90bb8449574852c471fa838c16d275788ac65fbb74a000000001976a914ee72dbbe1dc6098183ac2d4d312806eb578f4d9488ac00000000460200ea03060076f0fa94a217a4b87c23a4db952c583472964b6a2e894e8305a67f9ea575f8ff53fc1cc04336bdfe9210627b13395bf49fc1b3c641b2ba5cad81b4cb2d167fd9",
+      "deletedMNs": [
+      ],
+      "mnList": [
+      ],
+      "deletedQuorums": [
+      ],
+      "newQuorums": [
+      ],
+      "merkleRootMNList": "fff875a59e7fa605834e892e6a4b967234582c95dba4237cb8a417a294faf076",
+      "merkleRootQuorums": "d97f162dcbb481ad5cbab241c6b3c19ff45b39137b621092febd3643c01cfc53"
+    };
+  },
+  getChainlockDiffArray: function getChainlockDiffArray() {
+    return [this.getChainlockDiff0(), this.getChainlockDiff1(), this.getChainlockDiff2(), this.getChainlockDiff3(),
+      this.getChainlockDiff4(), this.getChainlockDiff5(), this.getChainlockDiff6(), this.getChainlockDiff7(),
+      this.getChainlockDiff8(), this.getChainlockDiff9(), this.getChainlockDiff10(), this.getChainlockDiff11(),
+      this.getChainlockDiff12(), this.getChainlockDiff13(), this.getChainlockDiff14(), this.getChainlockDiff15(),
+      this.getChainlockDiff16()];
+  },
 getSortedHashes: function getSortedHashes() {
     return ['082f5e29385f81704ef63c886aa20c2f8d69efd87d3937d6769285e2ead9ea0f',
       '9eb7f458d4f6c0db50183d71906388225a1db4b6dc24512bdab2dd0a90581113',

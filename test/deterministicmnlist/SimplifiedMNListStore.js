@@ -26,15 +26,32 @@ describe('SimplifiedMNListStore', function () {
         new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
       }).to.throw(`SimplifiedMNListStore requires an array with at least ${constants.LLMQ_SIGN_HEIGHT_OFFSET * 2} elements to create`);
     });
+    it('Should throw and error if initial diff param has exactly one element less than required elements', function () {
+      smlDiffArray.pop();
+      expect(function () {
+        new SimplifiedMNListStore(smlDiffArray);
+      }).to.throw(`SimplifiedMNListStore requires an array with at least ${constants.LLMQ_SIGN_HEIGHT_OFFSET * 2} elements to create`);
+    });
     it('Should initialize a SimplifiedMNListStore with options', function () {
      const options = { maxListsLimit: 20 };
-     const SMLStore = new SimplifiedMNListStore(smlDiffArray, options);
-     expect(SMLStore.options.maxListsLimit).to.be.equal(20);
+     const smlStore = new SimplifiedMNListStore(smlDiffArray, options);
+     expect(smlStore.options.maxListsLimit).to.be.equal(20);
     });
   });
   describe('add diffs', function () {
     it('add one diff to base', function () {
       const smlStore = new SimplifiedMNListStore(smlDiffArray);
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
+      const tipHeight = smlStore.getTipHeight();
+      const tipHash = smlStore.getTipHash();
+      const cbTx = new Transaction(SMNListFixture.getChainlockDiff16().cbTx);
+      const baseHeight = cbTx.extraPayload.height;
+      expect(tipHeight).to.equal(baseHeight);
+      expect(tipHash).to.equal(SMNListFixture.getChainlockDiff16().blockHash);
+    });
+    it('add two diff to base', function () {
+      const smlStore = new SimplifiedMNListStore(smlDiffArray);
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
       smlStore.addDiff(SMNListFixture.getChainlockDiff17());
       const tipHeight = smlStore.getTipHeight();
       const tipHash = smlStore.getTipHash();
@@ -43,8 +60,9 @@ describe('SimplifiedMNListStore', function () {
       expect(tipHeight).to.equal(baseHeight);
       expect(tipHash).to.equal(SMNListFixture.getChainlockDiff17().blockHash);
     });
-    it('add two diff to base', function () {
+    it('add three diff to base', function () {
       const smlStore = new SimplifiedMNListStore(smlDiffArray);
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
       smlStore.addDiff(SMNListFixture.getChainlockDiff17());
       smlStore.addDiff(SMNListFixture.getChainlockDiff18());
       const tipHeight = smlStore.getTipHeight();

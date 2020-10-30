@@ -158,7 +158,7 @@ describe('ChainLock', function () {
       });
     });
     describe('#verify', function () {
-      this.timeout(5000);
+      this.timeout(6000);
       it('should verify signature against SMLStore', async function () {
         const chainLock = new ChainLock(buf4);
         const SMLdiffArray = [SMNListFixture.getChainlockDiff0(),

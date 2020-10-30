@@ -76,8 +76,8 @@ describe('SimplifiedMNListStore', function () {
       const newMerkleRootAfterPruning = SMNListFixture.getChainlockDiff2().merkleRootMNList;
       const options = { maxListsLimit: 16 };
       const smlStore = new SimplifiedMNListStore(smlDiffArray, options);
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
       smlStore.addDiff(SMNListFixture.getChainlockDiff17());
-      smlStore.addDiff(SMNListFixture.getChainlockDiff18());
       expect(smlStore.baseSimplifiedMNList.merkleRootMNList).to.equal(newMerkleRootAfterPruning);
     });
   });
@@ -90,14 +90,14 @@ describe('SimplifiedMNListStore', function () {
     });
     it('Should get the current SML', function () {
       const smlStore = new SimplifiedMNListStore(smlDiffArray);
-      smlStore.addDiff(SMNListFixture.getChainlockDiff17());
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
       const currentMerkleRootMNList = 'fff875a59e7fa605834e892e6a4b967234582c95dba4237cb8a417a294faf076';
       const currentSML = smlStore.getCurrentSML();
       expect(currentSML.merkleRootMNList).to.be.equal(currentMerkleRootMNList);
     });
     it('Should through an error when trying to get an SML at an unknown height', function () {
       const smlStore = new SimplifiedMNListStore(smlDiffArray);
-      smlStore.addDiff(SMNListFixture.getChainlockDiff17());
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
       const height = 11111;
       expect(function () {
         smlStore.getSMLbyHeight(height);

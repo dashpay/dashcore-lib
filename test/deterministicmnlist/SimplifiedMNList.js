@@ -62,10 +62,16 @@ describe('SimplifiedMNList', function () {
       // Check that calculated merkle root is the same as merkle root in the latest applied diff
       expect(mnList.calculateMerkleRoot()).to.be.equal(SMNListFixture.getSecondDiff().merkleRootMNList);
     });
-    it("Should throw an error if calculated merkle root doesn't match merkle root in the diff", function () {
+    it("Should throw an error if diffs are nonconsecutive", function () {
       var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
       expect(function () {
         mnList.applyDiff(SMNListFixture.getThirdDiff());
+      }).to.throw('Cannot apply diff: previous blockHash needs to equal the new diff\'s baseBlockHash');
+    });
+    it("Should throw an error if calculated merkle root doesn't match merkle root in the diff", function () {
+      var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      expect(function () {
+        mnList.applyDiff(SMNListFixture.getSecondDiffWithWrongRoot());
       }).to.throw('Merkle root from the diff doesn\'t match calculated merkle root after diff is applied');
     });
     it("Should set base block hash on the first call and don't change it on any further calls", function () {

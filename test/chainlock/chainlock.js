@@ -161,16 +161,8 @@ describe('ChainLock', function () {
       this.timeout(6000);
       it('should verify signature against SMLStore', async function () {
         const chainLock = new ChainLock(buf4);
-        const SMLdiffArray = [SMNListFixture.getChainlockDiff0(),
-          SMNListFixture.getChainlockDiff1(), SMNListFixture.getChainlockDiff2(),
-          SMNListFixture.getChainlockDiff3(), SMNListFixture.getChainlockDiff4(),
-          SMNListFixture.getChainlockDiff5(), SMNListFixture.getChainlockDiff6(),
-          SMNListFixture.getChainlockDiff7(), SMNListFixture.getChainlockDiff8(),
-          SMNListFixture.getChainlockDiff9(), SMNListFixture.getChainlockDiff10(),
-          SMNListFixture.getChainlockDiff11(), SMNListFixture.getChainlockDiff12(),
-          SMNListFixture.getChainlockDiff13(), SMNListFixture.getChainlockDiff14(),
-          SMNListFixture.getChainlockDiff15(), SMNListFixture.getChainlockDiff16()];
-        const SMLStore = new SimplifiedMNListStore(SMLdiffArray);
+        const smlDiffArray = SMNListFixture.getChainlockDiffArray();
+        const SMLStore = new SimplifiedMNListStore(smlDiffArray);
         const isValid = await chainLock.verify(SMLStore);
         expect(isValid).to.equal(true);
       });

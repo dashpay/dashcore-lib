@@ -6743,6 +6743,24 @@ module.exports = {
       "merkleRootQuorums": "05a6361f679cbff990adfa22594c7354de3a2e33b5276a2b62712f90606a2b2a"
     };
   },
+  getSecondDiffWithWrongRoot: function getSecondDiffWithWrongRoot() {
+    return {
+      "baseBlockHash": "000000000765d8a1b6e6bdbe208111e89ae4926bd09c7e13933104acfaef0c92",
+      "blockHash": "00000000033475ccbb5faa4a5369ba77dec9c63169bbf4b8e49d3f8815e54149",
+      "cbTxMerkleTree": "0100000001c757b4a589ad72ea5b1f7307ce028ff23df0738070809c19419550ad0f1cb5d90101",
+      "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff0603e903060104ffffffff02eefccf31000000001976a9141ec5c66e9789c655ae068d35088b4073345fe0b088ac65fbb74a000000001976a914d9ff9ca5d6110cee1e62f82d3a790610df7a8f0188ac00000000460200e903060076f0fa94a217a4b87c23a4db952c583472964b6a2e894e8305a67f9ea575f8ff53fc1cc04336bdfe9210627b13395bf49fc1b3c641b2ba5cad81b4cb2d167fd9",
+      "deletedMNs": [
+      ],
+      "mnList": [
+      ],
+      "deletedQuorums": [
+      ],
+      "newQuorums": [
+      ],
+      "merkleRootMNList": "fff875a59e7fa605834e892e6a4b967234582c95dba4237cb8a417a294faf076",
+      "merkleRootQuorums": "d97f162dcbb481ad5cbab241c6b3c19ff45b39137b621092febd3643c01cfc53"
+    };
+  },
   getSecondDiff: function getSecondDiff() {
     return {
       "baseBlockHash": "000000000765d8a1b6e6bdbe208111e89ae4926bd09c7e13933104acfaef0c92",
@@ -8239,7 +8257,7 @@ module.exports = {
   },
   getQuorumHashDiff2: function getQuorumHashDiff2() {
     return {
-      "baseBlockHash": "000000000765d8a1b6e6bdbe208111e89ae4926bd09c7e13933104acfaef0c92",
+      "baseBlockHash": "00000000033475ccbb5faa4a5369ba77dec9c63169bbf4b8e49d3f8815e54149",
       "blockHash": "000000000118567b7c0694aacf26d738b939344eccce0f521b8b4ca3b8e29b6e",
       "cbTxMerkleTree": "0200000002aef38cd03f6c091668a48e73864551f10b010b3387560877271c50760908afffa9c2cc127a75705061539170a023d831af3dc3376db028041422a8525dcdde3f0103",
       "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff2603c04503194d696e656420627920416e74506f6f6c20e4000b20052f22ff00000040ef000000ffffffff034c64c63b000000001976a9142fd0e16c05bbbcdc388d4807b5cbe5f45389eb2d88ace08fb106000000001976a914339c226ad1f3608db1532167eff9b7d427e9050b88ac5564c63b000000001976a91488a060bc2dfe05780ae4dcb6c98b12436c35a93988ac00000000460200c04503007e0d4c106f3d74e0cc0351d69199c8e043c24d008bdac19ffe1845c418b13fa16da773588d9feb0e70c784fd3d105d2dcb33df89104745a3f8fffb32a8067c1b",
@@ -16210,6 +16228,48 @@ module.exports = {
       "merkleRootMNList": "fff875a59e7fa605834e892e6a4b967234582c95dba4237cb8a417a294faf076",
       "merkleRootQuorums": "d97f162dcbb481ad5cbab241c6b3c19ff45b39137b621092febd3643c01cfc53"
     };
+  },
+  getChainlockDiff17: function getChainlockDiff17() {
+    return {
+      "baseBlockHash": "000008cc02119a783921e214f358c72eb42941d1f972e0111da5037f5007270b",
+      "blockHash": "00000b890a200ac592ddfe9dc012c3a84b971f70fef02accd7a4b1b8d10ea802",
+      "cbTxMerkleTree": "0100000001c757b4a589ad72ea5b1f7307ce028ff23df0738070809c19419550ad0f1cb5d90101",
+      "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff0603e903060104ffffffff02eefccf31000000001976a9141ec5c66e9789c655ae068d35088b4073345fe0b088ac65fbb74a000000001976a914d9ff9ca5d6110cee1e62f82d3a790610df7a8f0188ac00000000460200e903060076f0fa94a217a4b87c23a4db952c583472964b6a2e894e8305a67f9ea575f8ff53fc1cc04336bdfe9210627b13395bf49fc1b3c641b2ba5cad81b4cb2d167fd9",
+      "deletedMNs": [
+      ],
+      "mnList": [
+      ],
+      "deletedQuorums": [
+      ],
+      "newQuorums": [
+      ],
+      "merkleRootMNList": "fff875a59e7fa605834e892e6a4b967234582c95dba4237cb8a417a294faf076",
+      "merkleRootQuorums": "d97f162dcbb481ad5cbab241c6b3c19ff45b39137b621092febd3643c01cfc53"
+    };
+  },
+  getChainlockDiff18: function getChainlockDiff18() {
+    return {
+      "baseBlockHash": "00000b890a200ac592ddfe9dc012c3a84b971f70fef02accd7a4b1b8d10ea802",
+      "blockHash": "0000094c7808b1159293b3b37c06bc86d8fea16aecb50cbc4ea913089ee875de",
+      "cbTxMerkleTree": "01000000014cd0251f4049c952ae2a5e9ebb57feeaa5a8cf3c105784824c6005c68eb4bbcf0101",
+      "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff0603ea03060104ffffffff02eefccf31000000001976a9140ddfb51fd90bb8449574852c471fa838c16d275788ac65fbb74a000000001976a914ee72dbbe1dc6098183ac2d4d312806eb578f4d9488ac00000000460200ea03060076f0fa94a217a4b87c23a4db952c583472964b6a2e894e8305a67f9ea575f8ff53fc1cc04336bdfe9210627b13395bf49fc1b3c641b2ba5cad81b4cb2d167fd9",
+      "deletedMNs": [
+      ],
+      "mnList": [
+      ],
+      "deletedQuorums": [
+      ],
+      "newQuorums": [
+      ],
+      "merkleRootMNList": "fff875a59e7fa605834e892e6a4b967234582c95dba4237cb8a417a294faf076",
+      "merkleRootQuorums": "d97f162dcbb481ad5cbab241c6b3c19ff45b39137b621092febd3643c01cfc53"
+    };
+  },
+  getChainlockDiffArray: function getChainlockDiffArray() {
+    return [this.getChainlockDiff0(), this.getChainlockDiff1(), this.getChainlockDiff2(), this.getChainlockDiff3(),
+      this.getChainlockDiff4(), this.getChainlockDiff5(), this.getChainlockDiff6(), this.getChainlockDiff7(),
+      this.getChainlockDiff8(), this.getChainlockDiff9(), this.getChainlockDiff10(), this.getChainlockDiff11(),
+      this.getChainlockDiff12(), this.getChainlockDiff13(), this.getChainlockDiff14(), this.getChainlockDiff15()];
   },
 getSortedHashes: function getSortedHashes() {
     return ['082f5e29385f81704ef63c886aa20c2f8d69efd87d3937d6769285e2ead9ea0f',

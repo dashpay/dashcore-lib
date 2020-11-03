@@ -1,86 +1,106 @@
 const expect = require('chai').expect;
+const constants = require('../../lib/constants');
 const SimplifiedMNListStore = require('../../lib/deterministicmnlist/SimplifiedMNListStore');
 const SMNListFixture = require('../fixtures/mnList');
 const Transaction = require('../../lib/transaction');
 
-const firstBlockHash = SMNListFixture.getFirstDiff().baseBlockHash;
+let smlDiffArray;
+
+
 
 describe('SimplifiedMNListStore', function () {
+  this.timeout(5000);
+
+  beforeEach(()=>{
+    smlDiffArray = SMNListFixture.getChainlockDiffArray();
+  });
+
   describe('constructor', function () {
-    it('Should create an SMLStore with just base diff', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      expect(SMLStore.baseBlockHash).to.be.equal(firstBlockHash);
+    it(`Should create an SMLStore with a diff of at least ${constants.LLMQ_SIGN_HEIGHT_OFFSET * 2} elements`, function () {
+      const smlStore = new SimplifiedMNListStore(smlDiffArray);
+      const firstBlockHash = SMNListFixture.getChainlockDiff0().baseBlockHash;
+      expect(smlStore.baseBlockHash).to.be.equal(firstBlockHash);
     });
-    it('Should create an SMLStore with 1st and 2nd diff', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff(), SMNListFixture.getSecondStoreDiff()]);
-      expect(SMLStore.baseBlockHash).to.be.equal(firstBlockHash);
+    it('Should throw and error if initial diff param has less than required elements', function () {
+      expect(function () {
+        new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
+      }).to.throw(`SimplifiedMNListStore requires an array with at least ${constants.LLMQ_SIGN_HEIGHT_OFFSET * 2} elements to create`);
+    });
+    it('Should throw and error if initial diff param has exactly one element less than required elements', function () {
+      smlDiffArray.pop();
+      expect(function () {
+        new SimplifiedMNListStore(smlDiffArray);
+      }).to.throw(`SimplifiedMNListStore requires an array with at least ${constants.LLMQ_SIGN_HEIGHT_OFFSET * 2} elements to create`);
     });
     it('Should initialize a SimplifiedMNListStore with options', function () {
      const options = { maxListsLimit: 20 };
-     const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()], options);
-     expect(SMLStore.options.maxListsLimit).to.be.equal(20);
+     const smlStore = new SimplifiedMNListStore(smlDiffArray, options);
+     expect(smlStore.options.maxListsLimit).to.be.equal(20);
     });
   });
   describe('add diffs', function () {
-    it('add base diff', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      const tipHeight = SMLStore.getTipHeight();
-      const tipHash = SMLStore.getTipHash();
-      const cbTx = new Transaction(SMNListFixture.getFirstDiff().cbTx);
+    it('add one diff to base', function () {
+      const smlStore = new SimplifiedMNListStore(smlDiffArray);
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
+      const tipHeight = smlStore.getTipHeight();
+      const tipHash = smlStore.getTipHash();
+      const cbTx = new Transaction(SMNListFixture.getChainlockDiff16().cbTx);
       const baseHeight = cbTx.extraPayload.height;
       expect(tipHeight).to.equal(baseHeight);
-      expect(tipHash).to.equal(SMNListFixture.getFirstDiff().blockHash);
+      expect(tipHash).to.equal(SMNListFixture.getChainlockDiff16().blockHash);
     });
-    it('add 2nd diff', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      SMLStore.addDiff(SMNListFixture.getSecondDiff());
-      const tipHeight = SMLStore.getTipHeight();
-      const tipHash = SMLStore.getTipHash();
-      const cbTx = new Transaction(SMNListFixture.getSecondDiff().cbTx);
-      const newHeight = cbTx.extraPayload.height;
-      expect(tipHeight).to.equal(newHeight);
-      expect(tipHash).to.equal(SMNListFixture.getSecondDiff().blockHash);
+    it('add two diff to base', function () {
+      const smlStore = new SimplifiedMNListStore(smlDiffArray);
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
+      smlStore.addDiff(SMNListFixture.getChainlockDiff17());
+      const tipHeight = smlStore.getTipHeight();
+      const tipHash = smlStore.getTipHash();
+      const cbTx = new Transaction(SMNListFixture.getChainlockDiff17().cbTx);
+      const baseHeight = cbTx.extraPayload.height;
+      expect(tipHeight).to.equal(baseHeight);
+      expect(tipHash).to.equal(SMNListFixture.getChainlockDiff17().blockHash);
     });
-    it('add 3nd diff', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      SMLStore.addDiff(SMNListFixture.getSecondDiff());
-      SMLStore.addDiff(SMNListFixture.getThirdDiff());
-      const tipHeight = SMLStore.getTipHeight();
-      const tipHash = SMLStore.getTipHash();
-      const cbTx = new Transaction(SMNListFixture.getThirdDiff().cbTx);
-      const newHeight = cbTx.extraPayload.height;
-      expect(tipHeight).to.equal(newHeight);
-      expect(tipHash).to.equal(SMNListFixture.getThirdDiff().blockHash);
+    it('add three diff to base', function () {
+      const smlStore = new SimplifiedMNListStore(smlDiffArray);
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
+      smlStore.addDiff(SMNListFixture.getChainlockDiff17());
+      smlStore.addDiff(SMNListFixture.getChainlockDiff18());
+      const tipHeight = smlStore.getTipHeight();
+      const tipHash = smlStore.getTipHash();
+      const cbTx = new Transaction(SMNListFixture.getChainlockDiff18().cbTx);
+      const baseHeight = cbTx.extraPayload.height;
+      expect(tipHeight).to.equal(baseHeight);
+      expect(tipHash).to.equal(SMNListFixture.getChainlockDiff18().blockHash);
     });
     it('prune oldest diff and rebase store when reaching maxListsLimit', function () {
-      const newMerkleRootAfterPruning = SMNListFixture.getSecondStoreDiff().merkleRootMNList;
-      const options = { maxListsLimit: 2 };
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()], options);
-      SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
-      SMLStore.addDiff(SMNListFixture.getThirdStoreDiff());
-      expect(SMLStore.baseSimplifiedMNList.merkleRootMNList).to.equal(newMerkleRootAfterPruning);
+      const newMerkleRootAfterPruning = SMNListFixture.getChainlockDiff2().merkleRootMNList;
+      const options = { maxListsLimit: 16 };
+      const smlStore = new SimplifiedMNListStore(smlDiffArray, options);
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
+      smlStore.addDiff(SMNListFixture.getChainlockDiff17());
+      expect(smlStore.baseSimplifiedMNList.merkleRootMNList).to.equal(newMerkleRootAfterPruning);
     });
   });
   describe('get SML', function () {
     it('Should get a SimplifiedMNList by block height', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      const height = SMLStore.getTipHeight();
-      const currentSML = SMLStore.getSMLbyHeight(height);
-      expect(SMLStore.getTipHash()).to.equal(currentSML.blockHash);
+      const smlStore = new SimplifiedMNListStore(smlDiffArray);
+      const height = smlStore.getTipHeight();
+      const currentSML = smlStore.getSMLbyHeight(height);
+      expect(smlStore.getTipHash()).to.equal(currentSML.blockHash);
     });
     it('Should get the current SML', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
-      const currentMerkleRootMNList = '57dc239d9740f4e0479599ff5eed69e101051ef340400e3e7b0b1fbf6d4aaf52';
-      const currentSML = SMLStore.getCurrentSML();
+      const smlStore = new SimplifiedMNListStore(smlDiffArray);
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
+      const currentMerkleRootMNList = 'fff875a59e7fa605834e892e6a4b967234582c95dba4237cb8a417a294faf076';
+      const currentSML = smlStore.getCurrentSML();
       expect(currentSML.merkleRootMNList).to.be.equal(currentMerkleRootMNList);
     });
     it('Should through an error when trying to get an SML at an unknown height', function () {
-      const SMLStore = new SimplifiedMNListStore([SMNListFixture.getFirstDiff()]);
-      SMLStore.addDiff(SMNListFixture.getSecondStoreDiff());
+      const smlStore = new SimplifiedMNListStore(smlDiffArray);
+      smlStore.addDiff(SMNListFixture.getChainlockDiff16());
       const height = 11111;
       expect(function () {
-        SMLStore.getSMLbyHeight(height);
+        smlStore.getSMLbyHeight(height);
       }).to.throw('unable to construct SML at this height');
     });
   });

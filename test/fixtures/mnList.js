@@ -16271,7 +16271,7 @@ module.exports = {
       this.getChainlockDiff8(), this.getChainlockDiff9(), this.getChainlockDiff10(), this.getChainlockDiff11(),
       this.getChainlockDiff12(), this.getChainlockDiff13(), this.getChainlockDiff14(), this.getChainlockDiff15()];
   },
-getSortedHashes: function getSortedHashes() {
+  getSortedHashes: function getSortedHashes() {
     return ['082f5e29385f81704ef63c886aa20c2f8d69efd87d3937d6769285e2ead9ea0f',
       '9eb7f458d4f6c0db50183d71906388225a1db4b6dc24512bdab2dd0a90581113',
       '78f2bb1566bbeaff83727bb62fa6c1c6b7d92a6ef630ba5a763181169980111d',

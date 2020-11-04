@@ -121,6 +121,7 @@ describe('QuorumEntry', function () {
         });
     });
     it('Should verify both signatures of the quorum and set isVerified to true', function () {
+      this.timeout(3000);
       var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
       mnList.applyDiff(SMNListFixture.getSecondDiff());
       mnList.applyDiff(SMNListFixture.getQuorumHashDiff());

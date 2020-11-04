@@ -93,6 +93,8 @@ describe('QuorumEntry', function () {
     });
   });
   describe('quorum signatures', function () {
+    this.timeout(6000);
+
     it('Should verify a threshold signature', function () {
       var entry = new QuorumEntry(quorumEntryJSON);
       return entry.isValidQuorumSig()

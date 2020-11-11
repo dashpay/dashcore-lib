@@ -107,7 +107,7 @@ describe('ChainLock', function () {
   });
 
 
-  it('should have clsig a constant', function () {
+  it(`should have 'clsig' constant prefix`, function () {
     expect(ChainLock.CLSIG_REQUESTID_PREFIX).to.deep.equal('clsig');
   });
   describe('instantiation', function () {

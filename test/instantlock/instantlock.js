@@ -107,8 +107,8 @@ describe('InstantLock', function () {
   });
 
 
-  it(`should have 'inlock' constant prefix`, function () {
-    expect(InstantLock.CLSIG_REQUESTID_PREFIX).to.deep.equal('inlock');
+  it(`should have 'islock' constant prefix`, function () {
+    expect(InstantLock.ISLOCK_REQUESTID_PREFIX).to.deep.equal('islock');
   });
   describe('instantiation', function () {
     describe('fromBuffer', function () {

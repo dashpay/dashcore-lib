@@ -1,38 +1,38 @@
 'use strict';
 
-var chai = require('chai');
-var should = chai.should();
-var expect = chai.expect;
+const chai = require('chai');
+const should = chai.should();
+const expect = chai.expect;
 
-var bitcore = require('../../index');
-var SimplifiedMNListStore = require('../../lib/deterministicmnlist/SimplifiedMNListStore');
-var SMNListFixture = require('../fixtures/mnList');
-var ChainLock = bitcore.ChainLock;
-var QuorumEntry = bitcore.QuorumEntry;
+const bitcore = require('../../index');
+const SimplifiedMNListStore = require('../../lib/deterministicmnlist/SimplifiedMNListStore');
+const SMNListFixture = require('../fixtures/mnList');
+const ChainLock = bitcore.ChainLock;
+const QuorumEntry = bitcore.QuorumEntry;
 
 describe('ChainLock', function () {
-  var object;
-  var str;
-  var buf;
-  var object2;
-  var buf2;
-  var str2;
-  var expectedHash2;
-  var expectedRequestId2;
-  var object3;
-  var str3;
-  var quorumEntryJSON;
-  var quorumEntryJSON4;
-  var quorum;
-  var quorum4;
-  var expectedRequestId3;
-  var object4;
-  var buf4;
-  var str4;
-  var expectedHash4;
-  var expectedRequestId4;
+  let object;
+  let str;
+  let buf;
+  let object2;
+  let buf2;
+  let str2;
+  let expectedHash2;
+  let expectedRequestId2;
+  let object3;
+  let str3;
+  let quorumEntryJSON;
+  let quorumEntryJSON4;
+  let quorum;
+  let quorum4;
+  let expectedRequestId3;
+  let object4;
+  let buf4;
+  let str4;
+  let expectedHash4;
+  let expectedRequestId4;
 
-  beforeEach(()=>{
+  beforeEach(() => {
     // Output from https://github.com/dashpay/dash/pull/3718 PR's description
     object = {
       "blockHash": "00000105df60caca6a257d8f2f90d422f2d1abf6658555650d5c2c8ecd209e25",
@@ -113,27 +113,27 @@ describe('ChainLock', function () {
   describe('instantiation', function () {
     describe('fromBuffer', function () {
       it('should be able to parse data from a buffer', function () {
-        var chainLock = ChainLock.fromBuffer(buf2);
-        var chainLockStr = chainLock.toString();
+        const chainLock = ChainLock.fromBuffer(buf2);
+        const chainLockStr = chainLock.toString();
         expect(chainLockStr).to.be.deep.equal(str2);
-        var chainLockJSON = chainLock.toObject();
+        const chainLockJSON = chainLock.toObject();
         expect(chainLockJSON).to.be.deep.equal(object2)
       });
     });
 
     describe('fromObject', function () {
       it('Should be able to parse data from an object', function () {
-        var chainLock = ChainLock.fromObject(object2);
-        var chainLockStr = chainLock.toString();
+        const chainLock = ChainLock.fromObject(object2);
+        const chainLockStr = chainLock.toString();
         expect(chainLockStr).to.be.deep.equal(str2)
       });
     });
 
     describe('fromString', function () {
       it('Should be able to parse data from a hex string', function () {
-        var chainLock = ChainLock.fromHex(str2);
-        var chainLockJSON = chainLock.toObject();
-        var chainLockBuffer = chainLock.toBuffer().toString('hex');
+        const chainLock = ChainLock.fromHex(str2);
+        const chainLockJSON = chainLock.toObject();
+        const chainLockBuffer = chainLock.toBuffer().toString('hex');
         expect(chainLockJSON).to.be.deep.equal(object2);
 
         expect(chainLockBuffer).to.be.deep.equal(buf2.toString('hex'))
@@ -142,8 +142,8 @@ describe('ChainLock', function () {
 
     describe('clone itself', function () {
       it('can be instantiated from another chainlock', function () {
-        var chainLock = ChainLock.fromBuffer(buf2);
-        var chainLock2 = new ChainLock(chainLock);
+        const chainLock = ChainLock.fromBuffer(buf2);
+        const chainLock2 = new ChainLock(chainLock);
         chainLock2.toString().should.equal(chainLock.toString());
       });
     })
@@ -152,26 +152,18 @@ describe('ChainLock', function () {
   describe('validation', function () {
     describe('#verifySignatureAgainstQuorum', function () {
       it('should verify signature against single quorum', async function () {
-        var chainLock = new ChainLock(buf4);
-        var isValid = await chainLock.verifySignatureAgainstQuorum(quorum4);
+        const chainLock = new ChainLock(buf4);
+        const isValid = await chainLock.verifySignatureAgainstQuorum(quorum4);
         expect(isValid).to.equal(true);
       });
     });
     describe('#verify', function () {
       this.timeout(6000);
       it('should verify signature against SMLStore', async function () {
-        var chainLock = new ChainLock(buf4);
-        var SMLdiffArray = [SMNListFixture.getChainlockDiff0(),
-          SMNListFixture.getChainlockDiff1(), SMNListFixture.getChainlockDiff2(),
-          SMNListFixture.getChainlockDiff3(), SMNListFixture.getChainlockDiff4(),
-          SMNListFixture.getChainlockDiff5(), SMNListFixture.getChainlockDiff6(),
-          SMNListFixture.getChainlockDiff7(), SMNListFixture.getChainlockDiff8(),
-          SMNListFixture.getChainlockDiff9(), SMNListFixture.getChainlockDiff10(),
-          SMNListFixture.getChainlockDiff11(), SMNListFixture.getChainlockDiff12(),
-          SMNListFixture.getChainlockDiff13(), SMNListFixture.getChainlockDiff14(),
-          SMNListFixture.getChainlockDiff15(), SMNListFixture.getChainlockDiff16()];
-        var SMLStore = new SimplifiedMNListStore(SMLdiffArray);
-        var isValid = await chainLock.verify(SMLStore);
+        const chainLock = new ChainLock(buf4);
+        const smlDiffArray = SMNListFixture.getChainlockDiffArray();
+        const SMLStore = new SimplifiedMNListStore(smlDiffArray);
+        const isValid = await chainLock.verify(SMLStore);
         expect(isValid).to.equal(true);
       });
     });
@@ -180,18 +172,18 @@ describe('ChainLock', function () {
   describe('computation', function () {
     describe('#getHash', function () {
       it('should compute the hash', function () {
-        var hash = ChainLock.fromBuffer(buf2).getHash().toString('hex');
+        const hash = ChainLock.fromBuffer(buf2).getHash().toString('hex');
         expect(hash).to.deep.equal(expectedHash2);
       })
     });
     describe('#getRequestId', function () {
       it('should compute the requestId', function () {
-        var chainLock2 = new ChainLock(object2);
-        var requestId2 = chainLock2.getRequestId().toString('hex');
+        const chainLock2 = new ChainLock(object2);
+        const requestId2 = chainLock2.getRequestId().toString('hex');
         expect(requestId2).to.deep.equal(expectedRequestId2);
 
-        var chainLock3 = new ChainLock(str3);
-        var requestId3 = chainLock3.getRequestId().toString('hex');
+        const chainLock3 = new ChainLock(str3);
+        const requestId3 = chainLock3.getRequestId().toString('hex');
         expect(requestId3).to.deep.equal(expectedRequestId3)
       })
     })
@@ -200,38 +192,38 @@ describe('ChainLock', function () {
   describe('output', function () {
     describe('#copy', function () {
       it('should output formatted output correctly', function () {
-        var chainLock = ChainLock.fromBuffer(Buffer.from(str2, 'hex'));
-        var chainLockCopy = chainLock.copy();
+        const chainLock = ChainLock.fromBuffer(Buffer.from(str2, 'hex'));
+        const chainLockCopy = chainLock.copy();
         expect(chainLockCopy).to.deep.equal(chainLock);
       })
     });
     describe('#toBuffer', function () {
       it('should output formatted output correctly', function () {
-        var chainLock = ChainLock.fromBuffer(buf2);
+        const chainLock = ChainLock.fromBuffer(buf2);
         expect(chainLock.toBuffer().toString('hex')).to.deep.equal(str2);
       })
     });
     describe('#toJSON/#toObject', function () {
       it('should output formatted output correctly', function () {
-        var chainLock = ChainLock.fromBuffer(buf);
+        const chainLock = ChainLock.fromBuffer(buf);
         expect(chainLock.toObject()).to.deep.equal(chainLock.toJSON());
         expect(chainLock.toObject()).to.deep.equal(object);
 
-        var chainLock2 = ChainLock.fromBuffer(buf2);
+        const chainLock2 = ChainLock.fromBuffer(buf2);
         expect(chainLock2.toObject()).to.deep.equal(chainLock2.toJSON());
         expect(chainLock2.toObject()).to.deep.equal(object2);
       })
     });
     describe('#toString', function () {
       it('should output formatted output correctly', function () {
-        var chainLock = ChainLock.fromBuffer(buf2);
+        const chainLock = ChainLock.fromBuffer(buf2);
         expect(chainLock.toString()).to.deep.equal(str2);
       })
     });
     describe('#inspect', function () {
       it('should output formatted output correctly', function () {
-        var chainLock = new ChainLock(str);
-        var output = '<ChainLock: 00000105df60caca6a257d8f2f90d422f2d1abf6658555650d5c2c8ecd209e25, height: 382312>';
+        const chainLock = new ChainLock(str);
+        const output = '<ChainLock: 00000105df60caca6a257d8f2f90d422f2d1abf6658555650d5c2c8ecd209e25, height: 382312>';
         chainLock.inspect().should.equal(output);
       });
     });

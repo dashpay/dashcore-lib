@@ -42,68 +42,23 @@ describe('InstantLock', function () {
     str = '68d50500259e20cd8e2c5c0d65558565f6abd1f222d4902f8f7d256acaca60df0501000017b7b6008df6725a5b89bd114c89a2d650b3fcb33fc127c29763c15a3cf110d7e32aa5108223b0b31597be0953d37c6c06545ed28e71be7d6420e1b24e54ae66eb40b932f453ddc811af37b38d364bd1a9df7da31c60be4728b84150558516f2';
     buf = Buffer.from(str, 'hex');
 
-    // DashJ test vectors : https://github.com/dashevo/dashj/blob/857b198a34b5cd49b7890d7c4dd3bbd2e6d9cc09/core/src/test/java/org/bitcoinj/quorums/InstantLockTest.java
-    str2 = 'ea480100f4a5708c82f589e19dfe9e9cd1dbab57f74f27b24f0a3c765ba6e007000000000a43f1c3e5b3e8dbd670bca8d437dc25572f72d8e1e9be673e9ebbb606570307c3e5f5d073f7beb209dd7e0b8f96c751060ab3a7fb69a71d5ccab697b8cfa5a91038a6fecf76b7a827d75d17f01496302942aa5e2c7f4a48246efc8d3941bf6c';
+    // DashJ test vectors : https://github.com/dashevo/dashj/blob/master/core/src/test/java/org/bitcoinj/quorums/InstantSendLockTest.java
+    str2 = '011dbbda5861b12d7523f20aa5e0d42f52de3dcd2d5c2fe919ba67b59f050d206e00000000babb35d229d6bf5897a9fc3770755868d9730e022dc04c8a7a7e9df9f1caccbe8967c46529a967b3822e1ba8a173066296d02593f0f59b3a78a30a7eef9c8a120847729e62e4a32954339286b79fe7590221331cd28d576887a263f45b595d499272f656c3f5176987c976239cac16f972d796ad82931d532102a4f95eec7d80';
     object2 = {
-      height: 84202,
-      blockHash: '0000000007e0a65b763c0a4fb2274ff757abdbd19c9efe9de189f5828c70a5f4',
-      signature: '0a43f1c3e5b3e8dbd670bca8d437dc25572f72d8e1e9be673e9ebbb606570307c3e5f5d073f7beb209dd7e0b8f96c751060ab3a7fb69a71d5ccab697b8cfa5a91038a6fecf76b7a827d75d17f01496302942aa5e2c7f4a48246efc8d3941bf6c'
+      inputs:[
+        {
+          outpointHash: '6e200d059fb567ba19e92f5c2dcd3dde522fd4e0a50af223752db16158dabb1d',
+          outpointIndex: 0
+        },
+      ],
+      txid: 'becccaf1f99d7e7a8a4cc02d020e73d96858757037fca99758bfd629d235bbba',
+      signature: '8967c46529a967b3822e1ba8a173066296d02593f0f59b3a78a30a7eef9c8a120847729e62e4a32954339286b79fe7590221331cd28d576887a263f45b595d499272f656c3f5176987c976239cac16f972d796ad82931d532102a4f95eec7d80'
     };
     buf2 = Buffer.from(str2, 'hex');
-    expectedHash2 = "3764ada6c32f09bb4f02295415b230657720f8be17d6fe046f0f8bf3db72b8e0";
-    expectedRequestId2 = "5d92e094e2aa582b76e8bf519f42c5e8fc141bbe548e9660726f744adad03966";
+    expectedHash2 = "4001b2c5acff9fc94e60d5adda9f70c3f0f829d0cc08434844c31b0410dfaca0";
+    expectedRequestId2 = "59f533efe1af5753cdb1227eb4b0db230d6720b2bdbef9e5d79653b5fe1cbbbb";
 
     // DashSync test vectors : https://github.com/dashevo/dashsync-iOS/blob/master/Example/Tests/DSInstantLockTests.m
-    object3 = {
-      height: 1177907,
-      blockHash: Buffer.from('0000000000000027b4f24c02e3e81e41e2ec4db8f1c42ee1f3923340a22680ee', 'hex'),
-      signature: Buffer.from('8ee1ecc07ee989230b68ccabaa95ef4c6435e642a61114595eb208cb8bfad5c8731d008c96e62519cb60a642c4999c880c4b92a73a99f6ff667b0961eb4b74fc1881c517cf807c8c4aed2c6f3010bb33b255ae75b7593c625e958f34bf8c02be', 'hex')
-    };
-    str3 = '33f911000000000000000027b4f24c02e3e81e41e2ec4db8f1c42ee1f3923340a22680ee8ee1ecc07ee989230b68ccabaa95ef4c6435e642a61114595eb208cb8bfad5c8731d008c96e62519cb60a642c4999c880c4b92a73a99f6ff667b0961eb4b74fc1881c517cf807c8c4aed2c6f3010bb33b255ae75b7593c625e958f34bf8c02be';
-
-    quorumEntryJSON = {
-      "version": 1,
-      "llmqType": 2,
-      "quorumHash": "0000000007697fd69a799bfa26576a177e817bc0e45b9fcfbf48b362b05aeff2",
-      "signersCount": 400,
-      "signers": "bf7fffaffedffef77fef7ffffffcbdffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
-      "validMembersCount": 400,
-      "validMembers": "bf7fffaffedffef77fef7ffffffcbfffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
-      "quorumPublicKey": "03a3fbbe99d80a9be8fc59fd4fe43dfbeba9119b688e97493664716cdf15ae47fad70fea7cb93f20fba10d689f9e3c02",
-      "quorumVvecHash": "bede6b120304eb31d173678bb54ffcb0ab91f8d72d5af78b5047f76e393a26a2",
-      "quorumSig": "9944c544e03a478b401b65cabbb24338872613f7d58ff13ab038ab86418ec70ef1734ff43e965ccb83e02da83b10d44c0f23c630752cfb29b402149a1fc3fad0760e6341a4a1031efad2983c8637d2a461e9bcaf935b7a4dfa225ed2f7771c75",
-      "membersSig": "92eda5c13583577719bea9337b4b9b6286ac11a072de0955b0dc5a012280bb557a53f9643cee7730dabe2d3a4a19042813ef5d39ae92d0015554954011c1e12bc688d4d7672ac33c4001e0dedbfe5d0316f2ad23206d478964ca62d75f50e4d0"
-    };
-
-    quorum = new QuorumEntry(quorumEntryJSON);
-
-    expectedRequestId3 = "0c51861d1b2de58610a0cdc7518be05892f1201992a71dd93958ea1eee7c9df7";
-
-    quorumEntryJSON4 = {
-      "version": 1,
-      "llmqType": 1,
-      "quorumHash": "00000a95d081a06e2ec67932b14b70b9d8ef3a586cd27ba288afe66d0fc069c2",
-      "signersCount": 50,
-      "signers": "ffffffffffff03",
-      "validMembersCount": 50,
-      "validMembers": "ffffffffffff03",
-      "quorumPublicKey": "86d0992f5c73b8f57101c34a0c4ebb17d962bb935a738c1ef1e2bb1c25034d8e4a0a2cc96e0ebc69a7bf3b8b67b2de5f",
-      "quorumVvecHash": "66db73de07442a06de20a171828abbd81589f8c6dc099cdc191d22f40aab1096",
-      "quorumSig": "1604a01eb78aa70fb28d12ab01fb9a3632036ff19fa249e5809e425ea09bda515a3d03d3c04901f8cb9ce35ef17cac4208dd21f3ffa4847a26c03357e5c2db2d0cd1b406e75389dc61effa4a8e30d287d4349cdb94d801ae3fe542c36460f2b8",
-      "membersSig": "140f5a4db1a3330b7dfdda8fe181137b2644577efd843a60401f0dbc7b0856782578bc9d6ab1a0b133596bcc158d781d02ed4db881cb4cc3260273dc90a53c1d1ce37930fa106c47db4cf7702b2e956dcafb7b180bea7aae2d662b7a6c217f27"
-    };
-
-    quorum4 = new QuorumEntry(quorumEntryJSON4);
-
-    str4 = 'e80306000b2707507f03a51d11e072f9d14129b42ec758f314e22139789a1102cc080000061476c699fee312a29c0e7a604a5288237073e9317ac458f5772e0e40793fcca83ba72fe3b8f42f4cf1499c02764fb313b6661e873b084bb8e65cd087567060743fca85a73782a6f53503d4c336cc07b69780c6b9e98a4bfcce0d4b17d3d889';
-    object4 = {
-      height: 394216,
-      blockHash: '000008cc02119a783921e214f358c72eb42941d1f972e0111da5037f5007270b',
-      signature: '061476c699fee312a29c0e7a604a5288237073e9317ac458f5772e0e40793fcca83ba72fe3b8f42f4cf1499c02764fb313b6661e873b084bb8e65cd087567060743fca85a73782a6f53503d4c336cc07b69780c6b9e98a4bfcce0d4b17d3d889'
-    };
-    buf4 = Buffer.from(str4, 'hex');
-    expectedHash4 = "d73841eb94c838a333614ce5f9410c2d3c98b62c5750c5b6d66eb77ef2c72439";
-    expectedRequestId4 = "430ac5edcd8862e9cd798d37bc6dc7074b4deb10e24eb9e602af57ca16ee7bab";
   });
 
 
@@ -205,10 +160,6 @@ describe('InstantLock', function () {
     });
     describe('#toJSON/#toObject', function () {
       it('should output formatted output correctly', function () {
-        const instantLock = InstantLock.fromBuffer(buf);
-        expect(instantLock.toObject()).to.deep.equal(instantLock.toJSON());
-        expect(instantLock.toObject()).to.deep.equal(object);
-
         const instantLock2 = InstantLock.fromBuffer(buf2);
         expect(instantLock2.toObject()).to.deep.equal(instantLock2.toJSON());
         expect(instantLock2.toObject()).to.deep.equal(object2);
@@ -222,8 +173,8 @@ describe('InstantLock', function () {
     });
     describe('#inspect', function () {
       it('should output formatted output correctly', function () {
-        const instantLock = new InstantLock(str);
-        const output = '<InstantLock: 00000105df60caca6a257d8f2f90d422f2d1abf6658555650d5c2c8ecd209e25, height: 382312>';
+        const instantLock = new InstantLock(str2);
+        const output = '<InstantLock: becccaf1f99d7e7a8a4cc02d020e73d96858757037fca99758bfd629d235bbba, sig: 8967c46529a967b3822e1ba8a173066296d02593f0f59b3a78a30a7eef9c8a120847729e62e4a32954339286b79fe7590221331cd28d576887a263f45b595d499272f656c3f5176987c976239cac16f972d796ad82931d532102a4f95eec7d80>';
         instantLock.inspect().should.equal(output);
       });
     });

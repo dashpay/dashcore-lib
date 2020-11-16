@@ -131,7 +131,8 @@ describe('InstantLock', function () {
     describe('#verifySignatureAgainstQuorum', function () {
       it('should verify signature against single quorum', async function () {
         const instantLock = new InstantLock(buf2);
-        const isValid = await instantLock.verifySignatureAgainstQuorum(quorum);
+        const requestId = instantLock.getRequestId();
+        const isValid = await instantLock.verifySignatureAgainstQuorum(quorum, requestId);
         expect(isValid).to.equal(true);
       });
     });

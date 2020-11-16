@@ -18877,12 +18877,8 @@ module.exports = {
           "isValid": true
         }
       ],
-        "deletedQuorums"
-    :
-      [],
-        "newQuorums"
-    :
-      [
+        "deletedQuorums": [],
+        "newQuorums": [
         {
           "version": 1,
           "llmqType": 1,

@@ -56,18 +56,18 @@ describe('InstantLock', function () {
     expectedHash2 = "e01f06c0a9284ae47253d913e1cd6caa92df8bbbf372dd7feef3f15676001c31";
     expectedRequestId2 = "4c778920186645d97f406e2d3c7ea75bd1a6989992123b640b7bd6b8bc6676bc";
 
-    quorumEntryJSON =      {
+    quorumEntryJSON = {
       "version": 1,
       "llmqType": 1,
-      "quorumHash": "000006bbf4e052245518f644dbb3418a8b60497eb95176750c421808029f5f1b",
+      "quorumHash": "00000aa2ebb79791febf877853f421a19b6b843f965a17527acb01fa18a84d8b",
       "signersCount": 50,
       "signers": "ffffffffffff03",
       "validMembersCount": 50,
       "validMembers": "ffffffffffff03",
-      "quorumPublicKey": "82b5f072e8afb58f3b6fdccfb7da330f7b88bfacb36ea5855e5b757fa2a7a500649105f13555f6f57b30051b75d4a40d",
-      "quorumVvecHash": "ffdf9794b7c616cbfe7a9c4c2c1b7e6eade7893f1cdba170024057aa4f700b6e",
-      "quorumSig": "0de4bee2d8f14ba2b82d038200a04eefa859c628d5860f04f8c8b7e059ea6aeb8e4f20d41b8d92313e7ca147ed6b41e60ca4dd2acb11e89899a63ba2fff1338232d75b88e955b000807054bcb71e5583178dbcb6fed4ac74474803b2827389bd",
-      "membersSig": "90d88ab58e6a244fe92a94fc3093897d144591ea3731d450458d56ff50f2b67585ec0f0529461cf3eba306f4dc3d4ce218e28e3aeb1c1af66a50678b5cb2e918c387c0431bb42d4610488a6452807d2f4146cabd73392e68a6bcf6e9eb02fe2c"
+      "quorumPublicKey": "17b9dc6759fd4ddd55241b17b3a1c9af43814d3dfb4fb5c42b049cce8b3c779703869c396cf43a3cd1c0de3afacb3ab3",
+      "quorumVvecHash": "f10cb68a98f619e30db2d41f1de4ee4f5ab651a7c5cdd28434836c46430d63ad",
+      "quorumSig": "0fa9672a76ba16df03da741bf51874d1d0b618bef00288a5bf9672f8daab1e98f5f9ff7579097b2dca63e6b0885f6983179a0cd2c0d4f673e94cbd912944331ac63d3dcc635a4d00f803a7cafb41b41e9c9723e809111f4cc96cb68b1789a774",
+      "membersSig": "8f9b86c65295601145ff5d7ef1828c15df04a7f930026508e89283016f4cf7d16f26f83d673855828211ea0bda7bba170a25e7148711a4f33551ec2869aa7270335dc50b67b1e792554c7f96d249b7f14064e9550e0481fd969b320c918ff995"
     };
 
     quorum = new QuorumEntry(quorumEntryJSON);

@@ -153,7 +153,8 @@ describe('ChainLock', function () {
     describe('#verifySignatureAgainstQuorum', function () {
       it('should verify signature against single quorum', async function () {
         const chainLock = new ChainLock(buf4);
-        const isValid = await chainLock.verifySignatureAgainstQuorum(quorum4);
+        const requestId = chainLock.getRequestId();
+        const isValid = await chainLock.verifySignatureAgainstQuorum(quorum4, requestId);
         expect(isValid).to.equal(true);
       });
     });

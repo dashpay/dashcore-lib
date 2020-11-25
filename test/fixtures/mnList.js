@@ -6743,6 +6743,76 @@ module.exports = {
       "merkleRootQuorums": "05a6361f679cbff990adfa22594c7354de3a2e33b5276a2b62712f90606a2b2a"
     };
   },
+  getDiffThatAddsMoreThanDeletes: function getDiffThatAddsMoreThanDeletes() {
+    return {
+      "baseBlockHash": "000000000765d8a1b6e6bdbe208111e89ae4926bd09c7e13933104acfaef0c92",
+      "blockHash": "000000000fdeb440a3b023db2f6649e807de906141aead84e7b86203cc8b2280",
+      "cbTxMerkleTree": "01000000018fbdc263df642b23bef6e9799937f3aaceb51c092e35de185712e50120a1f18e0101",
+      "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff4c03fea30104b5ebed5c08fabe6d6d000001b4050000580000000000000001010000000000000058000005440100000100000000000000580000053d0000000d2f6e6f64655374726174756d2f000000000240230e43000000001976a914b7ce0ea9ce2010f58ba4aaa6caa76671c438e89088ac40230e43000000001976a914e054fbd6dd18fc77ed0b234388436a25dee99a1d88ac00000000460200fea3010052af4a6dbf1f0b7b3e0e4040f31e0501e169ed5eff999547e0f440979d23dc572a2b6a60902f71622b6a27b5332e3ade54734c5922faad90f9bf9c671f36a605",
+      "deletedMNs": [
+      ],
+      "mnList": [
+      ],
+      "deletedQuorums": [
+      ],
+      "newQuorums": [
+        {
+          "version": 1,
+          "llmqType": 2,
+          "quorumHash": "0000000007697fd69a799bfa26576a177e817bc0e45b9fcfbf48b362b05aeff2",
+          "signersCount": 321,
+          "signers": "bf7fffaffedffef77fef7ffffffcbdffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
+          "validMembersCount": 322,
+          "validMembers": "bf7fffaffedffef77fef7ffffffcbfffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
+          "quorumPublicKey": "03a3fbbe99d80a9be8fc59fd4fe43dfbeba9119b688e97493664716cdf15ae47fad70fea7cb93f20fba10d689f9e3c02",
+          "quorumVvecHash": "bede6b120304eb31d173678bb54ffcb0ab91f8d72d5af78b5047f76e393a26a2",
+          "quorumSig": "9944c544e03a478b401b65cabbb24338872613f7d58ff13ab038ab86418ec70ef1734ff43e965ccb83e02da83b10d44c0f23c630752cfb29b402149a1fc3fad0760e6341a4a1031efad2983c8637d2a461e9bcaf935b7a4dfa225ed2f7771c75",
+          "membersSig": "92eda5c13583577719bea9337b4b9b6286ac11a072de0955b0dc5a012280bb557a53f9643cee7730dabe2d3a4a19042813ef5d39ae92d0015554954011c1e12bc688d4d7672ac33c4001e0dedbfe5d0316f2ad23206d478964ca62d75f50e4d0"
+        },
+        {
+          "version": 1,
+          "llmqType": 2,
+          "quorumHash": "0000000007697fd69a799bfa26576a177e817bc0e45b9fcfbf48b362b05aeff2",
+          "signersCount": 321,
+          "signers": "bf7fffaffedffef77fef7ffffffcbdffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
+          "validMembersCount": 322,
+          "validMembers": "bf7fffaffedffef77fef7ffffffcbfffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
+          "quorumPublicKey": "03a3fbbe99d80a9be8fc59fd4fe43dfbeba9119b688e97493664716cdf15ae47fad70fea7cb93f20fba10d689f9e3c02",
+          "quorumVvecHash": "bede6b120304eb31d173678bb54ffcb0ab91f8d72d5af78b5047f76e393a26a2",
+          "quorumSig": "9944c544e03a478b401b65cabbb24338872613f7d58ff13ab038ab86418ec70ef1734ff43e965ccb83e02da83b10d44c0f23c630752cfb29b402149a1fc3fad0760e6341a4a1031efad2983c8637d2a461e9bcaf935b7a4dfa225ed2f7771c75",
+          "membersSig": "92eda5c13583577719bea9337b4b9b6286ac11a072de0955b0dc5a012280bb557a53f9643cee7730dabe2d3a4a19042813ef5d39ae92d0015554954011c1e12bc688d4d7672ac33c4001e0dedbfe5d0316f2ad23206d478964ca62d75f50e4d0"
+        },
+        {
+          "version": 1,
+          "llmqType": 2,
+          "quorumHash": "0000000007697fd69a799bfa26576a177e817bc0e45b9fcfbf48b362b05aeff2",
+          "signersCount": 321,
+          "signers": "bf7fffaffedffef77fef7ffffffcbdffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
+          "validMembersCount": 322,
+          "validMembers": "bf7fffaffedffef77fef7ffffffcbfffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
+          "quorumPublicKey": "03a3fbbe99d80a9be8fc59fd4fe43dfbeba9119b688e97493664716cdf15ae47fad70fea7cb93f20fba10d689f9e3c02",
+          "quorumVvecHash": "bede6b120304eb31d173678bb54ffcb0ab91f8d72d5af78b5047f76e393a26a2",
+          "quorumSig": "9944c544e03a478b401b65cabbb24338872613f7d58ff13ab038ab86418ec70ef1734ff43e965ccb83e02da83b10d44c0f23c630752cfb29b402149a1fc3fad0760e6341a4a1031efad2983c8637d2a461e9bcaf935b7a4dfa225ed2f7771c75",
+          "membersSig": "92eda5c13583577719bea9337b4b9b6286ac11a072de0955b0dc5a012280bb557a53f9643cee7730dabe2d3a4a19042813ef5d39ae92d0015554954011c1e12bc688d4d7672ac33c4001e0dedbfe5d0316f2ad23206d478964ca62d75f50e4d0"
+        },
+        {
+          "version": 1,
+          "llmqType": 2,
+          "quorumHash": "0000000007697fd69a799bfa26576a177e817bc0e45b9fcfbf48b362b05aeff2",
+          "signersCount": 321,
+          "signers": "bf7fffaffedffef77fef7ffffffcbdffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
+          "validMembersCount": 322,
+          "validMembers": "bf7fffaffedffef77fef7ffffffcbfffaffffffffffffdfffff7f7f7fff7ffefbfffffdff1fdbf7feffcffbb1f0000000000",
+          "quorumPublicKey": "03a3fbbe99d80a9be8fc59fd4fe43dfbeba9119b688e97493664716cdf15ae47fad70fea7cb93f20fba10d689f9e3c02",
+          "quorumVvecHash": "bede6b120304eb31d173678bb54ffcb0ab91f8d72d5af78b5047f76e393a26a2",
+          "quorumSig": "9944c544e03a478b401b65cabbb24338872613f7d58ff13ab038ab86418ec70ef1734ff43e965ccb83e02da83b10d44c0f23c630752cfb29b402149a1fc3fad0760e6341a4a1031efad2983c8637d2a461e9bcaf935b7a4dfa225ed2f7771c75",
+          "membersSig": "92eda5c13583577719bea9337b4b9b6286ac11a072de0955b0dc5a012280bb557a53f9643cee7730dabe2d3a4a19042813ef5d39ae92d0015554954011c1e12bc688d4d7672ac33c4001e0dedbfe5d0316f2ad23206d478964ca62d75f50e4d0"
+        }
+      ],
+      "merkleRootMNList": "57dc239d9740f4e0479599ff5eed69e101051ef340400e3e7b0b1fbf6d4aaf52",
+      "merkleRootQuorums": "05a6361f679cbff990adfa22594c7354de3a2e33b5276a2b62712f90606a2b2a"
+    };
+  },
   getSecondDiff: function getSecondDiff() {
     return {
       "baseBlockHash": "000000000765d8a1b6e6bdbe208111e89ae4926bd09c7e13933104acfaef0c92",

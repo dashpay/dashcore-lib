@@ -163,5 +163,11 @@ describe('SimplifiedMNList', function () {
       var result = MNList.verifyQuorums();
       expect(result).to.be.true;
     });
+    it("Should throw an error if we are adding more quorums than activeCount for a particular llmqType permits", function () {
+      var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
+      expect(function () {
+        mnList.applyDiff(SMNListFixture.getDiffThatAddsMoreThanDeletes());
+      }).to.throw('Trying to add more quorums to quorum type 2 than its activeCount of 4 permits');
+    });
   });
 });

@@ -112,6 +112,21 @@ export class SimplifiedMNList {
     getLLMQTypes(): number;
 
     /**
+     * @return {number}
+     */
+    getChainlockLLMQType(): number;
+
+    /**
+     * @return {number}
+     */
+    getValidatorLLMQType(): number;
+
+    /**
+     * @return {number}
+     */
+    getInstantSendLLMQType(): number;
+
+    /**
      * Converts simplified MN list to simplified MN list diff that can be used to serialize data
      * to json, buffer, or a hex string
      * @param {string} [network]

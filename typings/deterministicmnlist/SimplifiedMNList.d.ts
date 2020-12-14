@@ -93,11 +93,24 @@ export class SimplifiedMNList {
     getQuorums(): QuorumEntry[];
 
     /**
+     * Returns only quorums of type llmqType - verified or unverified
+     * @param {constants.LLMQ_TYPES} llmqType - llmqType of quorum
+     * @returns {QuorumEntry[]}
+     */
+    getQuorumsOfType(llmqType: number): QuorumEntry[];
+
+    /**
      * Returns all already verified quorums
      * @returns {QuorumEntry[]}
      */
     getVerifiedQuorums(): QuorumEntry[];
 
+    /**
+     * Returns only already verified quorums of type llmqType
+     * @param {constants.LLMQ_TYPES} llmqType - llmqType of quorum
+     * @returns {QuorumEntry[]}
+     */
+    getVerifiedQuorumsOfType(llmqType: number): QuorumEntry[];
 
     /**
      * Returns all still unverified quorums

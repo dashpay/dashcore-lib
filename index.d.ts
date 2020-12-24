@@ -63,6 +63,7 @@ import * as _Transaction from './typings/transaction/Transaction';
 import * as _TransactionSignature from './typings/transaction/TransactionSignature';
 import * as _UnspentOutput from './typings/transaction/UnspentOutput';
 
+import * as _ChainLockSigMessage from './typings/zmqMessages/ChainLockSigMessage';
 
 declare module "@dashevo/dashcore-lib"  {
     /**
@@ -262,6 +263,10 @@ declare module "@dashevo/dashcore-lib"  {
         export import Point = _Point.Point;
         export import Signature = _Signature.Signature;
         export import Hash = _Hash.Hash;
+    }
+
+    export namespace ZmqMessages {
+        export import ChainLockSigMessage = _ChainLockSigMessage.ChainLockSigMessage;
     }
 
     /**

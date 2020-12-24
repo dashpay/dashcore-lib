@@ -75,6 +75,10 @@ bitcore.BloomFilter = require('./lib/bloomfilter');
 bitcore.ChainLock = require('./lib/chainlock/chainlock');
 bitcore.InstantLock = require('./lib/instantlock/instantlock');
 
+bitcore.ZmqMessages = {
+  ChainLockSigMessage: require('./lib/zmqMessages/ChainLockSigMessage'),
+};
+
 // dependencies, subject to change
 bitcore.deps = {};
 bitcore.deps.bnjs = require('bn.js');

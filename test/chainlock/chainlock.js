@@ -6,9 +6,11 @@ const expect = chai.expect;
 
 const bitcore = require('../../index');
 const SimplifiedMNListStore = require('../../lib/deterministicmnlist/SimplifiedMNListStore');
+const SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList');
 const SMNListFixture = require('../fixtures/mnList');
 const ChainLock = bitcore.ChainLock;
 const QuorumEntry = bitcore.QuorumEntry;
+const Networks = bitcore.Networks;
 
 describe('ChainLock', function () {
   let object;
@@ -166,6 +168,18 @@ describe('ChainLock', function () {
         const SMLStore = new SimplifiedMNListStore(smlDiffArray);
         const isValid = await chainLock.verify(SMLStore);
         expect(isValid).to.equal(true);
+      });
+      it("should return false if SML store does not have a signatory candidate", async function () {
+        const chainLock = new ChainLock(buf4);
+        const smlDiffArray = SMNListFixture.getChainlockDiffArray();
+        const SMLStore = new SimplifiedMNListStore(smlDiffArray);
+        SMLStore.getSMLbyHeight = function () {
+          var sml = new SimplifiedMNList();
+          sml.network = Networks.testnet;
+          return sml;
+        };
+        const isValid = await chainLock.verify(SMLStore);
+        expect(isValid).to.equal(false);
       });
     });
   });

@@ -4,7 +4,7 @@ import { ChainLock } from "../chainlock/ChainLock";
 export class ChainLockSigMessage {
   /**
    * Parses raw buffer from rawchainlocksig zmq message
-   * @param {Buffer} chainLockSigMessageBuffer - contents of awchainlocksig zmq message
+   * @param {Buffer} chainLockSigMessageBuffer - contents of rawchainlocksig zmq message
    */
   constructor(chainLockSigMessageBuffer: Buffer);
 

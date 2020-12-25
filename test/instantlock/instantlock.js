@@ -1,7 +1,6 @@
 'use strict';
 
 const chai = require('chai');
-const should = chai.should();
 const expect = chai.expect;
 
 const bitcore = require('../../index');
@@ -9,6 +8,8 @@ const SimplifiedMNListStore = require('../../lib/deterministicmnlist/SimplifiedM
 const SMNListFixture = require('../fixtures/mnList');
 const InstantLock = bitcore.InstantLock;
 const QuorumEntry = bitcore.QuorumEntry;
+
+const getSMLStoreJSONFixture = require('../fixtures/getSMLStoreJSON');
 
 describe('InstantLock', function () {
   this.timeout(10000);
@@ -24,6 +25,7 @@ describe('InstantLock', function () {
   let expectedRequestId2;
   let quorumEntryJSON;
   let quorum;
+  let instantLockJSONFromTestNet;
 
   beforeEach(() => {
     // DashJ test vector : https://github.com/dashevo/dashj/blob/master/core/src/test/java/org/bitcoinj/quorums/InstantSendLockTest.java
@@ -69,6 +71,17 @@ describe('InstantLock', function () {
       "quorumVvecHash": "f10cb68a98f619e30db2d41f1de4ee4f5ab651a7c5cdd28434836c46430d63ad",
       "quorumSig": "0fa9672a76ba16df03da741bf51874d1d0b618bef00288a5bf9672f8daab1e98f5f9ff7579097b2dca63e6b0885f6983179a0cd2c0d4f673e94cbd912944331ac63d3dcc635a4d00f803a7cafb41b41e9c9723e809111f4cc96cb68b1789a774",
       "membersSig": "8f9b86c65295601145ff5d7ef1828c15df04a7f930026508e89283016f4cf7d16f26f83d673855828211ea0bda7bba170a25e7148711a4f33551ec2869aa7270335dc50b67b1e792554c7f96d249b7f14064e9550e0481fd969b320c918ff995"
+    };
+
+    instantLockJSONFromTestNet = {
+      inputs: [
+        {
+          outpointHash: 'be880dbaba634974d82b5c333e4c46f3168332faff2d7eca563d96ec2ff3284b',
+          outpointIndex: 0
+        }
+      ],
+      txid: '822943269a2dfa7b2c081853787e06330936f54b88c2474a87a9abd0bea1d884',
+      signature: '05a6c477b76b23ed40c061a935273c0a9b72ad50814664dbe821ca35609be0742acd0c4409d9e898f388a113f1fc66160ed17cb2f8f1ed5747046f400b8e66426f6e1e734aa7cb88c036d46382ffb60ce92f080d7e27a43a80424ebfb4d17f3c'
     };
 
     quorum = new QuorumEntry(quorumEntryJSON);
@@ -153,7 +166,28 @@ describe('InstantLock', function () {
         const SMLStore = new SimplifiedMNListStore(smlDiffArray);
         const isValid = await instantLock.verify(SMLStore);
         expect(isValid).to.equal(false);
-      })
+      });
+      it('should not crash if no quorum was found for the lock to verify', async function () {
+        const SMLStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixture())
+
+        // Proceeding with the test
+        const instantLock = new InstantLock(buf2);
+        expect(instantLock.signature.length).to.be.equal(192);
+        instantLock.signature = '0'.repeat(192);
+        const isValid = await instantLock.verify(SMLStore);
+        expect(isValid).to.equal(false);
+      });
+      it('should verify instant lock past the height in sml store', async function () {
+        const SMLStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixture())
+
+        // That's is an ISLock approximately from height 4846
+        const instantLock = InstantLock.fromObject(instantLockJSONFromTestNet);
+        instantLock.signature = '0'.repeat(192);
+
+        // It verifies for the store 4765-4853
+        const isValid = await instantLock.verify(SMLStore);
+        expect(isValid).to.equal(true);
+      });
     });
   });
 

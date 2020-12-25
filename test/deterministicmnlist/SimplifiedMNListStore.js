@@ -3,10 +3,9 @@ const constants = require('../../lib/constants');
 const SimplifiedMNListStore = require('../../lib/deterministicmnlist/SimplifiedMNListStore');
 const SMNListFixture = require('../fixtures/mnList');
 const Transaction = require('../../lib/transaction');
+const getSMLStoreJSONFixture = require('../fixtures/getSMLStoreJSON');
 
 let smlDiffArray;
-
-
 
 describe('SimplifiedMNListStore', function () {
   this.timeout(5000);
@@ -102,6 +101,15 @@ describe('SimplifiedMNListStore', function () {
       expect(function () {
         smlStore.getSMLbyHeight(height);
       }).to.throw('unable to construct SML at this height');
+    });
+  });
+  describe('.fromJSON', function () {
+    it('should restore an SML store from JSON', function () {
+      const smlStoreJSON = getSMLStoreJSONFixture();
+      const smlStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixture());
+      const restoredSmlStoreJson = JSON.parse(JSON.stringify(smlStore));
+
+      expect(restoredSmlStoreJson).to.be.deep.equal(smlStoreJSON);
     });
   });
 });

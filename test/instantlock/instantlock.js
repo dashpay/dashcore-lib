@@ -11,6 +11,7 @@ const InstantLock = bitcore.InstantLock;
 const QuorumEntry = bitcore.QuorumEntry;
 
 describe('InstantLock', function () {
+  this.timeout(10000);
   let object;
   let str;
   let buf;
@@ -137,7 +138,6 @@ describe('InstantLock', function () {
       });
     });
     describe('#verify', function () {
-      this.timeout(6000);
       it('should verify signature against SMLStore', async function () {
         const instantLock = new InstantLock(buf2);
         const smlDiffArray = SMNListFixture.getInstantLockDiffArray();
@@ -145,6 +145,15 @@ describe('InstantLock', function () {
         const isValid = await instantLock.verify(SMLStore);
         expect(isValid).to.equal(true);
       });
+      it('should not crash if BLS fails to parse the signature or any other data', async function () {
+        const instantLock = new InstantLock(buf2);
+        expect(instantLock.signature.length).to.be.equal(192);
+        instantLock.signature = '0'.repeat(192);
+        const smlDiffArray = SMNListFixture.getInstantLockDiffArray();
+        const SMLStore = new SimplifiedMNListStore(smlDiffArray);
+        const isValid = await instantLock.verify(SMLStore);
+        expect(isValid).to.equal(false);
+      })
     });
   });
 

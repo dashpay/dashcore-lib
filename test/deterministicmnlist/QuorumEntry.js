@@ -40,6 +40,7 @@ var commitmentHash = "bc8c5dc5975ce6c4988ce8506ce6a4ec59b3232a8715aa2ffaeeebab8d
 var selectionModifier = "c6a87d306a29918722342ddd612262356097b50b3d67476f073c33947aee32f0";
 
 describe('QuorumEntry', function () {
+  this.timeout(10000);
   describe('fromBuffer', function () {
     it('Should be able to parse data from a buffer', function () {
       var entry = QuorumEntry.fromBuffer(Buffer.from(quorumEntryHex, 'hex'));

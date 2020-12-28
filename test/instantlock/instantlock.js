@@ -136,7 +136,7 @@ describe('InstantLock', function () {
       it('can be instantiated from another instantlock', function () {
         const instantLock = InstantLock.fromBuffer(buf2);
         const instantLock2 = new InstantLock(instantLock);
-        instantLock2.toString().should.equal(instantLock.toString());
+        expect(instantLock2.toString()).to.be.equal(instantLock.toString());
       });
     })
   });
@@ -167,6 +167,16 @@ describe('InstantLock', function () {
         const isValid = await instantLock.verify(SMLStore);
         expect(isValid).to.equal(false);
       });
+      it('should verify instant lock past the height in sml store', async function () {
+        const SMLStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixture())
+
+        // That's is an ISLock approximately from height 4846
+        const instantLock = InstantLock.fromObject(instantLockJSONFromTestNet);
+
+        // It verifies for the store 4765-4853
+        const isValid = await instantLock.verify(SMLStore);
+        expect(isValid).to.equal(true);
+      });
       it('should not crash if no quorum was found for the lock to verify', async function () {
         const SMLStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixture())
 
@@ -176,17 +186,6 @@ describe('InstantLock', function () {
         instantLock.signature = '0'.repeat(192);
         const isValid = await instantLock.verify(SMLStore);
         expect(isValid).to.equal(false);
-      });
-      it('should verify instant lock past the height in sml store', async function () {
-        const SMLStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixture())
-
-        // That's is an ISLock approximately from height 4846
-        const instantLock = InstantLock.fromObject(instantLockJSONFromTestNet);
-        instantLock.signature = '0'.repeat(192);
-
-        // It verifies for the store 4765-4853
-        const isValid = await instantLock.verify(SMLStore);
-        expect(isValid).to.equal(true);
       });
     });
   });
@@ -247,7 +246,7 @@ describe('InstantLock', function () {
       it('should output formatted output correctly', function () {
         const instantLock = new InstantLock(str);
         const output = '<InstantLock: becccaf1f99d7e7a8a4cc02d020e73d96858757037fca99758bfd629d235bbba, sig: 8967c46529a967b3822e1ba8a173066296d02593f0f59b3a78a30a7eef9c8a120847729e62e4a32954339286b79fe7590221331cd28d576887a263f45b595d499272f656c3f5176987c976239cac16f972d796ad82931d532102a4f95eec7d80>';
-        instantLock.inspect().should.equal(output);
+        expect(instantLock.inspect()).to.be.equal(output);
       });
     });
   })

@@ -6,6 +6,7 @@ var SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList')
 var QuorumEntry = require('../../lib/deterministicmnlist/QuorumEntry');
 var constants = require('../../lib/constants');
 var Networks = require('../../lib/networks');
+const testnetDiffs = require('../fixtures/testnetSMLDiffs.json');
 
 describe('SimplifiedMNList', function () {
   this.timeout(10000);
@@ -85,6 +86,19 @@ describe('SimplifiedMNList', function () {
       // Should be equal to the block hash from the first diff
       expect(mnList.baseBlockHash).to.be.equal(SMNListFixture.getFirstDiff().baseBlockHash);
     });
+    it('should process the diffs from testnet', function () {
+      const mnList = new SimplifiedMNList();
+
+      mnList.applyDiff(testnetDiffs[0]);
+
+      expect(mnList.quorumList.length).to.be.equal(39);
+
+      testnetDiffs.shift();
+
+      testnetDiffs.forEach((diff) => {
+        mnList.applyDiff(diff);
+      });
+    })
   });
   describe('calculateMerkleRoot', function () {
     it('Should calculate merkle root', function () {

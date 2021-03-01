@@ -12,6 +12,8 @@
     "scripthash": 19,
     "xpubkey": 70617039,
     "xprivkey": 70615956,
+    "xprivkey256bit": 250423156,
+    "xpubkey256bit": 250423051,
     "port": 19999,
     "networkMagic": {
       "type": "Buffer",
@@ -92,6 +94,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -169,6 +173,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -246,6 +252,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -323,6 +331,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -399,6 +409,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -475,6 +487,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -551,6 +565,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -629,6 +645,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -705,6 +723,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -781,6 +801,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -857,6 +879,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -935,6 +959,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1011,6 +1037,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1087,6 +1115,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1163,6 +1193,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1206,6 +1238,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1243,6 +1277,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1280,6 +1316,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1317,6 +1355,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1354,6 +1394,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1391,6 +1433,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1428,6 +1472,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1465,6 +1511,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1502,6 +1550,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1539,6 +1589,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1576,6 +1628,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1613,6 +1667,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1650,6 +1706,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1687,6 +1745,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1724,6 +1784,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1761,6 +1823,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1798,6 +1862,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1835,6 +1901,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1872,6 +1940,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1909,6 +1979,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1946,6 +2018,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -1983,6 +2057,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2020,6 +2096,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2057,6 +2135,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2094,6 +2174,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2131,6 +2213,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2168,6 +2252,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2205,6 +2291,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2242,6 +2330,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2279,6 +2369,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2316,6 +2408,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2353,6 +2447,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2390,6 +2486,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2427,6 +2525,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2464,6 +2564,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2501,6 +2603,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2538,6 +2642,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2575,6 +2681,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2612,6 +2720,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2649,6 +2759,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2686,6 +2798,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -2723,6 +2837,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3169,6 +3285,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3206,6 +3324,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3243,6 +3363,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3280,6 +3402,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3317,6 +3441,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3354,6 +3480,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3391,6 +3519,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3428,6 +3558,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3465,6 +3597,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3502,6 +3636,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3539,6 +3675,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3576,6 +3714,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3613,6 +3753,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3650,6 +3792,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3687,6 +3831,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3724,6 +3870,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3761,6 +3909,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3798,6 +3948,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3835,6 +3987,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3872,6 +4026,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3909,6 +4065,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3946,6 +4104,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -3983,6 +4143,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4020,6 +4182,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4057,6 +4221,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4094,6 +4260,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4131,6 +4299,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4168,6 +4338,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4205,6 +4377,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4242,6 +4416,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4279,6 +4455,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4316,6 +4494,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4353,6 +4533,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4390,6 +4572,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4427,6 +4611,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4464,6 +4650,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4501,6 +4689,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4538,6 +4728,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4575,6 +4767,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4612,6 +4806,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4649,6 +4845,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4686,6 +4884,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4756,6 +4956,8 @@
       "scripthash": 19,
       "xpubkey": 70617039,
       "xprivkey": 70615956,
+      "xprivkey256bit": 250423156,
+      "xpubkey256bit": 250423051,
       "port": 19999,
       "networkMagic": {
         "type": "Buffer",
@@ -4799,6 +5001,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4836,6 +5040,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4873,6 +5079,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4910,6 +5118,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4947,6 +5157,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -4984,6 +5196,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5021,6 +5235,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5058,6 +5274,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5095,6 +5313,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5132,6 +5352,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5169,6 +5391,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5206,6 +5430,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5243,6 +5469,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5280,6 +5508,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5317,6 +5547,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5354,6 +5586,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5391,6 +5625,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5428,6 +5664,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5465,6 +5703,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5502,6 +5742,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5539,6 +5781,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5576,6 +5820,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5613,6 +5859,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5650,6 +5898,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5687,6 +5937,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5724,6 +5976,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5761,6 +6015,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5798,6 +6054,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5835,6 +6093,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5872,6 +6132,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5909,6 +6171,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5946,6 +6210,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -5983,6 +6249,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6020,6 +6288,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6057,6 +6327,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6094,6 +6366,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6131,6 +6405,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6168,6 +6444,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6205,6 +6483,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6242,6 +6522,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6279,6 +6561,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6316,6 +6600,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6762,6 +7048,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6799,6 +7087,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6836,6 +7126,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6873,6 +7165,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6910,6 +7204,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6947,6 +7243,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -6984,6 +7282,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7021,6 +7321,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7058,6 +7360,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7095,6 +7399,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7132,6 +7438,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7169,6 +7477,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7206,6 +7516,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7243,6 +7555,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7280,6 +7594,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7317,6 +7633,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7354,6 +7672,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7391,6 +7711,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7428,6 +7750,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7465,6 +7789,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7502,6 +7828,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7539,6 +7867,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7576,6 +7906,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7613,6 +7945,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7650,6 +7984,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7687,6 +8023,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7724,6 +8062,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7761,6 +8101,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7798,6 +8140,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7835,6 +8179,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7872,6 +8218,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7909,6 +8257,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7946,6 +8296,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -7983,6 +8335,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -8020,6 +8374,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -8057,6 +8413,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -8094,6 +8452,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -8131,6 +8491,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -8168,6 +8530,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -8205,6 +8569,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -8242,6 +8608,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -8279,6 +8647,8 @@
           "scripthash": 19,
           "xpubkey": 70617039,
           "xprivkey": 70615956,
+          "xprivkey256bit": 250423156,
+          "xpubkey256bit": 250423051,
           "port": 19999,
           "networkMagic": {
             "type": "Buffer",
@@ -8348,6 +8718,8 @@
       "scripthash": 19,
       "xpubkey": 70617039,
       "xprivkey": 70615956,
+      "xprivkey256bit": 250423156,
+      "xpubkey256bit": 250423051,
       "port": 19999,
       "networkMagic": {
         "type": "Buffer",

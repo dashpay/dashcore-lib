@@ -344,6 +344,62 @@ describe('BIP32 compliance', function() {
       seededKey.xpubkey.should.equal(vector2_m_public);
     });
   });
+  
+  describe('DIP14 256-bit compliance', function() {
+
+    it('should derive an arbitrary DIP14 256-bit path correctly from a seed', function() {
+      var seededKey = HDPrivateKey.fromSeed(vector3_dip14_master, Networks.testnet);
+      seededKey.deriveChild(vector3_dip14_path_1_m77).privateKey.toString('hex').should.equal(vector3_dip14_path_1_m77_private);
+      seededKey.deriveChild(vector3_dip14_path_1_m77_f5h).privateKey.toString('hex').should.equal(vector3_dip14_path_1_m77_f5h_private);
+      seededKey.deriveChild(vector3_dip14_path_1_m77_f5h_4c_0).privateKey.toString('hex').should.equal(vector3_dip14_path_1_m77_f5h_4c_0_private);
+    });
+
+    it('should serialize an arbitrary DIP14 256-bit xpubkey and xprivkey correctly', function() {
+      var seededKey = HDPrivateKey.fromSeed(vector3_dip14_master, Networks.testnet);
+      seededKey.deriveChild(vector3_dip14_path_1_m77_f5h_4c_0).xprivkey.should.equal(vector3_dip14_path_1_m77_f5h_4c_0_xprivkey);
+      seededKey.deriveChild(vector3_dip14_path_1_m77_f5h_4c_0).xpubkey.should.equal(vector3_dip14_path_1_m77_f5h_4c_0_xpubkey);
+    });
+    
+    it('should return the same publicKey for non-hardened derivation from HDPrivateKey and HDPublicKey', function() {
+      var seededKey = HDPrivateKey.fromSeed(vector3_dip14_master, Networks.testnet);
+      seededKey.deriveChild(vector3_dip14_path_1_m77).publicKey.toString().should.equal(vector3_dip14_path_1_m77_public)
+      seededKey.hdPublicKey.deriveChild(vector3_dip14_path_1_m77).publicKey.toString().should.equal(vector3_dip14_path_1_m77_public)
+    });
+    
+    it('should serialize the same xpubkey non-hardened derivation from HDPrivateKey and HDPublicKey', function() {
+      var seededKey = HDPrivateKey.fromSeed(vector3_dip14_master, Networks.testnet);
+      seededKey.deriveChild(vector3_dip14_path_1_m77).xpubkey.toString().should.equal(vector3_dip14_path_1_m77_xpubkey)
+      seededKey.hdPublicKey.deriveChild(vector3_dip14_path_1_m77).xpubkey.toString().should.equal(vector3_dip14_path_1_m77_xpubkey)
+    });
+
+    it('should serialize 256-bit xpubkey and xprivkeys correctly for hardened and non-hardened derivations', function() {
+      var seededKey = HDPrivateKey.fromSeed(vector3_dip14_master, Networks.testnet);
+      seededKey.deriveChild(vector3_dip14_path_1_m77).xprivkey.should.equal(vector3_dip14_path_1_m77_xprivkey)
+      seededKey.deriveChild(vector3_dip14_path_1_m77).xpubkey.should.equal(vector3_dip14_path_1_m77_xpubkey)
+      seededKey.deriveChild(vector3_dip14_path_1_m77_f5h).xprivkey.should.equal(vector3_dip14_path_1_m77_f5h_xprivkey)
+      seededKey.deriveChild(vector3_dip14_path_1_m77_f5h).xpubkey.should.equal(vector3_dip14_path_1_m77_f5h_xpubkey)
+    });
+    
+    it('should derive a Dashpay DIP14 256-bit path correctly from a seed', function() {
+      var seededKey = HDPrivateKey.fromSeed(vector3_dip14_master, Networks.testnet);
+      seededKey.deriveChild(vector3_dip14_path_2).privateKey.toString('hex').should.equal(vector3_dip14_path_2_private);
+    });
+    
+    it('should serialize a Dashpay DIP14 256-bit xpubkey and xprivkey correctly', function() {
+      var seededKey = HDPrivateKey.fromSeed(vector3_dip14_master, Networks.testnet);
+      seededKey.deriveChild(vector3_dip14_path_2).xprivkey.should.equal(vector3_dip14_path_2_xprivkey);
+      seededKey.deriveChild(vector3_dip14_path_2).xpubkey.should.equal(vector3_dip14_path_2_xpubkey);
+    });
+    
+    it('should derive a BIP32 path from hex correctly', function() {
+      var seededKey = HDPrivateKey.fromSeed(vector3_dip14_master, Networks.testnet);
+      var child = seededKey.deriveChild(vector3_bip32)
+      var childHex = seededKey.deriveChild(vector3_bip32_hex)
+      child.privateKey.toString('hex').should.equal(childHex.privateKey.toString('hex'))
+      childHex.privateKey.toString('hex').should.equal(vector3_bip32_private)
+    });
+
+  });
 });
 
 //test vectors: https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
@@ -373,3 +429,30 @@ var vector2_m02147483647h12147483646h_public = 'xpub6ERApfZwUNrhLCkDtcHTcxd75Rbz
 var vector2_m02147483647h12147483646h_private = 'xprvA1RpRA33e1JQ7ifknakTFpgNXPmW2YvmhqLQYMmrj4xJXXWYpDPS3xz7iAxn8L39njGVyuoseXzU6rcxFLJ8HFsTjSyQbLYnMpCqE2VbFWc';
 var vector2_m02147483647h12147483646h2_public = 'xpub6FnCn6nSzZAw5Tw7cgR9bi15UV96gLZhjDstkXXxvCLsUXBGXPdSnLFbdpq8p9HmGsApME5hQTZ3emM2rnY5agb9rXpVGyy3bdW6EEgAtqt';
 var vector2_m02147483647h12147483646h2_private = 'xprvA2nrNbFZABcdryreWet9Ea4LvTJcGsqrMzxHx98MMrotbir7yrKCEXw7nadnHM8Dq38EGfSh6dqA9QWTyefMLEcBYJUuekgW4BYPJcr9E7j';
+
+//test vectors: https://github.com/dashpay/dips/blob/master/dip-0014.md#test-vectors
+var vector3_dip14_master = 'b16d3782e714da7c55a397d5f19104cfed7ffa8036ac514509bbb50807f8ac598eeb26f0797bd8cc221a6cbff2168d90a5e9ee025a5bd977977b9eccd97894bb';
+var vector3_dip14_path_1_m77 = "m/0x775d3854c910b7dee436869c4724bed2fe0784e198b8a39f02bbb49d8ebcfc3b"
+var vector3_dip14_path_1_m77_public = "03a2d1bbd1511e2bad8ed6292e949a97b42c29ce2438e39c93c46df2d283135ad3"
+var vector3_dip14_path_1_m77_private = "f6a95ae75ea8362d9478932f71b262b3d981918fe030316686a475dea4889938"
+var vector3_dip14_path_1_m77_xpubkey = "dptp1C5gGd8NzvAke5WNKyRfpDRyvV2UZ3jjrZVZU77qk9yZemMGSdZpkWp7y6wt3FzvFxAHSW8VMCaC1p6Ny5EqWuRm2sjvZLUUFMMwXhmW6eS69qjX958RYBH5R8bUCGZkCfUyQ8UVWcx9katkrRr"
+var vector3_dip14_path_1_m77_xprivkey = "dpts1vgMVEs9mmv1YLwURCeoTn9CFMZ8JMVhyZuxQSKttNSETR3zydMFHMKTTNDQPf6nnupCCtcNnSu3nKZXAJhaguyoJWD4Ju5PE6PSkBqAKWci7HLz37qmFmZZU6GMkLvNLtST2iV8NmqqbX37c45"
+
+var vector3_dip14_path_1_m77_f5h = "m/0x775d3854c910b7dee436869c4724bed2fe0784e198b8a39f02bbb49d8ebcfc3b/0xf537439f36d04a15474ff7423e4b904a14373fafb37a41db74c84f1dbb5c89a6'"
+var vector3_dip14_path_1_m77_f5h_private = "b898ad92d3a0698bc3117d3777d82676673816ce52f4fc2f1263a2f676825f90"
+var vector3_dip14_path_1_m77_f5h_xpubkey = "dptp1CLkexeadp6guoi8Fbiwq6CLZm3hT1DJLwHsxWvwYSeAhjenFhcQ9HumZSftfZEr4dyQjFD7gkM5bSn6Aj7F1Jve8KTn4JsMEaj9dFyJkYs4Ga5HSUqeajxGVmzaY1pEioDmvUtZL3J1NCDCmzQ"
+var vector3_dip14_path_1_m77_f5h_xprivkey = "dpts1vwRsaPMQfqwp59ELpx5UeuYtdaMCJyGTwiGtr8zgf6qWPMWnhPpg8R73hwR1xLibbdKVdh17zfwMxFEMxZzBKUgPwvuosUGDKW4ayZjs3AQB9EGRcVpDoFT8V6nkcc6KzksmZxvmDcd3MqiPEu"
+
+var vector3_dip14_path_1_m77_f5h_4c_0 = "m/0x775d3854c910b7dee436869c4724bed2fe0784e198b8a39f02bbb49d8ebcfc3b/0xf537439f36d04a15474ff7423e4b904a14373fafb37a41db74c84f1dbb5c89a6'/0x4c4592ca670c983fc43397dfd21a6f427fac9b4ac53cb4dcdc6522ec51e81e79/0"
+var vector3_dip14_path_1_m77_f5h_4c_0_private= "e8781fdef72862968cd9a4d2df34edaf9dcc5b17629ec505f0d2d1a8ed6f9f09"
+var vector3_dip14_path_1_m77_f5h_4c_0_xprivkey = "tprv8iNr6Z8PgAHmYSgMKGbq42kMVAAQmwmzm5iTJdUXoxLf25zG3GeRCvnEdC6HKTHkU59nZkfjvcGk9VW2YHsFQMwsZrQLyNrGx9c37kgb368"
+var vector3_dip14_path_1_m77_f5h_4c_0_xpubkey = "tpubDF4tEyAdpXySRui9CvGRTSQU4BgLwGxuLPKEb9WqEE93raF2ffU1PRQ6oJHCgZ7dArzcMj9iKG8s8EFA1DdwgzWAXs61uFuRE1bQi8kAmLy"
+
+var vector3_dip14_path_2 = "m/9'/5'/15'/0'/0x555d3854c910b7dee436869c4724bed2fe0784e198b8a39f02bbb49d8ebcfc3a'/0xa137439f36d04a15474ff7423e4b904a14373fafb37a41db74c84f1dbb5c89b5'/0"
+var vector3_dip14_path_2_private= "fac40790776d171ee1db90899b5eb2df2f7d2aaf35ad56f07ffb8ed2c57f8e60"
+var vector3_dip14_path_2_xprivkey = "tprv8p9LqE2tA2b94gc3ciRNA525WVkFvzkcC9qjpKEcGaTqjb9u2pwTXj41KkZTj3c1a6fJUpyXRfcB4dimsYsLMjQjsTJwi5Ukx6tJ5BpmYpx"
+var vector3_dip14_path_2_xpubkey = "tpubDLqNye58JQGox9dqWN5xZUgC5XGC6KwWmTSX6qGugrGEa5QffDm3iDfsVtX7qyXuWoQsXA6YCSuckKshyjnwiGGoYWHonAv2X98HTU613UH"
+
+var vector3_bip32 ="m/1/2/3/255"
+var vector3_bip32_hex = "m/0x01/0x02/0x03/0xFF"
+var vector3_bip32_private ="610c2ef3000e75ec04e78b4d9b016aad3e275bf17edb30087d6fa1299938cf0d"

@@ -256,10 +256,10 @@ describe('HDPrivate key interface', function() {
       indexes = HDPrivateKey._getDerivationIndexes('m/-1/12');
       expect(indexes).to.equal(null);
 
-      indexes = HDPrivateKey._getDerivationIndexes('m/0/12/12\'');
+      indexes = HDPrivateKey._getDerivationIndexes('m/0/12/12\'').map(index=>index.index);
       indexes.should.eql([0, 12, HDPrivateKey.Hardened + 12]);
 
-      indexes = HDPrivateKey._getDerivationIndexes('m/0/12/12\'');
+      indexes = HDPrivateKey._getDerivationIndexes('m/0/12/12\'').map(index=>index.index);
       indexes.should.eql([0, 12, HDPrivateKey.Hardened + 12]);
     });
 

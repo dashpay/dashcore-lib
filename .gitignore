@@ -1,5 +1,6 @@
 # ignore JetBrains IDE project specific files
 .idea
+.vscode
 
 # do not track dependencies
 node_modules

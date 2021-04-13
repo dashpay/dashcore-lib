@@ -122,7 +122,7 @@ You can also run just the Node.js tests with `npm run test:node`, just the brows
 * [PublicKey](docs/usage/publickey.md)
 * [Script](docs/usage/script.md)
 * [Transaction](docs/usage/transaction.md)
-* [Transaction Iput](docs/usage/transaction_input.md)
+* [Transaction Input](docs/usage/transaction_input.md)
 * [Transaction Output](docs/usage/transaction_output.md)
 * [URI](docs/usage/uri.md)
 

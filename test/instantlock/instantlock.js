@@ -2,6 +2,7 @@
 
 const chai = require('chai');
 const expect = chai.expect;
+const sinon = require('sinon');
 
 const bitcore = require('../../index');
 const SimplifiedMNListStore = require('../../lib/deterministicmnlist/SimplifiedMNListStore');
@@ -10,6 +11,7 @@ const InstantLock = bitcore.InstantLock;
 const QuorumEntry = bitcore.QuorumEntry;
 
 const getSMLStoreJSONFixture = require('../fixtures/getSMLStoreJSON');
+const getSMLStoreJSONFixtureNoQuorums = require('../fixtures/getSMLStoreNoQuorumsJSON');
 
 describe('InstantLock', function () {
   this.timeout(10000);
@@ -168,7 +170,7 @@ describe('InstantLock', function () {
         expect(isValid).to.equal(false);
       });
       it('should verify instant lock past the height in sml store', async function () {
-        const SMLStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixture())
+        const SMLStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixture());
 
         // That's is an ISLock approximately from height 4846
         const instantLock = InstantLock.fromObject(instantLockJSONFromTestNet);
@@ -178,8 +180,7 @@ describe('InstantLock', function () {
         expect(isValid).to.equal(true);
       });
       it('should not crash if no quorum was found for the lock to verify', async function () {
-        const SMLStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixture())
-
+        const SMLStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixture());
         // Proceeding with the test
         const instantLock = new InstantLock(buf2);
         expect(instantLock.signature.length).to.be.equal(192);
@@ -187,9 +188,20 @@ describe('InstantLock', function () {
         const isValid = await instantLock.verify(SMLStore);
         expect(isValid).to.equal(false);
       });
+      it('should not crash if no quorum was found for the lock to verify with empty quorumList', async function () {
+        // verifySignatureWithQuorumOffset should be called three times, because the quorumList is always empty
+        const spy = sinon.spy(InstantLock.prototype, 'verifySignatureWithQuorumOffset');
+        const SMLStore = SimplifiedMNListStore.fromJSON(getSMLStoreJSONFixtureNoQuorums());
+        // Proceeding with the test
+        const instantLock = new InstantLock(buf2);
+        expect(instantLock.signature.length).to.be.equal(192);
+        instantLock.signature = '0'.repeat(192);
+        const isValid = await instantLock.verify(SMLStore);
+        sinon.assert.calledThrice(spy)
+        expect(isValid).to.equal(false);
+      });
     });
   });
-
   describe('computation', function () {
     describe('#getHash', function () {
       it('should compute the hash of an InstantLock', function () {

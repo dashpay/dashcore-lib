@@ -1,6 +1,7 @@
 import {SimplifiedMNListDiff} from "./SimplifiedMNListDiff";
 import {SimplifiedMNListEntry} from "./SimplifiedMNListEntry";
 import {QuorumEntry} from "./QuorumEntry";
+import * as constants from "constants";
 
 export class SimplifiedMNList {
     constructor(arg?: Buffer | any | string);
@@ -118,26 +119,25 @@ export class SimplifiedMNList {
      */
     getUnverifiedQuorums(): QuorumEntry[];
 
-
     /**
      * @return {number}
      */
     getLLMQTypes(): number;
 
     /**
-     * @return {number}
+     * @return {constants.LLMQ_TYPES}
      */
-    getChainlockLLMQType(): number;
+    getChainlockLLMQType(): constants.LLMQ_TYPES;
 
     /**
-     * @return {number}
+     * @return {constants.LLMQ_TYPES}
      */
-    getValidatorLLMQType(): number;
+    getValidatorLLMQType(): constants.LLMQ_TYPES;
 
     /**
-     * @return {number}
+     * @return {constants.LLMQ_TYPES}
      */
-    getInstantSendLLMQType(): number;
+    getInstantSendLLMQType(): constants.LLMQ_TYPES;
 
     /**
      * Converts simplified MN list to simplified MN list diff that can be used to serialize data

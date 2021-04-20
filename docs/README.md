@@ -1,7 +1,7 @@
 ## Dashcore-lib
 
 [![NPM Version](https://img.shields.io/npm/v/@dashevo/dashcore-lib)](https://www.npmjs.com/package/@dashevo/dashcore-lib)
-[![Build Status](https://travis-ci.com/dashevo/dashcore-lib.svg?branch=master)](https://travis-ci.com/dashevo/dashcore-lib)
+[![Build Status](https://github.com/dashevo/dashcore-lib/actions/workflows/test_and_release.yml/badge.svg)](https://github.com/dashevo/dashcore-lib/actions/workflows/test_and_release.yml)
 [![Release Date](https://img.shields.io/github/release-date/dashevo/dashcore-lib)](https://github.com/dashevo/dashcore-lib/releases/latest)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen)](https://github.com/RichardLitt/standard-readme)
 

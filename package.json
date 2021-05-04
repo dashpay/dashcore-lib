@@ -1,6 +1,6 @@
 {
   "name": "@dashevo/dashcore-lib",
-  "version": "0.19.21",
+  "version": "0.19.23",
   "description": "A pure and powerful JavaScript Dash library.",
   "author": "Dash Core Group, Inc. <dev@dash.org>",
   "main": "index.js",
@@ -121,7 +121,7 @@
     "bls-signatures": "^0.2.5",
     "bn.js": "=4.11.8",
     "bs58": "=4.0.1",
-    "elliptic": "^6.5.3",
+    "elliptic": "6.5.3",
     "inherits": "=2.0.1",
     "lodash": "^4.17.20",
     "unorm": "^1.6.0"

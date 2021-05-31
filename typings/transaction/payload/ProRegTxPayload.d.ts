@@ -14,18 +14,18 @@
  * @property {string} [payloadSig] Signature of the hash of the ProTx fields. Signed with keyIDOwner
  */
 export type ProRegTxPayloadJSON = {
-    version: number;
-    collateralHash: string;
-    collateralIndex: number;
-    service: string;
-    keyIDOwner: string;
-    pubKeyOperator: string;
-    keyIDVoting: string;
-    operatorReward: number;
-    payoutAddress: string;
-    inputsHash: string;
-    payloadSigSize?: number;
-    payloadSig?: string;
+  version: number;
+  collateralHash: string;
+  collateralIndex: number;
+  service: string;
+  keyIDOwner: string;
+  pubKeyOperator: string;
+  keyIDVoting: string;
+  operatorReward: number;
+  payoutAddress: string;
+  inputsHash: string;
+  payloadSigSize?: number;
+  payloadSig?: string;
 };
 
 /**
@@ -46,93 +46,88 @@ export type ProRegTxPayloadJSON = {
  * @property {string} [payloadSig] Signature of the hash of the ProTx fields. Signed with keyIDOwner
  */
 export class ProRegTxPayload {
-    /**
-     * Parse raw payload
-     * @param {Buffer} rawPayload
-     * @return {ProRegTxPayload}
-     */
-    static fromBuffer(rawPayload: Buffer): ProRegTxPayload;
+  /**
+   * Parse raw payload
+   * @param {Buffer} rawPayload
+   * @return {ProRegTxPayload}
+   */
+  static fromBuffer(rawPayload: Buffer): ProRegTxPayload;
 
-    /**
-     * Create new instance of payload from JSON
-     * @param {string|ProRegTxPayloadJSON} payloadJson
-     * @return {ProRegTxPayload}
-     */
-    static fromJSON(payloadJson: string | ProRegTxPayloadJSON): ProRegTxPayload;
+  /**
+   * Create new instance of payload from JSON
+   * @param {string|ProRegTxPayloadJSON} payloadJson
+   * @return {ProRegTxPayload}
+   */
+  static fromJSON(payloadJson: string | ProRegTxPayloadJSON): ProRegTxPayload;
 
-    /**
-     * Validate payload
-     * @return {boolean}
-     */
-    validate(): boolean;
+  /**
+   * Validate payload
+   * @return {boolean}
+   */
+  validate(): boolean;
 
-    /**
-     * Serializes payload to JSON
-     * @param [options]
-     * @param [options.skipSignature]
-     * @param [options.network] - network for address serialization
-     * @return {ProRegTxPayloadJSON}
-     */
-    toJSON(options?: {
-        skipSignature?: any;
-        network?: any;
-    }): ProRegTxPayloadJSON;
+  /**
+   * Serializes payload to JSON
+   * @param [options]
+   * @param [options.skipSignature]
+   * @param [options.network] - network for address serialization
+   * @return {ProRegTxPayloadJSON}
+   */
+  toJSON(options?: { skipSignature?: any; network?: any }): ProRegTxPayloadJSON;
 
-    /**
-     * Serialize payload to buffer
-     * @param [options]
-     * @param {Boolean} [options.skipSignature] - skip signature. Needed for signing
-     * @return {Buffer}
-     */
-    toBuffer(options?: {
-        skipSignature?: boolean;
-    }): Buffer;
+  /**
+   * Serialize payload to buffer
+   * @param [options]
+   * @param {Boolean} [options.skipSignature] - skip signature. Needed for signing
+   * @return {Buffer}
+   */
+  toBuffer(options?: { skipSignature?: boolean }): Buffer;
 
-    /**
-     * uint_16    2    Provider transaction version number. Currently set to 1.
-     */
-    version: number;
-    type: number;
-    mode: number;
-    collateralHash: string;
-    /**
-     * uint_32    4    The collateral index.
-     */
-    collateralIndex: number;
-    /**
-     * service address, ip and port
-     */
-    service: string;
-    /**
-     * CKeyID    20    The public key hash used for owner related signing (ProTx updates, governance voting)
-     */
-    keyIDOwner: string;
-    /**
-     * BLSPubKey    48    The public key used for operational related signing (network messages, ProTx updates)
-     */
-    pubKeyOperator: string;
-    /**
-     * CKeyID    20    The public key hash used for voting.
-     */
-    keyIDVoting: string;
-    /**
-     * uint_16    2    A value from 0 to 10000.
-     */
-    operatorReward: number;
-    /**
-     * Script    Variable    Payee script (p2pkh/p2sh)
-     */
-    scriptPayout: string;
-    /**
-     * uint256    32    Hash of all the outpoints of the transaction inputs
-     */
-    inputsHash: string;
-    /**
-     * Size of the Signature
-     */
-    payloadSigSize?: number;
-    /**
-     * Signature of the hash of the ProTx fields. Signed with keyIDOwner
-     */
-    payloadSig?: string;
+  /**
+   * uint_16    2    Provider transaction version number. Currently set to 1.
+   */
+  version: number;
+  type: number;
+  mode: number;
+  collateralHash: string;
+  /**
+   * uint_32    4    The collateral index.
+   */
+  collateralIndex: number;
+  /**
+   * service address, ip and port
+   */
+  service: string;
+  /**
+   * CKeyID    20    The public key hash used for owner related signing (ProTx updates, governance voting)
+   */
+  keyIDOwner: string;
+  /**
+   * BLSPubKey    48    The public key used for operational related signing (network messages, ProTx updates)
+   */
+  pubKeyOperator: string;
+  /**
+   * CKeyID    20    The public key hash used for voting.
+   */
+  keyIDVoting: string;
+  /**
+   * uint_16    2    A value from 0 to 10000.
+   */
+  operatorReward: number;
+  /**
+   * Script    Variable    Payee script (p2pkh/p2sh)
+   */
+  scriptPayout: string;
+  /**
+   * uint256    32    Hash of all the outpoints of the transaction inputs
+   */
+  inputsHash: string;
+  /**
+   * Size of the Signature
+   */
+  payloadSigSize?: number;
+  /**
+   * Signature of the hash of the ProTx fields. Signed with keyIDOwner
+   */
+  payloadSig?: string;
 }

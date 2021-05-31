@@ -13,14 +13,9 @@
       }
     ],
     "to",
-    [
-      "yXGeNPQXYFXhLAN1ZKrAjxzzBnZ2JZNKnh",
-      1010000
-    ],
+    ["yXGeNPQXYFXhLAN1ZKrAjxzzBnZ2JZNKnh", 1010000],
     "sign",
-    [
-      "cSBnVM4xvxarwGQuAfQFwqDg9k5tErHUHzgWsEfD4zdwUasvqRVY"
-    ],
+    ["cSBnVM4xvxarwGQuAfQFwqDg9k5tErHUHzgWsEfD4zdwUasvqRVY"],
     "serialize",
     "01000000015884e5db9de218238671572340b207ee85b628074e7e467096c267266baf77a4000000006b4830450221009972100061da4a17a471ac1906c18bb5445c03da2a0be52c59aca6c58f1e342302202b7a19a22572cabb6e55c368ebdb5921541358fa969d5c76b5e0d6ad3f26a7d701210223078d2942df62c45621d209fab84ea9a7a23346201b7727b9b45a29c4e76f5effffffff0150690f00000000001976a9147821c0a3768aa9d1a37e16cf76002aef5373f1a888ac00000000"
   ],
@@ -34,23 +29,15 @@
         "vout": 1,
         "address": "yLygrKXHautSYwRAF3TUGJvidxKqXwLA23",
         "scriptPubKey": "76a914073b7eae2823efa349e3b9155b8a735526463a0f88ac",
-        "amount": 0.01080000
+        "amount": 0.0108
       }
     ],
     "to",
-    [
-      "ySxHD5jGymxKCw8Gkr8RyNZ8weNk4NfZ2y",
-      500000
-    ],
+    ["ySxHD5jGymxKCw8Gkr8RyNZ8weNk4NfZ2y", 500000],
     "to",
-    [
-      "ybt7T6KbAbs1gKPa1sBX7VhtRbkH1MJRQw",
-      570000
-    ],
+    ["ybt7T6KbAbs1gKPa1sBX7VhtRbkH1MJRQw", 570000],
     "sign",
-    [
-      "cSQUuwwJBAg6tYQhzqqLWW115D1s5KFZDyhCF2ffrnukZxMK6rNZ"
-    ],
+    ["cSQUuwwJBAg6tYQhzqqLWW115D1s5KFZDyhCF2ffrnukZxMK6rNZ"],
     "serialize",
     "0100000001863957ca797bf847eae50f6999e4c3616dc64b1e6661b16d9da2b57d184724e4010000006b483045022100855691c90510edf83ab632f0a0b17f5202d2cf7071050dcf0c2778325ed403cd022014ee7a4e787da8bc088d2ece43108a7b8d7112eba89876a27bb44195a0715a910121039dd446bbc85db6917f39c0b4c295b0f8cce76d1926fa76d7b84e3f7ff1c5eec5ffffffff0220a10700000000001976a91448c819246ae5645ceecd41fbe1aa6202a0a9b5ca88ac90b20800000000001976a914aab76ba4877d696590d94ea3e02948b55294815188ac00000000"
   ],
@@ -66,7 +53,7 @@
           "address": "ySxHD5jGymxKCw8Gkr8RyNZ8weNk4NfZ2y",
           "account": "",
           "scriptPubKey": "76a91448c819246ae5645ceecd41fbe1aa6202a0a9b5ca88ac",
-          "amount": 0.00500000,
+          "amount": 0.005,
           "confirmations": 0
         },
         {
@@ -75,16 +62,13 @@
           "address": "ybt7T6KbAbs1gKPa1sBX7VhtRbkH1MJRQw",
           "account": "",
           "scriptPubKey": "76a914aab76ba4877d696590d94ea3e02948b55294815188ac",
-          "amount": 0.00570000,
+          "amount": 0.0057,
           "confirmations": 0
         }
       ]
     ],
     "to",
-    [
-      "yZnGAMARuxPoT24Wg4LKDUYkRtzBYHVzQz",
-      1060000
-    ],
+    ["yZnGAMARuxPoT24Wg4LKDUYkRtzBYHVzQz", 1060000],
     "sign",
     [
       [
@@ -109,14 +93,9 @@
       }
     ],
     "to",
-    [
-      "yifD5iTJSxiCFg7NfGwsmnq2EZAKxCbHcc",
-      990000
-    ],
+    ["yifD5iTJSxiCFg7NfGwsmnq2EZAKxCbHcc", 990000],
     "sign",
-    [
-      "cPwWtDztEgRCMCU8pMQp4HgphvyadrAsYBrCjXUZuDSmnZkyoyNF"
-    ],
+    ["cPwWtDztEgRCMCU8pMQp4HgphvyadrAsYBrCjXUZuDSmnZkyoyNF"],
     "serialize",
     "0100000001dc8b68f2b4263d77ee30468da161242be499283a21dfd7eb38a4a9cdce130ef5010000006a473044022012610834051e6af8594dd5d9c47123d6ce03537d321f9fe3f6ff244b23f47dd5022034901bb0d83688758a9248fdef48bd2000b55cf70111cbef8f206e72a31aaf61012103e26b47e7c0d8946954bf9dd4bc7f9e415437eb98271d05f69e78cef8fc6c9a54ffffffff01301b0f00000000001976a914f50f9826ef186074c6fe206cca6b71472ff07ba888ac00000000"
   ],
@@ -142,10 +121,7 @@
       2
     ],
     "to",
-    [
-      "7cJdJ3CvjDHFWWeFLVGBmAx8reh7QQ69aX",
-      320299
-    ],
+    ["7cJdJ3CvjDHFWWeFLVGBmAx8reh7QQ69aX", 320299],
     "sign",
     [
       [
@@ -196,27 +172,15 @@
       2
     ],
     "to",
-    [
-      "7ZWZu4k2reHv1KF91AJuVu1Y5CLjpu3VA6",
-      150000
-    ],
+    ["7ZWZu4k2reHv1KF91AJuVu1Y5CLjpu3VA6", 150000],
     "to",
-    [
-      "7ZWZu4k2reHv1KF91AJuVu1Y5CLjpu3VA6",
-      160000
-    ],
+    ["7ZWZu4k2reHv1KF91AJuVu1Y5CLjpu3VA6", 160000],
     "change",
-    [
-      "7cJdJ3CvjDHFWWeFLVGBmAx8reh7QQ69aX"
-    ],
+    ["7cJdJ3CvjDHFWWeFLVGBmAx8reh7QQ69aX"],
     "sign",
-    [
-      "XGY5DLkLMJGRRQqu39GvgLitoHV8hKZEHKyRfD4LFEa94uvYGvt2"
-    ],
+    ["XGY5DLkLMJGRRQqu39GvgLitoHV8hKZEHKyRfD4LFEa94uvYGvt2"],
     "sign",
-    [
-      "XJoAwsbx9EqCp7PTMAWbhQsjFHDuQEaEJwcNS96F3ZKuPM4y8ntu"
-    ],
+    ["XJoAwsbx9EqCp7PTMAWbhQsjFHDuQEaEJwcNS96F3ZKuPM4y8ntu"],
     "serialize",
     "010000000220c24f763536edb05ce8df2a4816d971be4f20b58451d71589db434aca98bfaf00000000fdfd000048304502210088ddd40f1b58603b4ee75d21226528426ee4d9c9e88b960bf80081dcdf1a9d5a02202f368ce8bd9c66b9ec17f92569ae5dca2ef541e34bf632f8487009a58a1d1925014730440220704d7b99bb5333dd6a3e8b09fc5fa4fb9c891ce03cab47e902dfce5aeaf8724a0220402e08c44d088e4e5448574c2c10d7bc36d7ba1eb5de61dccb08786628738a19014c695221020483ebb834d91d494a3b649cf0e8f5c9c4fcec5f194ab94341cc99bb440007f2210271ebaeef1c2bf0c1a4772d1391eab03e4d96a6e9b48551ab4e4b0d2983eb452b2103a659828aabe443e2dedabb1db5a22335c5ace5b5b7126998a288d63c99516dd853aeffffffffa0644cd1606e081c59eb65fe69d4a83a3a822da423bc392c91712fb77a192edc00000000fdfd00004830450221008610924a2e48fd0f0be9b8dd5017f1d478be6101ee8ea69e0cdca6bcfbfd4c21022012da689506940bb20fcf9fe590d7687180b49904b82525c331bfe1965965c2f601473044022062b1f55d1afaaa94c2f27eec3bd5ea20f8a19afe09387655b7c9f7e03749f690022077904d8490ef149b8a097aa23ebc384cabe7c9b4f6b137e672793e176a1cf684014c695221020483ebb834d91d494a3b649cf0e8f5c9c4fcec5f194ab94341cc99bb440007f2210271ebaeef1c2bf0c1a4772d1391eab03e4d96a6e9b48551ab4e4b0d2983eb452b2103a659828aabe443e2dedabb1db5a22335c5ace5b5b7126998a288d63c99516dd853aeffffffff03f04902000000000017a9144de752833233fe69a20064f29b2ca0f6399c8af387007102000000000017a9144de752833233fe69a20064f29b2ca0f6399c8af38763b204000000000017a9146c8d8b04c6a1e664b1ec20ec932760760c97688e8700000000"
   ]

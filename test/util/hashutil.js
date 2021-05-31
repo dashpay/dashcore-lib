@@ -1,14 +1,12 @@
 /* eslint-disable */
 // TODO: Remove previous line and work through linting issues at next edit
 
-var expect = require('chai').expect;
-var HashUtil = require('../../lib/util/hashutil');
+var expect = require("chai").expect;
+var HashUtil = require("../../lib/util/hashutil");
 
-describe('hashutil', function () {
-
-  describe('#getRandomHashHexString', function () {
-
-    it('Should return random buffer with 32 byte size', function () {
+describe("hashutil", function () {
+  describe("#getRandomHashHexString", function () {
+    it("Should return random buffer with 32 byte size", function () {
       var hash1 = HashUtil.getRandomHashHexString();
 
       expect(hash1).to.be.a.string;
@@ -21,7 +19,5 @@ describe('hashutil', function () {
 
       expect(hash1).to.be.not.equal(hash2);
     });
-
-  })
-
+  });
 });

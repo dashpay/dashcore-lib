@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
     <!--    <script src="https://unpkg.com/@dashevo/dashcore-lib"></script>-->
     <script src="../../dist/dashcore-lib.min.js"></script>
     <script>
-        const { PrivateKey } = dashcore;
-        const privateKey = new PrivateKey();
-        const address = privateKey.toAddress().toString();
-        alert(`New private key generated ${privateKey.toString()}`);
+      const { PrivateKey } = dashcore;
+      const privateKey = new PrivateKey();
+      const address = privateKey.toAddress().toString();
+      alert(`New private key generated ${privateKey.toString()}`);
     </script>
-</head>
-<body>
-
-</body>
+  </head>
+  <body></body>
 </html>

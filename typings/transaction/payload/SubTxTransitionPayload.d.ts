@@ -9,13 +9,13 @@
  * @property {string} [payloadSigSize]
  */
 export type TransitionPayloadJSON = {
-    version: number;
-    regTxId: string;
-    hashPrevSubTx: string;
-    creditFee: number;
-    hashSTPacket: string;
-    payloadSig?: string;
-    payloadSigSize?: string;
+  version: number;
+  regTxId: string;
+  hashPrevSubTx: string;
+  creditFee: number;
+  hashSTPacket: string;
+  payloadSig?: string;
+  payloadSigSize?: string;
 };
 
 /**
@@ -29,94 +29,96 @@ export type TransitionPayloadJSON = {
  * @property {string} [payloadSigSize]
  */
 export class SubTxTransitionPayload {
-    /**
-     * Serialize transition payload
-     * @param {TransitionPayloadJSON} transitionPayload
-     * @return {Buffer} serialized payload
-     */
-    static serializeJSONToBuffer(transitionPayload: TransitionPayloadJSON): Buffer;
+  /**
+   * Serialize transition payload
+   * @param {TransitionPayloadJSON} transitionPayload
+   * @return {Buffer} serialized payload
+   */
+  static serializeJSONToBuffer(
+    transitionPayload: TransitionPayloadJSON
+  ): Buffer;
 
-    /**
-     * Parse raw transition payload
-     * @param {Buffer} rawPayload
-     * @return {SubTxTransitionPayload}
-     */
-    static fromBuffer(rawPayload: Buffer): SubTxTransitionPayload;
+  /**
+   * Parse raw transition payload
+   * @param {Buffer} rawPayload
+   * @return {SubTxTransitionPayload}
+   */
+  static fromBuffer(rawPayload: Buffer): SubTxTransitionPayload;
 
-    /**
-     * Create new instance of payload from JSON
-     * @param {string|TransitionPayloadJSON} payloadJson
-     * @return {SubTxTransitionPayload}
-     */
-    static fromJSON(payloadJson: string | TransitionPayloadJSON): SubTxTransitionPayload;
+  /**
+   * Create new instance of payload from JSON
+   * @param {string|TransitionPayloadJSON} payloadJson
+   * @return {SubTxTransitionPayload}
+   */
+  static fromJSON(
+    payloadJson: string | TransitionPayloadJSON
+  ): SubTxTransitionPayload;
 
-    /**
-     * Validate payload
-     * @param {TransitionPayloadJSON} blockchainUserPayload
-     * @return {boolean}
-     */
-    static validatePayloadJSON(blockchainUserPayload: TransitionPayloadJSON): boolean;
+  /**
+   * Validate payload
+   * @param {TransitionPayloadJSON} blockchainUserPayload
+   * @return {boolean}
+   */
+  static validatePayloadJSON(
+    blockchainUserPayload: TransitionPayloadJSON
+  ): boolean;
 
-    /**
-     * Validates payload data
-     * @return {boolean}
-     */
-    validate(): boolean;
+  /**
+   * Validates payload data
+   * @return {boolean}
+   */
+  validate(): boolean;
 
-    /**
-     * @param {string} regTxId - Hex string
-     */
-    setRegTxId(regTxId: string): void;
+  /**
+   * @param {string} regTxId - Hex string
+   */
+  setRegTxId(regTxId: string): void;
 
-    /**
-     * @param {string} hashPrevSubTx - Hex string
-     * @return {SubTxTransitionPayload}
-     */
-    setHashPrevSubTx(hashPrevSubTx: string): SubTxTransitionPayload;
+  /**
+   * @param {string} hashPrevSubTx - Hex string
+   * @return {SubTxTransitionPayload}
+   */
+  setHashPrevSubTx(hashPrevSubTx: string): SubTxTransitionPayload;
 
-    /**
-     * @param {string} hashSTPacket - Hex string
-     * @return {SubTxTransitionPayload}
-     */
-    setHashSTPacket(hashSTPacket: string): SubTxTransitionPayload;
+  /**
+   * @param {string} hashSTPacket - Hex string
+   * @return {SubTxTransitionPayload}
+   */
+  setHashSTPacket(hashSTPacket: string): SubTxTransitionPayload;
 
-    /**
-     * @param {number} creditFee
-     * @return {SubTxTransitionPayload}
-     */
-    setCreditFee(creditFee: number): SubTxTransitionPayload;
+  /**
+   * @param {number} creditFee
+   * @return {SubTxTransitionPayload}
+   */
+  setCreditFee(creditFee: number): SubTxTransitionPayload;
 
-    /**
-     * Serializes payload to JSON
-     * @param [options]
-     * @param {boolean} options.skipSignature - skip signature part. Needed for creating new signature
-     * @return {TransitionPayloadJSON}
-     */
-    toJSON(options?: {
-        skipSignature: boolean;
-    }): TransitionPayloadJSON;
+  /**
+   * Serializes payload to JSON
+   * @param [options]
+   * @param {boolean} options.skipSignature - skip signature part. Needed for creating new signature
+   * @return {TransitionPayloadJSON}
+   */
+  toJSON(options?: { skipSignature: boolean }): TransitionPayloadJSON;
 
-    /**
-     * Serialize payload to buffer
-     * @param [options]
-     * @param {boolean} options.skipSignature - skip signature part. Needed for creating new signature
-     * @return {Buffer}
-     */
-    toBuffer(options?: {
-        skipSignature: boolean;
-    }): Buffer;
+  /**
+   * Serialize payload to buffer
+   * @param [options]
+   * @param {boolean} options.skipSignature - skip signature part. Needed for creating new signature
+   * @return {Buffer}
+   */
+  toBuffer(options?: { skipSignature: boolean }): Buffer;
 
-    /**
-     * Copy payload instance
-     * @return {SubTxTransitionPayload}
-     */
-    copy(): SubTxTransitionPayload;
+  /**
+   * Copy payload instance
+   * @return {SubTxTransitionPayload}
+   */
+  copy(): SubTxTransitionPayload;
 
-    version: number;
-    regTxId: string;
-    hashPrevSubTx: string;
-    creditFee: number;
-    hashSTPacket: string;
-    payloadSig?: string;
-    payloadSigSize?: string;
+  version: number;
+  regTxId: string;
+  hashPrevSubTx: string;
+  creditFee: number;
+  hashSTPacket: string;
+  payloadSig?: string;
+  payloadSigSize?: string;
 }

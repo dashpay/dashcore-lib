@@ -48,12 +48,12 @@ Returns : {Transaction} An instance of Transaction
 **Description**: Retrieve a hex string that can be used with dashd's CLI interface (decoderawtransaction, sendrawtransaction)
 Flags that can be used to skip tests:
 
--   `disableAll`: disable all checks
--   `disableSmallFees`: disable checking for fees that are too small
--   `disableLargeFees`: disable checking for fees that are too large
--   `disableIsFullySigned`: disable checking if all inputs are fully signed
--   `disableDustOutputs`: disable checking if there are no outputs that are dust amounts
--   `disableMoreOutputThanInput`: disable checking if the transaction spends more bitcoins than the sum of the input amounts
+- `disableAll`: disable all checks
+- `disableSmallFees`: disable checking for fees that are too small
+- `disableLargeFees`: disable checking for fees that are too large
+- `disableIsFullySigned`: disable checking if all inputs are fully signed
+- `disableDustOutputs`: disable checking if there are no outputs that are dust amounts
+- `disableMoreOutputThanInput`: disable checking if the transaction spends more bitcoins than the sum of the input amounts
 
 **Parameters**:
 
@@ -131,11 +131,11 @@ Can receive, as output information, the output of dashd's `listunspent` command,
 
 ```json
 {
-    "address": "yYo3PeSBv2rMnJeyLUCCzx4Y8VhPppZKkC",
-    "txId": "a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458",
-    "outputIndex": 0,
-    "script": null,
-    "satoshis": 1020000
+  "address": "yYo3PeSBv2rMnJeyLUCCzx4Y8VhPppZKkC",
+  "txId": "a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458",
+  "outputIndex": 0,
+  "script": null,
+  "satoshis": 1020000
 }
 ```
 

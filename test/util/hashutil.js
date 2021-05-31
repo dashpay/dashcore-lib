@@ -1,23 +1,23 @@
 /* eslint-disable */
 // TODO: Remove previous line and work through linting issues at next edit
 
-var expect = require('chai').expect
-var HashUtil = require('../../lib/util/hashutil')
+var expect = require('chai').expect;
+var HashUtil = require('../../lib/util/hashutil');
 
 describe('hashutil', function () {
-    describe('#getRandomHashHexString', function () {
-        it('Should return random buffer with 32 byte size', function () {
-            var hash1 = HashUtil.getRandomHashHexString()
+  describe('#getRandomHashHexString', function () {
+    it('Should return random buffer with 32 byte size', function () {
+      var hash1 = HashUtil.getRandomHashHexString();
 
-            expect(hash1).to.be.a.string
-            expect(hash1.length).to.be.equal(64)
+      expect(hash1).to.be.a.string;
+      expect(hash1.length).to.be.equal(64);
 
-            var hash2 = HashUtil.getRandomHashHexString()
+      var hash2 = HashUtil.getRandomHashHexString();
 
-            expect(hash2).to.be.a.string
-            expect(hash2.length).to.be.equal(64)
+      expect(hash2).to.be.a.string;
+      expect(hash2.length).to.be.equal(64);
 
-            expect(hash1).to.be.not.equal(hash2)
-        })
-    })
-})
+      expect(hash1).to.be.not.equal(hash2);
+    });
+  });
+});

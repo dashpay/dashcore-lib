@@ -47,7 +47,7 @@ All standard parameters can be found as members of the class, the address is rep
 **Returns**: {Object} An object with the parsed params
 
 ```js
-const isValid = URI.isValid('dash:XsV4GHVKGTjQFvwB7c6mYsGV3Mxf7iser6') //true
+const isValid = URI.isValid('dash:XsV4GHVKGTjQFvwB7c6mYsGV3Mxf7iser6'); //true
 ```
 
 ## URI.parse(uri)

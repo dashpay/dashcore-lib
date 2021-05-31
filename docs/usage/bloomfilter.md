@@ -13,11 +13,11 @@ Returns : {BloomFilter} A new instance of a BloomFilter
 
 ```js
 const filter = new BloomFilter({
-    vData: [], // the data of the filter
-    nHashFucs: 3, // the number of hash functions to use
-    nTweak: 2147483649, // the seed used for the hash functions
-    nFlags: 0, // flags used to update the filter when matched
-})
+  vData: [], // the data of the filter
+  nHashFucs: 3, // the number of hash functions to use
+  nTweak: 2147483649, // the seed used for the hash functions
+  nFlags: 0, // flags used to update the filter when matched
+});
 ```
 
 ## BloomFilter.create(numberOfElements, falsePositiveRate)
@@ -34,9 +34,9 @@ Parameters:
 Returns : {BlockHeader} An instance of block header
 
 ```js
-const numberOfElements = 3
-const falsePositiveRate = 0.01
-const filter = BloomFilter.create(numberOfElements, falsePositiveRate)
+const numberOfElements = 3;
+const falsePositiveRate = 0.01;
+const filter = BloomFilter.create(numberOfElements, falsePositiveRate);
 ```
 
 ## BloomFilter.fromBuffer(buf)
@@ -62,7 +62,7 @@ Returns : {BloomFilter} An instance of BloomFilter
 | **element** | Buffer | yes      |             |
 
 ```js
-filter.insert(new Buffer('99108ad8ed9bb6274d3980bab5a85c048f0950c8', 'hex'))
+filter.insert(new Buffer('99108ad8ed9bb6274d3980bab5a85c048f0950c8', 'hex'));
 ```
 
 ## .contains(element)
@@ -76,7 +76,7 @@ filter.insert(new Buffer('99108ad8ed9bb6274d3980bab5a85c048f0950c8', 'hex'))
 | **element** | Buffer | yes      |             |
 
 ```js
-filter.contains(new Buffer('99108ad8ed9bb6274d3980bab5a85c048f0950c8', 'hex'))
+filter.contains(new Buffer('99108ad8ed9bb6274d3980bab5a85c048f0950c8', 'hex'));
 ```
 
 ## .toBuffer()

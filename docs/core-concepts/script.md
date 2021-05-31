@@ -18,12 +18,12 @@ This is the most commonly used transaction output script. It's used to pay to a 
 
 ```javascript
 // create a new p2pkh paying to a specific address
-var address = Address.fromString('XuUGDZHrKLo841CyamDbG5W7n59epA71h2')
-var script = Script.buildPublicKeyHashOut(address)
+var address = Address.fromString('XuUGDZHrKLo841CyamDbG5W7n59epA71h2');
+var script = Script.buildPublicKeyHashOut(address);
 assert(
-    script.toString() ===
-        'OP_DUP OP_HASH160 089acaba6af8b2b4fb4bed3b747ab1e4e60b4965 OP_EQUALVERIFY OP_CHECKSIG'
-)
+  script.toString() ===
+    'OP_DUP OP_HASH160 089acaba6af8b2b4fb4bed3b747ab1e4e60b4965 OP_EQUALVERIFY OP_CHECKSIG'
+);
 ```
 
 ### Pay to Public Key (p2pk)
@@ -33,13 +33,13 @@ Pay to public key scripts are a simplified form of the p2pkh, but aren't commonl
 ```javascript
 // create a new p2pk paying to a specific public key
 var pubkey = new PublicKey(
-    '022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da'
-)
-var script = Script.buildPublicKeyOut(pubkey)
+  '022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da'
+);
+var script = Script.buildPublicKeyOut(pubkey);
 assert(
-    script.toString() ===
-        '33 0x022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da OP_CHECKSIG'
-)
+  script.toString() ===
+    '33 0x022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da OP_CHECKSIG'
+);
 ```
 
 ### Pay to Multisig (p2ms)
@@ -51,24 +51,24 @@ Note that regular multisig outputs are rarely used nowadays. The best practice i
 ```javascript
 // create a new 2-of-3 multisig output from 3 given public keys
 var pubkeys = [
-    new PublicKey(
-        '022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da'
-    ),
-    new PublicKey(
-        '03e3818b65bcc73a7d64064106a859cc1a5a728c4345ff0b641209fba0d90de6e9'
-    ),
-    new PublicKey(
-        '021f2f6e1e50cb6a953935c3601284925decd3fd21bc445712576873fb8c6ebc18'
-    ),
-]
-var threshold = 2
-var script = Script.buildMultisigOut(pubkeys, threshold)
+  new PublicKey(
+    '022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da'
+  ),
+  new PublicKey(
+    '03e3818b65bcc73a7d64064106a859cc1a5a728c4345ff0b641209fba0d90de6e9'
+  ),
+  new PublicKey(
+    '021f2f6e1e50cb6a953935c3601284925decd3fd21bc445712576873fb8c6ebc18'
+  ),
+];
+var threshold = 2;
+var script = Script.buildMultisigOut(pubkeys, threshold);
 assert(
-    script.toString() ===
-        'OP_2 33 0x022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da' +
-            ' 33 0x03e3818b65bcc73a7d64064106a859cc1a5a728c4345ff0b641209fba0d90de6e9' +
-            ' 33 0x021f2f6e1e50cb6a953935c3601284925decd3fd21bc445712576873fb8c6ebc18 OP_3 OP_CHECKMULTISIG'
-)
+  script.toString() ===
+    'OP_2 33 0x022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da' +
+      ' 33 0x03e3818b65bcc73a7d64064106a859cc1a5a728c4345ff0b641209fba0d90de6e9' +
+      ' 33 0x021f2f6e1e50cb6a953935c3601284925decd3fd21bc445712576873fb8c6ebc18 OP_3 OP_CHECKMULTISIG'
+);
 ```
 
 ### Pay to Script Hash (p2sh)
@@ -80,22 +80,22 @@ Most multisig transactions today use p2sh outputs where the `redeemScript` is a 
 ```javascript
 // create a p2sh multisig output
 var pubkeys = [
-    new PublicKey(
-        '022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da'
-    ),
-    new PublicKey(
-        '03e3818b65bcc73a7d64064106a859cc1a5a728c4345ff0b641209fba0d90de6e9'
-    ),
-    new PublicKey(
-        '021f2f6e1e50cb6a953935c3601284925decd3fd21bc445712576873fb8c6ebc18'
-    ),
-]
-var redeemScript = Script.buildMultisigOut(pubkeys, 2)
-var script = redeemScript.toScriptHashOut()
+  new PublicKey(
+    '022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da'
+  ),
+  new PublicKey(
+    '03e3818b65bcc73a7d64064106a859cc1a5a728c4345ff0b641209fba0d90de6e9'
+  ),
+  new PublicKey(
+    '021f2f6e1e50cb6a953935c3601284925decd3fd21bc445712576873fb8c6ebc18'
+  ),
+];
+var redeemScript = Script.buildMultisigOut(pubkeys, 2);
+var script = redeemScript.toScriptHashOut();
 assert(
-    script.toString() ===
-        'OP_HASH160 20 0x620a6eeaf538ec9eb89b6ae83f2ed8ef98566a03 OP_EQUAL'
-)
+  script.toString() ===
+    'OP_HASH160 20 0x620a6eeaf538ec9eb89b6ae83f2ed8ef98566a03 OP_EQUAL'
+);
 ```
 
 ### Data output
@@ -128,16 +128,16 @@ assert(script.toString() === 'OP_2SWAP OP_IF OP_NOT 4 0xbacacafe');
 
 ```javascript
 var raw_script = Buffer.from(
-    '5221022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da2103e3818b65bcc73a7d64064106a859cc1a5a728c4345ff0b641209fba0d90de6e921021f2f6e1e50cb6a953935c3601284925decd3fd21bc445712576873fb8c6ebc1853ae',
-    'hex'
-)
-var s = new Script(raw_script)
-console.log(s.toString())
+  '5221022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da2103e3818b65bcc73a7d64064106a859cc1a5a728c4345ff0b641209fba0d90de6e921021f2f6e1e50cb6a953935c3601284925decd3fd21bc445712576873fb8c6ebc1853ae',
+  'hex'
+);
+var s = new Script(raw_script);
+console.log(s.toString());
 // 'OP_2 33 0x022df8750480ad5b26950b25c7ba79d3e37d75f640f8e5d9bcd5b150a0f85014da 33 0x03e3818b65bcc73a7d64064106a859cc1a5a728c4345ff0b641209fba0d90de6e9 33 0x021f2f6e1e50cb6a953935c3601284925decd3fd21bc445712576873fb8c6ebc18 OP_3 OP_CHECKMULTISIG'
 
-s.isPublicKeyHashOut() // false
-s.isScriptHashOut() // false
-s.isMultisigOut() // true
+s.isPublicKeyHashOut(); // false
+s.isScriptHashOut(); // false
+s.isMultisigOut(); // true
 ```
 
 ## Script Interpreting and Validation

@@ -30,28 +30,28 @@ Most projects will only need to work with one of the networks. The value of `Net
 The functionality of testnet and livenet is mostly similar (except for some relaxed block validation rules on testnet). They differ in the constants being used for human representation of base58 encoded strings. These are sometimes referred to as "version" constants.
 
 ```javascript
-var livenet = new Network()
+var livenet = new Network();
 _.extend(livenet, {
-    name: 'livenet',
-    alias: 'mainnet',
-    pubkeyhash: 0x4c,
-    privatekey: 0xcc,
-    scripthash: 0x10,
-    xpubkey: 0x488b21e,
-    xprivkey: 0x488ade4,
-    networkMagic: 0xbf0c6bbd,
-    port: 9999,
-})
+  name: 'livenet',
+  alias: 'mainnet',
+  pubkeyhash: 0x4c,
+  privatekey: 0xcc,
+  scripthash: 0x10,
+  xpubkey: 0x488b21e,
+  xprivkey: 0x488ade4,
+  networkMagic: 0xbf0c6bbd,
+  port: 9999,
+});
 
-var testnet = new Network()
+var testnet = new Network();
 _.extend(testnet, {
-    name: 'testnet',
-    alias: 'testnet',
-    pubkeyhash: 0x8c,
-    privatekey: 0xef,
-    scripthash: 0x13,
-    xpubkey: 0x43587cf,
-    xprivkey: 0x04358394,
-    port: 19999,
-})
+  name: 'testnet',
+  alias: 'testnet',
+  pubkeyhash: 0x8c,
+  privatekey: 0xef,
+  scripthash: 0x13,
+  xpubkey: 0x43587cf,
+  xprivkey: 0x04358394,
+  port: 19999,
+});
 ```

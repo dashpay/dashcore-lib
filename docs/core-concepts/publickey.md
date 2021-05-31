@@ -9,15 +9,15 @@ A PublicKey in Dashcore is an immutable object and can be instantiated from a [P
 Here is how to instantiate a public key:
 
 ```javascript
-var privateKey = new PrivateKey();
+var privateKey = new PrivateKey()
 
 // from a private key
-var publicKey = new PublicKey(privateKey);
+var publicKey = new PublicKey(privateKey)
 
 // from a der hex encoded string
 var publicKey2 = new PublicKey(
-  "02a1633cafcc01ebfb6d78e39f687a1f0995c62fc95f51ead10a02ee0be551b5dc"
-);
+    '02a1633cafcc01ebfb6d78e39f687a1f0995c62fc95f51ead10a02ee0be551b5dc'
+)
 ```
 
 ## Validating a Public Key
@@ -26,11 +26,11 @@ A public key point should be on the [secp256k1](https://en.bitcoin.it/wiki/Secp2
 
 ```javascript
 if (
-  PublicKey.isValid(
-    "02a1633cafcc01ebfb6d78e39f687a1f0995c62fc95f51ead10a02ee0be551b5dc"
-  )
+    PublicKey.isValid(
+        '02a1633cafcc01ebfb6d78e39f687a1f0995c62fc95f51ead10a02ee0be551b5dc'
+    )
 ) {
-  // valid public key
+    // valid public key
 }
 ```
 

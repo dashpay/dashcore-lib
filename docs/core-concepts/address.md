@@ -7,32 +7,32 @@ Represents a Dash address. Addresses are the most popular way to make Dash trans
 To be able to receive some funds an address is needed, but in order to spend them a private key is necessary. Please take a look at the [`PrivateKey`](privatekey.md) docs for more information about exporting and saving a key.
 
 ```javascript
-var privateKey = new PrivateKey();
-var address = privateKey.toAddress();
+var privateKey = new PrivateKey()
+var address = privateKey.toAddress()
 ```
 
 You can also instantiate an Address from a String, [PublicKey](publickey.md), or [HDPublicKey](hierarchical.md), in case you are not the owner of the private key.
 
 ```javascript
 // from a string
-var address = Address.fromString("XuUGDZHrKLo841CyamDbG5W7n59epA71h2");
+var address = Address.fromString('XuUGDZHrKLo841CyamDbG5W7n59epA71h2')
 
 // a default network address from a public key
-var publicKey = PublicKey(privateKey);
-var address = new Address(publicKey);
+var publicKey = PublicKey(privateKey)
+var address = new Address(publicKey)
 // alternative interface
-var address = Address.fromPublicKey(publicKey);
+var address = Address.fromPublicKey(publicKey)
 
 // a testnet address from a public key
-var publicKey = new PublicKey(privateKey);
-var address = new Address(publicKey, Networks.testnet);
+var publicKey = new PublicKey(privateKey)
+var address = new Address(publicKey, Networks.testnet)
 ```
 
 A pay-to-script-hash multisignature Address can be instantiated from an array of [PublicKeys](publickey.md).
 
 ```javascript
 // a 2-of-3 address from public keys
-var p2shAddress = new Address([publicKey1, publicKey2, publicKey3], 2);
+var p2shAddress = new Address([publicKey1, publicKey2, publicKey3], 2)
 ```
 
 ## Validating an Address

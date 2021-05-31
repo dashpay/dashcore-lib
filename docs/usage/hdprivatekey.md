@@ -101,10 +101,10 @@ If the first argument is a number, the child with that index will be derived. If
 **Returns**: {string} A hex encoded string of the HD private key
 
 ```js
-const parent = new HDPrivateKey("xprv...");
-const child_0_1_2h = parent.deriveChild(0).deriveChild(1).deriveChild(2, true);
-const copy_of_child_0_1_2h = parent.deriveChild("m/0/1/2'");
-assert(child_0_1_2h.xprivkey === copy_of_child_0_1_2h);
+const parent = new HDPrivateKey('xprv...')
+const child_0_1_2h = parent.deriveChild(0).deriveChild(1).deriveChild(2, true)
+const copy_of_child_0_1_2h = parent.deriveChild("m/0/1/2'")
+assert(child_0_1_2h.xprivkey === copy_of_child_0_1_2h)
 ```
 
 ## .toString()

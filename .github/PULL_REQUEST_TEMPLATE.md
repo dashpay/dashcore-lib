@@ -25,7 +25,7 @@
 
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
 
-- [ ] I have performed a self-review of my own code
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have added or updated relevant unit/integration/functional/e2e tests
-- [ ] I have made corresponding changes to the documentation
+-   [ ] I have performed a self-review of my own code
+-   [ ] I have commented my code, particularly in hard-to-understand areas
+-   [ ] I have added or updated relevant unit/integration/functional/e2e tests
+-   [ ] I have made corresponding changes to the documentation

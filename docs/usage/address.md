@@ -28,13 +28,13 @@ To create an address from unsorted public keys, use the Script#buildMultisigOut
 
 ```js
 const public1 =
-  "02da5798ed0c055e31339eb9b5cef0d3c0ccdec84a62e2e255eb5c006d4f3e7f5b";
+    '02da5798ed0c055e31339eb9b5cef0d3c0ccdec84a62e2e255eb5c006d4f3e7f5b'
 const public2 =
-  "0272073bf0287c4469a2a011567361d42529cd1a72ab0d86aa104ecc89342ffeb0";
+    '0272073bf0287c4469a2a011567361d42529cd1a72ab0d86aa104ecc89342ffeb0'
 const public3 =
-  "02738a516a78355db138e8119e58934864ce222c553a5407cf92b9c1527e03c1a2";
-const publics = [public1, public2, public3];
-const address = Address.createMultisig(publics, 2, Networks.livenet);
+    '02738a516a78355db138e8119e58934864ce222c553a5407cf92b9c1527e03c1a2'
+const publics = [public1, public2, public3]
+const address = Address.createMultisig(publics, 2, Networks.livenet)
 ```
 
 Returns :{Address} A new valid and frozen instance of an Address
@@ -54,9 +54,9 @@ Returns : {Address} A new valid and frozen instance of an Address
 
 ```js
 const pubkey = new PublicKey(
-  "0285e9737a74c30a873f74df05124f2aa6f53042c2fc0a130d6cbd7d16b944b004"
-);
-const address = Address.fromPublicKey(pubkey);
+    '0285e9737a74c30a873f74df05124f2aa6f53042c2fc0a130d6cbd7d16b944b004'
+)
+const address = Address.fromPublicKey(pubkey)
 ```
 
 ## Address.fromPublicKeyHash(data, network)
@@ -74,10 +74,10 @@ Returns : {Address} A new valid and frozen instance of an Address
 
 ```js
 const pubkeyhash = Buffer.from(
-  "3c3fa3d4adcaf8f52d5b1843975e122548269937",
-  "hex"
-);
-const address = Address.fromPublicKeyHash(pubkeyhash, "livenet");
+    '3c3fa3d4adcaf8f52d5b1843975e122548269937',
+    'hex'
+)
+const address = Address.fromPublicKeyHash(pubkeyhash, 'livenet')
 ```
 
 ## Address.fromScriptHash(hash, network)
@@ -95,10 +95,10 @@ Returns : {Address} A new valid and frozen instance of an Address
 
 ```js
 const scriptHash = Buffer.from(
-  "19a7d869032368fd1f1e26e5e73a4ad0e474960e",
-  "hex"
-);
-const address = Address.fromScriptHash(scriptHash, "livenet");
+    '19a7d869032368fd1f1e26e5e73a4ad0e474960e',
+    'hex'
+)
+const address = Address.fromScriptHash(scriptHash, 'livenet')
 ```
 
 ## Address.fromScript(hash, network)
@@ -118,9 +118,9 @@ Returns : {Address} A new valid and frozen instance of an Address
 
 ```js
 const script = new Script(
-  "OP_DUP OP_HASH160 20 0xc8e11b0eb0d2ad5362d894f048908341fa61b6e1 OP_EQUALVERIFY OP_CHECKSIG"
-);
-const address = Address.fromScript(script);
+    'OP_DUP OP_HASH160 20 0xc8e11b0eb0d2ad5362d894f048908341fa61b6e1 OP_EQUALVERIFY OP_CHECKSIG'
+)
+const address = Address.fromScript(script)
 ```
 
 ## Address.fromObject(json)

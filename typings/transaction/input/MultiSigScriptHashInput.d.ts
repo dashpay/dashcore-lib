@@ -2,5 +2,5 @@
  * @constructor
  */
 export class MultiSigScriptHashInput {
-  constructor();
+    constructor()
 }

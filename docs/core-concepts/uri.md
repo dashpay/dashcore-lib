@@ -17,10 +17,10 @@ The main use that we expect you'll have for the `URI` class in Dashcore is valid
 The code for validating URIs looks like this:
 
 ```javascript
-var uriString = "dash:XuUGDZHrKLo841CyamDbG5W7n59epA71h2?amount=1.2";
-var valid = URI.isValid(uriString);
-var uri = new URI(uriString);
-console.log(uri.address.network, uri.amount); // 'livenet', 120000000
+var uriString = 'dash:XuUGDZHrKLo841CyamDbG5W7n59epA71h2?amount=1.2'
+var valid = URI.isValid(uriString)
+var uri = new URI(uriString)
+console.log(uri.address.network, uri.amount) // 'livenet', 120000000
 ```
 
 ## URI Parameters
@@ -37,11 +37,11 @@ The code for creating an URI from an Object looks like this:
 
 ```javascript
 var uri = new URI({
-  address: "XuUGDZHrKLo841CyamDbG5W7n59epA71h2",
-  amount: 10000, // in satoshis
-  message: "My payment request",
-});
-console.log(uri.toString()); //dash:XuUGDZHrKLo841CyamDbG5W7n59epA71h2?amount=0.0001&message=My%20payment%20request
+    address: 'XuUGDZHrKLo841CyamDbG5W7n59epA71h2',
+    amount: 10000, // in satoshis
+    message: 'My payment request',
+})
+console.log(uri.toString()) //dash:XuUGDZHrKLo841CyamDbG5W7n59epA71h2?amount=0.0001&message=My%20payment%20request
 ```
 
 Methods `toObject`, `toJSON` and `inspect` remain available.

@@ -5,10 +5,10 @@ The `Mnemonic` class provides an implementation of a mnemonic code or mnemonic s
 For example, the following code would generate a new random mnemonic code and convert it to a `HDPrivateKey`.
 
 ```javascript
-var Mnemonic = require("@dashevo/dashcore-mnemonic");
-var code = new Mnemonic(Mnemonic.Words.SPANISH);
-code.toString(); // natal hada sutil año sólido papel jamón combate aula flota ver esfera...
-var xpriv = code.toHDPrivateKey();
+var Mnemonic = require('@dashevo/dashcore-mnemonic')
+var code = new Mnemonic(Mnemonic.Words.SPANISH)
+code.toString() // natal hada sutil año sólido papel jamón combate aula flota ver esfera...
+var xpriv = code.toHDPrivateKey()
 ```
 
 ## Mnemonic generation
@@ -16,10 +16,10 @@ var xpriv = code.toHDPrivateKey();
 For creating a new random mnemonic code you just create a new instance.
 
 ```javascript
-var Mnemonic = require("@dashevo/dashcore-mnemonic");
-var code = new Mnemonic();
+var Mnemonic = require('@dashevo/dashcore-mnemonic')
+var code = new Mnemonic()
 
-code.toString(); // 'select scout crash enforce riot rival spring whale hollow radar rule sentence'
+code.toString() // 'select scout crash enforce riot rival spring whale hollow radar rule sentence'
 ```
 
 ## Multi-language support
@@ -40,14 +40,14 @@ var customCode = new Mnemonic(myWordList);
 The Mnemonic class provides a static method to check if a mnemonic string is valid. If you generated the mnemonic code using any of the default word list, the class will identify it, otherwise you must provide the word list used.
 
 ```javascript
-var Mnemonic = require("@dashevo/dashcore-mnemonic");
+var Mnemonic = require('@dashevo/dashcore-mnemonic')
 
 var code =
-  "select scout crash enforce riot rival spring whale hollow radar rule sentence";
-var valid = Mnemonic.isValid(code);
+    'select scout crash enforce riot rival spring whale hollow radar rule sentence'
+var valid = Mnemonic.isValid(code)
 
 // using a custom word list
-var validCutom = Mnemonic.isValid(code, customWordlist);
+var validCutom = Mnemonic.isValid(code, customWordlist)
 ```
 
 ## Generating a private key
@@ -55,11 +55,11 @@ var validCutom = Mnemonic.isValid(code, customWordlist);
 A mnemonic encodes entropy that can be used for creating a seed and later a [HDPrivateKey](hierarchical.md). During the seed generation process a passphrase can be used. The code for doing so looks like this:
 
 ```javascript
-var Mnemonic = require("@dashevo/dashcore-mnemonic");
+var Mnemonic = require('@dashevo/dashcore-mnemonic')
 var code = new Mnemonic(
-  "select scout crash enforce riot rival spring whale hollow radar rule sentence"
-);
+    'select scout crash enforce riot rival spring whale hollow radar rule sentence'
+)
 
-var xpriv1 = code.toHDPrivateKey(); // no passphrase
-var xpriv2 = code.toHDPrivateKey("my passphrase"); // using a passphrase
+var xpriv1 = code.toHDPrivateKey() // no passphrase
+var xpriv2 = code.toHDPrivateKey('my passphrase') // using a passphrase
 ```

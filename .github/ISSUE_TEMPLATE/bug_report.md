@@ -1,9 +1,9 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ""
-labels: "bug"
-assignees: ""
+title: ''
+labels: 'bug'
+assignees: ''
 ---
 
 <!--- Provide a general summary of the issue in the Title above -->
@@ -39,7 +39,7 @@ assignees: ""
 
 <!--- Include as many relevant details about the environment you experienced the bug in -->
 
-- Version used:
-- Environment name and version (e.g. Chrome 39, node.js 5.4):
-- Operating System and version (desktop, server, or mobile):
-- Link to your project:
+-   Version used:
+-   Environment name and version (e.g. Chrome 39, node.js 5.4):
+-   Operating System and version (desktop, server, or mobile):
+-   Link to your project:

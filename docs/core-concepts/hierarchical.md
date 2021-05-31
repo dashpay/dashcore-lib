@@ -13,19 +13,19 @@ An instance of a [PrivateKey](privatekey.md) that also contains information requ
 Sample usage:
 
 ```javascript
-var HDPrivateKey = dashcore.HDPrivateKey;
+var HDPrivateKey = dashcore.HDPrivateKey
 
-var hdPrivateKey = new HDPrivateKey();
-var retrieved = new HDPrivateKey("xpriv...");
-var derived = hdPrivateKey.derive("m/0'"); // see deprecation warning for derive
-var derivedByNumber = hdPrivateKey.derive(1).derive(2, true);
-var derivedByArgument = hdPrivateKey.derive("m/1/2'");
-assert(derivedByNumber.xprivkey === derivedByArgument.xprivkey);
+var hdPrivateKey = new HDPrivateKey()
+var retrieved = new HDPrivateKey('xpriv...')
+var derived = hdPrivateKey.derive("m/0'") // see deprecation warning for derive
+var derivedByNumber = hdPrivateKey.derive(1).derive(2, true)
+var derivedByArgument = hdPrivateKey.derive("m/1/2'")
+assert(derivedByNumber.xprivkey === derivedByArgument.xprivkey)
 
-var address = derived.privateKey.toAddress();
+var address = derived.privateKey.toAddress()
 
 // obtain HDPublicKey
-var hdPublicKey = hdPrivateKey.hdPublicKey;
+var hdPublicKey = hdPrivateKey.hdPublicKey
 ```
 
 ## HDPublicKey
@@ -33,19 +33,19 @@ var hdPublicKey = hdPrivateKey.hdPublicKey;
 An instance of a PublicKey that can be derived to build extended public keys. Note that hardened paths are not available when deriving an HDPublicKey.
 
 ```javascript
-var hdPrivateKey = new HDPrivateKey();
-var hdPublicKey = hdPrivateKey.hdPublicKey;
+var hdPrivateKey = new HDPrivateKey()
+var hdPublicKey = hdPrivateKey.hdPublicKey
 try {
-  new HDPublicKey();
+    new HDPublicKey()
 } catch (e) {
-  console.log("Can't generate a public key without a private key");
+    console.log("Can't generate a public key without a private key")
 }
 
-var address = new Address(hdPublicKey.publicKey, Networks.livenet);
+var address = new Address(hdPublicKey.publicKey, Networks.livenet)
 var derivedAddress = new Address(
-  hdPublicKey.derive(100).publicKey,
-  Networks.testnet
-); // see deprecation warning for derive
+    hdPublicKey.derive(100).publicKey,
+    Networks.testnet
+) // see deprecation warning for derive
 ```
 
 ## Deprecation Warning for `HDPublicKey.derive()` and `HDPrivateKey.derive()`

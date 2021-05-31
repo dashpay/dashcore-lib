@@ -6,15 +6,15 @@ We're working hard to make _dashcore-lib_ the most powerful JavaScript library f
 
 If there are any questions, etc., please feel to ask in one of the community channels:
 
-- https://www.dash.org/forum (Support Forum)
+-   https://www.dash.org/forum (Support Forum)
 
 ## Quick Checklist
 
 Ideally, please make sure to run:
 
-- `npm run test` passes all the tests (We run tests against Node.js v6, v8, v10 and modern browsers)
-- `npm run coverage` covers 100% of the branches of your code (See `coverage/lcov-report/index.html` for details)
-- `npm run lint` doesn't complain about your changes
+-   `npm run test` passes all the tests (We run tests against Node.js v6, v8, v10 and modern browsers)
+-   `npm run coverage` covers 100% of the branches of your code (See `coverage/lcov-report/index.html` for details)
+-   `npm run lint` doesn't complain about your changes
 
 ## Design Guidelines
 
@@ -81,40 +81,40 @@ Name them in UpperCamelCase, as they are namespaces.
 DO:
 
 ```javascript
-var BufferUtil = require("./util/buffer");
+var BufferUtil = require('./util/buffer')
 ```
 
 DON'T:
 
 ```javascript
-var bufferUtil = require("./util/buffer");
+var bufferUtil = require('./util/buffer')
 ```
 
 #### G7 - Standard Methods
 
 When possible, dashcore-lib objects should have standard methods on an instance prototype:
 
-- `toObject/toJSON` - A plain JavaScript object that `JSON.stringify` can call
-- `toString` - A string representation of the instance
-- `toBuffer` - A hex Buffer
+-   `toObject/toJSON` - A plain JavaScript object that `JSON.stringify` can call
+-   `toString` - A string representation of the instance
+-   `toBuffer` - A hex Buffer
 
 These should have a matching static method that can be used for instantiation:
 
-- `fromObject` - Should be able to instantiate with the output from `toObject/toJSON`
-- `fromString` - Should be able to instantiate with output from `toString`
-- `fromBuffer` - Should likewise be able to instantiate from output from `toBuffer`
+-   `fromObject` - Should be able to instantiate with the output from `toObject/toJSON`
+-   `fromString` - Should be able to instantiate with output from `toString`
+-   `fromBuffer` - Should likewise be able to instantiate from output from `toBuffer`
 
 `JSON.stringify` and `JSON.parse` are expected to be handled outside of the scope of dashcore-lib methods. For example, calling `JSON.stringify` on an dashcore-lib object will behave as expected and call `transaction.toJSON()` and then stringify it:
 
 ```javascript
-var transactionString = JSON.stringify(transaction);
+var transactionString = JSON.stringify(transaction)
 ```
 
 Likewise to instantiate a transaction from that string:
 
 ```javascript
-var data = JSON.parse(transactionString);
-var tx = new Transaction(data);
+var data = JSON.parse(transactionString)
+var tx = new Transaction(data)
 ```
 
 ### Errors
@@ -125,9 +125,9 @@ We've designed a structure for Errors to follow and are slowly migrating to it.
 
 Usage:
 
-- The specification for errors is written in the `lib/errors/spec.js` file.
-- Whenever a new class is created, add a generic error for that class in `lib/errors/spec.js`.
-- Specific errors for that class should subclass that error. Take a look at the structure in `lib/errors/spec.js`, it should be clear how subclasses are generated from that file.
+-   The specification for errors is written in the `lib/errors/spec.js` file.
+-   Whenever a new class is created, add a generic error for that class in `lib/errors/spec.js`.
+-   Specific errors for that class should subclass that error. Take a look at the structure in `lib/errors/spec.js`, it should be clear how subclasses are generated from that file.
 
 #### E2 - Provide a `getValidationError` Static Method for Classes
 
@@ -141,12 +141,12 @@ There's a module called `util/preconditions`, loosely based on `preconditions.js
 
 ```javascript
 $.checkState(
-  something === anotherthing,
-  "Expected something to be anotherthing"
-);
-$.checkArgument(something < 100, "something", "must be less than 100");
-$.checkArgumentType(something, PrivateKey, "something"); // The third argument is a helper to mention the name of the argument
-$.checkArgumentType(something, PrivateKey); // but it's optional (will show up as "(unknown argument)")
+    something === anotherthing,
+    'Expected something to be anotherthing'
+)
+$.checkArgument(something < 100, 'something', 'must be less than 100')
+$.checkArgumentType(something, PrivateKey, 'something') // The third argument is a helper to mention the name of the argument
+$.checkArgumentType(something, PrivateKey) // but it's optional (will show up as "(unknown argument)")
 ```
 
 #### I2 - Permissive Constructors
@@ -159,33 +159,33 @@ For classes that have a mutable state, most of the methods that can be chained _
 
 ```javascript
 var transaction = new Transaction()
-  .from(utxo)
-  .to(address, amount)
-  .change(address)
-  .sign(privkey);
+    .from(utxo)
+    .to(address, amount)
+    .change(address)
+    .sign(privkey)
 ```
 
 #### I4 - Copy Constructors
 
 Constructors, when provided an instance of the same class, should:
 
-- Return the same object, if the instances of this class are immutable
-- Return a deep copy of the object, if the instances are mutable
+-   Return the same object, if the instances of this class are immutable
+-   Return a deep copy of the object, if the instances are mutable
 
 Examples:
 
 ```javascript
 function MyMutableClass(arg) {
-  if (arg instanceof MyMutableClass) {
-    return MyMutableClass._deepCopy(arg);
-  }
-  // ...
+    if (arg instanceof MyMutableClass) {
+        return MyMutableClass._deepCopy(arg)
+    }
+    // ...
 }
 function ImmutableClass(arg) {
-  if (arg instanceof ImmutableClass) {
-    return arg;
-  }
-  // ...
+    if (arg instanceof ImmutableClass) {
+        return arg
+    }
+    // ...
 }
 ```
 
@@ -195,10 +195,10 @@ Constructors should not require to be called with `new`. This rule is not heavil
 
 ```javascript
 function NoNewRequired(args) {
-  if (!(this instanceof NoNewRequired)) {
-    return new NoNewRequired(args);
-  }
-  // ...
+    if (!(this instanceof NoNewRequired)) {
+        return new NoNewRequired(args)
+    }
+    // ...
 }
 ```
 
@@ -221,14 +221,14 @@ This helps to make tests more useful as examples, and more independent of where 
 DO:
 
 ```javascript
-var dashcore = require("../");
-var PublicKey = dashcore.PublicKey;
+var dashcore = require('../')
+var PublicKey = dashcore.PublicKey
 ```
 
 DON'T:
 
 ```javascript
-var PublicKey = require("../lib/publickey");
+var PublicKey = require('../lib/publickey')
 ```
 
 #### T4 - Data for Tests Included in a JSON File

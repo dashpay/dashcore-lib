@@ -4,5 +4,5 @@
  * @constructor
  */
 export class Trigger {
-  constructor();
+    constructor()
 }

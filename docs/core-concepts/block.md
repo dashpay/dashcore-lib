@@ -4,14 +4,14 @@ A Block instance represents the information of a block in the Dash network. Give
 
 ```javascript
 // instantiate a new block instance
-var block = new Block(hexaEncodedBlock);
+var block = new Block(hexaEncodedBlock)
 
 // will verify that the corresponding block transactions match the header
-assert(block.validMerkleRoot());
+assert(block.validMerkleRoot())
 
 // blocks have several properties
-assert(block.header); // an instance of block header, more info below
-assert(block.transactions); // an array of transactions, more info below
+assert(block.header) // an instance of block header, more info below
+assert(block.transactions) // an array of transactions, more info below
 ```
 
 For detailed technical information about a block please visit [Blocks](https://dash-docs.github.io/en/glossary/block) on the Dash Wiki.
@@ -22,18 +22,18 @@ Each instance of Block has a BlockHeader _(which can be instantiated separately)
 
 ```javascript
 // will verify that the nonce demonstrates enough proof of work
-assert(block.header.validProofOfWork());
+assert(block.header.validProofOfWork())
 
 // will verify that timestamp is not too far in the future
-assert(block.header.validTimestamp());
+assert(block.header.validTimestamp())
 
 // each header has the following properties
-assert(block.header.version);
-assert(block.header.prevHash);
-assert(block.header.merkleRoot);
-assert(block.header.time);
-assert(block.header.bits);
-assert(block.header.nonce);
+assert(block.header.version)
+assert(block.header.prevHash)
+assert(block.header.merkleRoot)
+assert(block.header.time)
+assert(block.header.bits)
+assert(block.header.nonce)
 ```
 
 For more information about the specific properties of a block header please visit the [Block headers](https://dash-docs.github.io/en/developer-reference#block-headers) page on the Dash Developer Reference Wiki.
@@ -44,6 +44,6 @@ The set of transactions in a block is an array of instances of [Transaction](tra
 
 ```javascript
 for (var i in block.transactions) {
-  var transaction = block.transactions[i];
+    var transaction = block.transactions[i]
 }
 ```

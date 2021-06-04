@@ -37,8 +37,11 @@ module.exports = (config) => {
     port: 9876,
     colors: true,
     autoWatch: false,
-    browsers: ['ChromeHeadless', 'FirefoxHeadless'],
+    browsers: ['ChromeHeadless'],
     singleRun: false,
+    browserNoActivityTimeout: 60000,
+    browserDisconnectTimeout : 60000,
+    browserDisconnectTolerance : 2,
     concurrency: Infinity,
     plugins: [
       'karma-mocha',
@@ -52,7 +55,7 @@ module.exports = (config) => {
       FirefoxHeadless: {
         base: 'Firefox',
         flags: ['-headless'],
-      },
+      }
     },
   });
 };

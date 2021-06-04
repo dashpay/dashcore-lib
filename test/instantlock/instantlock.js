@@ -14,7 +14,7 @@ const getSMLStoreJSONFixture = require('../fixtures/getSMLStoreJSON');
 const getSMLStoreJSONFixtureNoQuorums = require('../fixtures/getSMLStoreNoQuorumsJSON');
 
 describe('InstantLock', function () {
-  this.timeout(10000);
+  this.timeout(15000);
   let object;
   let str;
   let buf;

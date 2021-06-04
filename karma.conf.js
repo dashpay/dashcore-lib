@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 module.exports = (config) => {
   config.set({
     frameworks: ['mocha', 'chai'],
@@ -7,13 +8,26 @@ module.exports = (config) => {
       './test.spec.js': ['webpack'],
     },
     webpack: {
-      node: {
-        fs: 'empty',
+      resolve: {
+        fallback: {
+          fs: false,
+          crypto: require.resolve('crypto-browserify'),
+          buffer: require.resolve('buffer/'),
+          assert: require.resolve('assert-browserify'),
+          stream: require.resolve('stream-browserify'),
+          path: require.resolve('path-browserify'),
+          url: require.resolve('url/'),
+        }
       },
+      plugins: [
+        new webpack.ProvidePlugin({
+          Buffer: ["buffer", "Buffer"],
+          process: 'process/browser',
+        })
+      ],
       module: {
         rules: [
           { test: /\.dat$/, use: 'raw-loader' },
-          { enforce: 'post', loader: 'transform-loader?brfs' },
         ],
       },
     },

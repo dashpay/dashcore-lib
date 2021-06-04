@@ -10,7 +10,7 @@ let smlDiffArray;
 let sml4848;
 
 describe('SimplifiedMNListStore', function () {
-  this.timeout(5000);
+  this.timeout(15000);
 
   beforeEach(() => {
     smlDiffArray = SMNListFixture.getChainlockDiffArray();

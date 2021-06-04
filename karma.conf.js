@@ -1,10 +1,7 @@
 module.exports = (config) => {
   config.set({
     frameworks: ['mocha', 'chai'],
-    files: [
-      './index.js',
-      './test.spec.js',
-    ],
+    files: ['./index.js', './test.spec.js'],
     preprocessors: {
       './index.js': ['webpack'],
       './test.spec.js': ['webpack'],

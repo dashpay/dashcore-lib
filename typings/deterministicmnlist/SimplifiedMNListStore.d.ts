@@ -1,10 +1,10 @@
-import {SimplifiedMNListDiff} from "./SimplifiedMNListDiff";
-import {SimplifiedMNList} from "./SimplifiedMNList";
+import { SimplifiedMNListDiff } from './SimplifiedMNListDiff';
+import { SimplifiedMNList } from './SimplifiedMNList';
 
 export class SimplifiedMNListStore {
   constructor(diffArray: SimplifiedMNListDiff[], options: any);
 
-  network: string
+  network: string;
   options: any;
   maxDiffs: number;
   diffStore: any[];
@@ -27,7 +27,7 @@ export class SimplifiedMNListStore {
    * If SMLSTORE_MAX_DIFFS reached it drops the oldest
    * @param {SimplifiedMNListDiff} diff
    */
-  addDiff(diff: SimplifiedMNListDiff): void
+  addDiff(diff: SimplifiedMNListDiff): void;
 
   /**
    * Returns height for latest block

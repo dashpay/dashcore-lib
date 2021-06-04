@@ -1,4 +1,3 @@
-
 /**
  * @typedef {Object} ProUpServTxPayloadJSON
  * @property {number} version
@@ -9,12 +8,12 @@
  * @property {string} [payloadSig]
  */
 export type ProUpServTxPayloadJSON = {
-    version: number;
-    proTxHash: string;
-    service: string;
-    operatorPayoutAddress?: string;
-    inputsHash: string;
-    payloadSig?: string;
+  version: number;
+  proTxHash: string;
+  service: string;
+  operatorPayoutAddress?: string;
+  inputsHash: string;
+  payloadSig?: string;
 };
 
 /**
@@ -27,76 +26,74 @@ export type ProUpServTxPayloadJSON = {
  * @property {string} [payloadSig] BLSSig Signature of the hash of the ProUpServTx fields. Signed by the Operator.
  */
 export class ProUpServTxPayload {
-    /**
-     * Parse raw transition payload
-     * @param {Buffer} rawPayload
-     * @return {ProUpServTxPayload}
-     */
-    static fromBuffer(rawPayload: Buffer): ProUpServTxPayload;
+  /**
+   * Parse raw transition payload
+   * @param {Buffer} rawPayload
+   * @return {ProUpServTxPayload}
+   */
+  static fromBuffer(rawPayload: Buffer): ProUpServTxPayload;
 
-    /**
-     * Create new instance of payload from JSON
-     * @param {ProUpServTxPayloadJSON} payloadJson
-     * @return {ProUpServTxPayload}
-     */
-    static fromJSON(payloadJson: ProUpServTxPayloadJSON): ProUpServTxPayload;
+  /**
+   * Create new instance of payload from JSON
+   * @param {ProUpServTxPayloadJSON} payloadJson
+   * @return {ProUpServTxPayload}
+   */
+  static fromJSON(payloadJson: ProUpServTxPayloadJSON): ProUpServTxPayload;
 
-    /**
-     * Validates payload data
-     * @return {boolean}
-     */
-    validate(): boolean;
+  /**
+   * Validates payload data
+   * @return {boolean}
+   */
+  validate(): boolean;
 
-    /**
-     * Serializes payload to JSON
-     * @param [options]
-     * @param [options.skipSignature]
-     * @param [options.network] - network param for payout address serialization
-     * @return {ProUpServTxPayloadJSON}
-     */
-    toJSON(options?: {
-        skipSignature?: any;
-        network?: any;
-    }): ProUpServTxPayloadJSON;
+  /**
+   * Serializes payload to JSON
+   * @param [options]
+   * @param [options.skipSignature]
+   * @param [options.network] - network param for payout address serialization
+   * @return {ProUpServTxPayloadJSON}
+   */
+  toJSON(options?: {
+    skipSignature?: any;
+    network?: any;
+  }): ProUpServTxPayloadJSON;
 
-    /**
-     * Serialize payload to buffer
-     * @param [options]
-     * @param {Boolean} options.skipSignature - skip signature. Used for generating new signature
-     * @return {Buffer}
-     */
-    toBuffer(options?: {
-        skipSignature: boolean;
-    }): Buffer;
+  /**
+   * Serialize payload to buffer
+   * @param [options]
+   * @param {Boolean} options.skipSignature - skip signature. Used for generating new signature
+   * @return {Buffer}
+   */
+  toBuffer(options?: { skipSignature: boolean }): Buffer;
 
-    /**
-     * Copy payload instance
-     * @return {ProUpServTxPayload}
-     */
-    copy(): ProUpServTxPayload;
+  /**
+   * Copy payload instance
+   * @return {ProUpServTxPayload}
+   */
+  copy(): ProUpServTxPayload;
 
-    /**
-     * ProUpServTx version number. Currently set to 1.
-     */
-    version: number;
-    /**
-     * The hash of the initial ProRegTx
-     */
-    proTXHash: string;
-    /**
-     * string - ip and port
-     */
-    service: string;
-    /**
-     * Hash of all the outpoints of the transaction inputs
-     */
-    inputsHash: string;
-    /**
-     * Payee script (p2pkh/p2sh)
-     */
-    scriptOperatorPayout?: string;
-    /**
-     * BLSSig Signature of the hash of the ProUpServTx fields. Signed by the Operator.
-     */
-    payloadSig?: string;
+  /**
+   * ProUpServTx version number. Currently set to 1.
+   */
+  version: number;
+  /**
+   * The hash of the initial ProRegTx
+   */
+  proTXHash: string;
+  /**
+   * string - ip and port
+   */
+  service: string;
+  /**
+   * Hash of all the outpoints of the transaction inputs
+   */
+  inputsHash: string;
+  /**
+   * Payee script (p2pkh/p2sh)
+   */
+  scriptOperatorPayout?: string;
+  /**
+   * BLSSig Signature of the hash of the ProUpServTx fields. Signed by the Operator.
+   */
+  payloadSig?: string;
 }

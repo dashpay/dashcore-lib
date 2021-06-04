@@ -20,13 +20,14 @@ var validPayloadJSONFixture = {
   creditFee: 100,
   hashPrevSubTx: HashUtil.getRandomHashHexString(),
   regTxId: HashUtil.getRandomHashHexString(),
-  hashSTPacket: HashUtil.getRandomHashHexString()
+  hashSTPacket: HashUtil.getRandomHashHexString(),
 };
 
-var validPayloadFixture = SubTxTransitionPayload.fromJSON(validPayloadJSONFixture);
+var validPayloadFixture = SubTxTransitionPayload.fromJSON(
+  validPayloadJSONFixture
+);
 
-describe('SubTxTransitionPayload', function() {
-
+describe('SubTxTransitionPayload', function () {
   describe('constructor', function () {
     it('Should create SubTxTransitionPayload instance', function () {
       var payload = new SubTxTransitionPayload();
@@ -38,8 +39,7 @@ describe('SubTxTransitionPayload', function() {
     it('Should set regTxId and return instance back', function () {
       var regTxId = HashUtil.getRandomHashHexString();
 
-      var payload = new SubTxTransitionPayload()
-        .setRegTxId(regTxId);
+      var payload = new SubTxTransitionPayload().setRegTxId(regTxId);
 
       expect(payload).to.be.an.instanceOf(SubTxTransitionPayload);
       expect(payload.regTxId).to.be.deep.equal(regTxId);
@@ -50,8 +50,9 @@ describe('SubTxTransitionPayload', function() {
     it('Should set hashPrevSubTx and return instance back', function () {
       var hashPrevSubTx = HashUtil.getRandomHashHexString();
 
-      var payload = new SubTxTransitionPayload()
-        .setHashPrevSubTx(hashPrevSubTx);
+      var payload = new SubTxTransitionPayload().setHashPrevSubTx(
+        hashPrevSubTx
+      );
 
       expect(payload).to.be.an.instanceOf(SubTxTransitionPayload);
       expect(payload.hashPrevSubTx).to.be.deep.equal(hashPrevSubTx);
@@ -62,8 +63,7 @@ describe('SubTxTransitionPayload', function() {
     it('Should set creditFee and return instance back', function () {
       var creditFee = 10;
 
-      var payload = new SubTxTransitionPayload()
-        .setCreditFee(creditFee);
+      var payload = new SubTxTransitionPayload().setCreditFee(creditFee);
 
       expect(payload).to.be.an.instanceOf(SubTxTransitionPayload);
       expect(payload.creditFee).to.be.equal(creditFee);
@@ -74,8 +74,7 @@ describe('SubTxTransitionPayload', function() {
     it('Should set hashSTPacket and return instance back', function () {
       var hashSTPacket = HashUtil.getRandomHashHexString();
 
-      var payload = new SubTxTransitionPayload()
-        .setHashSTPacket(hashSTPacket);
+      var payload = new SubTxTransitionPayload().setHashSTPacket(hashSTPacket);
 
       expect(payload).to.be.an.instanceOf(SubTxTransitionPayload);
       expect(payload.hashSTPacket).to.be.deep.equal(hashSTPacket);
@@ -135,7 +134,9 @@ describe('SubTxTransitionPayload', function() {
         hashPrevSubTx: HashUtil.getRandomHashHexString(),
         regTxId: HashUtil.getRandomHashHexString(),
         hashSTPacket: HashUtil.getRandomHashHexString(),
-        payloadSig: BufferUtil.emptyBuffer(CORRECT_SIGNATURE_SIZE).toString('hex')
+        payloadSig: BufferUtil.emptyBuffer(CORRECT_SIGNATURE_SIZE).toString(
+          'hex'
+        ),
       };
       var payload = SubTxTransitionPayload.fromJSON(payloadJSON);
       expect(payload.version).to.be.equal(10);
@@ -151,42 +152,57 @@ describe('SubTxTransitionPayload', function() {
         creditFee: 100,
         regTxId: HashUtil.getRandomHashHexString(),
         hashSTPacket: HashUtil.getRandomHashHexString(),
-        payloadSig: BufferUtil.emptyBuffer(CORRECT_SIGNATURE_SIZE).toString('hex')
+        payloadSig: BufferUtil.emptyBuffer(CORRECT_SIGNATURE_SIZE).toString(
+          'hex'
+        ),
       };
       var payloadWithoutRegTxId = {
         version: 10,
         creditFee: 100,
         hashPrevSubTx: HashUtil.getRandomHashHexString(),
         hashSTPacket: HashUtil.getRandomHashHexString(),
-        payloadSig: BufferUtil.emptyBuffer(CORRECT_SIGNATURE_SIZE).toString('hex')
+        payloadSig: BufferUtil.emptyBuffer(CORRECT_SIGNATURE_SIZE).toString(
+          'hex'
+        ),
       };
       var payloadWithoutHashSTPacket = {
         version: 10,
         creditFee: 100,
         hashPrevSubTx: HashUtil.getRandomHashHexString(),
         regTxId: HashUtil.getRandomHashHexString(),
-        payloadSig: BufferUtil.emptyBuffer(CORRECT_SIGNATURE_SIZE).toString('hex')
+        payloadSig: BufferUtil.emptyBuffer(CORRECT_SIGNATURE_SIZE).toString(
+          'hex'
+        ),
       };
       var payloadWithoutCreditFee = {
         version: 10,
         hashPrevSubTx: HashUtil.getRandomHashHexString(),
         hashSTPacket: HashUtil.getRandomHashHexString(),
         regTxId: HashUtil.getRandomHashHexString(),
-        payloadSig: BufferUtil.emptyBuffer(CORRECT_SIGNATURE_SIZE).toString('hex')
+        payloadSig: BufferUtil.emptyBuffer(CORRECT_SIGNATURE_SIZE).toString(
+          'hex'
+        ),
       };
       expect(function () {
         SubTxTransitionPayload.fromJSON(payloadWithoutHashPrevSubTx);
-      }).to.throw('Invalid Argument: expect hashPrevSubTx to be a hex string but got undefined');
+      }).to.throw(
+        'Invalid Argument: expect hashPrevSubTx to be a hex string but got undefined'
+      );
       expect(function () {
         SubTxTransitionPayload.fromJSON(payloadWithoutRegTxId);
-      }).to.throw('Invalid Argument: expect regTxId to be a hex string but got undefined');
+      }).to.throw(
+        'Invalid Argument: expect regTxId to be a hex string but got undefined'
+      );
       expect(function () {
         SubTxTransitionPayload.fromJSON(payloadWithoutHashSTPacket);
-      }).to.throw('Invalid Argument: expect hashSTPacket to be a hex string but got undefined');
+      }).to.throw(
+        'Invalid Argument: expect hashSTPacket to be a hex string but got undefined'
+      );
       expect(function () {
         SubTxTransitionPayload.fromJSON(payloadWithoutCreditFee);
-      }).to.throw('Invalid Argument for creditFee, expected number but got undefined');
-
+      }).to.throw(
+        'Invalid Argument for creditFee, expected number but got undefined'
+      );
     });
     it('Should throw an error if the data is incorrect', function () {
       var invalidVersions = [-1, '1', 1.5, []];
@@ -200,14 +216,23 @@ describe('SubTxTransitionPayload', function() {
           SubTxTransitionPayload.fromJSON(payloadWithInvalidVersion);
         }).to.throw('Invalid Argument');
       });
-      var payloadWithIncorrectRegTxIdSize = validPayloadFixture.copy().setRegTxId('123');
-      var payloadWithIncorrectHashSTPacketSize = validPayloadFixture.copy().setHashSTPacket('123');
-      var payloadWithIncorrectCreditFee = validPayloadFixture.copy().setCreditFee(-10);
-      var payloadWithIncorrectHashPrevSubTx = validPayloadFixture.copy().setHashPrevSubTx('123');
+      var payloadWithIncorrectRegTxIdSize = validPayloadFixture
+        .copy()
+        .setRegTxId('123');
+      var payloadWithIncorrectHashSTPacketSize = validPayloadFixture
+        .copy()
+        .setHashSTPacket('123');
+      var payloadWithIncorrectCreditFee = validPayloadFixture
+        .copy()
+        .setCreditFee(-10);
+      var payloadWithIncorrectHashPrevSubTx = validPayloadFixture
+        .copy()
+        .setHashPrevSubTx('123');
       var payloadWithIncorrectSignature = validPayloadFixture.copy();
       payloadWithIncorrectSignature.payloadSig = 'signature';
       var payloadWithIncorrectSignatureSize = validPayloadFixture.copy();
-      payloadWithIncorrectSignatureSize.payloadSig = BufferUtil.emptyBuffer(10).toString('hex');
+      payloadWithIncorrectSignatureSize.payloadSig =
+        BufferUtil.emptyBuffer(10).toString('hex');
       expect(function () {
         SubTxTransitionPayload.fromJSON(payloadWithIncorrectRegTxIdSize);
       }).to.throw('Invalid Argument: Invalid regTxId size');
@@ -216,7 +241,9 @@ describe('SubTxTransitionPayload', function() {
       }).to.throw('Invalid Argument: Invalid hashSTPacket size');
       expect(function () {
         SubTxTransitionPayload.fromJSON(payloadWithIncorrectCreditFee);
-      }).to.throw('Invalid Argument: Expect creditFee to be an unsigned integer');
+      }).to.throw(
+        'Invalid Argument: Expect creditFee to be an unsigned integer'
+      );
       expect(function () {
         SubTxTransitionPayload.fromJSON(payloadWithIncorrectHashPrevSubTx);
       }).to.throw('Invalid Argument: Invalid hashPrevSubTx size');
@@ -256,9 +283,10 @@ describe('SubTxTransitionPayload', function() {
       var payload = validPayloadFixture.copy().sign(privateKey);
       expect(payload.verifySignature(pubKeyId.toString('hex'))).to.be.true;
     });
-    it('Should return false if pubKeyId doesn\'t match the signature', function () {
+    it("Should return false if pubKeyId doesn't match the signature", function () {
       var payload = validPayloadFixture.copy().sign(privateKey);
-      expect(payload.verifySignature(new PrivateKey().toPublicKey()._getID())).to.be.false;
+      expect(payload.verifySignature(new PrivateKey().toPublicKey()._getID()))
+        .to.be.false;
     });
   });
   describe('#toJSON', function () {
@@ -303,7 +331,7 @@ describe('SubTxTransitionPayload', function() {
       spy.restore();
     });
   });
-  describe('#getHash', function() {
+  describe('#getHash', function () {
     it('Should return deterministic hash', function () {
       var payload = validPayloadFixture.copy();
 
@@ -317,7 +345,9 @@ describe('SubTxTransitionPayload', function() {
       var payload = validPayloadFixture.copy().sign(privateKey);
 
       var hash = payload.getHash();
-      var hashFromDataWithoutSignature = payload.getHash({ skipSignature: true });
+      var hashFromDataWithoutSignature = payload.getHash({
+        skipSignature: true,
+      });
       expect(hashFromDataWithoutSignature).to.be.an.instanceOf(Buffer);
       expect(hashFromDataWithoutSignature.length).to.be.equal(32);
       expect(hashFromDataWithoutSignature).to.be.not.deep.equal(hash);

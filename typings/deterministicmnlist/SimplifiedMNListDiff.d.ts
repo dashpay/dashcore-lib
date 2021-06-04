@@ -1,6 +1,6 @@
-import {SimplifiedMNListEntry} from "./SimplifiedMNListEntry";
-import {PartialMerkleTree} from "../block/PartialMerkleTree";
-import {Transaction} from "../transaction/Transaction";
+import { SimplifiedMNListEntry } from './SimplifiedMNListEntry';
+import { PartialMerkleTree } from '../block/PartialMerkleTree';
+import { Transaction } from '../transaction/Transaction';
 
 /**
  * Note that this property contains ALL masternodes, including banned ones.
@@ -29,54 +29,57 @@ export var validMNs: SimplifiedMNListEntry[];
  * @property {string} merkleRootMNList - merkle root of the whole mn list
  */
 export class SimplifiedMNListDiff {
-    constructor(arg?: Buffer | any | string, network?: string);
+  constructor(arg?: Buffer | any | string, network?: string);
 
-    /**
-     * Creates MnListDiff from a Buffer.
-     * @param {Buffer} buffer
-     * @param {string} [network]
-     * @return {SimplifiedMNListDiff}
-     */
-    static fromBuffer(buffer: Buffer, network?: string): SimplifiedMNListDiff;
+  /**
+   * Creates MnListDiff from a Buffer.
+   * @param {Buffer} buffer
+   * @param {string} [network]
+   * @return {SimplifiedMNListDiff}
+   */
+  static fromBuffer(buffer: Buffer, network?: string): SimplifiedMNListDiff;
 
-    /**
-     * @param {string} hexString
-     * @param {string} [network]
-     * @return {SimplifiedMNListDiff}
-     */
-    static fromHexString(hexString: string, network?: string): SimplifiedMNListDiff;
+  /**
+   * @param {string} hexString
+   * @param {string} [network]
+   * @return {SimplifiedMNListDiff}
+   */
+  static fromHexString(
+    hexString: string,
+    network?: string
+  ): SimplifiedMNListDiff;
 
-    /**
-     * Serializes mnlist diff to a Buffer
-     * @return {Buffer}
-     */
-    toBuffer(): Buffer;
+  /**
+   * Serializes mnlist diff to a Buffer
+   * @return {Buffer}
+   */
+  toBuffer(): Buffer;
 
-    /**
-     * Creates MNListDiff from object
-     * @param obj
-     * @param {string} [network]
-     * @return {SimplifiedMNListDiff}
-     */
-    static fromObject(obj: any, network?: string): SimplifiedMNListDiff;
+  /**
+   * Creates MNListDiff from object
+   * @param obj
+   * @param {string} [network]
+   * @return {SimplifiedMNListDiff}
+   */
+  static fromObject(obj: any, network?: string): SimplifiedMNListDiff;
 
-    /**
-     * sha256
-     */
-    baseBlockHash: string;
-    /**
-     * sha256
-     */
-    blockHash: string;
-    cbTxMerkleTree: PartialMerkleTree;
-    cbTx: Transaction;
-    /**
-     * sha256 hashes of deleted MNs
-     */
-    deletedMNs: string[];
-    mnList: SimplifiedMNListEntry[];
-    /**
-     * merkle root of the whole mn list
-     */
-    merkleRootMNList: string;
+  /**
+   * sha256
+   */
+  baseBlockHash: string;
+  /**
+   * sha256
+   */
+  blockHash: string;
+  cbTxMerkleTree: PartialMerkleTree;
+  cbTx: Transaction;
+  /**
+   * sha256 hashes of deleted MNs
+   */
+  deletedMNs: string[];
+  mnList: SimplifiedMNListEntry[];
+  /**
+   * merkle root of the whole mn list
+   */
+  merkleRootMNList: string;
 }

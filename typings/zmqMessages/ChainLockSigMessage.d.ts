@@ -1,5 +1,5 @@
-import { Block } from "../block/Block";
-import { ChainLock } from "../chainlock/ChainLock";
+import { Block } from '../block/Block';
+import { ChainLock } from '../chainlock/ChainLock';
 
 export class ChainLockSigMessage {
   /**

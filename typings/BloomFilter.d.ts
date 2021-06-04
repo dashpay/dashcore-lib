@@ -18,23 +18,23 @@ import Filter from 'bloom-filter';
  * @constructor
  */
 export class BloomFilter {
-    vData: [];
-    nHashFuncs: Number;
-    nTweak: Number;
-    nFlags: Number;
+  vData: [];
+  nHashFuncs: Number;
+  nTweak: Number;
+  nFlags: Number;
 
-    /**
-     * @memberOf BloomFilter
-     * A constructor for Bloom Filters
-     * @see https://github.com/bitpay/bloom-filter
-     * @param {Buffer} payload
-     * @return Filter
-     */
-    static fromBuffer(payload: Buffer): Filter;
-    /**
-     * Will return a buffer representation of the address
-     *
-     * @returns {Buffer}
-     */
-    toBuffer(): Buffer;
+  /**
+   * @memberOf BloomFilter
+   * A constructor for Bloom Filters
+   * @see https://github.com/bitpay/bloom-filter
+   * @param {Buffer} payload
+   * @return Filter
+   */
+  static fromBuffer(payload: Buffer): Filter;
+  /**
+   * Will return a buffer representation of the address
+   *
+   * @returns {Buffer}
+   */
+  toBuffer(): Buffer;
 }

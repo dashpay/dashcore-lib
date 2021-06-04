@@ -15,19 +15,19 @@
  * @property {string} sig    BLSSig    96    Aggregated BLS signatures from all included commitments
  */
 export type CommitmentTxPayloadJSON = {
-    version: number;
-    height: number;
-    qfcVersion: number;
-    llmqtype: number;
-    quorumHash: string;
-    signersSize: number;
-    signers: string;
-    validMembersSize: number;
-    validMembers: string;
-    quorumPublicKey: string;
-    quorumVvecHash: string;
-    quorumSig: string;
-    sig: string;
+  version: number;
+  height: number;
+  qfcVersion: number;
+  llmqtype: number;
+  quorumHash: string;
+  signersSize: number;
+  signers: string;
+  validMembersSize: number;
+  validMembers: string;
+  quorumPublicKey: string;
+  quorumVvecHash: string;
+  quorumSig: string;
+  sig: string;
 };
 
 /**
@@ -47,51 +47,53 @@ export type CommitmentTxPayloadJSON = {
  * @property {string} sig
  */
 export class CommitmentTxPayload {
-    /**
-     * Parse raw payload
-     * @param {Buffer} rawPayload
-     * @return {CommitmentTxPayload}
-     */
-    static fromBuffer(rawPayload: Buffer): CommitmentTxPayload;
+  /**
+   * Parse raw payload
+   * @param {Buffer} rawPayload
+   * @return {CommitmentTxPayload}
+   */
+  static fromBuffer(rawPayload: Buffer): CommitmentTxPayload;
 
-    /**
-     * Create new instance of payload from JSON
-     * @param {string|CommitmentTxPayloadJSON} payloadJson
-     * @return {CommitmentTxPayload}
-     */
-    static fromJSON(payloadJson: string | CommitmentTxPayloadJSON): CommitmentTxPayload;
+  /**
+   * Create new instance of payload from JSON
+   * @param {string|CommitmentTxPayloadJSON} payloadJson
+   * @return {CommitmentTxPayload}
+   */
+  static fromJSON(
+    payloadJson: string | CommitmentTxPayloadJSON
+  ): CommitmentTxPayload;
 
-    /**
-     * Validate payload
-     * @return {boolean}
-     */
-    validate(): boolean;
+  /**
+   * Validate payload
+   * @return {boolean}
+   */
+  validate(): boolean;
 
-    /**
-     * Serializes payload to JSON
-     * @param [options]
-     * @return {CommitmentTxPayload}
-     */
-    toJSON(options?: any): CommitmentTxPayload;
+  /**
+   * Serializes payload to JSON
+   * @param [options]
+   * @return {CommitmentTxPayload}
+   */
+  toJSON(options?: any): CommitmentTxPayload;
 
-    /**
-     * Serialize payload to buffer
-     * @param [options]
-     * @return {Buffer}
-     */
-    toBuffer(options?: any): Buffer;
+  /**
+   * Serialize payload to buffer
+   * @param [options]
+   * @return {Buffer}
+   */
+  toBuffer(options?: any): Buffer;
 
-    version: number;
-    height: number;
-    qfcVersion: number;
-    llmqtype: number;
-    quorumHash: string;
-    signersSize: number;
-    signers: string;
-    validMembersSize: number;
-    validMembers: string;
-    quorumPublicKey: string;
-    quorumVvecHash: string;
-    quorumSig: string;
-    sig: string;
+  version: number;
+  height: number;
+  qfcVersion: number;
+  llmqtype: number;
+  quorumHash: string;
+  signersSize: number;
+  signers: string;
+  validMembersSize: number;
+  validMembers: string;
+  quorumPublicKey: string;
+  quorumVvecHash: string;
+  quorumSig: string;
+  sig: string;
 }

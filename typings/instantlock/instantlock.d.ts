@@ -1,12 +1,12 @@
-import {BufferReader} from "../buffer/BufferReader";
-import {QuorumEntry} from "../deterministicmnlist/QuorumEntry";
-import {BufferWriter} from "../buffer/BufferWriter";
-import {SimplifiedMNListStore} from "../deterministicmnlist/SimplifiedMNListStore";
+import { BufferReader } from '../buffer/BufferReader';
+import { QuorumEntry } from '../deterministicmnlist/QuorumEntry';
+import { BufferWriter } from '../buffer/BufferWriter';
+import { SimplifiedMNListStore } from '../deterministicmnlist/SimplifiedMNListStore';
 
 interface RawInstantLock {
-  inputs: any[],
-  txid: string,
-  signature: string,
+  inputs: any[];
+  txid: string;
+  signature: string;
 }
 
 /**
@@ -47,7 +47,7 @@ export class InstantLock {
    * @param {String} string - A hex string representation of the instantLock
    * @return {InstantLock} - An instance of InstantLock
    */
-  static fromHex(string: string): InstantLock
+  static fromHex(string: string): InstantLock;
 
   /**
    * Creates InstantLock from a Buffer.
@@ -70,7 +70,10 @@ export class InstantLock {
    * @param {Buffer} requestId
    * @returns {Promise<Boolean>} - returns the result of the signature verification
    */
-  verifySignatureAgainstQuorum(quorumEntry: QuorumEntry, requestId: Buffer): Promise<boolean>
+  verifySignatureAgainstQuorum(
+    quorumEntry: QuorumEntry,
+    requestId: Buffer
+  ): Promise<boolean>;
 
   /**
    * @private
@@ -79,14 +82,18 @@ export class InstantLock {
    * @param {number} offset - starting height offset to identify the signatory
    * @returns {Promise<Boolean>}
    */
-   verifySignatureWithQuorumOffset(smlStore: SimplifiedMNListStore, requestId: Buffer, offset: number): Promise<boolean>
+  verifySignatureWithQuorumOffset(
+    smlStore: SimplifiedMNListStore,
+    requestId: Buffer,
+    offset: number
+  ): Promise<boolean>;
 
   /**
    * Verifies that the signature is valid
    * @param {SimplifiedMNListStore} smlStore - used to reconstruct quorum lists
    * @returns {Promise<Boolean>} - returns the result of the verification
    */
-  verify(smlStore): Promise<boolean>
+  verify(smlStore): Promise<boolean>;
 
   /**
    * Validate InstantLock structure
@@ -113,7 +120,11 @@ export class InstantLock {
    * @param {number} offset
    * @returns {QuorumEntry} - signatoryQuorum
    */
-  selectSignatoryQuorum(smlStore: SimplifiedMNListStore, requestId: Buffer, offset: number): QuorumEntry;
+  selectSignatoryQuorum(
+    smlStore: SimplifiedMNListStore,
+    requestId: Buffer,
+    offset: number
+  ): QuorumEntry;
 
   /**
    * Computes signature id for a quorum entry
@@ -121,7 +132,10 @@ export class InstantLock {
    * @param {Buffer} requestId
    * @returns {Buffer} - Signature id for this requestId and quorum.
    */
-  getSignHashForQuorumEntry(quorumEntry: QuorumEntry, requestId: Buffer): Buffer;
+  getSignHashForQuorumEntry(
+    quorumEntry: QuorumEntry,
+    requestId: Buffer
+  ): Buffer;
 
   /**
    * Serializes InstantLock to JSON

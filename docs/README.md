@@ -29,7 +29,6 @@ For browser usage, you can also directly rely on unpkg :
 <script src="https://unpkg.com/@dashevo/dashcore-lib"></script>
 ```
 
-
 ## Licence
 
 [MIT](https://github.com/dashevo/dashcore-lib/blob/master/LICENCE.md) © Dash Core Group, Inc.

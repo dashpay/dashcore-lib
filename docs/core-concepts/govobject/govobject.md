@@ -1,48 +1,66 @@
 # Governance Object / Proposal
 
 - [GovObject](#governance-object)
-    - [`new GovObject([govObjectData])`](#new-govobjectgovobjectdata)
-    - [Methods](#methods)
-        - [dataHex](#datahex)
-        - [fromObject](#fromobject)
-        - [fromString](#fromstring)
-        - [checkedSerialize](#checkedserialize)
-        - [serialize](#serialize)
-        - [inspect](#inspect)
-        - [toBuffer](#tobuffer)
-        - [fromBuffer](#frombuffer)
-        - [shallowCopy](#shallowcopy)
+  - [`new GovObject([govObjectData])`](#new-govobjectgovobjectdata)
+  - [Methods](#methods)
+    - [dataHex](#datahex)
+    - [fromObject](#fromobject)
+    - [fromString](#fromstring)
+    - [checkedSerialize](#checkedserialize)
+    - [serialize](#serialize)
+    - [inspect](#inspect)
+    - [toBuffer](#tobuffer)
+    - [fromBuffer](#frombuffer)
+    - [shallowCopy](#shallowcopy)
 - [Governance Object Creation](#governance-object-creation)
 - [Governance Object Types](#govobject-types)
 
 ## Governance Object
 
-A Governance Object (or "govObject") is a generic structure introduced in Dash Core v12.1 to allow for the creation of Budget Proposals, Triggers, and Watch Dogs. Class inheritance has been utilized to extend this generic object into a "Proposal" which is outlined throughout the remainder of this document. 
+A Governance Object (or "govObject") is a generic structure introduced in Dash Core v12.1 to allow for the creation of Budget Proposals, Triggers, and Watch Dogs. Class inheritance has been utilized to extend this generic object into a "Proposal" which is outlined throughout the remainder of this document.
 
 ### `new GovObject([govObjectData])`
 
 Creates a new `GovObject` object where:
-  - `govObjectData` - optional data (allowed types are `json`, `jsonString`, `hex`, `buffer`, `GovObject`)
+
+- `govObjectData` - optional data (allowed types are `json`, `jsonString`, `hex`, `buffer`, `GovObject`)
 
 ### Methods
 
-####  `dataHex`  
+#### `dataHex`
+
 Returns a dataHex representation (see above)
-####  `fromObject`  
+
+#### `fromObject`
+
 Allow to create a govObj from a json or stringifiedJSON obj
-####  `fromString`
+
+#### `fromString`
+
 Allow to create a govObj from a hex string
-####  `checkedSerialize`
+
+#### `checkedSerialize`
+
 Return a hex string that can be used in dashd CLI
-####  `serialize`
+
+#### `serialize`
+
 Return a hex string
-####  `inspect`
+
+#### `inspect`
+
 Returns a representation of the object
-####  `toBuffer`
+
+#### `toBuffer`
+
 Return a buffer
-####  `fromBuffer`
+
+#### `fromBuffer`
+
 Allow to create a govObject from a buffer
-####  `shallowCopy`
+
+#### `shallowCopy`
+
 Allow to shallowCopy from another govObject
 
 ## Governance Object Creation
@@ -58,13 +76,13 @@ Budget Proposals can be created from a valid JSON object (stringified or not)
 
 ```javascript
 var jsonProposal = {
-  name:  "My First GovObject",
+  name: 'My First GovObject',
   start_epoch: 1483228800,
   end_epoch: 1483747200,
   payment_address: 'yXGeNPQXYFXhLAN1ZKrAjxzzBnZ2JZNKnh',
   payment_amount: 10,
   type: 1,
-  url: "http://www.dash.org/proposal/first_proposal"
+  url: 'http://www.dash.org/proposal/first_proposal',
 };
 
 // Will instantiate the govObject given the json passed as arg for fromObject
@@ -84,15 +102,15 @@ var fromBuff = new GovObject(govObjBuffer);
 var fromBuff = new GovObject().fromBuffer(govObjBuffer);
 
 // And from a hex string
-var fromString = new GovObject("7b226e616d65223a224...");
+var fromString = new GovObject('7b226e616d65223a224...');
 // or
-var fromString = new GovObject().fromString("7b226e616d65223a224...")
+var fromString = new GovObject().fromString('7b226e616d65223a224...');
 ```
 
 You can display a hex-encoded representation of a Budget Proposal with a simple "toString()"
 
 ```javascript
-var fromString = new GovObject("7b226e616d65223a224...");
+var fromString = new GovObject('7b226e616d65223a224...');
 
 var hexString = fromString.toString();
 // or
@@ -102,9 +120,9 @@ var hexString = fromString.serialize();
 Logging the object will also return a hex-encoded representation of the object
 
 ```javascript
-var fromString = new GovObject("7b226e616d65223a224...");
+var fromString = new GovObject('7b226e616d65223a224...');
 
-console.log(fromString) // <GovObject: 7b226e616d65223a224...>
+console.log(fromString); // <GovObject: 7b226e616d65223a224...>
 // Or using the method
 fromString.inspect();
 ```
@@ -112,21 +130,21 @@ fromString.inspect();
 You could shallowcopy a first govObj into a second one
 
 ```javascript
-proposal.url = "http://dash.org/badUrl"
+proposal.url = 'http://dash.org/badUrl';
 var shallowCopyProposal = proposal.shallowCopy();
-proposal.url = "http://dash.org/fixedUrl"
+proposal.url = 'http://dash.org/fixedUrl';
 
-console.log(proposal.url!==shallowCopyProposal.url) // return true as it's a copy
-console.log(proposal!==shallowCopyProposal) // return true
+console.log(proposal.url !== shallowCopyProposal.url); // return true as it's a copy
+console.log(proposal !== shallowCopyProposal); // return true
 ```
 
 Finally you are able to get the dataHex from the object
 
 ```javascript
-var fromString = new GovObject("7b226e616d65223a224...");
+var fromString = new GovObject('7b226e616d65223a224...');
 
 // Give a stringified json [['proposal',{name:"My First GovObject",....}]]
-fromString.dataHex()
+fromString.dataHex();
 
 // You could get back the given JSON object by doing so
 var JSONObject = JSON.parse(fromString.dataHex());
@@ -136,17 +154,17 @@ var JSONObject = JSON.parse(fromString.dataHex());
 
 Each of these types are inherited from govObject allowing the same methods to be callable.
 
-* Proposal `type:1`: Allow to create a proposal which inherit govObject method and overwrite them when needed
+- Proposal `type:1`: Allow to create a proposal which inherit govObject method and overwrite them when needed
 
 ```javascript
 var jsonProposal = {
-  name: "My First Proposal",
+  name: 'My First Proposal',
   start_epoch: startDate,
   end_epoch: endDate,
   payment_address: 'yXGeNPQXYFXhLAN1ZKrAjxzzBnZ2JZNKnh',
   payment_amount: 10,
   type: 1,
-  url: "http://www.dash.org"
+  url: 'http://www.dash.org',
 };
 
 var proposal = new Proposal();
@@ -157,5 +175,5 @@ proposal = proposal.fromObject(JSON.stringify(jsonProposal));
 var shallowCopy = proposal.shallowCopy();
 
 // Return a hex equivalent of the proposal
-var hexProposal = proposal.serialize()
+var hexProposal = proposal.serialize();
 ```

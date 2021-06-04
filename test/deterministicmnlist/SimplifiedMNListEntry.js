@@ -6,26 +6,36 @@ var expect = require('chai').expect;
 var Networks = require('../../lib/networks');
 
 var smlEntryJSON = {
-  "proRegTxHash": "32e5ad5cf9a06eb13e0f65cb7ecde1a93ef24995d07355fac2ff05ebd5b9ddbf",
-  "confirmedHash": "0000001960431ec5a566e69f28ae0f6fa3199bd99ec527cccd02f7541d77300c",
-  "service": "95.183.51.146:39999",
-  "pubKeyOperator": "1326ddac1044e0219dba7dccf6b43d1deed3e897717ca06757243b02516cfa67e24026f7a317cf575b40c10e7f6bf7f0",
-  "votingAddress": "yYhmQPak2w5L8KSwVw9R5wpqzPbAJ1fK7v",
-  "isValid": true
+  proRegTxHash:
+    '32e5ad5cf9a06eb13e0f65cb7ecde1a93ef24995d07355fac2ff05ebd5b9ddbf',
+  confirmedHash:
+    '0000001960431ec5a566e69f28ae0f6fa3199bd99ec527cccd02f7541d77300c',
+  service: '95.183.51.146:39999',
+  pubKeyOperator:
+    '1326ddac1044e0219dba7dccf6b43d1deed3e897717ca06757243b02516cfa67e24026f7a317cf575b40c10e7f6bf7f0',
+  votingAddress: 'yYhmQPak2w5L8KSwVw9R5wpqzPbAJ1fK7v',
+  isValid: true,
 };
-var smlEntryHex = "bfddb9d5eb05ffc2fa5573d09549f23ea9e1cd7ecb650f3eb16ea0f95cade5320c30771d54f702cdcc27c59ed99b19a36f0fae289fe666a5c51e43601900000000000000000000000000ffff5fb733929c3f1326ddac1044e0219dba7dccf6b43d1deed3e897717ca06757243b02516cfa67e24026f7a317cf575b40c10e7f6bf7f087da2642cf967c493f126137d4f15e9de36b976801";
-var smlEntryHash = "1f4ab767f64d321f61d0a0995faa3096bf54742d62efe594aeabba6dbfc7e830";
+var smlEntryHex =
+  'bfddb9d5eb05ffc2fa5573d09549f23ea9e1cd7ecb650f3eb16ea0f95cade5320c30771d54f702cdcc27c59ed99b19a36f0fae289fe666a5c51e43601900000000000000000000000000ffff5fb733929c3f1326ddac1044e0219dba7dccf6b43d1deed3e897717ca06757243b02516cfa67e24026f7a317cf575b40c10e7f6bf7f087da2642cf967c493f126137d4f15e9de36b976801';
+var smlEntryHash =
+  '1f4ab767f64d321f61d0a0995faa3096bf54742d62efe594aeabba6dbfc7e830';
 
 var smlEntryWithoutAddress = {
-  "proRegTxHash": "1659e06c825212c9b11325760a18f6ea06194ec4efd603f03d8704f23d818a6f",
-  "confirmedHash": "000000000ca93e850827b361743c25c8508e6e42efaaa331cc1b54326d9fd179",
-  "service": "[0:0:0:0:0:0:0:0]:0",
-  "pubKeyOperator": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-  "votingAddress": "yUTy9Fb2ULXdgyqYtMMbuUWpFLaDgUqT3f",
-  "isValid": false
+  proRegTxHash:
+    '1659e06c825212c9b11325760a18f6ea06194ec4efd603f03d8704f23d818a6f',
+  confirmedHash:
+    '000000000ca93e850827b361743c25c8508e6e42efaaa331cc1b54326d9fd179',
+  service: '[0:0:0:0:0:0:0:0]:0',
+  pubKeyOperator:
+    '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  votingAddress: 'yUTy9Fb2ULXdgyqYtMMbuUWpFLaDgUqT3f',
+  isValid: false,
 };
-var smlEntryWithoutAddressHex = '6f8a813df204873df003d6efc44e1906eaf6180a762513b1c91252826ce0591679d19f6d32541bcc31a3aaef426e8e50c8253c7461b32708853ea90c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000595d9f40d00a7ea5cca2502a1c5bc47706688c4200';
-var smlEntryWithoutAddressHash = '6e793293a676277c97c8d8ffe25a958e5627caeafa270da4dc9b96e2e88379ff';
+var smlEntryWithoutAddressHex =
+  '6f8a813df204873df003d6efc44e1906eaf6180a762513b1c91252826ce0591679d19f6d32541bcc31a3aaef426e8e50c8253c7461b32708853ea90c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000595d9f40d00a7ea5cca2502a1c5bc47706688c4200';
+var smlEntryWithoutAddressHash =
+  '6e793293a676277c97c8d8ffe25a958e5627caeafa270da4dc9b96e2e88379ff';
 
 describe('SimplifiedMNListEntry', function () {
   describe('constructor', function () {
@@ -34,7 +44,10 @@ describe('SimplifiedMNListEntry', function () {
       expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
     });
     it('Should create an entry object from a buffer', function () {
-      var entry = new SimplifiedMNListEntry(Buffer.from(smlEntryHex, 'hex'), Networks.testnet);
+      var entry = new SimplifiedMNListEntry(
+        Buffer.from(smlEntryHex, 'hex'),
+        Networks.testnet
+      );
       expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
     });
     it('Should create an entry object from a hex string', function () {
@@ -47,17 +60,25 @@ describe('SimplifiedMNListEntry', function () {
       entry1.votingAddress = 'something';
       expect(entry2.toObject()).to.be.deep.equal(smlEntryJSON);
       expect(entry1.votingAddress).to.be.equal('something');
-      expect(entry2.votingAddress).to.be.equal('yYhmQPak2w5L8KSwVw9R5wpqzPbAJ1fK7v');
+      expect(entry2.votingAddress).to.be.equal(
+        'yYhmQPak2w5L8KSwVw9R5wpqzPbAJ1fK7v'
+      );
     });
   });
   describe('fromBuffer', function () {
     it('Should be able to parse data from a buffer when ip address is present', function () {
-      var entry = SimplifiedMNListEntry.fromBuffer(Buffer.from(smlEntryHex, 'hex'), Networks.testnet);
+      var entry = SimplifiedMNListEntry.fromBuffer(
+        Buffer.from(smlEntryHex, 'hex'),
+        Networks.testnet
+      );
       var entryJSON = entry.toObject();
       expect(entryJSON).to.be.deep.equal(smlEntryJSON);
     });
     it('Should be able to parse data from a buffer when ip address is not present', function () {
-      var entry = SimplifiedMNListEntry.fromBuffer(Buffer.from(smlEntryHex, 'hex'), Networks.testnet);
+      var entry = SimplifiedMNListEntry.fromBuffer(
+        Buffer.from(smlEntryHex, 'hex'),
+        Networks.testnet
+      );
       var entryJSON = entry.toObject();
       expect(entryJSON).to.be.deep.equal(smlEntryJSON);
     });
@@ -79,15 +100,25 @@ describe('SimplifiedMNListEntry', function () {
       expect(entryString).to.be.equal(smlEntryWithoutAddressHex);
     });
     it('Buffer size should always be the same', function () {
-      var entryWithDifferentKeys = new SimplifiedMNListEntry(smlEntryJSON).toBuffer();
-      var entryWithSameKeys = new SimplifiedMNListEntry(smlEntryJSON).toBuffer();
-      var entryWithNoAddress = new SimplifiedMNListEntry(smlEntryWithoutAddress).toBuffer();
+      var entryWithDifferentKeys = new SimplifiedMNListEntry(
+        smlEntryJSON
+      ).toBuffer();
+      var entryWithSameKeys = new SimplifiedMNListEntry(
+        smlEntryJSON
+      ).toBuffer();
+      var entryWithNoAddress = new SimplifiedMNListEntry(
+        smlEntryWithoutAddress
+      ).toBuffer();
 
-      expect(entryWithSameKeys.length).to.be.equal(entryWithDifferentKeys.length);
-      expect(entryWithNoAddress.length).to.be.equal(entryWithDifferentKeys.length);
+      expect(entryWithSameKeys.length).to.be.equal(
+        entryWithDifferentKeys.length
+      );
+      expect(entryWithNoAddress.length).to.be.equal(
+        entryWithDifferentKeys.length
+      );
     });
   });
-  describe('fromObject', function() {
+  describe('fromObject', function () {
     it('Should create an instance from a JSONObject', function () {
       var entry = SimplifiedMNListEntry.fromObject(smlEntryJSON);
 
@@ -104,29 +135,36 @@ describe('SimplifiedMNListEntry', function () {
   });
   describe('fromHexString', function () {
     it('Should be able to create an entry from a hex string', function () {
-      var entry = SimplifiedMNListEntry.fromHexString(smlEntryHex, Networks.testnet);
+      var entry = SimplifiedMNListEntry.fromHexString(
+        smlEntryHex,
+        Networks.testnet
+      );
 
       expect(entry.toObject()).to.be.deep.equal(smlEntryJSON);
     });
   });
   describe('calculateHash', function () {
-    it('Should get correct hash for an entry with ip address', function() {
+    it('Should get correct hash for an entry with ip address', function () {
       var entry = new SimplifiedMNListEntry(smlEntryJSON);
       var serialized = entry.toBuffer().toString('hex');
       expect(serialized.length).to.be.equal(smlEntryHex.length);
       expect(entry.toBuffer().toString('hex')).to.be.equal(smlEntryHex);
       expect(entry.calculateHash().toString('hex')).to.be.equal(smlEntryHash);
     });
-    it('Should get correct hash for an entry without ip address', function() {
+    it('Should get correct hash for an entry without ip address', function () {
       var entry = new SimplifiedMNListEntry(smlEntryWithoutAddress);
       var serialized = entry.toBuffer().toString('hex');
       expect(serialized.length).to.be.equal(smlEntryWithoutAddressHex.length);
-      expect(entry.toBuffer().toString('hex')).to.be.equal(smlEntryWithoutAddressHex);
-      expect(entry.calculateHash().toString('hex')).to.be.equal(smlEntryWithoutAddressHash);
+      expect(entry.toBuffer().toString('hex')).to.be.equal(
+        smlEntryWithoutAddressHex
+      );
+      expect(entry.calculateHash().toString('hex')).to.be.equal(
+        smlEntryWithoutAddressHash
+      );
     });
   });
   describe('getIp', function () {
-    it('Should get the ip address', function() {
+    it('Should get the ip address', function () {
       var entry = new SimplifiedMNListEntry(smlEntryJSON);
       var ip = entry.getIp();
       expect(ip).to.be.equal('95.183.51.146');

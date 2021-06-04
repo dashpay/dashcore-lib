@@ -42,7 +42,8 @@ The Mnemonic class provides a static method to check if a mnemonic string is val
 ```javascript
 var Mnemonic = require('@dashevo/dashcore-mnemonic');
 
-var code = 'select scout crash enforce riot rival spring whale hollow radar rule sentence';
+var code =
+  'select scout crash enforce riot rival spring whale hollow radar rule sentence';
 var valid = Mnemonic.isValid(code);
 
 // using a custom word list
@@ -55,7 +56,9 @@ A mnemonic encodes entropy that can be used for creating a seed and later a [HDP
 
 ```javascript
 var Mnemonic = require('@dashevo/dashcore-mnemonic');
-var code = new Mnemonic('select scout crash enforce riot rival spring whale hollow radar rule sentence');
+var code = new Mnemonic(
+  'select scout crash enforce riot rival spring whale hollow radar rule sentence'
+);
 
 var xpriv1 = code.toHDPrivateKey(); // no passphrase
 var xpriv2 = code.toHDPrivateKey('my passphrase'); // using a passphrase

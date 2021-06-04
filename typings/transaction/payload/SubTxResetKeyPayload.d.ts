@@ -10,14 +10,14 @@
  * @property {string} payloadSig - signature of most recent pubkey
  */
 export type SubTxResetKeyPayloadJSON = {
-    version: number;
-    regTxHash: string;
-    hashPrevSubTx: string;
-    creditFee: number;
-    newPubKeySize: number;
-    newPubKey: Buffer;
-    payloadSigSize: number;
-    payloadSig: string;
+  version: number;
+  regTxHash: string;
+  hashPrevSubTx: string;
+  creditFee: number;
+  newPubKeySize: number;
+  newPubKey: Buffer;
+  payloadSigSize: number;
+  payloadSig: string;
 };
 
 /**
@@ -32,90 +32,94 @@ export type SubTxResetKeyPayloadJSON = {
  * @property {string} payloadSig - signature of most recent pubkey
  */
 export class SubTxResetKeyPayload {
-    /**
-     * Parse raw transition payload
-     * @param {Buffer} rawPayload
-     * @return {SubTxResetKeyPayload}
-     */
-    static fromBuffer(rawPayload: Buffer): SubTxResetKeyPayload;
+  /**
+   * Parse raw transition payload
+   * @param {Buffer} rawPayload
+   * @return {SubTxResetKeyPayload}
+   */
+  static fromBuffer(rawPayload: Buffer): SubTxResetKeyPayload;
 
-    /**
-     * Create new instance of payload from JSON
-     * @param {string|SubTxResetKeyPayloadJSON} payloadJson
-     * @return {SubTxResetKeyPayload}
-     */
-    static fromJSON(payloadJson: string | SubTxResetKeyPayloadJSON): SubTxResetKeyPayload;
+  /**
+   * Create new instance of payload from JSON
+   * @param {string|SubTxResetKeyPayloadJSON} payloadJson
+   * @return {SubTxResetKeyPayload}
+   */
+  static fromJSON(
+    payloadJson: string | SubTxResetKeyPayloadJSON
+  ): SubTxResetKeyPayload;
 
-    /**
-     * Validates payload data
-     * @return {boolean}
-     */
-    validate(): boolean;
+  /**
+   * Validates payload data
+   * @return {boolean}
+   */
+  validate(): boolean;
 
-    /**
-     * @param {string} regTxHash
-     * @return {SubTxResetKeyPayload}
-     */
-    setRegTxHash(regTxHash: string): SubTxResetKeyPayload;
+  /**
+   * @param {string} regTxHash
+   * @return {SubTxResetKeyPayload}
+   */
+  setRegTxHash(regTxHash: string): SubTxResetKeyPayload;
 
-    /**
-     * @param {string} hashPrevSubTx
-     * @return {SubTxResetKeyPayload}
-     */
-    setPrevSubTxHash(hashPrevSubTx: string): SubTxResetKeyPayload;
+  /**
+   * @param {string} hashPrevSubTx
+   * @return {SubTxResetKeyPayload}
+   */
+  setPrevSubTxHash(hashPrevSubTx: string): SubTxResetKeyPayload;
 
-    /**
-     * @param {number} duffs
-     * @return {SubTxResetKeyPayload}
-     */
-    setCreditFee(duffs: number): SubTxResetKeyPayload;
+  /**
+   * @param {number} duffs
+   * @return {SubTxResetKeyPayload}
+   */
+  setCreditFee(duffs: number): SubTxResetKeyPayload;
 
-    /**
-     * @param {Buffer} pubKeyId
-     * @return {SubTxResetKeyPayload}
-     */
-    setNewPubKeyId(pubKeyId: Buffer): SubTxResetKeyPayload;
+  /**
+   * @param {Buffer} pubKeyId
+   * @return {SubTxResetKeyPayload}
+   */
+  setNewPubKeyId(pubKeyId: Buffer): SubTxResetKeyPayload;
 
-    /**
-     * Extracts and sets pubKeyId from private key
-     * @param {string|PrivateKey} privateKey
-     * @return {SubTxResetKeyPayload}
-     */
-    setPubKeyIdFromPrivateKey(privateKey: string | PrivateKey): SubTxResetKeyPayload;
+  /**
+   * Extracts and sets pubKeyId from private key
+   * @param {string|PrivateKey} privateKey
+   * @return {SubTxResetKeyPayload}
+   */
+  setPubKeyIdFromPrivateKey(
+    privateKey: string | PrivateKey
+  ): SubTxResetKeyPayload;
 
-    /**
-     * Serializes payload to JSON
-     * @return {{version: *, regTxHash: *, hashPrevSubTx: *, creditFee: *, newPubKeySize: *, newPubKey: *, payloadSigSize: *, payloadSig: *}}
-     */
-    toJSON(): any;
+  /**
+   * Serializes payload to JSON
+   * @return {{version: *, regTxHash: *, hashPrevSubTx: *, creditFee: *, newPubKeySize: *, newPubKey: *, payloadSigSize: *, payloadSig: *}}
+   */
+  toJSON(): any;
 
-    /**
-     * Serialize payload to buffer
-     * @return {Buffer}
-     */
-    toBuffer(): Buffer;
+  /**
+   * Serialize payload to buffer
+   * @return {Buffer}
+   */
+  toBuffer(): Buffer;
 
-    /**
-     * payload version
-     */
-    version: number;
-    regTxHash: string;
-    hashPrevSubTx: string;
-    /**
-     * fee to pay for transaction (duffs)
-     */
-    creditFee: number;
-    /**
-     * length of the new public key (not present in implementation)
-     */
-    newPubKeySize: number;
-    newPubKey: Buffer;
-    /**
-     * length of the signature (payloadSig)
-     */
-    payloadSigSize: number;
-    /**
-     * signature of most recent pubkey
-     */
-    payloadSig: string;
+  /**
+   * payload version
+   */
+  version: number;
+  regTxHash: string;
+  hashPrevSubTx: string;
+  /**
+   * fee to pay for transaction (duffs)
+   */
+  creditFee: number;
+  /**
+   * length of the new public key (not present in implementation)
+   */
+  newPubKeySize: number;
+  newPubKey: Buffer;
+  /**
+   * length of the signature (payloadSig)
+   */
+  payloadSigSize: number;
+  /**
+   * signature of most recent pubkey
+   */
+  payloadSig: string;
 }

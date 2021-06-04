@@ -1,5 +1,4 @@
 /**
  * @class BN
  */
-export class BN {
-}
+export class BN {}

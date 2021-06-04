@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+
 module.exports = (config) => {
   config.set({
     frameworks: ['mocha', 'chai', 'webpack'],

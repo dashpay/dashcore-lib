@@ -13,7 +13,7 @@ module.exports = (config) => {
       module: {
         rules: [
           { test: /\.dat$/, use: 'raw-loader' },
-          { enforce: 'post', loader: 'transform-loader?brfs' },
+          { enforce: 'post', loader: 'transform-loader?brfs-node-15' },
         ],
       },
     },

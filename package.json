@@ -126,7 +126,7 @@
   },
   "devDependencies": {
     "assert-browserify": "^2.0.0",
-    "brfs": "^2.0.2",
+    "brfs-node-15": "^2.0.3",
     "buffer": "^6.0.3",
     "chai": "^4.2.0",
     "crypto-browserify": "^3.12.0",

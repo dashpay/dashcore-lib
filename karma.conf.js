@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 module.exports = (config) => {
   config.set({
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha', 'chai', 'webpack'],
     files: ['./index.js', './test.spec.js'],
     preprocessors: {
       './index.js': ['webpack'],
@@ -28,6 +28,7 @@ module.exports = (config) => {
       module: {
         rules: [
           { test: /\.dat$/, use: 'raw-loader' },
+          { enforce: 'post', loader: "transform-loader", options: "brfs-node-15" },
         ],
       },
     },

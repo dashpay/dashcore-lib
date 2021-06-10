@@ -9,7 +9,7 @@ var Networks = require('../../lib/networks');
 const testnetDiffs = require('../fixtures/testnetSMLDiffs.json');
 
 describe('SimplifiedMNList', function () {
-  this.timeout(10000);
+  this.timeout(15000);
 
   describe('constructor', function () {
     it('Should call applyDiff with the first argument passed to the constructor', function () {

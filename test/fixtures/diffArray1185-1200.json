@@ -1,0 +1,50 @@
+[{
+  "baseBlockHash": "19dd54096a2e602e0d1eb210d7b1f749bc8ba517c271113d84c5c6e6207ccd41",
+  "blockHash": "5b943c6a3a56d8179aabf0158eae6a523198a60f4c4dd1263e74e6b667c4ba1e",
+  "cbTxMerkleTree": "0100000001aeefd5c12ade59a30ce4d11b2ec6df30509f0f8f5e7d4b8751cbc873b6b5065a0101",
+  "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff0502b0040101ffffffff02aa8b4e1e030000001976a914383f555b7a9313bb659a7d33a9a3368aeae88c7188aca28b4e1e030000001976a914c00aba565b49b41e5333a6789969e8c4a47e11b088ac00000000460200b0040000aac2ae2d2c88cd881dce806d5ccf6adac108318807cb1480355dab0f256e11c81519960fa6ffd3cceaaf52f38ca894a73b77fc06230c086512aa9e07b510ad0b",
+  "deletedMNs": [
+  ],
+  "mnList": [
+  ],
+  "deletedQuorums": [
+    {
+      "llmqType": 100,
+      "quorumHash": "68d0a27a5e66178b555e802e2a608aa718f90ff16619e1fe03022165249d0e50"
+    },
+    {
+      "llmqType": 102,
+      "quorumHash": "68d0a27a5e66178b555e802e2a608aa718f90ff16619e1fe03022165249d0e50"
+    }
+  ],
+  "newQuorums": [
+    {
+      "version": 1,
+      "llmqType": 100,
+      "quorumHash": "0dc8d0df62b076a7757ab5ca07dde0f1e2bfaf83f94299fd9a77577e6cc7022e",
+      "signersCount": 3,
+      "signers": "07",
+      "validMembersCount": 3,
+      "validMembers": "07",
+      "quorumPublicKey": "136701b57b4ff93c6c4e38528f499aa213c9a38e7f39106703083f43e67daf4388e0c5326d5ffa9d544131716816bd43",
+      "quorumVvecHash": "907226ac63fb52c3afcc3a03bd9b23b1d68c6746152c4176fc2d5966bfedd4df",
+      "quorumSig": "8474aa1c41d44c0fcb3c85b435faad56bbeaf9f0e1038a872bf5e947c8b7e445ed7a7921e7484938f1741942b3de805d148f25c0e199b19160d6b411844748e6059147015b6e7580cac084276cd8078ab863e0e3b66ea839f93692baed65a69c",
+      "membersSig": "0cb97c2a31370dfbbf785daa0460819b2d3546898683498b42db3b0fa2d66a34383906d12bcee24b81af8b12477b29800cd484f7c85fe870f12634c0cf710cbe0fe3a1a436fdba868eb766d8b926345d8ed02019a4fc233fcb6fc1a1846b0708"
+    },
+    {
+      "version": 1,
+      "llmqType": 102,
+      "quorumHash": "0dc8d0df62b076a7757ab5ca07dde0f1e2bfaf83f94299fd9a77577e6cc7022e",
+      "signersCount": 3,
+      "signers": "07",
+      "validMembersCount": 3,
+      "validMembers": "07",
+      "quorumPublicKey": "8640bdafe9065824e8eb76a7b3c7b66dcead1d33fa2cc4ca1fe3394233540cb3aa80b0aacd42fab81e90938e17c020b0",
+      "quorumVvecHash": "2afb8235297f07d6f418f2123e2f038b6814a6213d05ef22207763ddc725febe",
+      "quorumSig": "872e2421dd3cd5f057c405a967340cb8d5ff64b35f4ab81d393ed44d86d3c30b4fe40d3570cfe1ca4c1722b80432cc490cccc872e4047c7193767cbc180902ef3cc6f827e0f223146ad906bba83dbad6f4f0cfaa6d722662a65c527090ebd27b",
+      "membersSig": "0e392040a3f014de6001dfcba91afad8370f0b62f1d73ec18d155cce0327faa4a978bc4c11d71edd3af06a35ccb57a771237a31a5d4b97fac7fdfb704511ab36b30d71a9a2d4c6a1cb6461c6f0554d332e9edcd8eec2a7f815fb5d930e95f19e"
+    }
+  ],
+  "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
+  "merkleRootQuorums": "0bad10b5079eaa1265080c2306fc773ba794a88cf352afeaccd3ffa60f961915"
+}]

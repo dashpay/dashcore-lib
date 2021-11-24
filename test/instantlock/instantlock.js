@@ -208,6 +208,7 @@ describe('InstantLock', function () {
         const isValid = await instantLock.verify(SMLStore);
         expect(isValid).to.equal(true);
       });
+
       it('should not crash if no quorum was found for the lock to verify', async function () {
         const SMLStore = new SimplifiedMNListStore(
           JSON.parse(JSON.stringify(diffArrayFixture))
@@ -219,6 +220,7 @@ describe('InstantLock', function () {
         const isValid = await instantLock.verify(SMLStore);
         expect(isValid).to.equal(false);
       });
+
       it('should not crash if no quorum was found for the lock to verify with empty quorumList', async function () {
         // verifySignatureWithQuorumOffset should be called three times, because the quorumList is always empty
         const spy = sinon.spy(
@@ -238,23 +240,27 @@ describe('InstantLock', function () {
       });
     });
   });
+
   describe('computation', function () {
     describe('#getHash', function () {
       it('should compute the hash of an InstantLock', function () {
         const hash = InstantLock.fromBuffer(buf).getHash().toString('hex');
         expect(hash).to.deep.equal(expectedHash);
       });
+
       it('should compute the hash of another InstantLock', function () {
         const hash = InstantLock.fromBuffer(buf2).getHash().toString('hex');
         expect(hash).to.deep.equal(expectedHash2);
       });
     });
+
     describe('#getRequestId', function () {
       it('should compute the requestId of an InstantLock', function () {
         const instantLock = new InstantLock(object);
         const requestId = instantLock.getRequestId().toString('hex');
         expect(requestId).to.deep.equal(expectedRequestId);
       });
+
       it('should compute the requestId of another InstantLock', function () {
         const instantLock2 = new InstantLock(object2);
         const requestId2 = instantLock2.getRequestId().toString('hex');
@@ -271,12 +277,14 @@ describe('InstantLock', function () {
         expect(instantLockCopy).to.deep.equal(instantLock);
       });
     });
+
     describe('#toBuffer', function () {
       it('should output formatted output correctly', function () {
         const instantLock = InstantLock.fromBuffer(buf2);
         expect(instantLock.toBuffer().toString('hex')).to.deep.equal(str2);
       });
     });
+
     describe('#toJSON/#toObject', function () {
       it('should output formatted output correctly', function () {
         const instantLock2 = InstantLock.fromBuffer(buf2);
@@ -284,18 +292,112 @@ describe('InstantLock', function () {
         expect(instantLock2.toObject()).to.deep.equal(object2);
       });
     });
+
     describe('#toString', function () {
       it('should output formatted output correctly', function () {
         const instantLock = InstantLock.fromBuffer(buf2);
         expect(instantLock.toString()).to.deep.equal(str2);
       });
     });
+
     describe('#inspect', function () {
       it('should output formatted output correctly', function () {
         const instantLock = new InstantLock(str);
         const output =
           '<InstantLock: e17f490ba5856baaf554903e4b08299fd64a9f64650a2c40672c590ae06d444b, sig: 85e12d70ca7118c5034004f93e45384079f46c6c2928b45cfc5d3ad640e70dfd87a9a3069899adfb3b1622daeeead19809b74354272ccf95290678f55c13728e3c5ee8f8417fcce3dfdca2a7c9c33ec981abdff1ec35a2e4b558c3698f01c1b8>';
         expect(instantLock.inspect()).to.be.equal(output);
+      });
+    });
+  });
+
+  describe('v17', () => {
+    beforeEach(() => {
+      str =
+        '011dbbda5861b12d7523f20aa5e0d42f52de3dcd2d5c2fe919ba67b59f050d206e00000000babb35d229d6bf5897a9fc3770755868d9730e022dc04c8a7a7e9df9f1caccbe8967c46529a967b3822e1ba8a173066296d02593f0f59b3a78a30a7eef9c8a120847729e62e4a32954339286b79fe7590221331cd28d576887a263f45b595d499272f656c3f5176987c976239cac16f972d796ad82931d532102a4f95eec7d80';
+      object = {
+        inputs: [
+          {
+            outpointHash:
+              '6e200d059fb567ba19e92f5c2dcd3dde522fd4e0a50af223752db16158dabb1d',
+            outpointIndex: 0,
+          },
+        ],
+        txid: 'becccaf1f99d7e7a8a4cc02d020e73d96858757037fca99758bfd629d235bbba',
+        signature:
+          '8967c46529a967b3822e1ba8a173066296d02593f0f59b3a78a30a7eef9c8a120847729e62e4a32954339286b79fe7590221331cd28d576887a263f45b595d499272f656c3f5176987c976239cac16f972d796ad82931d532102a4f95eec7d80',
+      };
+      buf = Buffer.from(str, 'hex');
+    });
+
+    describe('instantiation', () => {
+      describe('#fromBuffer', () => {
+        it('should be able to parse data from a buffer', () => {
+          const instantLock = InstantLock.fromBuffer(buf);
+          const instantLockStr = instantLock.toString();
+          expect(instantLockStr).to.be.deep.equal(str);
+          const instantLockJSON = instantLock.toObject();
+          expect(instantLockJSON).to.be.deep.equal(object);
+        });
+      });
+
+      describe('#fromObject', () => {
+        it('should be able to parse data from an object', () => {
+          const instantLock = InstantLock.fromObject(object);
+          const instantLockStr = instantLock.toString();
+          expect(instantLockStr).to.be.deep.equal(str);
+        });
+      });
+
+      describe('#fromString', () => {
+        it('should be able to parse data from a hex string', () => {
+          const instantLock = InstantLock.fromHex(str);
+          const instantLockJSON = instantLock.toObject();
+          const instantLockBuffer = instantLock.toBuffer().toString('hex');
+          expect(instantLockJSON).to.be.deep.equal(object);
+          expect(instantLockBuffer).to.be.deep.equal(buf.toString('hex'));
+        });
+      });
+
+      describe('#copy', () => {
+        it('can be instantiated from another instantlock', () => {
+          const instantLock = InstantLock.fromBuffer(buf);
+          const instantLock2 = new InstantLock(instantLock);
+          expect(instantLock2.toString()).to.be.equal(instantLock.toString());
+        });
+      });
+    });
+
+    describe('output', function () {
+      describe('#copy', function () {
+        it('should output formatted output correctly', function () {
+          it('should output formatted output correctly', function () {
+            const instantLock = InstantLock.fromBuffer(Buffer.from(str, 'hex'));
+            const instantLockCopy = instantLock.copy();
+            expect(instantLockCopy).to.deep.equal(instantLock);
+          });
+        });
+      });
+
+      describe('#toBuffer', function () {
+        it('should output formatted output correctly', function () {
+          const instantLock = InstantLock.fromBuffer(buf);
+          expect(instantLock.toBuffer().toString('hex')).to.deep.equal(str);
+        });
+      });
+
+      describe('#toJSON/#toObject', function () {
+        it('should output formatted output correctly', function () {
+          const instantLock = InstantLock.fromBuffer(buf);
+          expect(instantLock.toObject()).to.deep.equal(instantLock.toJSON());
+          expect(instantLock.toObject()).to.deep.equal(object);
+        });
+      });
+
+      describe('#toString', function () {
+        it('should output formatted output correctly', function () {
+          const instantLock = InstantLock.fromBuffer(buf);
+          expect(instantLock.toString()).to.deep.equal(str);
+        });
       });
     });
   });

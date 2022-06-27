@@ -2,6 +2,7 @@
 // TODO: Remove previous line and work through linting issues at next edit
 
 'use strict';
+const { configure } = require('./lib/configuration');
 
 var bitcore = module.exports;
 
@@ -90,3 +91,4 @@ bitcore.deps._ = require('lodash');
 
 // Internal usage, exposed for testing/advanced tweaking
 bitcore.Transaction.sighash = require('./lib/transaction/sighash');
+bitcore.configure = configure;

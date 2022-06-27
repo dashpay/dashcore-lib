@@ -1,6 +1,8 @@
 const chai = require('chai');
 const X11 = require('wasm-x11-hash');
 const Hash = require('../lib/crypto/hash');
+const crypto = require('crypto');
+const x11hash = require('@dashevo/x11-hash-js');
 
 const { configure, BlockHeader } = require("../index");
 
@@ -23,6 +25,13 @@ describe('configuration', function () {
       }
     })
   });
+
+  after(() => {
+    configure({
+      x11hash,
+      crypto
+    })
+  })
 
   it('should use external x11 for block header hash', () => {
     const blockHeader = new BlockHeader(headerBuffer);

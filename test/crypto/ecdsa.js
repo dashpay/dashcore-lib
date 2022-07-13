@@ -326,6 +326,10 @@ describe('ECDSA', function () {
       it('should verify a valid signature, and unverify an invalid signature', function () {
         var sig = ECDSA.sign(ecdsa.hashbuf, ecdsa.privkey);
         ECDSA.verify(ecdsa.hashbuf, sig, ecdsa.pubkey).should.equal(true);
+        // TODO -- the test is supposed to fail, and does fail, but not in
+        //         the desired manner - because the signature doesn't generate
+        //         a valid public key and therefore fails on a toPubKey(),
+        //         rather that giving a bogus r and s and failing at a later stage
         var fakesig = new Signature(sig.r.add(new BN(1)), sig.s);
         ECDSA.verify(ecdsa.hashbuf, fakesig, ecdsa.pubkey).should.equal(false);
       });

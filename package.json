@@ -124,7 +124,7 @@
     "@types/node": "^12.12.47",
     "bloom-filter": "^0.2.0",
     "bls-signatures": "^0.2.5",
-    "bn.js": "=4.11.8",
+    "bn.js": "^4.12.0",
     "bs58": "=4.0.1",
     "elliptic": "^6.5.4",
     "eslint-config-prettier": "^8.3.0",

@@ -1,6 +1,6 @@
 {
   "name": "@dashevo/dashcore-lib",
-  "version": "0.19.38",
+  "version": "0.19.41",
   "description": "A pure and powerful JavaScript Dash library.",
   "author": "Dash Core Group, Inc. <dev@dash.org>",
   "main": "index.js",
@@ -87,6 +87,10 @@
     {
       "name": "Dashameter",
       "email": "Dashameter@gmail.com"
+    },
+    {
+      "name": "Igor Markin",
+      "email": "markin.io210@gmail.com"
     }
   ],
   "keywords": [
@@ -120,12 +124,13 @@
     "@types/node": "^12.12.47",
     "bloom-filter": "^0.2.0",
     "bls-signatures": "^0.2.5",
-    "bn.js": "=4.11.8",
+    "bn.js": "^4.12.0",
     "bs58": "=4.0.1",
-    "elliptic": "6.5.3",
+    "elliptic": "^6.5.4",
     "eslint-config-prettier": "^8.3.0",
     "inherits": "=2.0.1",
     "lodash": "^4.17.20",
+    "ripemd160": "^2.0.2",
     "unorm": "^1.6.0"
   },
   "devDependencies": {
@@ -145,7 +150,7 @@
     "karma-mocha": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",
     "karma-webpack": "^5.0.0",
-    "mocha": "^8.4.0",
+    "mocha": "^9.2.2",
     "nyc": "^15.1.0",
     "path-browserify": "^1.0.1",
     "prettier": "^2.3.0",
@@ -156,6 +161,7 @@
     "terser-webpack-plugin": "^4.1.0",
     "transform-loader": "^0.2.4",
     "url": "^0.11.0",
+    "wasm-x11-hash": "^0.0.2",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"
   },

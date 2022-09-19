@@ -3,7 +3,7 @@
     "baseBlockHash": "2977923f3e8fe1ba0ec5cb2b48e135428d90fd875c3691dbd6c78413d25d0f70",
     "blockHash": "552327aebd14a13aee34360e79cc034f60d6fd9488f846978c7c36cdd36351fd",
     "cbTxMerkleTree": "010000000149fdb4dc80eb91535f67d2951ea9cbeb605666298242500e2d6cb9eddacfa1510101",
-    "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff050292040101ffffffff02aa8b4e1e030000001976a914383f555b7a9313bb659a7d33a9a3368aeae88c7188aca28b4e1e030000001976a914c00aba565b49b41e5333a6789969e8c4a47e11b088ac00000000460200920400008e84ce668deab8b9505255bd87e1c77cfeda394fb7c10b5fbc4df5347fd1ecebabb478c2de103e2ee29d6e28c0be0bcb2ea86d3370f314602d35a5230f5f768f",
+    "cbTx": "03000500010000000000000000000000000000000000000000000000000000000000000000ffffffff050292040101ffffffff02aa8b4e1e030000001976a914383f555b7a9313bb659a7d33a9a3368aeae88c7188aca28b4e1e030000001976a914c00aba565b49b41e5333a6789969e8c4a47e11b088ac0000000046020092040000aac2ae2d2c88cd881dce806d5ccf6adac108318807cb1480355dab0f256e11c8abb478c2de103e2ee29d6e28c0be0bcb2ea86d3370f314602d35a5230f5f768f",
     "deletedMNs": [],
     "mnList": [
       {
@@ -86,7 +86,7 @@
         "membersSig": "8903f333318798432b3a1acacd260f42dbb70b2c750173c82d7c2564e67185c13b2adbe51a49a0801e35197d5afaaeb70ade44439c2a0528197c498fb9b91a7466f2b55a1f5fc5f232ea8d58a1807304d6e9bd26d8f95eda850e0129c85cf943"
       }
     ],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -98,7 +98,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -110,7 +110,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -122,7 +122,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -134,7 +134,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -146,7 +146,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -158,7 +158,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -170,7 +170,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -182,7 +182,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -194,7 +194,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -206,7 +206,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -218,7 +218,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -230,7 +230,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -242,7 +242,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -254,7 +254,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   },
   {
@@ -266,7 +266,7 @@
     "mnList": [],
     "deletedQuorums": [],
     "newQuorums": [],
-    "merkleRootMNList": "ebecd17f34f54dbc5f0bc1b74f39dafe7cc7e187bd555250b9b8ea8d66ce848e",
+    "merkleRootMNList": "c8116e250fab5d358014cb07883108c1da6acf5c6d80ce1d88cd882c2daec2aa",
     "merkleRootQuorums": "8f765f0f23a5352d6014f370336da82ecb0bbec0286e9de22e3e10dec278b4ab"
   }
 ]

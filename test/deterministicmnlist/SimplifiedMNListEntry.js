@@ -17,9 +17,9 @@ var smlEntryJSON = {
   isValid: true,
 };
 var smlEntryHex =
-  'bfddb9d5eb05ffc2fa5573d09549f23ea9e1cd7ecb650f3eb16ea0f95cade5320c30771d54f702cdcc27c59ed99b19a36f0fae289fe666a5c51e43601900000000000000000000000000ffff5fb733929c3f1326ddac1044e0219dba7dccf6b43d1deed3e897717ca06757243b02516cfa67e24026f7a317cf575b40c10e7f6bf7f087da2642cf967c493f126137d4f15e9de36b9768010000';
+  'bfddb9d5eb05ffc2fa5573d09549f23ea9e1cd7ecb650f3eb16ea0f95cade5320c30771d54f702cdcc27c59ed99b19a36f0fae289fe666a5c51e43601900000000000000000000000000ffff5fb733929c3f1326ddac1044e0219dba7dccf6b43d1deed3e897717ca06757243b02516cfa67e24026f7a317cf575b40c10e7f6bf7f087da2642cf967c493f126137d4f15e9de36b976801';
 var smlEntryHash =
-  '1dc2e51740104f6aa09c63d21310830b37b24aa1e61456a7d1b8bc39054128a7';
+  '1f4ab767f64d321f61d0a0995faa3096bf54742d62efe594aeabba6dbfc7e830';
 
 var smlEntryWithoutAddress = {
   proRegTxHash:
@@ -33,40 +33,9 @@ var smlEntryWithoutAddress = {
   isValid: false,
 };
 var smlEntryWithoutAddressHex =
-  '6f8a813df204873df003d6efc44e1906eaf6180a762513b1c91252826ce0591679d19f6d32541bcc31a3aaef426e8e50c8253c7461b32708853ea90c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000595d9f40d00a7ea5cca2502a1c5bc47706688c42000000';
+  '6f8a813df204873df003d6efc44e1906eaf6180a762513b1c91252826ce0591679d19f6d32541bcc31a3aaef426e8e50c8253c7461b32708853ea90c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000595d9f40d00a7ea5cca2502a1c5bc47706688c4200';
 var smlEntryWithoutAddressHash =
-  'f90f280d29d33792e9b44ad943740f1b24bbd173f6775d648f423e2e12a09707';
-
-var smlEntryWithPayoutAddressJSON = {
-  proRegTxHash: 'd10622d315a085042117662fe906b443475d9e7d0e624b6518a32000e9ed6460',
-  confirmedHash: '5cf9e6c0d6ac464d0cb8d55ef4004957c9889b60d7a1790531aca3b4bc4ec1b3',
-  service: '192.168.65.2:20001',
-  pubKeyOperator: '858486cb2bcaf78b29d9dfefba8c3ca74a3229e8468db5f4a80c464d92eccffa1cbe721739995a425355429e5e5eb1cb',
-  votingAddress: 'yXPzG7QXfcK8gHRA9rcwxCPhNsompJnZQy',
-  isValid: true,
-  payoutAddress: 'yVs22KfwXqZ36k3u3FhTc54dSaFQDJQcT5',
-};
-
-var smlEntryWithPayoutAddressHex =
-'6064ede90020a318654b620e7d9e5d4743b406e92f6617210485a015d32206d1b3c14ebcb4a3ac310579a1d7609b88c9574900f45ed5b80c4d46acd6c0e6f95c00000000000000000000ffffc0a841024e21858486cb2bcaf78b29d9dfefba8c3ca74a3229e8468db5f4a80c464d92eccffa1cbe721739995a425355429e5e5eb1cb798544e135d81afca74c0fb59deffadeeca8d82d011976a91468b1b83304ca997e387015a430359d59658b5b7c88ac00';
-var smlEntryWithPayoutAddressHash =
-'72cafede95c07ade60c1c0809d41eca4504510b0ab15b7d379f6405fd2d07a87';
-
-var smlEntryWithOperatorPayoutAddressJSON = {
-  proRegTxHash: 'd10622d315a085042117662fe906b443475d9e7d0e624b6518a32000e9ed6460',
-  confirmedHash: '5cf9e6c0d6ac464d0cb8d55ef4004957c9889b60d7a1790531aca3b4bc4ec1b3',
-  service: '192.168.65.2:20001',
-  pubKeyOperator: '858486cb2bcaf78b29d9dfefba8c3ca74a3229e8468db5f4a80c464d92eccffa1cbe721739995a425355429e5e5eb1cb',
-  votingAddress: 'yXPzG7QXfcK8gHRA9rcwxCPhNsompJnZQy',
-  isValid: true,
-  payoutAddress: 'yVs22KfwXqZ36k3u3FhTc54dSaFQDJQcT5',
-  operatorPayoutAddress: 'yU5YwavuvGX7GYTnxiKyBd9YcvS2ngSfvK',
-};
-
-var smlEntryWithOperatorPayoutAddressHex =
-'6064ede90020a318654b620e7d9e5d4743b406e92f6617210485a015d32206d1b3c14ebcb4a3ac310579a1d7609b88c9574900f45ed5b80c4d46acd6c0e6f95c00000000000000000000ffffc0a841024e21858486cb2bcaf78b29d9dfefba8c3ca74a3229e8468db5f4a80c464d92eccffa1cbe721739995a425355429e5e5eb1cb798544e135d81afca74c0fb59deffadeeca8d82d011976a91468b1b83304ca997e387015a430359d59658b5b7c88ac1976a914552044d19ebbacf5f33851b920bfc8f82b3cb5fd88ac';
-var smlEntryWithOperatorPayoutAddressHash =
-'f364cb67d862bfed15109a4f3202bba56ee3c9d7b3be86a7ea156c96c06c704e';
+  '6e793293a676277c97c8d8ffe25a958e5627caeafa270da4dc9b96e2e88379ff';
 
 describe('SimplifiedMNListEntry', function () {
   describe('constructor', function () {
@@ -113,24 +82,6 @@ describe('SimplifiedMNListEntry', function () {
       var entryJSON = entry.toObject();
       expect(entryJSON).to.be.deep.equal(smlEntryJSON);
     });
-
-    it('Should sbe able to parse data from a buffer when payout address is present', () => {
-      var entry = SimplifiedMNListEntry.fromBuffer(
-        Buffer.from(smlEntryWithPayoutAddressHex, 'hex'),
-        Networks.testnet
-      );
-      var entryJSON = entry.toObject();
-      expect(entryJSON).to.be.deep.equal(smlEntryWithPayoutAddressJSON);
-    });
-
-    it('Should sbe able to parse data from a buffer when operator payout address is present', () => {
-      var entry = SimplifiedMNListEntry.fromBuffer(
-        Buffer.from(smlEntryWithOperatorPayoutAddressHex, 'hex'),
-        Networks.testnet
-      );
-      var entryJSON = entry.toObject();
-      expect(entryJSON).to.be.deep.equal(smlEntryWithOperatorPayoutAddressJSON);
-    });
   });
   describe('toBuffer', function () {
     it('Should serialize data to same buffer', function () {
@@ -148,7 +99,7 @@ describe('SimplifiedMNListEntry', function () {
       expect(entryJSON).to.be.deep.equal(smlEntryWithoutAddress);
       expect(entryString).to.be.equal(smlEntryWithoutAddressHex);
     });
-    it('Buffer size should be the same until payoutAddress or operatorPayoutAddress are undefined', function () {
+    it('Buffer size should always be the same', function () {
       var entryWithDifferentKeys = new SimplifiedMNListEntry(
         smlEntryJSON
       ).toBuffer();
@@ -158,12 +109,6 @@ describe('SimplifiedMNListEntry', function () {
       var entryWithNoAddress = new SimplifiedMNListEntry(
         smlEntryWithoutAddress
       ).toBuffer();
-      var entryWithPayoutAddress = new SimplifiedMNListEntry(
-        smlEntryWithPayoutAddressJSON
-      ).toBuffer();
-      var entryWithOperatorPayoutAddress = new SimplifiedMNListEntry(
-        smlEntryWithOperatorPayoutAddressJSON
-      ).toBuffer();
 
       expect(entryWithSameKeys.length).to.be.equal(
         entryWithDifferentKeys.length
@@ -171,30 +116,6 @@ describe('SimplifiedMNListEntry', function () {
       expect(entryWithNoAddress.length).to.be.equal(
         entryWithDifferentKeys.length
       );
-      expect(entryWithSameKeys.length).to.be.lessThan(
-        entryWithPayoutAddress.length
-      );
-      expect(entryWithSameKeys.length).to.be.lessThan(
-        entryWithOperatorPayoutAddress.length
-      );
-    });
-
-    it('Should serialize data to same buffer if payout address is present', () => {
-      var entry = new SimplifiedMNListEntry(smlEntryWithPayoutAddressJSON);
-      var entryBuffer = entry.toBuffer();
-      var entryJSON = entry.toObject();
-      var entryString = entryBuffer.toString('hex');
-      expect(entryJSON).to.be.deep.equal(smlEntryWithPayoutAddressJSON);
-      expect(entryString).to.be.equal(smlEntryWithPayoutAddressHex);
-    });
-
-    it('Should serialize data to same buffer if address is present', () => {
-      var entry = new SimplifiedMNListEntry(smlEntryWithOperatorPayoutAddressJSON);
-      var entryBuffer = entry.toBuffer();
-      var entryJSON = entry.toObject();
-      var entryString = entryBuffer.toString('hex');
-      expect(entryJSON).to.be.deep.equal(smlEntryWithOperatorPayoutAddressJSON);
-      expect(entryString).to.be.equal(smlEntryWithOperatorPayoutAddressHex);
     });
   });
   describe('fromObject', function () {
@@ -239,28 +160,6 @@ describe('SimplifiedMNListEntry', function () {
       );
       expect(entry.calculateHash().toString('hex')).to.be.equal(
         smlEntryWithoutAddressHash
-      );
-    });
-    it('Should get correct hash for an entry with payout address', () => {
-      var entry = new SimplifiedMNListEntry(smlEntryWithPayoutAddressJSON);
-      var serialized = entry.toBuffer().toString('hex');
-      expect(serialized.length).to.be.equal(smlEntryWithPayoutAddressHex.length);
-      expect(entry.toBuffer().toString('hex')).to.be.equal(
-        smlEntryWithPayoutAddressHex
-      );
-      expect(entry.calculateHash().toString('hex')).to.be.equal(
-        smlEntryWithPayoutAddressHash
-      );
-    });
-    it('Should get correct hash for an entry with operator payout address', () => {
-      var entry = new SimplifiedMNListEntry(smlEntryWithOperatorPayoutAddressJSON);
-      var serialized = entry.toBuffer().toString('hex');
-      expect(serialized.length).to.be.equal(smlEntryWithOperatorPayoutAddressHex.length);
-      expect(entry.toBuffer().toString('hex')).to.be.equal(
-        smlEntryWithOperatorPayoutAddressHex
-      );
-      expect(entry.calculateHash().toString('hex')).to.be.equal(
-        smlEntryWithOperatorPayoutAddressHash
       );
     });
   });

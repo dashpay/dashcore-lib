@@ -177,7 +177,7 @@ describe('ChainLock', function () {
       it('can be instantiated from another chainlock', function () {
         const chainLock = ChainLock.fromBuffer(buf2);
         const chainLock2 = new ChainLock(chainLock);
-        expect(chainLock2.toString()).to.be.equal(chainLock.toString());
+        chainLock2.toString().should.equal(chainLock.toString());
       });
     });
   });

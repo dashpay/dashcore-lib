@@ -49,7 +49,7 @@
           ]
         },
         "cbTx": {
-          "hash": "652234c29910d24507f5e9a83746e83e917c4e2e32cc4bcc146dee2c7aa890e8",
+          "hash": "6190a64f478eac24d606848c2a1b5bed0fab67033dc576b5bd5a337812ddae16",
           "version": 3,
           "inputs": [
             {
@@ -71,13 +71,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200e71200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200e71200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -126,7 +126,7 @@
           ]
         },
         "cbTx": {
-          "hash": "317248fa857f5abde3b12edf2a6329a76713a63e7087c9ffe4a7c9db164d3cdb",
+          "hash": "21995d33f37db7bed793bfd7c4f1405ba106dfaa05dddcc0f3c7f7407a966c18",
           "version": 3,
           "inputs": [
             {
@@ -148,13 +148,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200e81200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200e81200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -203,7 +203,7 @@
           ]
         },
         "cbTx": {
-          "hash": "330469f2948c1a636ea792551b6bf78f5d56441e42b8636c31f00e63e8bab1c6",
+          "hash": "e70b0924a5e8350d8069dfbd80ca3d6af35cefdb3cb70728b126507f6bc6b496",
           "version": 3,
           "inputs": [
             {
@@ -225,13 +225,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200e91200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200e91200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -280,7 +280,7 @@
           ]
         },
         "cbTx": {
-          "hash": "e9e01254f23aacbc8de5a1296dd2f7a597fe764cc60ba1f5aac591fa8dbb3487",
+          "hash": "c3ff5a5d3ecbaa7fbeb9b9cc106ef4088ca6f2a3e3b0946dbc357a02e2b46baf",
           "version": 3,
           "inputs": [
             {
@@ -302,13 +302,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200ea1200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200ea1200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -356,7 +356,7 @@
           ]
         },
         "cbTx": {
-          "hash": "5553f88840aebad1d5237b6f6b12b277a5585d1c6ba580865ccf44252c89205d",
+          "hash": "4d173607c7881ad29c99cdca9312ca4b2b7bf4912e6ab918d753d639cc5da5cb",
           "version": 3,
           "inputs": [
             {
@@ -378,13 +378,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200eb1200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200eb1200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -432,7 +432,7 @@
           ]
         },
         "cbTx": {
-          "hash": "3d8554fd09dd836be0788731535f26d5ad583b10f1be5d83a2a09d20135157a1",
+          "hash": "230e232bafae90c503075221dce56932eace08a168551f60e86d9469b5ee0c76",
           "version": 3,
           "inputs": [
             {
@@ -454,13 +454,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200ec1200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200ec1200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -508,7 +508,7 @@
           ]
         },
         "cbTx": {
-          "hash": "1da4037405be4cbcbefb03cd9d8d5367b0ec1b0725e9e4f3973adfb0bc3c489b",
+          "hash": "3e224e0e8644166e17fbc6eb2d27d680d56d56fb556e65408fa3d17dfadb20a9",
           "version": 3,
           "inputs": [
             {
@@ -530,13 +530,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200ed1200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200ed1200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -586,7 +586,7 @@
           ]
         },
         "cbTx": {
-          "hash": "2faebac224d590c967555e0286ab0e4979fbdd162b21cc7ed91490215320fe85",
+          "hash": "ad56629bdbe12fa73277aaa9b5b88a2f23ac08f545d742e3505fd55d2cbd2935",
           "version": 3,
           "inputs": [
             {
@@ -608,13 +608,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200ee1200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200ee1200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -662,7 +662,7 @@
           ]
         },
         "cbTx": {
-          "hash": "9c4712766b357dbf1a1be398a0147f1c2d88ae50248d79e8c64177842da7ecaf",
+          "hash": "429645e105b468187989e90b7362295e9d64ba8215584480b53efc3d661730e5",
           "version": 3,
           "inputs": [
             {
@@ -684,13 +684,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200ef1200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200ef1200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -738,7 +738,7 @@
           ]
         },
         "cbTx": {
-          "hash": "b9a2da297d8bc0f0871f9978c0667fdc27c046424a7b87dd525ffce552b10b6c",
+          "hash": "bcd44c896f7f250ea902d17559619f9ad610331e6d8ca55f240631e782c03a32",
           "version": 3,
           "inputs": [
             {
@@ -760,13 +760,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200f01200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200f01200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -814,7 +814,7 @@
           ]
         },
         "cbTx": {
-          "hash": "5297643bf8fe75377c395c1f845ee6baa30130799dee6db3b4fa37c4efc57c69",
+          "hash": "dae3c95935c430919b9a915ac3c2b5ec1c2ce59af3fd2134a37138e82bce6ad7",
           "version": 3,
           "inputs": [
             {
@@ -836,13 +836,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200f11200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200f11200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -892,7 +892,7 @@
           ]
         },
         "cbTx": {
-          "hash": "663df49d880af9aa9bf3a6337f427674c6572d82e306674b6a3db5ca54d49f95",
+          "hash": "61d911f69df4c13a8dfa5c70a0bb02d5331994b46b610fee3c53add8fa5dd594",
           "version": 3,
           "inputs": [
             {
@@ -914,13 +914,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200f21200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200f21200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -968,7 +968,7 @@
           ]
         },
         "cbTx": {
-          "hash": "68d217ed787029cd111abb215103c228e353aee209af735c9b702896c1727c30",
+          "hash": "89ecb6c0a0d89d771eb945444fbefd9692e3a9930a8085b57731e86afef07516",
           "version": 3,
           "inputs": [
             {
@@ -990,13 +990,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200f31200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200f31200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -1044,7 +1044,7 @@
           ]
         },
         "cbTx": {
-          "hash": "4d49ed1007923f2fc2f0c653629a5e2a0cbd1ac8458c2142abff694e8bfb21cb",
+          "hash": "6112df61bb71ed367f30b38a401b451d3f68fbd32f448fd6c5ffe537e33b98d3",
           "version": 3,
           "inputs": [
             {
@@ -1066,13 +1066,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200f41200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200f41200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -1120,7 +1120,7 @@
           ]
         },
         "cbTx": {
-          "hash": "5b921aebc8780a5942c806f43fc8228b2454306725d01222fbc4e8a6adebbb36",
+          "hash": "01f08e9caa190a9c4f329cb302aa698691c6fbab993441f29c8b5d7fd47fba7e",
           "version": 3,
           "inputs": [
             {
@@ -1142,13 +1142,13 @@
           ],
           "nLockTime": 0,
           "type": 5,
-          "extraPayload": "0200f51200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+          "extraPayload": "0200f51200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
         },
         "deletedMNs": [],
         "mnList": [],
         "deletedQuorums": [],
         "newQuorums": [],
-        "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+        "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
         "merkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
         "network": {
           "name": "testnet",
@@ -4298,12 +4298,12 @@
         }
       }
     ],
-    "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
-    "lastDiffMerkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+    "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
+    "lastDiffMerkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
     "lastDiffMerkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
     "quorumsActive": true,
     "cbTx": {
-      "hash": "9888e259013f4095d409a87f7c938b534fde76c2d605b601d77b806f280e460f",
+      "hash": "f844913882d8410ff96007a4f8822ee830e74d2ee960338a26c5905396c78952",
       "version": 3,
       "inputs": [
         {
@@ -4325,7 +4325,7 @@
       ],
       "nLockTime": 0,
       "type": 5,
-      "extraPayload": "0200e61200007335f26f32560992322a60ffdb28ca51258680fd868aecbe2ec85f350dae2ff3becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
+      "extraPayload": "0200e61200003d8e273bf286d48ccba5a87b5adf332ed070a15e4e2d81eeb9ff685373be5656becec1dac6bc9b3a05ee78d29e597130b39846663558a5a4d4044705d39dfbda"
     },
     "cbTxMerkleTree": {
       "totalTransactions": 2,
@@ -7485,8 +7485,8 @@
         }
       }
     ],
-    "merkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
-    "lastDiffMerkleRootMNList": "f32fae0d355fc82ebeec8a86fd80862551ca28dbff602a32920956326ff23573",
+    "merkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
+    "lastDiffMerkleRootMNList": "5656be735368ffb9ee812d4e5ea170d02e33df5a7ba8a5cb8cd486f23b278e3d",
     "lastDiffMerkleRootQuorums": "dafb9dd3054704d4a4a55835664698b33071599ed278ee053a9bbcc6dac1cebe",
     "quorumsActive": true,
     "cbTx": {

@@ -110,7 +110,7 @@ describe.skip('SimplifiedMNListStore', function () {
       const smlStore = new SimplifiedMNListStore(smlDiffArray);
       smlStore.addDiff(SMNListFixture.getChainlockDiff16());
       const currentMerkleRootMNList =
-        '9e339c535b53edcd1881a85a22980db0565ffe2c8a5b9e7e516a2dd54a23b57f';
+        'fff875a59e7fa605834e892e6a4b967234582c95dba4237cb8a417a294faf076';
       const currentSML = smlStore.getCurrentSML();
       expect(currentSML.merkleRootMNList).to.be.equal(currentMerkleRootMNList);
     });

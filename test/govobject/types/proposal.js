@@ -134,7 +134,7 @@ describe('Proposal', function () {
     }).to.throw(errors.GovObject.Proposal.invalidAddress);
   });
 
-  it('should throw error if payment address is P2SH', function () {
+  it('should not throw error if payment address is P2SH', function () {
     var proposal = new Proposal();
 
     proposal.network = 'testnet';
@@ -158,10 +158,10 @@ describe('Proposal', function () {
 
     expect(function () {
       return proposal.serialize();
-    }).to.throw(errors.GovObject.Proposal.invalidP2SHAddress);
+    }).to.not.throw();
     expect(function () {
       return proposal2.serialize();
-    }).to.throw(errors.GovObject.Proposal.invalidP2SHAddress);
+    }).to.not.throw();
   });
 
   it('should throw error if amount <= 0', function () {

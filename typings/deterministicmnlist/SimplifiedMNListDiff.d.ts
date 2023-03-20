@@ -24,6 +24,7 @@ export var validMNs: SimplifiedMNListEntry[];
  * @property {string} blockHash - sha256
  * @property {PartialMerkleTree} cbTxMerkleTree
  * @property {Transaction} cbTx
+ * @property {number} nVersion
  * @property {Array<string>} deletedMNs - sha256 hashes of deleted MNs
  * @property {Array<SimplifiedMNListEntry>} mnList
  * @property {string} merkleRootMNList - merkle root of the whole mn list

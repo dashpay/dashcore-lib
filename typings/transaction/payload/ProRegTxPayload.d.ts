@@ -10,6 +10,10 @@
  * @property {number} operatorReward    uint_16    2    A value from 0 to 10000.
  * @property {string} payoutAddress
  * @property {string} inputsHash    uint256    32    Hash of all the outpoints of the transaction inputs
+ * @property {string} [platformNodeID] Platform Node ID
+ * @property {number} [payloadSigSize] Size of the Signature
+ * @property {number} [platformP2PPort] Platform P2P port
+ * @property {number} [platformHTTPPort] Platform HTTP port
  * @property {number} [payloadSigSize] Size of the Signature
  * @property {string} [payloadSig] Signature of the hash of the ProTx fields. Signed with keyIDOwner
  */
@@ -26,6 +30,9 @@ export type ProRegTxPayloadJSON = {
   inputsHash: string;
   payloadSigSize?: number;
   payloadSig?: string;
+  platformNodeID?: string;
+  platformP2PPort?: number;
+  platformHTTPPort?: number;
 };
 
 /**
@@ -42,7 +49,10 @@ export type ProRegTxPayloadJSON = {
  * @property {number} operatorReward    uint_16    2    A value from 0 to 10000.
  * @property {string} scriptPayout    Script    Variable    Payee script (p2pkh/p2sh)
  * @property {string} inputsHash    uint256    32    Hash of all the outpoints of the transaction inputs
+ * @property {string} [platformNodeID] Platform Node ID
  * @property {number} [payloadSigSize] Size of the Signature
+ * @property {number} [platformP2PPort] Platform P2P port
+ * @property {number} [platformHTTPPort] Platform HTTP port
  * @property {string} [payloadSig] Signature of the hash of the ProTx fields. Signed with keyIDOwner
  */
 export class ProRegTxPayload {
@@ -130,4 +140,16 @@ export class ProRegTxPayload {
    * Signature of the hash of the ProTx fields. Signed with keyIDOwner
    */
   payloadSig?: string;
+  /*
+   * Platform Node ID
+   */
+  platformNodeID?: string;
+  /*
+   * Platform P2P port
+   */
+  platformP2PPort?: number;
+  /*
+   * Platform HTTP port
+   */
+  platformHTTPPort?: number;
 }

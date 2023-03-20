@@ -1,20 +1,28 @@
 /**
  * @typedef {Object} ProUpRegTransactionPayloadJSON
  * @property {number} version
+ * @property {number} [type]
  * @property {string} proTxHash
  * @property {string} pubKeyOperator
  * @property {string} keyIDVoting
  * @property {string} payoutAddress
  * @property {string} inputsHash
+ * @property {string} [platformNodeID] Platform Node ID
+ * @property {number} [platformP2PPort] Platform P2P port
+ * @property {number} [platformHTTPPort] Platform HTTP port
  * @property {string} [payloadSig]
  */
 export type ProUpRegTransactionPayloadJSON = {
   version: number;
+  type?: number;
   proTxHash: string;
   pubKeyOperator: string;
   keyIDVoting: string;
   payoutAddress: string;
   inputsHash: string;
+  platformNodeID?: string;
+  platformP2PPort?: number;
+  platformHTTPPort?: number;
   payloadSig?: string;
 };
 
@@ -22,6 +30,7 @@ export type ProUpRegTransactionPayloadJSON = {
  * @class ProUpRegTxPayload
  * @property {number} version uint_16    2    Upgrade Provider Transaction version number. Currently set to 1.
  * @property {string} proTxHash uint256    32    The hash of the provider transaction
+ * @property {number} [type]
  * @property {number} mode uint_16    2    Masternode mode
  * @property {string} pubKeyOperator BLSPubKey    48    The public key hash used for operational related signing (network messages, ProTx updates)
  * @property {string} keyIDVoting CKeyID    20    The public key hash used for voting.
@@ -29,6 +38,9 @@ export type ProUpRegTransactionPayloadJSON = {
  * @property {string} scriptPayout Script    Variable    Payee script (p2pkh/p2sh)
  * @property {string} inputsHash uint256    32    Hash of all the outpoints of the transaction inputs
  * @property {number} payloadSigSize compactSize uint    1-9    Size of the Signature
+ * @property {string} [platformNodeID] Platform Node ID
+ * @property {number} [platformP2PPort] Platform P2P port
+ * @property {number} [platformHTTPPort] Platform HTTP port@
  * @property {string} payloadSig vector    Variable    Signature of the hash of the ProTx fields. Signed by the Owner.
  *
  * @param {ProUpRegTransactionPayloadJSON} [payloadJSON]
@@ -89,6 +101,7 @@ export class ProUpRegTxPayload {
    * uint_16    2    Upgrade Provider Transaction version number. Currently set to 1.
    */
   version: number;
+  type?: number;
   /**
    * uint256    32    The hash of the provider transaction
    */
@@ -121,6 +134,18 @@ export class ProUpRegTxPayload {
    * compactSize uint    1-9    Size of the Signature
    */
   payloadSigSize: number;
+  /*
+   * Platform Node ID
+   */
+  platformNodeID?: string;
+  /*
+   * Platform P2P port
+   */
+  platformP2PPort?: number;
+  /*
+   * Platform HTTP port
+   */
+  platformHTTPPort?: number;
   /**
    * vector    Variable    Signature of the hash of the ProTx fields. Signed by the Owner.
    */

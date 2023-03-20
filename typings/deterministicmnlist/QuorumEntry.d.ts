@@ -8,6 +8,7 @@ import { SimplifiedMNListEntry } from './SimplifiedMNListEntry';
  * @property {number} version
  * @property {number} llmqType
  * @property {string} quorumHash
+ * @property {number} [quorumIndex]
  * @property {number} signersCount
  * @property {string} signers
  * @property {number} validMembersCount

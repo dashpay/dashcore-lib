@@ -48,6 +48,7 @@ describe('SimplifiedMNList', function () {
       });
       expect(mnList.calculateMerkleRoot()).to.be.equal(diff.merkleRootMNList);
     });
+    // TODO enable when we have diffs with removed mastenodes
     it.skip('Should update entries', function () {
       var mnList = new SimplifiedMNList(SMNListFixture.getFirstDiff());
       var mnsCountInTheFirstDiff = SMNListFixture.getFirstDiff().mnList.length;
@@ -58,7 +59,6 @@ describe('SimplifiedMNList', function () {
       mnList.applyDiff(SMNListFixture.getSecondDiff());
 
       // Check that there are masternodes to be deleted
-      // TODO update diffs to have removed mastenodes
       expect(mnsDeleted).to.be.equal(0);
       // Check that there are masternodes to be updated - resulting list should be shorter than two diff - deleted count
       expect(
@@ -103,6 +103,7 @@ describe('SimplifiedMNList', function () {
         SMNListFixture.getFirstDiff().baseBlockHash
       );
     });
+    //TODO enable when we have testnet
     it.skip('should process the diffs from testnet', function () {
       const mnList = new SimplifiedMNList();
 

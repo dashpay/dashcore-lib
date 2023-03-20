@@ -99,4 +99,5 @@ export class SimplifiedMNListEntry {
   platformHTTPPort?: number;
   payoutAddress?: string;
   operatorPayoutAddress?: string;
+  quorumIndex?: number;
 }

@@ -9,8 +9,8 @@ const SimplifiedMNListStore = require('../../lib/deterministicmnlist/SimplifiedM
 const InstantLock = bitcore.InstantLock;
 const QuorumEntry = bitcore.QuorumEntry;
 
-const diffArrayFixture = require('../fixtures/diffArray1170_1185.json');
-const diffArrayAdditionalFixture = require('../fixtures/diffArray1185-1200.json');
+const diffArrayFixture = require('../fixtures/v19diffArray1724-1739.json');
+const diffArrayAdditionalFixture = require('../fixtures/v19diffArray1739-1756.json');
 const getSMLStoreJSONFixtureNoQuorums = require('../fixtures/getSMLStoreNoQuorumsJSON');
 
 const DashcoreLib = require('../../index');
@@ -35,57 +35,57 @@ describe('InstantLock', function () {
     DashcoreLib.Networks.enableRegtest();
 
     str =
-      '010101102862a43d122e6675aba4b507ae307af8e1e17febc77907e08b3efa28f41b000000004b446de00a592c67402c0a65649f4ad69f29084b3e9054f5aa6b85a50b497fe136a56617591a6a89237bada6af1f9b46eba47b5d89a8c4e49ff2d0236182307c85e12d70ca7118c5034004f93e45384079f46c6c2928b45cfc5d3ad640e70dfd87a9a3069899adfb3b1622daeeead19809b74354272ccf95290678f55c13728e3c5ee8f8417fcce3dfdca2a7c9c33ec981abdff1ec35a2e4b558c3698f01c1b8';
+      '013c4493ff16e63720c9c46fe866ef9e49b1787369e387a4f7267d29df37c31ae6010000009a0626badd140d5c8265eeb429aa91b2c371656ccdd993a2682eb69396b85806879660757405ddc5dbb88d6366333032b901101b9bc3bff47d1d48189645a3ec8757142e749fa885ddf293817d669e4e12650b0d1c2111e4f98e2613e59ba09cf60f29c31260c9fc12a77f92ecfb5d22e36678808193052c5b71a2b659a2642c';
+
     object = {
-      version: 1,
       inputs: [
         {
-          outpointHash: '1bf428fa3e8be00779c7eb7fe1e1f87a30ae07b5a4ab75662e123da462281001',
-          outpointIndex: 0
+          outpointHash: 'e61ac337df297d26f7a487e3697378b1499eef66e86fc4c92037e616ff93443c',
+          outpointIndex: 1
         }
       ],
-      txid: 'e17f490ba5856baaf554903e4b08299fd64a9f64650a2c40672c590ae06d444b',
-      cyclehash: '7c30826123d0f29fe4c4a8895d7ba4eb469b1fafa6ad7b23896a1a591766a536',
-      signature: '85e12d70ca7118c5034004f93e45384079f46c6c2928b45cfc5d3ad640e70dfd87a9a3069899adfb3b1622daeeead19809b74354272ccf95290678f55c13728e3c5ee8f8417fcce3dfdca2a7c9c33ec981abdff1ec35a2e4b558c3698f01c1b8'
+      txid: '0658b89693b62e68a293d9cd6c6571c3b291aa29b4ee65825c0d14ddba26069a',
+      signature: '879660757405ddc5dbb88d6366333032b901101b9bc3bff47d1d48189645a3ec8757142e749fa885ddf293817d669e4e12650b0d1c2111e4f98e2613e59ba09cf60f29c31260c9fc12a77f92ecfb5d22e36678808193052c5b71a2b659a2642c'
     };
     buf = Buffer.from(str, 'hex');
     expectedHash =
-      '4ee6a4ed2b6c70efd401c6c91dfaf6c61badd13f80ec07c281bb93d5270fcd58';
+      '5d74dc66f9584b4178b3bb42aa0f9d8c5fb4fdb0e3f78267faaaf2845c884ef0';
     expectedRequestId =
-      '495be44677e82895a9396fef02c6e9afc1f01d4aff70622b9f78e0e10d57064c';
+      '2fad2b4fa149419ab3363a65242bd1472e213e7dddd210f73bb989999bab2a8f';
 
     str2 =
-      '0101bd19ef43a7f6f798a2ac9c26c32b7bd282e0a204c68a0bb5cc9233954448eb2b0000000038b8db8ee2e5ec4a6573b7906a36ca02754bb349d3d19d592dc2fbe569e877d62e02c76c7e57779afd9942f983afbfe2f1e0dd07cab57a75a776b062dfd0c80d92575702490ce2bf1ea23007ab789ccd0cc9aa042ab03e5817e47d7d216b7cdb10efad36588fcc06140f84010357d02b1110a25ab5fcf8f1e0c2389657abb08da854ee81790a8db5e1df52a77426bd8f64985db23fc35c132b4b9744003e049f';
+      '019a0626badd140d5c8265eeb429aa91b2c371656ccdd993a2682eb69396b85806000000003a5b2aa5d4c53707acff4d4f6253cedd1184e28b0e600dc91e2069d9f0b1518bb375c32bdb9a66a8b869abd20ca28b92f08fede20577e9f5edd5b1f122747e2afb375a07749a7c8db56c40636bfa5fc5099788852cfbebf8999faf079061988320363fbdca9024afdcd0b11f622ffa8d7edb285c11f4d4c76c072950ac3eab1c';
     object2 = {
-      version: 1,
       inputs: [
         {
-          outpointHash: '2beb4844953392ccb50b8ac604a2e082d27b2bc3269caca298f7f6a743ef19bd',
+          outpointHash: '0658b89693b62e68a293d9cd6c6571c3b291aa29b4ee65825c0d14ddba26069a',
           outpointIndex: 0
         }
       ],
-      txid: 'd677e869e5fbc22d599dd1d349b34b7502ca366a90b773654aece5e28edbb838',
-      cyclehash: '0dc8d0df62b076a7757ab5ca07dde0f1e2bfaf83f94299fd9a77577e6cc7022e',
-      signature: '92575702490ce2bf1ea23007ab789ccd0cc9aa042ab03e5817e47d7d216b7cdb10efad36588fcc06140f84010357d02b1110a25ab5fcf8f1e0c2389657abb08da854ee81790a8db5e1df52a77426bd8f64985db23fc35c132b4b9744003e049f'
+      txid: '8b51b1f0d969201ec90d600e8be28411ddce53624f4dffac0737c5d4a52a5b3a',
+      signature: 'b375c32bdb9a66a8b869abd20ca28b92f08fede20577e9f5edd5b1f122747e2afb375a07749a7c8db56c40636bfa5fc5099788852cfbebf8999faf079061988320363fbdca9024afdcd0b11f622ffa8d7edb285c11f4d4c76c072950ac3eab1c'
     };
     buf2 = Buffer.from(str2, 'hex');
     expectedHash2 =
-      '9488f2f207d209a15f40ef011a2181bc847b37fb949f23f8e6026ec4882e364c';
+      '20322c13368e9e7ea1dc5d85a2aead21447fb67f965b29aed10e0b51a6767b57';
     expectedRequestId2 =
-      'a61e1962b228cf4a9820960a972575e2b5be936a6e01a3acfe400b6bbf498d5f';
+      '28a6d1d575437929f51a42d9a8afb758e308216fecce1ce641326d9c55834f64';
 
     quorumEntryJSON = {
-      "version": 1,
-      "llmqType": 100,
-      "quorumHash": "68d0a27a5e66178b555e802e2a608aa718f90ff16619e1fe03022165249d0e50",
-      "signersCount": 3,
-      "signers": "07",
-      "validMembersCount": 3,
-      "validMembers": "07",
-      "quorumPublicKey": "8df99d16425af6db62a8cef42ee818c3332aa9635e38cdf68a4e8b42c75371613dae96d0b5ab41ab3533f5dc3bd8cd30",
-      "quorumVvecHash": "573768c6bceef705c3cb8cffe0bf6369f60ea88a80125a60cbdf7da769f891dc",
-      "quorumSig": "8d583e2cbd27d45170274783e9c3b8f3cf29f9b82ea95c2a1234347936eb765a66fc1719c14b175b0181c6f894e9db490d26b06e7e7ca581308c168dd54f14a7e828467f65b5dd44927e076384854fd772a5a87f792de9a94342436532730f09",
-      "membersSig": "0fbfcac76ac6d1dbc1e713703ca6f156db6556db3b3686af54009b4a2911aeb1e2519e6e1a6eb8cb863a15b9829b07230e0abe9c53fdbd1a88840b90f9de1516f7ec9f60d5132dad7666ca5b2c90c1703e58c2c6f19b1a05b8ae32fc8cc46f41"
+      isVerified: false,
+      isOutdatedRPC: false,
+      version: 3,
+      llmqType: 104,
+      quorumHash: '79aa3c3d5ff180aa6d200d78785894466190d4421eef3d86f442dde4257f1725',
+      quorumIndex: 0,
+      signersCount: 3,
+      signers: '07',
+      validMembersCount: 3,
+      validMembers: '07',
+      quorumPublicKey: 'aaca742e2c94a1e216d96cb7de81089130954599ec987a47c272c1ae97aa17953b619b03b7b1a39f5ce6a17b1a1e583a',
+      quorumVvecHash: '963ea8d183225dac6696009e789b0913c435093ea4eea3444c8ff5318cbb73fd',
+      quorumSig: '85714c17dac8d6f6161d4894a56a8f014887e7755c4bf48f34c83e71ba8ea80bba3670489b37a6db7085ac83cb504ee90a08127e4958686fede397e8a2a3e4edc86bf760dcce184bfdcb93334500023373fbbcfa468b8c79e4c6274f11362d7f',
+      membersSig: 'b5d9563394f90a2526de899619137c8dd4a17c5f42767f4bd5e32446105f10adf0eb5df9cc47f9b96d94269e2e759a3007374ae1f9285e4f7f7ca2458aa486c90d2d2d19ba75f9ad3667e0d528603f6ec755660b3733c6c7bebf7d1863bf7388'
     };
 
     instantLockJSONFromTestNet = {
@@ -162,7 +162,7 @@ describe('InstantLock', function () {
   describe('validation', function () {
     describe('#verifySignatureAgainstQuorum', function () {
       it('should verify signature against single quorum', async function () {
-        const instantLock = new InstantLock(buf2);
+        const instantLock = new InstantLock(buf);
         const requestId = instantLock.getRequestId();
         const isValid = await instantLock.verifySignatureAgainstQuorum(
           quorum,
@@ -173,13 +173,16 @@ describe('InstantLock', function () {
     });
     describe('#verify', function () {
       it('should verify signature against SMLStore', async function () {
-        const instantLock = new InstantLock(buf2);
+        const instantLock = new InstantLock(Buffer.from(
+          str,
+          'hex',
+          ));
         const SMLStore = new SimplifiedMNListStore(JSON.parse(JSON.stringify(diffArrayFixture)));
         const isValid = await instantLock.verify(SMLStore);
         expect(isValid).to.equal(true);
       });
       it('should not crash if BLS fails to parse the signature or any other data', async function () {
-        const instantLock = new InstantLock(buf2);
+        const instantLock = new InstantLock(Buffer.from('01da0dfd2000cf06d41a4eabe5c4ab5927c2ad59a0bf22df7211646e65b631a1c201000000766a483d06cc3498f6e957cc119e2a1cb5a8507a3f6d416f1388cb922ee6a03c99bba712d10e546b0049c96cbcb6c1ce2147f61e1d0617aafa0f42bee763d68a8d3bcd49caddbc64a6587d195b9f1d7505b642b2ca9c9d7e25ca3ec70048ad754a52f91e6512a2d9cf26201a9307c9d14dc2f915bdc839d406b1778d442a748c', 'hex'));
         expect(instantLock.signature.length).to.be.equal(192);
         instantLock.signature = '0'.repeat(192);
         const SMLStore = new SimplifiedMNListStore(JSON.parse(JSON.stringify(diffArrayFixture)));
@@ -187,22 +190,12 @@ describe('InstantLock', function () {
         expect(isValid).to.equal(false);
       });
       it('should verify instant lock past the height in sml store', async function () {
-        const SMLStore = new SimplifiedMNListStore([...diffArrayFixture, ...diffArrayAdditionalFixture]);
+        const additionalDiff = diffArrayAdditionalFixture.slice(1);
+        const SMLStore = new SimplifiedMNListStore([...diffArrayFixture, ...additionalDiff]);
 
-        // That's is an ISLock approximately from height 1180
-        const instantLock = InstantLock.fromObject(
-          {
-            version: 1,
-            inputs: [
-              {
-                outpointHash: 'e8cd2025e3341197c5b7aac82e0c7e19498a440d51a260414b60cafa9edc72ed',
-                outpointIndex: 0
-              }
-            ],
-            txid: '20b2f03ad56c8b7d283107f2a652865968bc1599d875d2bce5467a21f1c347ca',
-            cyclehash: '0dc8d0df62b076a7757ab5ca07dde0f1e2bfaf83f94299fd9a77577e6cc7022e',
-            signature: '87a91c454e55fb24b9829e3a4e751ab1ef4cfaaae6cbc00cb58c6066191ae2ee111931bef2a2596cef953fb5c4aa462d020407b47a5f5a89870ae422c5fd7f5c3e43d516b570d823764676ae55823504ec07a33e1952d28c4a3105ccf269175d'
-          }
+        // That's an ISLock approximately from height 1180
+        const instantLock = InstantLock.fromBuffer(
+          Buffer.from('013c4493ff16e63720c9c46fe866ef9e49b1787369e387a4f7267d29df37c31ae600000000c3576ff9c4e05e648bacb02a1b77bab9a44dc7ac8cfa3a05929d60f632692676a779cc094dbd217be325cf104726eaa0071abb95e2e97db26a58bf9f2f28cb3293835e9c6e7f460080256e1f9efb5fcc058cac141aa6643b6346c57f2b4a0e8027c27a953955bdb8a3893db39166667b5d83ac112a6dcc1ec2393cb7d8956cf8', 'hex')
         );
         // It verifies for the store 1170-1200
         const isValid = await instantLock.verify(SMLStore);
@@ -304,7 +297,7 @@ describe('InstantLock', function () {
       it('should output formatted output correctly', function () {
         const instantLock = new InstantLock(str);
         const output =
-          '<InstantLock: e17f490ba5856baaf554903e4b08299fd64a9f64650a2c40672c590ae06d444b, sig: 85e12d70ca7118c5034004f93e45384079f46c6c2928b45cfc5d3ad640e70dfd87a9a3069899adfb3b1622daeeead19809b74354272ccf95290678f55c13728e3c5ee8f8417fcce3dfdca2a7c9c33ec981abdff1ec35a2e4b558c3698f01c1b8>';
+          '<InstantLock: 0658b89693b62e68a293d9cd6c6571c3b291aa29b4ee65825c0d14ddba26069a, sig: 879660757405ddc5dbb88d6366333032b901101b9bc3bff47d1d48189645a3ec8757142e749fa885ddf293817d669e4e12650b0d1c2111e4f98e2613e59ba09cf60f29c31260c9fc12a77f92ecfb5d22e36678808193052c5b71a2b659a2642c>';
         expect(instantLock.inspect()).to.be.equal(output);
       });
     });

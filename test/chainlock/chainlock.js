@@ -32,6 +32,11 @@ describe('ChainLock', function () {
   let str4;
   let expectedHash4;
   let expectedRequestId4;
+  let object5;
+  let buf5;
+  let str5;
+  let quorum5;
+  let quorumEntryJSON5;
 
   beforeEach(() => {
     // Output from https://github.com/dashpay/dash/pull/3718 PR's description
@@ -138,6 +143,30 @@ describe('ChainLock', function () {
       'd73841eb94c838a333614ce5f9410c2d3c98b62c5750c5b6d66eb77ef2c72439';
     expectedRequestId4 =
       '430ac5edcd8862e9cd798d37bc6dc7074b4deb10e24eb9e602af57ca16ee7bab';
+
+    object5 ={"height":1407,"blockHash":"7675a54a922f710af3496b1424666157551dfda8d0d05bb3ebd5f52cd1fd070a","signature":"b4117577aaef9d19115ff9ae45974f476c1c378879daa4f1dfe3c2b8b72df8423c483f4c6d39a61fc2181e279669108a12059634d6df232f6daae261b3c59667ce07eea6c2fc74b8a20400c66f478be5d59ecd888ebf6d677341a6d888f622c7"};
+
+    str5 = '7f0500000a07fdd12cf5d5ebb35bd0d0a8fd1d5557616624146b49f30a712f924aa57576b4117577aaef9d19115ff9ae45974f476c1c378879daa4f1dfe3c2b8b72df8423c483f4c6d39a61fc2181e279669108a12059634d6df232f6daae261b3c59667ce07eea6c2fc74b8a20400c66f478be5d59ecd888ebf6d677341a6d888f622c7';
+    buf5 = Buffer.from(str5, 'hex');
+
+    quorumEntryJSON5 = {
+      isVerified: false,
+      isOutdatedRPC: false,
+      version: 3,
+      llmqType: 100,
+      quorumHash: '702a256bfb71f5036c840bbfabc999d9f4ea4c9e721c68f55bd7463138a89130',
+      quorumIndex: 0,
+      signersCount: 3,
+      signers: '07',
+      validMembersCount: 3,
+      validMembers: '07',
+      quorumPublicKey: '8980c2da461929c2b4584d57ab0f8d016ac3f904c4adee8322766602dc9b1763a132984ad300c057d6ccb8f0f52fde09',
+      quorumVvecHash: '7de6279950d201802e0ee654b961cab12fbdc871569e903f0af177a6a7f16b62',
+      quorumSig: 'a4d2c36a94f36ebadfcceae58d1d76b958e2a6d01c71411730ac1d987d5b18ce4055fa92bace2c32daf110daa6cb69a5058e9bbdd51675f8fb5e5a0bf7b7bd24af179fa613dee5e0e3114a106b0984d633bd54aafd4a18d971163a6b320e3a5b',
+      membersSig: '874532a268d41f5d589c47ab66a85e4b89cf81aa5f02174fbd578e641ef0ac5fc8ba6fd31cdc1fe013b1f22987dd0865172735282b0bf7886e516eb08c2444829e89d0b19d337462c6e8204cacc9d9b6775d375a4ae5a3b03f9b5955ac48b5e1'
+    };
+
+    quorum5 = new QuorumEntry(quorumEntryJSON5);
   });
 
   it(`should have 'clsig' constant prefix`, function () {
@@ -185,10 +214,10 @@ describe('ChainLock', function () {
   describe('validation', function () {
     describe('#verifySignatureAgainstQuorum', function () {
       it('should verify signature against single quorum', async function () {
-        const chainLock = new ChainLock(buf4);
+        const chainLock = new ChainLock(buf5);
         const requestId = chainLock.getRequestId();
         const isValid = await chainLock.verifySignatureAgainstQuorum(
-          quorum4,
+          quorum5,
           requestId
         );
         expect(isValid).to.equal(true);
@@ -197,14 +226,16 @@ describe('ChainLock', function () {
     describe('#verify', function () {
       this.timeout(15000);
       it('should verify signature against SMLStore', async function () {
-        const chainLock = new ChainLock(buf4);
+        Networks.enableRegtest();
+
+        const chainLock = new ChainLock(buf5);
         const smlDiffArray = SMNListFixture.getChainlockDiffArray();
         const SMLStore = new SimplifiedMNListStore(smlDiffArray);
         const isValid = await chainLock.verify(SMLStore);
         expect(isValid).to.equal(true);
       });
       it('should return false if SML store does not have a signatory candidate', async function () {
-        const chainLock = new ChainLock(buf4);
+        const chainLock = new ChainLock(buf5);
         const smlDiffArray = SMNListFixture.getChainlockDiffArray();
         const SMLStore = new SimplifiedMNListStore(smlDiffArray);
         SMLStore.getSMLbyHeight = function () {
@@ -274,7 +305,7 @@ describe('ChainLock', function () {
         const chainLock = new ChainLock(str);
         const output =
           '<ChainLock: 00000105df60caca6a257d8f2f90d422f2d1abf6658555650d5c2c8ecd209e25, height: 382312>';
-        chainLock.inspect().should.equal(output);
+        expect(chainLock.inspect()).to.be.equal(output);
       });
     });
   });

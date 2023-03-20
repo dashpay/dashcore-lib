@@ -10,9 +10,10 @@ describe('bls', () => {
   it('should return bls-signatures library', () => {
     return bls.getInstance().then((blsInstance) => {
       expect(blsInstance).to.be.an('Object');
-      expect(blsInstance.PublicKey).to.be.a('function');
-      expect(blsInstance.Signature).to.be.a('function');
-      expect(blsInstance.AggregationInfo).to.be.a('function');
+      expect(blsInstance.G2Element).to.be.a('function');
+      expect(blsInstance.G1Element).to.be.a('function');
+      expect(blsInstance.BasicSchemeMPL).to.be.a('function');
+      expect(blsInstance.PrivateKey).to.be.a('function');
     });
   });
 });

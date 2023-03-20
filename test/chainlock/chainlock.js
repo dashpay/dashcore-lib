@@ -32,11 +32,6 @@ describe('ChainLock', function () {
   let str4;
   let expectedHash4;
   let expectedRequestId4;
-  // let object5;
-  // let buf5;
-  // let str5;
-  // let quorum5;
-  // let quorumEntryJSON5;
 
   beforeEach(() => {
     // Output from https://github.com/dashpay/dash/pull/3718 PR's description

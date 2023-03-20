@@ -32,11 +32,11 @@ describe('ChainLock', function () {
   let str4;
   let expectedHash4;
   let expectedRequestId4;
-  let object5;
-  let buf5;
-  let str5;
-  let quorum5;
-  let quorumEntryJSON5;
+  // let object5;
+  // let buf5;
+  // let str5;
+  // let quorum5;
+  // let quorumEntryJSON5;
 
   beforeEach(() => {
     // Output from https://github.com/dashpay/dash/pull/3718 PR's description
@@ -127,29 +127,10 @@ describe('ChainLock', function () {
         '140f5a4db1a3330b7dfdda8fe181137b2644577efd843a60401f0dbc7b0856782578bc9d6ab1a0b133596bcc158d781d02ed4db881cb4cc3260273dc90a53c1d1ce37930fa106c47db4cf7702b2e956dcafb7b180bea7aae2d662b7a6c217f27',
     };
 
-    quorum4 = new QuorumEntry(quorumEntryJSON4);
-
-    str4 =
-      'e80306000b2707507f03a51d11e072f9d14129b42ec758f314e22139789a1102cc080000061476c699fee312a29c0e7a604a5288237073e9317ac458f5772e0e40793fcca83ba72fe3b8f42f4cf1499c02764fb313b6661e873b084bb8e65cd087567060743fca85a73782a6f53503d4c336cc07b69780c6b9e98a4bfcce0d4b17d3d889';
-    object4 = {
-      height: 394216,
-      blockHash:
-        '000008cc02119a783921e214f358c72eb42941d1f972e0111da5037f5007270b',
-      signature:
-        '061476c699fee312a29c0e7a604a5288237073e9317ac458f5772e0e40793fcca83ba72fe3b8f42f4cf1499c02764fb313b6661e873b084bb8e65cd087567060743fca85a73782a6f53503d4c336cc07b69780c6b9e98a4bfcce0d4b17d3d889',
-    };
+    str4 = '7f0500000a07fdd12cf5d5ebb35bd0d0a8fd1d5557616624146b49f30a712f924aa57576b4117577aaef9d19115ff9ae45974f476c1c378879daa4f1dfe3c2b8b72df8423c483f4c6d39a61fc2181e279669108a12059634d6df232f6daae261b3c59667ce07eea6c2fc74b8a20400c66f478be5d59ecd888ebf6d677341a6d888f622c7';
     buf4 = Buffer.from(str4, 'hex');
-    expectedHash4 =
-      'd73841eb94c838a333614ce5f9410c2d3c98b62c5750c5b6d66eb77ef2c72439';
-    expectedRequestId4 =
-      '430ac5edcd8862e9cd798d37bc6dc7074b4deb10e24eb9e602af57ca16ee7bab';
 
-    object5 ={"height":1407,"blockHash":"7675a54a922f710af3496b1424666157551dfda8d0d05bb3ebd5f52cd1fd070a","signature":"b4117577aaef9d19115ff9ae45974f476c1c378879daa4f1dfe3c2b8b72df8423c483f4c6d39a61fc2181e279669108a12059634d6df232f6daae261b3c59667ce07eea6c2fc74b8a20400c66f478be5d59ecd888ebf6d677341a6d888f622c7"};
-
-    str5 = '7f0500000a07fdd12cf5d5ebb35bd0d0a8fd1d5557616624146b49f30a712f924aa57576b4117577aaef9d19115ff9ae45974f476c1c378879daa4f1dfe3c2b8b72df8423c483f4c6d39a61fc2181e279669108a12059634d6df232f6daae261b3c59667ce07eea6c2fc74b8a20400c66f478be5d59ecd888ebf6d677341a6d888f622c7';
-    buf5 = Buffer.from(str5, 'hex');
-
-    quorumEntryJSON5 = {
+    quorumEntryJSON4 = {
       isVerified: false,
       isOutdatedRPC: false,
       version: 3,
@@ -166,7 +147,7 @@ describe('ChainLock', function () {
       membersSig: '874532a268d41f5d589c47ab66a85e4b89cf81aa5f02174fbd578e641ef0ac5fc8ba6fd31cdc1fe013b1f22987dd0865172735282b0bf7886e516eb08c2444829e89d0b19d337462c6e8204cacc9d9b6775d375a4ae5a3b03f9b5955ac48b5e1'
     };
 
-    quorum5 = new QuorumEntry(quorumEntryJSON5);
+    quorum4 = new QuorumEntry(quorumEntryJSON4);
   });
 
   it(`should have 'clsig' constant prefix`, function () {
@@ -214,10 +195,10 @@ describe('ChainLock', function () {
   describe('validation', function () {
     describe('#verifySignatureAgainstQuorum', function () {
       it('should verify signature against single quorum', async function () {
-        const chainLock = new ChainLock(buf5);
+        const chainLock = new ChainLock(buf4);
         const requestId = chainLock.getRequestId();
         const isValid = await chainLock.verifySignatureAgainstQuorum(
-          quorum5,
+          quorum4,
           requestId
         );
         expect(isValid).to.equal(true);
@@ -228,14 +209,14 @@ describe('ChainLock', function () {
       it('should verify signature against SMLStore', async function () {
         Networks.enableRegtest();
 
-        const chainLock = new ChainLock(buf5);
+        const chainLock = new ChainLock(buf4);
         const smlDiffArray = SMNListFixture.getChainlockDiffArray();
         const SMLStore = new SimplifiedMNListStore(smlDiffArray);
         const isValid = await chainLock.verify(SMLStore);
         expect(isValid).to.equal(true);
       });
       it('should return false if SML store does not have a signatory candidate', async function () {
-        const chainLock = new ChainLock(buf5);
+        const chainLock = new ChainLock(buf4);
         const smlDiffArray = SMNListFixture.getChainlockDiffArray();
         const SMLStore = new SimplifiedMNListStore(smlDiffArray);
         SMLStore.getSMLbyHeight = function () {

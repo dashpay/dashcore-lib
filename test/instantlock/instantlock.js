@@ -141,15 +141,6 @@ describe('InstantLock', function () {
       });
     });
 
-    it("should zalupa", async () => {
-      // const instantLock = InstantLock.fromHex(str);
-
-      const instantLock = new InstantLock(buf2);
-      const SMLStore = new SimplifiedMNListStore(JSON.parse(JSON.stringify(diffArrayFixture)));
-
-      console.log(instantLock.selectSignatoryQuorum(SMLStore, instantLock.getRequestId(), 8));
-    });
-
     describe('fromString', function () {
       it('Should be able to parse data from a hex string', function () {
         const instantLock = InstantLock.fromHex(str2);

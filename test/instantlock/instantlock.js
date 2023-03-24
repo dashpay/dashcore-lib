@@ -113,6 +113,7 @@ describe('InstantLock', function () {
     describe('fromBuffer', function () {
       it('should be able to parse data from a buffer', function () {
         const instantLock = InstantLock.fromBuffer(buf);
+        console.log(instantLock.getRequestId().toString('hex'));
         const instantLockStr = instantLock.toString();
         expect(instantLockStr).to.be.deep.equal(str);
         const instantLockJSON = instantLock.toObject();
@@ -138,6 +139,15 @@ describe('InstantLock', function () {
         const instantLockStr = instantLock.toString();
         expect(instantLockStr).to.be.deep.equal(str2);
       });
+    });
+
+    it("should zalupa", async () => {
+      // const instantLock = InstantLock.fromHex(str);
+
+      const instantLock = new InstantLock(buf2);
+      const SMLStore = new SimplifiedMNListStore(JSON.parse(JSON.stringify(diffArrayFixture)));
+
+      console.log(instantLock.selectSignatoryQuorum(SMLStore, instantLock.getRequestId(), 8));
     });
 
     describe('fromString', function () {

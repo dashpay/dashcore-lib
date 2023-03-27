@@ -14,6 +14,7 @@ const diffArrayAdditionalFixture = require('../fixtures/v19diffArray1739-1756.js
 const getSMLStoreJSONFixtureNoQuorums = require('../fixtures/getSMLStoreNoQuorumsJSON');
 
 const DashcoreLib = require('../../index');
+const constants = require("../../lib/constants");
 
 describe('InstantLock', function () {
   this.timeout(15000);
@@ -258,6 +259,39 @@ describe('InstantLock', function () {
         const instantLock2 = new InstantLock(object2);
         const requestId2 = instantLock2.getRequestId().toString('hex');
         expect(requestId2).to.deep.equal(expectedRequestId2);
+      });
+    });
+
+    describe("selectSignatoryNonRotatedQuorum", () => {
+      it("should select signatory for non rotated quorum", () => {
+        const offset = 8;
+        const instantLock = new InstantLock(buf2);
+
+        const SMLStore = new SimplifiedMNListStore(
+          JSON.parse(JSON.stringify(diffArrayFixture))
+        );
+
+        const result = instantLock.selectSignatoryQuorum(SMLStore, instantLock.getRequestId(), offset);
+        expect(result).to.be.an.instanceof(QuorumEntry);
+        expect(result.quorumHash).to.be.equal('79aa3c3d5ff180aa6d200d78785894466190d4421eef3d86f442dde4257f1725');
+        expect(result.llmqType).to.be.equal(constants.LLMQ_TYPE_TEST_INSTANTSEND); // non rotated llmq
+      });
+    });
+
+    // TODO complete this when the devnet be available
+    describe.skip("selectSignatoryRotatedQuorum", () => {
+      it("should select signatory for rotated quorum", () => {
+        const offset = 8;
+        const instantLock = new InstantLock(buf2);
+
+        const SMLStore = new SimplifiedMNListStore(
+          JSON.parse(JSON.stringify(diffArrayFixture))
+        );
+
+        const result = instantLock.selectSignatoryQuorum(SMLStore, instantLock.getRequestId(), offset);
+        expect(result).to.be.an.instanceof(QuorumEntry);
+        expect(result.quorumHash).to.be.equal('');
+        expect(result.llmqType).to.be.equal(); // rotated llmq
       });
     });
   });

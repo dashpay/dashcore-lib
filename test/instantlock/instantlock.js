@@ -113,7 +113,6 @@ describe('InstantLock', function () {
     describe('fromBuffer', function () {
       it('should be able to parse data from a buffer', function () {
         const instantLock = InstantLock.fromBuffer(buf);
-        console.log(instantLock.getRequestId().toString('hex'));
         const instantLockStr = instantLock.toString();
         expect(instantLockStr).to.be.deep.equal(str);
         const instantLockJSON = instantLock.toObject();

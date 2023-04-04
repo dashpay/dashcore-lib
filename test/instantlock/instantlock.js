@@ -274,7 +274,7 @@ describe('InstantLock', function () {
         const result = instantLock.selectSignatoryQuorum(SMLStore, instantLock.getRequestId(), offset);
         expect(result).to.be.an.instanceof(QuorumEntry);
         expect(result.quorumHash).to.be.equal('79aa3c3d5ff180aa6d200d78785894466190d4421eef3d86f442dde4257f1725');
-        expect(result.llmqType).to.be.equal(constants.LLMQ_TYPE_TEST_INSTANTSEND); // non rotated llmq
+        expect(result.llmqType).to.be.equal(constants.LLMQ_TYPES.LLMQ_TYPE_TEST_INSTANTSEND); // non rotated llmq
       });
     });
 

@@ -10,11 +10,13 @@ const InstantLock = bitcore.InstantLock;
 const QuorumEntry = bitcore.QuorumEntry;
 
 const diffArrayFixture = require('../fixtures/v19diffArray1724-1739.json');
+const diffArrayDevnetFixture = require('../fixtures/diffArrayDevnet.json');
 const diffArrayAdditionalFixture = require('../fixtures/v19diffArray1739-1756.json');
 const getSMLStoreJSONFixtureNoQuorums = require('../fixtures/getSMLStoreNoQuorumsJSON');
 
 const DashcoreLib = require('../../index');
 const constants = require("../../lib/constants");
+const { Networks } = require("../../index");
 
 describe('InstantLock', function () {
   this.timeout(15000);
@@ -105,6 +107,8 @@ describe('InstantLock', function () {
     };
 
     quorum = new QuorumEntry(quorumEntryJSON);
+
+    Networks.enableRegtest();
   });
 
   it(`should have 'islock' constant prefix`, function () {
@@ -278,20 +282,22 @@ describe('InstantLock', function () {
       });
     });
 
-    // TODO complete this when the devnet be available
-    describe.skip("selectSignatoryRotatedQuorum", () => {
+    describe("selectSignatoryRotatedQuorum", () => {
       it("should select signatory for rotated quorum", () => {
+        Networks.disableRegtest();
+
         const offset = 8;
-        const instantLock = new InstantLock(buf2);
+        const isBufHex = '010195283e7ba81641a8edea81d4718495a9d7d04aefcef7d441a8ad4a376ef1c40300000000456bd8335ca93c0916f6c1108357e845f84dd7b8a77fb91b3ec9b5d8e09e422e403091b1bc3bd60b9ed8a108803937f77c2d17d396512c47ebe03d132f000000b6151c62b41857b8b814305b96389a2b84d2b2d76eb1740efc1033b07eb0c0794c39658b537f48040c89aea18c2d437112b6232467449e54b40c5c57943b100cbe6f5832483c1b7a24eed14e3b8bec161ee39e96b49e521a55224bd2cd0792c6';
+        const instantLock = new InstantLock(Buffer.from(isBufHex, 'hex'));
 
         const SMLStore = new SimplifiedMNListStore(
-          JSON.parse(JSON.stringify(diffArrayFixture))
+          JSON.parse(JSON.stringify(diffArrayDevnetFixture))
         );
 
         const result = instantLock.selectSignatoryQuorum(SMLStore, instantLock.getRequestId(), offset);
         expect(result).to.be.an.instanceof(QuorumEntry);
-        expect(result.quorumHash).to.be.equal('');
-        expect(result.llmqType).to.be.equal(); // rotated llmq
+        expect(result.quorumHash).to.be.equal('00000084db75bc85dc66d6fd7f569283415b06afc4a5d33e746b96470339359b');
+        expect(result.llmqType).to.be.equal(constants.LLMQ_TYPES.LLMQ_DEVNET_DIP0024); // rotated llmq
       });
     });
   });

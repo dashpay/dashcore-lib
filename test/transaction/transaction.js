@@ -1642,20 +1642,6 @@ describe('Transaction', function () {
   });
 
   describe('Special transaction payload integration', function () {
-    var randomPubKeyId = new PrivateKey()
-      .toPublicKey()
-      ._getID()
-      .toString('hex');
-    var subTxRegisterHex =
-      '03000800000140420f0000000000016a000000005d0100047465737488d9931ea73d60eaf7e5671efc0552b912911f2a412068b83466eaae3ac1f5c021d8d95559592c1e4c49142dc0da61e4912e124b4bca5ad5f5e282e24f6c0c1b1580545479d2c40ca088e54316c836221a143da5596c';
-    var username = 'test';
-    var expectedPubKeyId = new PrivateKey(privateKey)
-      .toPublicKey()
-      ._getID()
-      .toString('hex');
-    var privateKeyToSignTransaction =
-      'cRbKdvygFSgwQQ61owyRuiNiknvWPN2zjjw7KS22q7kCwt2naVJf';
-
     describe('Provider Register Transaction with collateral (protx register)', function () {
       it('Should parse the payload if transaction serialized as a hex string', function () {
         var tx = new Transaction(proRegTxFixture.getProRegTransactionHex());
@@ -1810,10 +1796,6 @@ describe('Transaction', function () {
         var tx = new Transaction(transactionHex);
         expect(tx.extraPayload.version).to.be.equal(1);
       });
-    });
-
-    describe('Asset Lock', function () {
-
     });
   });
 });

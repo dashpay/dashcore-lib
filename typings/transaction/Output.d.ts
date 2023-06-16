@@ -1,6 +1,11 @@
 import { Script } from '../script/Script';
 import { BufferWriter } from '../buffer/BufferWriter';
 
+export type OutputJSON = {
+  satoshis: number,
+  script: string
+}
+
 /**
  * Instantiate an Output from an Object
 
@@ -36,9 +41,9 @@ export class Output {
 
   /**
    * @function
-   * @returns {Object} A plain object with the output information
+   * @returns {OutputJSON} A plain object with the output information
    */
-  toJSON(): Object;
+  toJSON(): OutputJSON;
 
   /**
    * Instantiate an address from an Object

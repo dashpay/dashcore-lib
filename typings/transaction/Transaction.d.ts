@@ -9,6 +9,7 @@ import { AbstractPayload } from './payload/AbstractPayload';
 import { bitcore } from '../bitcore';
 import { TransactionSignature } from './TransactionSignature';
 import { UnspentOutput } from './UnspentOutput';
+import { Payload } from './payload/Payload';
 
 export namespace Transaction {
   /**
@@ -38,6 +39,7 @@ export namespace Transaction {
   export { Output };
   export { UnspentOutput };
   export { TransactionSignature as Signature };
+  export { Payload };
 }
 /**
  * Represents a transaction, a set of inputs and outputs to change ownership of tokens

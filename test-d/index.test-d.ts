@@ -44,7 +44,6 @@ import type {
   ProUpRevTxPayload,
   ProUpServTxPayload,
   SubTxCloseAccountPayload,
-  SubTxRegisterPayload,
   SubTxResetKeyPayload,
   SubTxTopupPayload,
   SubTxTransitionPayload,

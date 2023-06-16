@@ -3,7 +3,6 @@ import { ProUpRegTxPayload } from './ProUpRegTxPayload';
 import { ProUpRevTxPayload } from './ProUpRevTxPayload';
 import { ProUpServTxPayload } from './ProUpServTxPayload';
 import { SubTxCloseAccountPayload } from './SubTxCloseAccountPayload';
-import { SubTxRegisterPayload } from './SubTxRegisterPayload';
 import { SubTxResetKeyPayload } from './SubTxResetKeyPayload';
 import { SubTxTopupPayload } from './SubTxTopupPayload';
 import { SubTxTransitionPayload } from './SubTxTransitionPayload';
@@ -17,7 +16,6 @@ export namespace Payload {
   export { ProUpRevTxPayload };
   export { ProUpServTxPayload };
   export { SubTxCloseAccountPayload };
-  export { SubTxRegisterPayload };
   export { SubTxResetKeyPayload };
   export { SubTxTopupPayload };
   export { SubTxTransitionPayload };

@@ -1656,22 +1656,6 @@ describe('Transaction', function () {
     var privateKeyToSignTransaction =
       'cRbKdvygFSgwQQ61owyRuiNiknvWPN2zjjw7KS22q7kCwt2naVJf';
 
-    describe('Topup Transaction', function () {
-      it('Should parse the payload', function () {
-        var txHexString =
-          '030009000001001bb70000000000016a000000002201003727f1b7e5aa90f32235d045fd4624bf453fe8e16ea5010ad923f70d2f88fd45';
-
-        var transaction = new Transaction(txHexString);
-
-        expect(transaction.extraPayload.version).to.be.equal(1);
-        expect(transaction.extraPayload.regTxHash).to.be.equal(
-          '45fd882f0df723d90a01a56ee1e83f45bf2446fd45d03522f390aae5b7f12737'
-        );
-
-        expect(transaction.outputs[0].satoshis).to.be.equal(12000000);
-      });
-    });
-
     describe('Provider Register Transaction with collateral (protx register)', function () {
       it('Should parse the payload if transaction serialized as a hex string', function () {
         var tx = new Transaction(proRegTxFixture.getProRegTransactionHex());
@@ -1825,65 +1809,6 @@ describe('Transaction', function () {
 
         var tx = new Transaction(transactionHex);
         expect(tx.extraPayload.version).to.be.equal(1);
-      });
-    });
-
-    describe('State transition', function () {
-      var regTxId =
-        'd0df4810f9899a71968b5e4147b52cab86ad9342a9806a514227514d8a160a3c';
-      var hashPrevSubTx =
-        'd0df4810f9899a71968b5e4147b52cab86ad9342a9806a514227514d8a160a3c';
-      var hashSTPacket =
-        'a0df4810f9899a71968b5e4147b52cab86ad9342a9806a514227514d8a160a3a';
-      var creditFee = 1000; // 0.00001 dash
-
-      it('Should parse and verify hex', function () {
-        var subTxTransitionTxHex =
-          '03000c00000000000000ac01003c0a168a4d512742516a80a94293ad86ab2cb547415e8b96719a89f91048dfd03c0a168a4d512742516a80a94293ad86ab2cb547415e8b96719a89f91048dfd0e8030000000000003a0a168a4d512742516a80a94293ad86ab2cb547415e8b96719a89f91048dfa0411f3ae683b0a3ac3c3342ab30e646df344e8c3648902b48c5cb5f29c17f15a43ad93943b49c1f83a06321c6c434ae1c73d22ae83da3d39b9c5ce98a7947f5deab90';
-
-        var transaction = new Transaction(subTxTransitionTxHex);
-
-        expect(transaction.extraPayload.version).to.be.equal(1);
-        expect(transaction.extraPayload.regTxId).to.be.equal(regTxId);
-        expect(transaction.extraPayload.hashPrevSubTx).to.be.equal(
-          hashPrevSubTx
-        );
-        expect(transaction.extraPayload.hashSTPacket).to.be.equal(hashSTPacket);
-        expect(transaction.extraPayload.creditFee).to.be.equal(creditFee);
-
-        expect(transaction.extraPayload.verifySignature(expectedPubKeyId)).to.be
-          .true;
-        expect(transaction.extraPayload.verifySignature(randomPubKeyId)).to.be
-          .false;
-      });
-
-      it('Should create valid hex', function () {
-        var prevSubTx =
-          'ef94b22076eddf91430f52910f13dce287e46a9d878164ce07292a7f7ccaeb70';
-
-        var transaction = new Transaction().setType(
-          Transaction.TYPES.TRANSACTION_SUBTX_TRANSITION
-        );
-
-        transaction.extraPayload
-          .setRegTxId(regTxId)
-          .setHashPrevSubTx(prevSubTx)
-          .setHashSTPacket(hashSTPacket)
-          .setCreditFee(creditFee)
-          .sign(privateKey);
-
-        var transactionHex = transaction.serialize();
-
-        expect(transaction.extraPayload.version).to.be.equal(1);
-        expect(transaction.extraPayload.regTxId).to.be.equal(regTxId);
-        expect(transaction.extraPayload.hashPrevSubTx).to.be.equal(prevSubTx);
-        expect(transaction.extraPayload.hashSTPacket).to.be.equal(hashSTPacket);
-        expect(transaction.extraPayload.creditFee).to.be.equal(creditFee);
-
-        expect(transaction.extraPayload.verifySignature(expectedPubKeyId)).to.be
-          .true;
-        expect(transaction.extraPayload.verifySignature(randomPubKeyId)).to.be
-          .false;
       });
     });
 

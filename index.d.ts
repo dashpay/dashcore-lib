@@ -64,10 +64,6 @@ export { ProRegTxPayload } from './typings/transaction/payload/ProRegTxPayload';
 export { ProUpRegTxPayload } from './typings/transaction/payload/ProUpRegTxPayload';
 export { ProUpRevTxPayload } from './typings/transaction/payload/ProUpRevTxPayload';
 export { ProUpServTxPayload } from './typings/transaction/payload/ProUpServTxPayload';
-export { SubTxCloseAccountPayload } from './typings/transaction/payload/SubTxCloseAccountPayload';
-export { SubTxResetKeyPayload } from './typings/transaction/payload/SubTxResetKeyPayload';
-export { SubTxTopupPayload } from './typings/transaction/payload/SubTxTopupPayload';
-export { SubTxTransitionPayload } from './typings/transaction/payload/SubTxTransitionPayload';
 
 export { Output } from './typings/transaction/Output';
 

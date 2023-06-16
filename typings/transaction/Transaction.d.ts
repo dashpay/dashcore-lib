@@ -387,7 +387,6 @@ export class Transaction {
   sign(privateKey: any[] | string | PrivateKey, sigtype?: number): Transaction;
 
   getSignatures(): any[];
-  canHaveNoUtxo(): boolean;
 
   /**
    * Add a signature to the transaction

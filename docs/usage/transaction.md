@@ -444,14 +444,6 @@ The argument function MUST NOT modify the order of the original array
 **Parameters**: None.
 **Returns**: Array
 
-## .canHaveNoUtxo()
-
-**Description**:
-
-**Parameters**: None.
-
-**Returns**: Boolean
-
 ## .toObject() / .toJSON()
 
 **Description**: Will return an object representation of the transaction

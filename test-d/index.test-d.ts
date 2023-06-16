@@ -43,13 +43,9 @@ import type {
   ProUpRegTxPayload,
   ProUpRevTxPayload,
   ProUpServTxPayload,
-  SubTxCloseAccountPayload,
-  SubTxResetKeyPayload,
-  SubTxTopupPayload,
-  SubTxTransitionPayload,
   Output,
   Transaction,
   TransactionSignature,
   UnspentOutput,
-  ChainLockSigMessage
+  ChainLockSigMessage,
 } from "..";

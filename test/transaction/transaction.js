@@ -1591,7 +1591,7 @@ describe('Transaction', function () {
 
       var outPointBuffer = transaction.getOutPointBuffer(0);
 
-      expect(outPointBuffer.toString('hex')).to.be.equal(txHash + indexHex);
+      expect(outPointBuffer.toString('hex')).to.be.equal(transaction._getHash().toString('hex') + indexHex);
       expect(outPointBuffer.length).to.be.equal(36);
     });
 

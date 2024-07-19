@@ -22,7 +22,7 @@ describe('ip', function () {
     });
     it('Should accept only zero ipv6, if ipv6 is passed as an arg, as implemented in dashcore', function () {
       var zeroaddressBuffer = ip.ipAndPortToBuffer(
-        constants.EMPTY_IPV6_ADDRESS
+        '[::]:0'
       );
       expect(zeroaddressBuffer.length).to.be.equal(18);
       expect(zeroaddressBuffer).to.be.deep.equal(Buffer.alloc(18));
@@ -61,7 +61,7 @@ describe('ip', function () {
     it('Should return zero ipv6 if hex is zero, as it works in dashcore', function () {
       var zeroBuffer = Buffer.alloc(18);
       var ipAndPort = ip.bufferToIPAndPort(zeroBuffer);
-      expect(ipAndPort).to.be.equal(constants.EMPTY_IPV6_ADDRESS);
+      expect(ipAndPort).to.be.equal('[0:0:0:0:0:0:0:0]:0');
     });
     it('Should throw if buffer size is different from ip and port size', function () {
       expect(ip.bufferToIPAndPort.bind(this, Buffer.alloc(19))).to.throw(

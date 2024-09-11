@@ -8,6 +8,7 @@ var DashcoreLib = require('../../../index');
 
 var MnHfSignalPayload = DashcoreLib.Transaction.Payload.MnHfSignalPayload;
 
+// Valid test data based on an actual MnHfSignal
 var validMnHfSignalPayloadJSON = {
   version: 1,
   signal: {
@@ -22,7 +23,12 @@ var validMnHfSignalPayload = MnHfSignalPayload.fromJSON(validMnHfSignalPayloadJS
 var validMnHfSignalPayloadBuffer = validMnHfSignalPayload.toBuffer();
 var validMnHfSignalPayloadHexString = validMnHfSignalPayloadBuffer.toString('hex');
 
+// An example of an actual MnHfSignal in hex format
+var mainnetMnHfSignalHex = '010a00000000000000107c98e94bdb9ffb729fe9c190a6d1223fd9b6700ccb79b627a12bc6a3d43e76fd6ab5d48dff11998811747bf51ffe722d9fda93ae892e4b18a716f58045c86459d0dafd38ae1f7f520519002983fc307e92fa606c3eb5ac8cf6ca03a102889866d58c9207b483e0b975baee63c1202209293ff7393222f812';
+var mainnetMnHfSignalBuffer = Buffer.from(mainnetMnHfSignalHex, 'hex');
+
 describe('MnHfSignalPayload', function () {
+
   describe('.fromBuffer', function () {
     beforeEach(function () {
       sinon.spy(MnHfSignalPayload.prototype, 'validate');
@@ -198,6 +204,27 @@ describe('MnHfSignalPayload', function () {
       MnHfSignalPayload.prototype.validate.resetHistory();
       payload.toBuffer();
       expect(payload.validate.callCount).to.be.equal(1);
+    });
+  });
+
+  describe('Actual MnHfSignalHex parsing', function () {
+    it('Should parse an actual MnHfSignal (hex) into MnHfSignalPayload', function () {
+      var payload = MnHfSignalPayload.fromBuffer(mainnetMnHfSignalBuffer);
+
+      expect(payload).to.be.an.instanceOf(MnHfSignalPayload);
+      expect(payload.version).to.be.equal(1);
+      expect(payload.signal.versionBit).to.be.equal(10);
+      expect(payload.signal.quorumHash).to.be.equal('00000000000000107c98e94bdb9ffb729fe9c190a6d1223fd9b6700ccb79b627');
+      expect(payload.signal.sig).to.be.equal(validMnHfSignalPayloadJSON.signal.sig);
+    });
+
+    it('Should serialize MnHfSignalPayload back to hex and match the original MnHfSignal hex', function () {
+      var payload = MnHfSignalPayload.fromBuffer(mainnetMnHfSignalBuffer);
+
+      var serializedBuffer = payload.toBuffer();
+      var serializedHex = serializedBuffer.toString('hex');
+
+      expect(serializedHex).to.be.equal(mainnetMnHfSignalHex);
     });
   });
 });

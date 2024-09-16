@@ -41,6 +41,7 @@ import type {
   AssetUnlockPayload,
   CoinbasePayload,
   CommitmentTxPayload,
+  MnHfSignalPayload,
   ProRegTxPayload,
   ProUpRegTxPayload,
   ProUpRevTxPayload,

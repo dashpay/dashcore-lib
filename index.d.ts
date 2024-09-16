@@ -60,6 +60,7 @@ export { MultiSigScriptHashInput } from './typings/transaction/input/MultiSigScr
 export { AbstractPayload };
 export { CoinbasePayload } from './typings/transaction/payload/CoinbasePayload';
 export { CommitmentTxPayload } from './typings/transaction/payload/CommitmentTxPayload';
+export { MnHfSignalPayload } from './typings/transaction/payload/MnHfSignalPayload';
 export { ProRegTxPayload } from './typings/transaction/payload/ProRegTxPayload';
 export { ProUpRegTxPayload } from './typings/transaction/payload/ProUpRegTxPayload';
 export { ProUpRevTxPayload } from './typings/transaction/payload/ProUpRevTxPayload';

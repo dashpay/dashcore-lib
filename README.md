@@ -149,6 +149,7 @@ Please send pull requests for bug fixes, code optimization, and ideas for improv
 
 Code released under [the MIT license](LICENSE).
 
-Copyright 2013-2017 BitPay, Inc. Bitcore is a trademark maintained by BitPay, Inc.  
-Copyright 2016-2017 The Dash Foundation, Inc.  
 Copyright 2017-2020 Dash Core Group, Inc.
+Copyright 2016-2017 The Dash Foundation, Inc.
+Copyright 2013-2017 BitPay, Inc.
+

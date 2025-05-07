@@ -241,10 +241,10 @@ describe('Transaction', function () {
 
     var minimalUTXO = {
       "satoshis": 5460 + 255,
-      "script": "76a914c3dbfd40e7f8a4845c2f8e868a167c984049764988ac",
+      "script": Script.buildPublicKeyHashOut('yfGjFr9Cu8AZYYrdeiRRNtLktWcJetxKv4').toString(),
       "txid": '88d78d6afaa06bbe5943152757305338eba27cc1f3e84acb1a31ab17f26c038d',
       outputIndex: 0,
-      address: "yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm"
+      address: "yfGjFr9Cu8AZYYrdeiRRNtLktWcJetxKv4"
     }
 
     var simpleUTXO = {
@@ -261,14 +261,85 @@ describe('Transaction', function () {
         .from(minimalUTXO)
         .to('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm', 5460)
         .change('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm')
-        // .sign(privateKey);
 
       tx.getFee().should.equal(minimalFee);
 
+      tx.sign(privateKey);
+
+      tx.isFullySigned().should.equal(true);
+
       tx.getFee().should.equal(minimalFee);
+
+      should.equal(tx.getChangeOutput(), null);
+    });
+
+    it('should return correct minimal fee amount with 30 input and 1 output', () => {
+      var tx = new Transaction()
+
+      const privateKeys = []
+
+      for (let i=0; i < 30; i++){
+        tx.from(simpleUTXO)
+        privateKeys.push(privateKey)
+      }
+
+      tx
+        .to('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm', 5460)
+        .change('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm')
+        .sign(privateKeys);
+
+      tx.isFullySigned().should.equal(true);
+
+      tx.getFee().should.gte(tx.toString().length/2);
+    });
+
+    it('should return correct minimal fee amount with 30 input and 30 outputs', () => {
+      var tx = new Transaction()
+
+      const privateKeys = []
+
+      for (let i=0; i < 30; i++){
+        tx.from(simpleUTXO)
+        privateKeys.push(privateKey)
+      }
+
+      for (let i=0; i < 30; i++){
+        tx.to('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm', 5460)
+      }
+
+      tx
+        .change('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm')
+        .sign(privateKeys);
+
+      tx.isFullySigned().should.equal(true);
+
+      tx.getFee().should.gte(tx.toString().length/2);
+    });
+
+    it('should return correct minimal fee amount with 30 input and 30 outputs with custom fee per KB', () => {
+      var tx = new Transaction()
+        .feePerKb(2000)
+
+      const privateKeys = []
+
+      for (let i=0; i < 30; i++){
+        tx.from(simpleUTXO)
+        privateKeys.push(privateKey)
+      }
+
+      for (let i=0; i < 30; i++){
+        tx.to('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm', 5460)
+      }
+
+      tx
+        .change('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm')
+        .sign(privateKeys);
+
+      tx.isFullySigned().should.equal(true);
+
+      tx.getFee().should.gte(tx.toString().length);
     });
   })
-  
 
 
   describe('transaction creation test vector', function () {

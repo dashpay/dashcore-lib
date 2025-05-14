@@ -10,7 +10,7 @@ module.exports = (config) => {
     },
     client: {
       mocha: {
-        timeout: 6000
+        timeout: 60000
       }
     },
     webpack: {

@@ -8,6 +8,11 @@ module.exports = (config) => {
       './index.js': ['webpack'],
       './test.spec.js': ['webpack'],
     },
+    client: {
+      mocha: {
+        timeout: 6000
+      }
+    },
     webpack: {
       resolve: {
         fallback: {

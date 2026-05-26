@@ -161,6 +161,24 @@ describe('BlockHeader', function () {
         .toString('hex')
         .should.equal(bhhex);
     });
+
+    it('should accept Uint8Array', function () {
+      var bytes = new Uint8Array(bhbuf);
+      var fromBuffer = BlockHeader.fromBuffer(bhbuf);
+      var fromBytes = new BlockHeader(bytes);
+
+      fromBytes.version.should.equal(fromBuffer.version);
+      fromBytes.prevHash.toString('hex').should.equal(
+        fromBuffer.prevHash.toString('hex')
+      );
+      fromBytes.merkleRoot.toString('hex').should.equal(
+        fromBuffer.merkleRoot.toString('hex')
+      );
+      fromBytes.time.should.equal(fromBuffer.time);
+      fromBytes.bits.should.equal(fromBuffer.bits);
+      fromBytes.nonce.should.equal(fromBuffer.nonce);
+      fromBytes.toBuffer().toString('hex').should.equal(bhhex);
+    });
   });
 
   describe('#fromBufferReader', function () {

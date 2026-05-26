@@ -23,6 +23,18 @@ describe('BufferReader', function () {
     should.exist(br);
     Buffer.isBuffer(br.buf).should.equal(true);
   });
+
+  it('should accept Uint8Array', function () {
+    var bytes = new Uint8Array([1, 2, 0x34, 0x12, 0xdd, 0xcc, 0xbb, 0xaa]);
+    var br = new BufferReader(bytes);
+    should.exist(br);
+    Buffer.isBuffer(br.buf).should.equal(true);
+    br.readUInt8().should.equal(1);
+    br.readUInt8().should.equal(2);
+    br.readUInt16LE().should.equal(0x1234);
+    br.readUInt32LE().should.equal(0xaabbccdd);
+  });
+
   it('should fail for invalid object', function () {
     var fail = function () {
       return new BufferReader(5);

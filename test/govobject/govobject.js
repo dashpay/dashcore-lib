@@ -18,6 +18,16 @@ var BufferReader = require('../../lib/encoding/bufferreader');
 /* FromObject */
 describe('GovObject', function () {
   describe('GovObject - FromObject', function () {
+    var clock;
+
+    before(function () {
+      clock = sinon.useFakeTimers(new Date('2024-01-01T00:00:00Z').getTime());
+    });
+
+    after(function () {
+      clock.restore();
+    });
+
     it('should cast a JSON Proposal into a Proposal Object', function () {
       var govObject = new GovObject();
       var jsonProposal = {

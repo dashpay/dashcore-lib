@@ -20,6 +20,7 @@ var errors = bitcore.errors;
 // TODO: create Proposal from object
 
 describe('Proposal', function () {
+  var clock;
   var startDate = Math.round(new Date('2015-10-10').getTime() / 1000);
   var endDate = Math.round(new Date('2025-10-10').getTime() / 1000);
   var validJSONProposal = {
@@ -32,6 +33,15 @@ describe('Proposal', function () {
     type: 1,
     url: 'http://www.dash.org',
   };
+
+  before(function () {
+    clock = sinon.useFakeTimers(new Date('2024-01-01T00:00:00Z').getTime());
+  });
+
+  after(function () {
+    clock.restore();
+  });
+
   it('should create new proposal', function () {
     var proposal = new Proposal();
 

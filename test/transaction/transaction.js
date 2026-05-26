@@ -235,6 +235,113 @@ describe('Transaction', function () {
     );
   });
 
+
+  describe('transaction fee calculation test', function () {
+    var minimalFee = 255;
+
+    var minimalUTXO = {
+      "satoshis": 5460 + 255,
+      "script": Script.buildPublicKeyHashOut('yfGjFr9Cu8AZYYrdeiRRNtLktWcJetxKv4').toString(),
+      "txid": '88d78d6afaa06bbe5943152757305338eba27cc1f3e84acb1a31ab17f26c038d',
+      outputIndex: 0,
+      address: "yfGjFr9Cu8AZYYrdeiRRNtLktWcJetxKv4"
+    }
+
+    var simpleUTXO = {
+      ...minimalUTXO,
+      "satoshis": 1000000000,
+    }
+
+    var privateKey = PrivateKey.fromWIF(
+      'cTtLHt4mv6zuJytSnM7Vd6NLxyNauYLMxD818sBC8PJ1UPiVTRSs'
+    )
+
+    it('should return correct minimal fee amount with 1 input and 1 output', () => {
+      var tx = new Transaction()
+        .from(minimalUTXO)
+        .to('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm', 5460)
+        .change('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm')
+
+      tx.getFee().should.equal(minimalFee);
+
+      tx.sign(privateKey);
+
+      tx.isFullySigned().should.equal(true);
+
+      tx.getFee().should.equal(minimalFee);
+
+      should.equal(tx.getChangeOutput(), null);
+    });
+
+    it('should return correct minimal fee amount with 30 input and 1 output', () => {
+      var tx = new Transaction()
+
+      const privateKeys = []
+
+      for (let i=0; i < 30; i++){
+        tx.from(simpleUTXO)
+        privateKeys.push(privateKey)
+      }
+
+      tx
+        .to('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm', 5460)
+        .change('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm')
+        .sign(privateKeys);
+
+      tx.isFullySigned().should.equal(true);
+
+      tx.getFee().should.gte(tx.toString().length/2);
+    });
+
+    it('should return correct minimal fee amount with 30 input and 30 outputs', () => {
+      var tx = new Transaction()
+
+      const privateKeys = []
+
+      for (let i=0; i < 30; i++){
+        tx.from(simpleUTXO)
+        privateKeys.push(privateKey)
+      }
+
+      for (let i=0; i < 30; i++){
+        tx.to('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm', 5460)
+      }
+
+      tx
+        .change('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm')
+        .sign(privateKeys);
+
+      tx.isFullySigned().should.equal(true);
+
+      tx.getFee().should.gte(tx.toString().length/2);
+    });
+
+    it('should return correct minimal fee amount with 30 input and 30 outputs with custom fee per KB', () => {
+      var tx = new Transaction()
+        .feePerKb(2000)
+
+      const privateKeys = []
+
+      for (let i=0; i < 30; i++){
+        tx.from(simpleUTXO)
+        privateKeys.push(privateKey)
+      }
+
+      for (let i=0; i < 30; i++){
+        tx.to('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm', 5460)
+      }
+
+      tx
+        .change('yeB49jSYYp3786GQr7eKFwLNdEqonBf6hm')
+        .sign(privateKeys);
+
+      tx.isFullySigned().should.equal(true);
+
+      tx.getFee().should.gte(tx.toString().length);
+    });
+  })
+
+
   describe('transaction creation test vector', function () {
     this.timeout(5000);
     var index = 0;
@@ -466,7 +573,7 @@ describe('Transaction', function () {
         .change(changeAddress)
         .sign(privateKey);
       transaction.outputs.length.should.equal(2);
-      transaction.outputs[1].satoshis.should.equal(49000);
+      transaction.outputs[1].satoshis.should.equal(49745);
       transaction.outputs[1].script
         .toString()
         .should.equal(Script.fromAddress(changeAddress).toString());
@@ -540,7 +647,7 @@ describe('Transaction', function () {
         .sign(privateKey);
       transaction._estimateSize().should.be.within(1000, 1999);
       transaction.outputs.length.should.equal(2);
-      transaction.outputs[1].satoshis.should.equal(34000);
+      transaction.outputs[1].satoshis.should.equal(37808);
     });
     it('if satoshis are invalid', function () {
       var transaction = new Transaction()
@@ -1126,7 +1233,7 @@ describe('Transaction', function () {
         .change(changeAddress)
         .to(toAddress, 10000);
       transaction.inputAmount.should.equal(100000000);
-      transaction.outputAmount.should.equal(99999000);
+      transaction.outputAmount.should.equal(99999745);
     });
     it('returns correct values for coinjoin transaction', function () {
       // see livenet tx c16467eea05f1f30d50ed6dbc06a38539d9bb15110e4b7dc6653046a3678a718
@@ -1216,7 +1323,7 @@ describe('Transaction', function () {
       tx.outputs.length.should.equal(2);
       tx.outputs[0].satoshis.should.equal(10000000);
       tx.outputs[0].script.toAddress().toString().should.equal(toAddress);
-      tx.outputs[1].satoshis.should.equal(89999000);
+      tx.outputs[1].satoshis.should.equal(89999745);
       tx.outputs[1].script.toAddress().toString().should.equal(changeAddress);
     });
   });

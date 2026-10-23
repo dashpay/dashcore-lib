@@ -348,3 +348,69 @@ describe('CoinbasePayload', function () {
     });
   });
 });
+
+
+describe('CoinbasePayload version 4 (Core V24)', function () {
+  var fixtures = require('../../fixtures/core24-coinbase.json');
+  var root = '000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f';
+  // Independent wire vector: v3 payload, version changed to 4, then uint256 LE.
+  var wire = Buffer.concat([
+    Buffer.from('0400' + fixtures[0].extraPayload.slice(4), 'hex'),
+    Buffer.from(root, 'hex').reverse(),
+  ]);
+
+  it('reads and writes a nonzero asset-unlock root in little-endian order', function () {
+    var payload = CoinbasePayload.fromBuffer(Buffer.from(wire));
+    expect(payload.merkleRootAssetUnlocks).to.equal(root);
+    expect(payload.toBuffer()).to.deep.equal(wire);
+    expect(payload.toJSON().merkleRootAssetUnlocks).to.equal(root);
+    expect(CoinbasePayload.fromJSON(payload.toJSON()).toBuffer()).to.deep.equal(wire);
+    expect(payload.copy().toBuffer()).to.deep.equal(wire);
+  });
+
+  it('requires exactly 32 bytes for the version-4 root', function () {
+    [0, 1, 31].forEach(function (length) {
+      expect(function () {
+        CoinbasePayload.fromBuffer(Buffer.from(wire.slice(0, wire.length - 32 + length)));
+      }).to.throw();
+    });
+    expect(function () {
+      CoinbasePayload.fromBuffer(Buffer.concat([wire, Buffer.from([0])]));
+    }).to.throw('raw payload is bigger than expected');
+  });
+
+  it('rejects missing, nonhex, and wrong-sized JSON roots', function () {
+    var json = CoinbasePayload.fromBuffer(Buffer.from(wire)).toJSON();
+    [undefined, null, 42, '', 'gg'.repeat(32), 'ab'.repeat(31), 'ab'.repeat(33)].forEach(function (value) {
+      expect(function () {
+        CoinbasePayload.fromJSON(Object.assign({}, json, { merkleRootAssetUnlocks: value }));
+      }).to.throw();
+    });
+  });
+
+  it('preserves versions 1 through 3 without an asset-unlock root', function () {
+    [1, 2, 3].forEach(function (version) {
+      var payload = CoinbasePayload.fromJSON(Object.assign({}, validCoinbasePayloadJSON, { version: version }));
+      var bytes = payload.toBuffer();
+      var parsed = CoinbasePayload.fromBuffer(Buffer.from(bytes));
+      expect(parsed.toBuffer()).to.deep.equal(bytes);
+      expect(parsed.toJSON()).not.to.have.property('merkleRootAssetUnlocks');
+      expect(parsed.copy().toBuffer()).to.deep.equal(bytes);
+    });
+  });
+
+  fixtures.forEach(function (fixture) {
+    it('round-trips testnet block ' + fixture.height + ' and preserves the Core coinbase txid', function () {
+      var tx = new DashcoreLib.Transaction(fixture.coinbaseHex);
+      expect(tx.id).to.equal(fixture.coinbaseTxId);
+      expect(tx.toBuffer().toString('hex')).to.equal(fixture.coinbaseHex);
+      var payload = CoinbasePayload.fromBuffer(Buffer.from(fixture.extraPayload, 'hex'));
+      expect(payload.height).to.equal(fixture.height);
+      if (payload.version >= 4) {
+        expect(payload.merkleRootAssetUnlocks).to.equal(fixture.merkleRootAssetUnlocks);
+      }
+      var block = DashcoreLib.Block.fromString(fixture.blockHex);
+      expect(block.toBuffer().toString('hex')).to.equal(fixture.blockHex);
+    });
+  });
+});

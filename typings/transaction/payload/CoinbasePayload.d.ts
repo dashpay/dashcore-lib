@@ -4,12 +4,14 @@
  * @property {number} height
  * @property {string} merkleRootMNList
  * @property {string} merkleRootQuorums
+ * @property {string} merkleRootAssetUnlocks
  */
 export type CoinbasePayloadJSON = {
   version: number;
   height: number;
   merkleRootMNList: string;
   merkleRootQuorums: string;
+  merkleRootAssetUnlocks?: string;
 };
 
 /**
@@ -18,6 +20,7 @@ export type CoinbasePayloadJSON = {
  * @property {number} height
  * @property {string} merkleRootMNList
  * @property {string} merkleRootQuorums
+ * @property {string} merkleRootAssetUnlocks
  */
 export class CoinbasePayload {
   /**
@@ -62,4 +65,5 @@ export class CoinbasePayload {
   height: number;
   merkleRootMNList: string;
   merkleRootQuorums: string;
+  merkleRootAssetUnlocks?: string;
 }

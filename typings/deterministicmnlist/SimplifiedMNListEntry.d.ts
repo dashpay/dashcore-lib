@@ -6,6 +6,7 @@
  * @property {string} pubKeyOperator - operator public key
  * @property {string} votingAddress
  * @property {boolean} isValid
+ * @property {Object<string, string[]>} [addresses] - "addr:port" lists by purpose
  * @property {string} [payoutAddress]
  * @property {string} [operatorPayoutAddress]
  */
@@ -16,6 +17,7 @@ export type SMLEntry = {
   pubKeyOperator: string;
   votingAddress: string;
   isValid: boolean;
+  addresses?: Record<string, string[]>;
   payoutAddress?: string;
   operatorPayoutAddress?: string;
 };
@@ -35,6 +37,8 @@ export type SMLEntry = {
  * @property {string} [operatorPayoutAddress]
  */
 export class SimplifiedMNListEntry {
+  addresses?: Record<string, string[]>;
+
   constructor(arg: string | any | Buffer, network?: string);
 
   /**

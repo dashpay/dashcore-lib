@@ -2,6 +2,7 @@
 // TODO: Remove previous line and work through linting issues at next edit
 
 var SimplifiedMNListEntry = require('../../lib/deterministicmnlist/SimplifiedMNListEntry');
+var _ = require('lodash');
 var expect = require('chai').expect;
 var Networks = require('../../lib/networks');
 
@@ -231,7 +232,7 @@ describe('SimplifiedMNListEntry', function () {
       expect(entry.getIp()).to.be.equal('162.35.243.85');
       expect(entry.toBuffer().toString('hex')).to.be.equal(extAddrEvoEntryHex);
     });
-    it('Should serialize a revoked ExtAddr entry with empty addresses', function () {
+    it('Should serialize an ExtAddr entry with empty addresses', function () {
       var json = Object.assign({}, extAddrRegularEntryJSON, { addresses: {} });
       delete json.service;
       var entry = new SimplifiedMNListEntry(json);
@@ -239,7 +240,21 @@ describe('SimplifiedMNListEntry', function () {
       expect(entry.toBuffer().toString('hex').slice(128, 132)).to.be.equal('0100');
       expect(entry.service).to.be.equal('[0:0:0:0:0:0:0:0]:0');
     });
-    it('Should not share addresses with toObject() results', function () {
+    it('Should take service and platformHTTPPort of ExtAddr entries only from addresses', function () {
+      var json = Object.assign({}, extAddrEvoEntryJSON, {
+        service: '1.2.3.4:19997',
+        platformHTTPPort: 443,
+      });
+      var entry = new SimplifiedMNListEntry(json);
+      expect(entry.getIp()).to.be.equal('162.35.243.85');
+      expect(entry.platformHTTPPort).to.be.equal(1443);
+    });
+    it('Should not share addresses with the input object or toObject() results', function () {
+      var json = _.cloneDeep(extAddrEvoEntryJSON);
+      var entry = new SimplifiedMNListEntry(json);
+      json.addresses.core_p2p.push('1.2.3.4:9999');
+      expect(entry.toBuffer().toString('hex')).to.be.equal(extAddrEvoEntryHex);
+
       var entry = new SimplifiedMNListEntry(extAddrEvoEntryJSON);
       entry.toObject().addresses.core_p2p.push('1.2.3.4:9999');
       expect(entry.toBuffer().toString('hex')).to.be.equal(extAddrEvoEntryHex);
@@ -250,6 +265,33 @@ describe('SimplifiedMNListEntry', function () {
       expect(function () {
         return new SimplifiedMNListEntry(json);
       }).to.throw('Expected addresses to be an object');
+    });
+  });
+  describe('legacy entries without deprecated fields', function () {
+    it('Should take service and platformHTTPPort from addresses', function () {
+      var json = Object.assign({}, smlEntryJSON, {
+        addresses: {
+          core_p2p: ['95.183.51.146:39999'],
+          platform_https: ['95.183.51.146:3200'],
+        },
+      });
+      delete json.service;
+      delete json.platformHTTPPort;
+      var entry = new SimplifiedMNListEntry(json);
+      expect(entry.toBuffer().toString('hex')).to.be.equal(smlEntryHex);
+    });
+    it('Should keep reported fields, which legacy entries hash', function () {
+      var json = Object.assign({}, smlEntryWithoutAddress, { addresses: {} });
+      var entry = new SimplifiedMNListEntry(json);
+      expect(entry.toBuffer().toString('hex')).to.be.equal(smlEntryWithoutAddressHex);
+    });
+    it('Should reject a legacy evonode whose port neither Core nor addresses report', function () {
+      var json = Object.assign({}, smlEntryWithoutAddress, { addresses: {} });
+      delete json.service;
+      delete json.platformHTTPPort;
+      expect(function () {
+        return new SimplifiedMNListEntry(json);
+      }).to.throw('Expected platformHTTPPort to be a number');
     });
   });
   describe('getIp', function () {

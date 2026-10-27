@@ -300,5 +300,12 @@ describe('SimplifiedMNListEntry', function () {
       var ip = entry.getIp();
       expect(ip).to.be.equal('95.183.51.146');
     });
+    it('Should get an IPv6 address without brackets', function () {
+      var json = Object.assign({}, extAddrRegularEntryJSON, {
+        addresses: { core_p2p: ['[2001:db8::1]:19999'] },
+      });
+      var entry = new SimplifiedMNListEntry(json);
+      expect(entry.getIp()).to.be.equal('2001:db8::1');
+    });
   });
 });

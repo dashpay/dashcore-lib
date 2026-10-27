@@ -2,7 +2,7 @@
  * @typedef {Object} SMLEntry
  * @property {string} proRegTxHash
  * @property {string} confirmedHash
- * @property {string} service - ip and port
+ * @property {string} [service] - ip and port, derived from addresses when omitted for v3
  * @property {string} pubKeyOperator - operator public key
  * @property {string} votingAddress
  * @property {boolean} isValid
@@ -13,7 +13,7 @@
 export type SMLEntry = {
   proRegTxHash: string;
   confirmedHash: string;
-  service: string;
+  service?: string;
   pubKeyOperator: string;
   votingAddress: string;
   isValid: boolean;

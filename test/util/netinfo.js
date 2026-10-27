@@ -71,6 +71,13 @@ describe('netinfo', () => {
       expect(() => extNetInfoToBuffer({ platform_https: ['Example.com:443'] })).to.throw('Invalid address entry');
       expect(() => extNetInfoToBuffer({ core_p2p: ['[2001:db8::1::2]:9999'] })).to.throw('Invalid IPv6');
       expect(() => extNetInfoToBuffer({ core_p2p: ['aaaa.onion:9999'] })).to.throw('Invalid Tor v3');
+      // the last character of a 52 character I2P address carries 4 unused bits
+      expect(() => extNetInfoToBuffer({
+        core_p2p: ['eaqseizeeutcokbjfivsyljof4ydcmrtgq2tmnzyhe5dwpb5hy7r.b32.i2p:0'],
+      })).to.throw('Non-canonical base32');
+      expect(() => extNetInfoToBuffer({
+        platform_https: ['1.2.3.1:443', '1.2.3.2:443', '1.2.3.3:443', '1.2.3.4:443', '1.2.3.5:443'],
+      })).to.throw('Too many platform_https addresses');
     });
   });
 });

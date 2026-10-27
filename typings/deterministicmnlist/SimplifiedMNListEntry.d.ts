@@ -17,6 +17,10 @@ export type SMLEntry = {
   pubKeyOperator: string;
   votingAddress: string;
   isValid: boolean;
+  nVersion?: number;
+  nType?: number;
+  platformHTTPPort?: number;
+  platformNodeID?: string;
   addresses?: Record<string, string[]>;
   payoutAddress?: string;
   operatorPayoutAddress?: string;

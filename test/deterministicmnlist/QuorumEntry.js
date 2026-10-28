@@ -132,6 +132,20 @@ describe('QuorumEntry', function () {
       var buffer = entry.toBufferForHashing();
       expect(buffer).to.be.deep.equal(Buffer.from(quorumEntryHex, 'hex'));
     });
+
+    it('Should reject bit sets that do not match the LLMQ size', function () {
+      var short = QuorumEntry.fromBuffer(Buffer.from(quorumEntryHex, 'hex'));
+      short.signers = '00';
+      expect(function () {
+        short.toBufferForHashing();
+      }).to.throw('Expected signers to have the LLMQ bit set length');
+
+      var long = QuorumEntry.fromBuffer(Buffer.from(quorumEntryHex, 'hex'));
+      long.validMembers += '00';
+      expect(function () {
+        long.toBufferForHashing();
+      }).to.throw('Expected validMembers to have the LLMQ bit set length');
+    });
   });
   describe('generate commitmentHash', function () {
     it('Should be able to generate a correct commitmentHash', function () {

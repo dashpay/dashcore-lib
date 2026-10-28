@@ -133,6 +133,18 @@ describe('netinfo', () => {
       expect(extNetInfoFromBuffer(Buffer.from('0100', 'hex'))).to.deep.equal({});
     });
 
+    it('should reject a domain with a byte above 0x7f', () => {
+      // platform_https, one domain entry: "ex" + 0xe1 + "mple.com", port 443
+      const domain = Buffer.concat([Buffer.from('ex'), Buffer.from([0xe1]), Buffer.from('mple.com')]);
+      const buffer = Buffer.concat([
+        Buffer.from('0101020102', 'hex'),
+        Buffer.from([domain.length]),
+        domain,
+        Buffer.from('01bb', 'hex'),
+      ]);
+      expect(() => extNetInfoFromBuffer(buffer)).to.throw('Invalid domain');
+    });
+
     it('should compress IPv6 addresses like Core', () => {
       // one core_p2p IPv6 service on port 9999
       const read = (hex) => extNetInfoFromBuffer(

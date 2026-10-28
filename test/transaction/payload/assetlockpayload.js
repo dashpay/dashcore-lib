@@ -277,6 +277,29 @@ describe('AssetLockPayload version 2 (Core V24)', function () {
     }).to.throw('Invalid Argument: Credit output 1 is not P2PKH or P2SH');
   });
 
+  it('should reject a non-minimal P2PKH credit output, like Core', function () {
+    // OP_DUP OP_HASH160 OP_PUSHDATA1 20 <hash> OP_EQUALVERIFY OP_CHECKSIG
+    var nonMinimal = Output.fromObject({
+      satoshis: 1000,
+      script: '76a94c14' + '11'.repeat(20) + '88ac'
+    });
+    expect(nonMinimal.script.isPublicKeyHashOut()).to.be.equal(true);
+
+    expect(function () {
+      AssetLockPayload.fromJSON({
+        version: 1,
+        creditOutputs: [nonMinimal.toJSON()]
+      });
+    }).to.throw('Invalid Argument: Credit output 0 is not P2PKH');
+
+    expect(function () {
+      AssetLockPayload.fromJSON({
+        version: 2,
+        creditOutputs: [output1.toJSON(), nonMinimal.toJSON()]
+      });
+    }).to.throw('Invalid Argument: Credit output 1 is not P2PKH or P2SH');
+  });
+
   it('should reject version 3', function () {
     var payload = validAssetLockPayload.copy();
     payload.version = 3;

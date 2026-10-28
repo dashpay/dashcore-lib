@@ -53,7 +53,7 @@ export class Transaction {
   version: number;
   id: string;
   hash: string;
-  instanceHash: string;
+  readonly instanceHash: string;
   nLockTime: number;
   type: number;
   inputs: Input[];

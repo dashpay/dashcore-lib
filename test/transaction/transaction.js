@@ -1899,6 +1899,60 @@ describe('Asset unlock stable txid (Core V24)', function () {
     });
   });
 
+  describe('#isAssetUnlockWithStableTxid', function () {
+    var fixture = fixtures.assetUnlocksV2[0];
+
+    afterEach(function () {
+      sinon.restore();
+    });
+
+    it('should not throw for payloads that cannot be serialized', function () {
+      var tx = new Transaction(fixture.hex);
+      tx.extraPayload.version = 3;
+      expect(tx.isAssetUnlockWithStableTxid()).to.be.equal(true);
+      expect(function () {
+        tx.toBuffer();
+      }).to.throw('Invalid version');
+
+      tx = new Transaction(fixture.hex);
+      tx.extraPayload.fee = -1;
+      expect(tx.isAssetUnlockWithStableTxid()).to.be.equal(true);
+
+      tx = new Transaction(fixture.hex);
+      tx.extraPayload.quorumSig = 123;
+      expect(tx.isAssetUnlockWithStableTxid()).to.be.equal(false);
+
+      tx = new Transaction(fixture.hex);
+      tx.extraPayload.version = 256;
+      expect(tx.isAssetUnlockWithStableTxid()).to.be.equal(false);
+    });
+
+    it('should judge the total payload size, like Core', function () {
+      var tx = new Transaction(fixture.hex);
+      // 31 + 97 bytes: Core only checks the 145-byte total
+      tx.extraPayload.quorumHash = tx.extraPayload.quorumHash.slice(2);
+      tx.extraPayload.quorumSig += 'ff';
+      var zeroed = tx.toBuffer();
+      zeroed.fill(0, zeroed.length - 132);
+
+      expect(tx.isAssetUnlockWithStableTxid()).to.be.equal(true);
+      expect(tx.id).to.be.equal(
+        Hash.sha256sha256(zeroed).reverse().toString('hex')
+      );
+
+      tx.extraPayload.quorumSig += 'ff';
+      expect(tx.isAssetUnlockWithStableTxid()).to.be.equal(false);
+    });
+
+    it('should serialize the payload once per txid', function () {
+      var tx = new Transaction(fixture.hex);
+      sinon.spy(AssetUnlockPayload.prototype, 'toBuffer');
+
+      expect(tx.id).to.be.equal(fixture.txid);
+      expect(AssetUnlockPayload.prototype.toBuffer.callCount).to.be.equal(1);
+    });
+  });
+
   fixtures.assetUnlocksV1.forEach(function (fixture) {
     it('should hash version 1 unlock ' + fixture.txid + ' over the full serialization', function () {
       var tx = new Transaction(fixture.hex);

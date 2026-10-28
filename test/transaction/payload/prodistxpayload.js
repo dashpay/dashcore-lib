@@ -226,7 +226,15 @@ describe('ProDisTxPayload', () => {
         ProDisTxPayload.fromBuffer(
           Buffer.from(unilateral.extraPayload.slice(0, -2), 'hex')
         )
-      ).to.throw('Expected each payloadSig');
+      ).to.throw('expected 65 more bytes, found 64');
+    });
+
+    it('should throw when the proTxHash is truncated', () => {
+      expect(() =>
+        ProDisTxPayload.fromBuffer(
+          Buffer.from(unilateral.extraPayload.slice(0, 2 * 20), 'hex')
+        )
+      ).to.throw('expected 32 more bytes, found 18');
     });
   });
 

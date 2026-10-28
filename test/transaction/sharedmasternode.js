@@ -45,7 +45,7 @@ describe('Shared masternode special transactions (Core V24)', () => {
 
   it(`should reject a ${fixtures.truncatedProDisTx.description}`, () => {
     expect(() => new Transaction(fixtures.truncatedProDisTx.hex)).to.throw(
-      'Expected each payloadSig'
+      'expected 65 more bytes, found 64'
     );
   });
 

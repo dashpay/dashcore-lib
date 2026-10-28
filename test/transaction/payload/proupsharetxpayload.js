@@ -78,6 +78,72 @@ describe('ProUpShareTxPayload', () => {
     });
   });
 
+  describe('strict parsing', () => {
+    // version, proTxHash, shareIndex | 0x19 scriptReward | inputsHash | 0x41 payloadSig
+    const scriptStart = 36;
+    const sigStart = raw.length - 66;
+    const sig = raw.slice(sigStart + 1);
+
+    function parse(...parts) {
+      return () => ProUpShareTxPayload.fromBuffer(Buffer.concat(parts));
+    }
+
+    it('should parse the Core vector bytes', () => {
+      expect(parse(raw)).to.not.throw();
+    });
+
+    it('should throw when a declared 66-byte signature carries 65 bytes', () => {
+      expect(parse(raw.slice(0, sigStart), Buffer.from([66]), sig)).to.throw(
+        'expected 66 more bytes, found 65'
+      );
+    });
+
+    it('should throw when a declared signature is missing', () => {
+      expect(parse(raw.slice(0, sigStart + 1))).to.throw(
+        'expected 65 more bytes, found 0'
+      );
+      expect(parse(raw.slice(0, sigStart))).to.throw(
+        'expected 1 more bytes, found 0'
+      );
+    });
+
+    it('should throw on non-canonical CompactSize encodings', () => {
+      expect(
+        parse(raw.slice(0, sigStart), Buffer.from('fd4100', 'hex'), sig)
+      ).to.throw('non-canonical CompactSize');
+      expect(
+        parse(
+          raw.slice(0, scriptStart),
+          Buffer.from('fd1900', 'hex'),
+          raw.slice(scriptStart + 1)
+        )
+      ).to.throw('non-canonical CompactSize');
+      expect(
+        parse(raw.slice(0, sigStart), Buffer.from('fe41000000', 'hex'), sig)
+      ).to.throw('non-canonical CompactSize');
+      expect(
+        parse(
+          raw.slice(0, sigStart),
+          Buffer.from('ff4100000000000000', 'hex'),
+          sig
+        )
+      ).to.throw('non-canonical CompactSize');
+    });
+
+    it('should throw on a CompactSize above Core MAX_SIZE', () => {
+      expect(
+        parse(raw.slice(0, sigStart), Buffer.from('fe01000002', 'hex'), sig)
+      ).to.throw('CompactSize too large');
+    });
+
+    it('should throw when a fixed-size field is truncated', () => {
+      expect(parse(raw.slice(0, 20))).to.throw('expected 32 more bytes');
+      expect(parse(raw.slice(0, sigStart - 10))).to.throw(
+        'expected 32 more bytes, found 22'
+      );
+    });
+  });
+
   describe('serialization', () => {
     it('should omit the signature with skipSignature, as Core hashes the payload', () => {
       const payload = ProUpShareTxPayload.fromBuffer(Buffer.from(raw));

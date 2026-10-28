@@ -91,6 +91,23 @@ describe('ProUpSharedRegTxPayload', () => {
     });
   });
 
+  describe('strict parsing', () => {
+    // version, proTxHash | pubKeyOperator | keyIDVoting | inputsHash | sigCount, sigs
+    it('should throw when a fixed-size field is truncated', () => {
+      [
+        [20, 'expected 32 more bytes, found 18'],
+        [34 + 40, 'expected 48 more bytes, found 40'],
+        [82 + 10, 'expected 20 more bytes, found 10'],
+        [102 + 31, 'expected 32 more bytes, found 31'],
+        [raw.length - 1, 'expected 65 more bytes, found 64'],
+      ].forEach(([length, message]) => {
+        expect(() =>
+          ProUpSharedRegTxPayload.fromBuffer(raw.slice(0, length))
+        ).to.throw(message);
+      });
+    });
+  });
+
   describe('serialization', () => {
     it('should omit the signature list with skipSignature, as Core hashes the payload', () => {
       const payload = ProUpSharedRegTxPayload.fromBuffer(Buffer.from(raw));

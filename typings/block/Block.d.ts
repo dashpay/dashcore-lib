@@ -140,6 +140,13 @@ export class Block {
   getMerkleRoot(): Buffer;
 
   /**
+   * Calculates the coinbase merkleRootAssetUnlocks (Core V24): the merkle root of
+   * the instance hashes of the asset unlocks that have a stable txid.
+   * @returns {Buffer} - A little endian buffer, all zeros if there are none
+   */
+  getAssetUnlocksMerkleRoot(): Buffer;
+
+  /**
    * Verifies that the transactions in the block match the header merkle root
    * @returns {Boolean} - If the merkle roots match
    */

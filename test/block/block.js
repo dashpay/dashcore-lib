@@ -259,3 +259,89 @@ describe('Block', function () {
     });
   });
 });
+
+describe('Block with Core V24 asset locks and unlocks', function () {
+  var fixtures = require('../fixtures/core24-asset-locks.json');
+  var expect = chai.expect;
+
+  function reversedHex(buffer) {
+    return Buffer.from(buffer).reverse().toString('hex');
+  }
+
+  fixtures.blocks.forEach(function (fixture) {
+    describe(fixture.note, function () {
+      var block = Block.fromString(fixture.hex);
+
+      it('should re-serialize identically with a valid merkle root', function () {
+        expect(block.toBuffer().toString('hex')).to.be.equal(fixture.hex);
+        expect(block.validMerkleRoot()).to.be.equal(true);
+        expect(reversedHex(block.getMerkleRoot())).to.be.equal(fixture.merkleRoot);
+      });
+
+      it('should compute Core txids, instance hashes and spent outpoints', function () {
+        expect(block.transactions.length).to.be.equal(fixture.transactions.length);
+        block.transactions.forEach(function (tx, i) {
+          var expected = fixture.transactions[i];
+          expect(tx.type).to.be.equal(expected.type);
+          expect(tx.id).to.be.equal(expected.txid);
+          expect(tx.instanceHash).to.be.equal(expected.instanceHash || expected.txid);
+          (expected.inputs || []).forEach(function (input, j) {
+            expect(tx.inputs[j].prevTxId.toString('hex')).to.be.equal(input.txid);
+            expect(tx.inputs[j].outputIndex).to.be.equal(input.vout);
+          });
+        });
+      });
+
+      it('should compute the coinbase merkleRootAssetUnlocks', function () {
+        expect(block.transactions[0].extraPayload.merkleRootAssetUnlocks)
+          .to.be.equal(fixture.merkleRootAssetUnlocks);
+        expect(reversedHex(block.getAssetUnlocksMerkleRoot()))
+          .to.be.equal(fixture.merkleRootAssetUnlocks);
+      });
+    });
+  });
+
+  it('should spend a version 2 unlock by its stable txid', function () {
+    var block = Block.fromString(fixtures.blocks[0].hex);
+    var unlock = block.transactions[5];
+    var spend = block.transactions[6];
+
+    expect(unlock.isAssetUnlockWithStableTxid()).to.be.equal(true);
+    expect(unlock.instanceHash).not.to.be.equal(unlock.id);
+    expect(spend.inputs[0].prevTxId.toString('hex')).to.be.equal(unlock.id);
+    expect(spend.inputs[0].outputIndex).to.be.equal(0);
+    expect(Buffer.from(unlock.getOutPointBuffer(0).slice(0, 32)).reverse())
+      .to.deep.equal(spend.inputs[0].prevTxId);
+  });
+
+  it('should spend a version 1 unlock by its full hash', function () {
+    var block = Block.fromString(fixtures.blocks[2].hex);
+    var unlock = new Transaction(fixtures.assetUnlocksV1[1].hex);
+
+    expect(block.transactions[1].inputs[0].prevTxId.toString('hex'))
+      .to.be.equal(unlock.id);
+  });
+
+  it('should build the asset unlocks merkle tree from instance hashes', function () {
+    var coinbase = Block.fromString(fixtures.blocks[0].hex).transactions[0];
+    var unlocks = fixtures.assetUnlocksV2.map(function (fixture) {
+      return new Transaction(fixture.hex);
+    });
+    var block = new Block({
+      header: Block.fromString(fixtures.blocks[0].hex).header.toObject(),
+      transactions: [coinbase].concat(unlocks),
+    });
+    var level1 = [
+      bitcore.crypto.Hash.sha256sha256(Buffer.concat([
+        unlocks[0]._getInstanceHash(), unlocks[1]._getInstanceHash()
+      ])),
+      bitcore.crypto.Hash.sha256sha256(Buffer.concat([
+        unlocks[2]._getInstanceHash(), unlocks[2]._getInstanceHash()
+      ])),
+    ];
+
+    expect(block.getAssetUnlocksMerkleRoot()).to.deep.equal(
+      bitcore.crypto.Hash.sha256sha256(Buffer.concat(level1))
+    );
+  });
+});

@@ -393,3 +393,51 @@ describe('AssetUnlockPayload', function () {
     });
   });
 });
+
+describe('AssetUnlockPayload version 2 (Core V24)', function () {
+  var fixtures = require('../../fixtures/core24-asset-locks.json');
+
+  it('should create version 1 payloads by default', function () {
+    expect(new AssetUnlockPayload().version).to.be.equal(1);
+  });
+
+  it('should serialize version 2 like version 1', function () {
+    var payload = AssetUnlockPayload.fromJSON(
+      Object.assign({}, validAssetUnlockPayloadJSON, { version: 2 })
+    );
+
+    expect(payload.toBuffer().toString('hex')).to.be.equal(
+      '02' + validAssetUnlockPayloadHexString.slice(2)
+    );
+    expect(AssetUnlockPayload.fromBuffer(payload.toBuffer()).toJSON())
+      .to.deep.equal(payload.toJSON());
+  });
+
+  it('should reject version 3', function () {
+    var payload = validAssetUnlockPayload.copy();
+    payload.version = 3;
+
+    expect(function () {
+      payload.validate();
+    }).to.throw('Invalid Argument: Invalid version');
+  });
+
+  fixtures.assetUnlocksV2.forEach(function (fixture) {
+    it('should parse the payload of Core asset unlock ' + fixture.txid, function () {
+      var payloadHex = fixture.hex.slice(-145 * 2);
+      var payload = AssetUnlockPayload.fromBuffer(Buffer.from(payloadHex, 'hex'));
+
+      expect(payload.version).to.be.equal(fixture.version);
+      expect(payload.index).to.be.equal(fixture.index);
+      expect(payload.fee).to.be.equal(fixture.fee);
+      expect(payload.requestHeight).to.be.equal(fixture.requestedHeight);
+      // quorumHash keeps wire byte order; Core prints it reversed
+      expect(payload.quorumHash).to.be.equal(
+        Buffer.from(fixture.quorumHash, 'hex').reverse().toString('hex')
+      );
+      expect(payload.toBuffer().toString('hex')).to.be.equal(payloadHex);
+      expect(AssetUnlockPayload.fromJSON(payload.toJSON()).toBuffer().toString('hex'))
+        .to.be.equal(payloadHex);
+    });
+  });
+});

@@ -52,3 +52,13 @@ import type {
   UnspentOutput,
   ChainLockSigMessage,
 } from "..";
+
+import { expectType } from "tsd";
+
+declare const transaction: Transaction;
+expectType<string>(transaction.instanceHash);
+expectType<Buffer>(transaction._getInstanceHash());
+expectType<boolean>(transaction.isAssetUnlockWithStableTxid());
+
+declare const block: Block;
+expectType<Buffer>(block.getAssetUnlocksMerkleRoot());

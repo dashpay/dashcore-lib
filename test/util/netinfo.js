@@ -1,5 +1,10 @@
 const { expect } = require('chai');
-const { extNetInfoToBuffer } = require('../../lib/util/netinfo');
+const BufferReader = require('../../lib/encoding/bufferreader');
+const {
+  extNetInfoToBuffer,
+  extNetInfoFromBuffer,
+  readExtNetInfo,
+} = require('../../lib/util/netinfo');
 
 // Expected bytes follow Core's ExtNetInfo / NetInfoEntry serialization
 // (src/evo/netinfo.h): version, purpose map, then per entry a type byte and
@@ -71,6 +76,10 @@ describe('netinfo', () => {
       expect(() => extNetInfoToBuffer({ platform_https: ['Example.com:443'] })).to.throw('Invalid address entry');
       expect(() => extNetInfoToBuffer({ core_p2p: ['[2001:db8::1::2]:9999'] })).to.throw('Invalid IPv6');
       expect(() => extNetInfoToBuffer({ core_p2p: ['aaaa.onion:9999'] })).to.throw('Invalid Tor v3');
+      // a valid address with the last checksum character changed
+      expect(() => extNetInfoToBuffer({
+        core_p2p: ['pg6mmjiyjmcrsslvykfwnntlaru7p5svn6y2ymmju6nubxndf4pscsyd.onion:9999'],
+      })).to.throw('Invalid Tor v3 address checksum');
       // the last character of a 52 character I2P address carries 4 unused bits
       expect(() => extNetInfoToBuffer({
         core_p2p: ['eaqseizeeutcokbjfivsyljof4ydcmrtgq2tmnzyhe5dwpb5hy7r.b32.i2p:0'],
@@ -78,6 +87,75 @@ describe('netinfo', () => {
       expect(() => extNetInfoToBuffer({
         platform_https: ['1.2.3.1:443', '1.2.3.2:443', '1.2.3.3:443', '1.2.3.4:443', '1.2.3.5:443'],
       })).to.throw('Too many platform_https addresses');
+    });
+  });
+
+  describe('extNetInfoFromBuffer', () => {
+    it('should read every address kind in Core\'s string form', () => {
+      // Tor, I2P and domain entries as Core v24 reports them (rpc_netinfo.py)
+      const addresses = {
+        core_p2p: [
+          '127.0.0.1:19951',
+          'kpgvmscirrdqpekbqjsvw5teanhatztpp2gl6eee4zkowvwfxwenqaid.onion:19951',
+          '[2001:db8::1]:9999',
+          '[fc00::1]:9999',
+        ],
+        platform_p2p: ['c4gfnttsuwqomiygupdqqqyy5y5emnk5c73hrfvatri67prd7vyq.b32.i2p:0'],
+        platform_https: ['server-1.example.com:22201'],
+      };
+      const buffer = extNetInfoToBuffer(addresses);
+
+      expect(extNetInfoFromBuffer(buffer)).to.deep.equal(addresses);
+    });
+
+    it('should read an empty address map', () => {
+      expect(extNetInfoFromBuffer(Buffer.from('0100', 'hex'))).to.deep.equal({});
+    });
+
+    it('should compress IPv6 addresses like Core', () => {
+      // one core_p2p IPv6 service on port 9999
+      const read = (hex) => extNetInfoFromBuffer(
+        Buffer.from('0101000101' + '02' + '10' + hex + '270f', 'hex'),
+      ).core_p2p[0];
+
+      expect(read('00000000000000000000000000000001')).to.equal('[::1]:9999');
+      expect(read('20010db8000000000000000000000000')).to.equal('[2001:db8::]:9999');
+      // a single zero group is not compressed
+      expect(read('20010db8000100010001000100000001')).to.equal('[2001:db8:1:1:1:1:0:1]:9999');
+      // the first of two equally long zero runs is compressed
+      expect(read('20010db8000000000001000000000001')).to.equal('[2001:db8::1:0:0:1]:9999');
+      // the longest zero run is compressed
+      expect(read('20010000000100000000000000000001')).to.equal('[2001:0:1::1]:9999');
+    });
+
+    it('should leave a BufferReader after the ExtNetInfo', () => {
+      const reader = new BufferReader(Buffer.concat([
+        extNetInfoToBuffer({ core_p2p: ['1.2.3.4:9999'] }),
+        Buffer.from('ff', 'hex'),
+      ]));
+
+      expect(readExtNetInfo(reader)).to.deep.equal({ core_p2p: ['1.2.3.4:9999'] });
+      expect(reader.readUInt8()).to.equal(0xff);
+      expect(reader.finished()).to.equal(true);
+    });
+
+    it('should reject input Core would not read back as the same addresses', () => {
+      const entry = (hex) => Buffer.from(`01010001${hex}`, 'hex');
+
+      expect(() => extNetInfoFromBuffer(Buffer.from('0200', 'hex'))).to.throw('Unsupported ExtNetInfo version 2');
+      expect(() => extNetInfoFromBuffer(Buffer.from('010103', 'hex'))).to.throw('unknown or out of order');
+      expect(() => extNetInfoFromBuffer(Buffer.from('0102010000', 'hex'))).to.throw('unknown or out of order');
+      expect(() => extNetInfoFromBuffer(Buffer.from('01010005', 'hex'))).to.throw('Too many core_p2p addresses');
+      expect(() => extNetInfoFromBuffer(entry('ff'))).to.throw('Unknown address entry type 255');
+      expect(() => extNetInfoFromBuffer(entry('010303'))).to.throw('Invalid BIP155 address of network 3');
+      expect(() => extNetInfoFromBuffer(entry('01010501020304'))).to.throw('Invalid BIP155 address of network 1 and size 5');
+      expect(() => extNetInfoFromBuffer(entry(`010210${'00000000000000000000ffff01020304'}270f`)))
+        .to.throw('Invalid IPv6 address');
+      expect(() => extNetInfoFromBuffer(entry(`0203${Buffer.from('A.b').toString('hex')}01bb`)))
+        .to.throw('Invalid domain');
+      expect(() => extNetInfoFromBuffer(entry('02fdfe00'))).to.throw('too long');
+      expect(() => extNetInfoFromBuffer(Buffer.concat([extNetInfoToBuffer({}), Buffer.from('00', 'hex')])))
+        .to.throw('ExtNetInfo is followed by unexpected data');
     });
   });
 });

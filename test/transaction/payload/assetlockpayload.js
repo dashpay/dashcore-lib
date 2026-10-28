@@ -227,3 +227,87 @@ describe('AssetLockPayload', function () {
     });
   });
 });
+
+describe('AssetLockPayload version 2 (Core V24)', function () {
+  var fixtures = require('../../fixtures/core24-asset-locks.json');
+
+  var p2shOutput = Output.fromObject({
+    satoshis: 3000,
+    script: Script.buildScriptHashOut(
+      Script.buildPublicKeyHashOut(
+        Address.fromString('XxGJLCB7BBXAgA1AbgtNDMyVpQV9yXd7oB', 'mainnet')
+      )
+    ).toHex()
+  });
+
+  it('should create version 1 payloads by default', function () {
+    expect(new AssetLockPayload().version).to.be.equal(1);
+  });
+
+  it('should accept P2PKH and P2SH credit outputs in version 2', function () {
+    var payload = AssetLockPayload.fromJSON({
+      version: 2,
+      creditOutputs: [output1.toJSON(), p2shOutput.toJSON()]
+    });
+
+    var parsed = AssetLockPayload.fromBuffer(payload.toBuffer());
+    expect(parsed.version).to.be.equal(2);
+    expect(parsed.creditOutputs).to.deep.equal([output1, p2shOutput]);
+    expect(parsed.toBuffer()).to.deep.equal(payload.toBuffer());
+  });
+
+  it('should still allow only P2PKH credit outputs in version 1', function () {
+    expect(function () {
+      AssetLockPayload.fromJSON({
+        version: 1,
+        creditOutputs: [output1.toJSON(), p2shOutput.toJSON()]
+      });
+    }).to.throw('Invalid Argument: Credit output 1 is not P2PKH');
+  });
+
+  it('should allow only P2PKH and P2SH credit outputs in version 2', function () {
+    expect(function () {
+      AssetLockPayload.fromJSON({
+        version: 2,
+        creditOutputs: [
+          output1.toJSON(),
+          { satoshis: 1000, script: Script.buildDataOut('0x0').toHex() }
+        ]
+      });
+    }).to.throw('Invalid Argument: Credit output 1 is not P2PKH or P2SH');
+  });
+
+  it('should reject version 3', function () {
+    var payload = validAssetLockPayload.copy();
+    payload.version = 3;
+
+    expect(function () {
+      payload.validate();
+    }).to.throw('Invalid Argument: Invalid version');
+  });
+
+  fixtures.assetLocksV2.forEach(function (fixture) {
+    it('should round-trip Core asset lock ' + fixture.txid, function () {
+      var tx = new DashcoreLib.Transaction(fixture.hex);
+      var payload = tx.extraPayload;
+
+      expect(payload).to.be.an.instanceOf(AssetLockPayload);
+      expect(tx.toBuffer().toString('hex')).to.be.equal(fixture.hex);
+      expect(tx.id).to.be.equal(fixture.txid);
+      expect(payload.version).to.be.equal(fixture.version);
+      expect(payload.creditOutputs.map(function (output) {
+        return { valueSat: output.satoshis, scriptHex: output.script.toHex() };
+      })).to.deep.equal(fixture.creditOutputs);
+
+      var payloadBuffer = payload.toBuffer();
+      expect(AssetLockPayload.fromBuffer(payloadBuffer).toBuffer())
+        .to.deep.equal(payloadBuffer);
+      expect(AssetLockPayload.fromJSON(payload.toJSON()).toBuffer())
+        .to.deep.equal(payloadBuffer);
+      expect(new DashcoreLib.Transaction(tx.toJSON()).toBuffer().toString('hex'))
+        .to.be.equal(fixture.hex);
+      expect(new DashcoreLib.Transaction(tx.toObject()).toBuffer().toString('hex'))
+        .to.be.equal(fixture.hex);
+    });
+  });
+});

@@ -213,6 +213,29 @@ describe('SimplifiedMNListDiff', function () {
       );
     });
   });
+  describe('toBuffer quorumsCLSigs', function () {
+    var signature = coreDiffsJSON[0].quorumsCLSigs[0];
+    var signatureHex = Object.keys(signature)[0];
+
+    [
+      ['two signatures in one entry', Object.assign({}, signature, coreDiffsJSON[0].quorumsCLSigs[1]),
+        'Expected each quorumsCLSigs entry to hold exactly one signature'],
+      ['no signature', {}, 'Expected each quorumsCLSigs entry to hold exactly one signature'],
+      ['an array entry', [[1]], 'Expected each quorumsCLSigs entry to hold exactly one signature'],
+      ['a short signature', { abcd: [1] }, 'Expected quorumsCLSigs keys to be bls signatures'],
+      ['indexes that are not an array', { [signatureHex]: 1 },
+        'Expected quorumsCLSigs values to be arrays of quorum indexes'],
+    ].forEach(function (testCase) {
+      it('Should reject ' + testCase[0], function () {
+        var diff = new SimplifiedMNListDiff(mnListDiffJSON);
+        diff.quorumsCLSigs = [testCase[1]];
+
+        expect(function () {
+          diff.toBuffer();
+        }).to.throw(testCase[2]);
+      });
+    });
+  });
   describe('Core P2P mnlistdiff messages', function () {
     Object.keys(coreDiffs).filter(function (name) {
       return name !== 'note';

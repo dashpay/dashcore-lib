@@ -399,6 +399,21 @@ describe('SimplifiedMNListEntry', function () {
         new SimplifiedMNListEntry(smlEntryWithoutAddress).getPlatformHTTPSEndpoint()
       ).to.be.null;
     });
+    it('Should return null for a version 3 evonode with a zero or missing platform_https', function () {
+      var json = Object.assign({}, extAddrEvoEntryJSON, {
+        addresses: Object.assign({}, extAddrEvoEntryJSON.addresses, {
+          platform_https: ['[::]:0'],
+        }),
+      });
+      expect(new SimplifiedMNListEntry(json).getPlatformHTTPSEndpoint()).to.be.null;
+
+      // platformHTTPPort left set after the addresses change
+      var entry = new SimplifiedMNListEntry(extAddrEvoEntryJSON);
+      entry.addresses.platform_https = [];
+      expect(entry.getPlatformHTTPSEndpoint()).to.be.null;
+      delete entry.addresses.platform_https;
+      expect(entry.getPlatformHTTPSEndpoint()).to.be.null;
+    });
     it('Should return null for a regular masternode', function () {
       expect(
         new SimplifiedMNListEntry(extAddrRegularEntryJSON).getPlatformHTTPSEndpoint()

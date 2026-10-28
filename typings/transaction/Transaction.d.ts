@@ -53,6 +53,7 @@ export class Transaction {
   version: number;
   id: string;
   hash: string;
+  readonly instanceHash: string;
   nLockTime: number;
   type: number;
   inputs: Input[];
@@ -75,6 +76,16 @@ export class Transaction {
    * @return {Buffer}
    */
   _getHash(): Buffer;
+
+  /**
+   * Retrieve the little endian hash of the full transaction serialization.
+   * Equals the transaction hash, except for asset unlocks with a stable txid,
+   * whose instance hash also covers the quorum signing info. Core V24 relays
+   * those by instance hash and commits to it in the coinbase
+   * merkleRootAssetUnlocks.
+   * @return {Buffer}
+   */
+  _getInstanceHash(): Buffer;
 
   /**
    * Retrieve a hex string that can be used with bitcoind's CLI interface
@@ -452,6 +463,15 @@ export class Transaction {
    * @returns {boolean}
    */
   isSpecialTransaction(): boolean;
+
+  /**
+   * Returns true if this is an asset unlock whose txid excludes the quorum
+   * signing info (requestHeight, quorumHash, quorumSig), i.e. a well-formed
+   * payload of version 2 or higher (Core V24), so every re-signed instance of
+   * one withdrawal shares one txid.
+   * @returns {boolean}
+   */
+  isAssetUnlockWithStableTxid(): boolean;
 
   /**
    * Checks if transaction has DIP2 extra payload

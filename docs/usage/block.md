@@ -127,6 +127,14 @@ Returns : {Block} A instance of a Block
 
 **Returns**: {Buffer} A buffer of the merkle root hash
 
+## .getAssetUnlocksMerkleRoot()
+
+**Description**: Calculates the coinbase `merkleRootAssetUnlocks` (Core V24): the merkle root of the instance hashes of the asset unlocks that have a stable txid.
+
+**Parameters**: None.
+
+**Returns**: {Buffer} A little endian buffer of the merkle root hash, all zeros if the block has no such asset unlocks
+
 ## .validMerkleRoot()
 
 **Description**: Verifies that the transactions in the block match the header merkle root

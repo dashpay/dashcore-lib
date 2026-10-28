@@ -398,6 +398,14 @@ The argument function MUST NOT modify the order of the original array
 
 **Returns**: boolean
 
+## .isAssetUnlockWithStableTxid()
+
+**Description**: Checks if the transaction is an asset unlock with a version 2 or higher payload (Core V24). Its `id`/`hash` is computed with the quorum signing info (`requestHeight`, `quorumHash`, `quorumSig`) zeroed, so every re-signed instance of one withdrawal shares one txid. `instanceHash` is the hash of the full serialization, which Core uses to relay these transactions and to build the coinbase `merkleRootAssetUnlocks`. For all other transactions `instanceHash` equals `id`.
+
+**Parameters**: None.
+
+**Returns**: boolean
+
 ## .hasExtraPayload()
 
 **Description**: Checks if transaction has DIP2 extra payload

@@ -115,29 +115,65 @@ describe('ProUpRegTxPayload', function () {
       expect(new ProUpRegTxPayload().version).to.be.equal(1);
     });
 
-    it('Should require at least one payout', function () {
-      var payload = new DashcoreLib.Transaction(vector.hex).extraPayload;
+    function getPayload() {
+      return new DashcoreLib.Transaction(vector.hex).extraPayload;
+    }
+
+    function p2pkh(keyID) {
+      return '76a914' + Buffer.from(keyID, 'hex').reverse().toString('hex') + '88ac';
+    }
+
+    it('Should validate the Core vector', function () {
+      getPayload().validate();
+    });
+
+    it('Should require valid payouts', function () {
+      var payload = getPayload();
       payload.payouts = [];
       expect(function () {
         payload.validate();
-      }).to.throw('Expect at least one payout');
+      }).to.throw('Expect payouts to be an array of 1 to 8 payouts');
 
-      payload.payouts = undefined;
+      payload = getPayload();
+      payload.payouts[0].reward = 9999;
       expect(function () {
         payload.validate();
-      }).to.throw('Expect payouts to be an array');
+      }).to.throw('Expect payout rewards to add up to 10000');
     });
 
-    it('Should reject a version 3 payoutAddress', function () {
-      var json = new DashcoreLib.Transaction(vector.hex).extraPayload.toJSON({
-        network: 'testnet',
-      });
-      json.payoutAddress = json.payouts[0].address;
-      delete json.payouts;
+    it('Should reject a payee paying the voting key but not check an owner key', function () {
+      var payload = getPayload();
+      payload.payouts[0].scriptPayout = p2pkh(payload.keyIDVoting);
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect payouts not to pay the owner or voting key');
+    });
 
+    it('Should require a compact signature', function () {
+      var payload = getPayload();
+      expect(payload.payloadSig).to.have.lengthOf(130);
+      payload.payloadSig = payload.payloadSig.slice(2);
+      expect(function () {
+        payload.validate();
+      }).to.throw("payloadSig size doesn't match compact signature size");
+      payload.payloadSig = getPayload().payloadSig + '00';
+      expect(function () {
+        payload.validate();
+      }).to.throw("payloadSig size doesn't match compact signature size");
+    });
+
+    it('Should reject fields of the other versions', function () {
+      var json = getPayload().toJSON({ network: 'testnet' });
+      json.payoutAddress = json.payouts[0].address;
       expect(function () {
         ProUpRegTxPayload.fromJSON(json);
-      }).to.throw('Expect payouts instead of payoutAddress from version 3');
+      }).to.throw('Expect no payoutAddress in a version 3 payload');
+
+      var legacyJSON = proUpRegTxFixture.getProUpRegPayloadJSON();
+      legacyJSON.payouts = [];
+      expect(function () {
+        ProUpRegTxPayload.fromJSON(legacyJSON);
+      }).to.throw('Expect no payouts in a version 1 payload');
     });
   });
 });

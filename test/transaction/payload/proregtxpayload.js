@@ -155,124 +155,252 @@ describe('ProRegTxPayload', function () {
       expect(ProRegTxPayload.fromJSON(json).shares[0].scriptReward).to.be.equal('');
     });
 
-    it('Should require one join signature per share', function () {
-      var payload = getSharedPayload();
-      payload.joinSigs.pop();
+    function p2pkh(keyID) {
+      return '76a914' + Buffer.from(keyID, 'hex').reverse().toString('hex') + '88ac';
+    }
 
+    function expectInvalid(payload, message) {
       expect(function () {
-        payload.toBuffer();
-      }).to.throw('Expect one join signature per share');
+        payload.validate();
+      }).to.throw(message);
+    }
+
+    function withPayload(name, change, message) {
+      var payload = getPayload(name);
+      change(payload);
+      expectInvalid(payload, message);
+    }
+
+    var TWO_PAYOUTS = 'v3 ProRegTx with two payouts';
+    var SHARED = 'v3 shared ProRegTx with an explicit reward script';
+    var COIN = 100000000;
+
+    it('Should validate every Core vector', function () {
+      vectors
+        .filter(function (v) {
+          return v.coreKey === 'proRegTx';
+        })
+        .forEach(function (v) {
+          new Transaction(v.hex).extraPayload.validate();
+        });
     });
 
-    it('Should require 65 byte join signatures', function () {
-      var payload = getSharedPayload();
-      payload.joinSigs[0] = payload.joinSigs[0].slice(2);
-
-      expect(function () {
-        payload.validate();
-      }).to.throw('Expect join signatures to be 65 bytes in size');
-    });
-
-    it('Should require p2pkh/p2sh share scripts', function () {
-      var payload = getSharedPayload();
-      payload.shares[1].scriptReward = '6a';
-
-      expect(function () {
-        payload.validate();
-      }).to.throw('Expected share scriptReward to be empty or a p2pkh/p2sh');
-
-      payload = getSharedPayload();
-      payload.shares[0].scriptRefund = '';
-
-      expect(function () {
-        payload.validate();
-      }).to.throw('Expected share scriptRefund to be a p2pkh/p2sh');
-    });
-
-    it('Should require valid share amounts and early period terms', function () {
-      var payload = getSharedPayload();
-      payload.shares[0].amount = -1;
-
-      expect(function () {
-        payload.validate();
-      }).to.throw('Expect share amount to be an unsigned integer');
-
-      payload = getSharedPayload();
-      payload.earlyPeriodBlocks = 0x100000000;
-
-      expect(function () {
-        payload.validate();
-      }).to.throw('Expect earlyPeriodBlocks to be an uint32');
-    });
-
-    it('Should require p2pkh/p2sh payouts with rewards of at most 10000', function () {
-      var payload = getPayload('v3 ProRegTx with two payouts');
-      payload.payouts[0].reward = 10001;
-
-      expect(function () {
-        payload.validate();
-      }).to.throw('Expect payout reward to be an integer from 0 to 10000');
-
-      payload = getPayload('v3 ProRegTx with two payouts');
-      payload.payouts[0].scriptPayout = '6a';
-
-      expect(function () {
-        payload.validate();
-      }).to.throw('Expected payout scriptPayout to be a p2pkh/p2sh');
-    });
-
-    it('Should require payouts unless the masternode is shared', function () {
-      var payload = getPayload('v3 ProRegTx with two payouts');
-      payload.payouts = [];
-
-      expect(function () {
-        payload.validate();
-      }).to.throw('Expect at least one payout');
-
-      payload = getSharedPayload();
-      payload.payouts = getPayload('v3 ProRegTx with two payouts').payouts;
-
-      expect(function () {
-        payload.validate();
-      }).to.throw('Expect no payouts for a shared masternode');
-    });
-
-    it('Should reject a version 3 payoutAddress', function () {
-      var json = getPayload('v3 ProRegTx with two payouts').toJSON({
-        network: 'testnet',
+    describe('payouts', function () {
+      it('Should require 1 to 8 payouts', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts = [];
+        }, 'Expect payouts to be an array of 1 to 8 payouts');
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts = [];
+          for (var i = 0; i < 9; i++) {
+            payload.payouts.push({
+              scriptPayout: '76a914' + ('0' + i).repeat(20) + '88ac',
+              reward: i < 8 ? 1100 : 1200,
+            });
+          }
+        }, 'Expect payouts to be an array of 1 to 8 payouts');
       });
-      json.payoutAddress = json.payouts[0].address;
-      delete json.payouts;
 
-      expect(function () {
-        ProRegTxPayload.fromJSON(json);
-      }).to.throw('Expect payouts instead of payoutAddress from version 3');
+      it('Should require rewards from 100 to 10000', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts[0].reward = 9901;
+          payload.payouts[1].reward = 99;
+        }, 'Expect payout reward to be an integer from 100 to 10000');
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts[0].reward = 10001;
+        }, 'Expect payout reward to be an integer from 100 to 10000');
+      });
+
+      it('Should require rewards adding up to 10000', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts[1].reward = 3999;
+        }, 'Expect payout rewards to add up to 10000');
+      });
+
+      it('Should require p2pkh/p2sh payees', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts[0].scriptPayout = '6a';
+        }, 'Expected payout scriptPayout to be a p2pkh/p2sh');
+      });
+
+      it('Should require unique payees', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts[1].scriptPayout = payload.payouts[0].scriptPayout;
+        }, 'Expect payout scripts to be unique');
+      });
+
+      it('Should reject payees paying the owner or voting key', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts[0].scriptPayout = p2pkh(payload.keyIDOwner);
+        }, 'Expect payouts not to pay the owner or voting key');
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts[1].scriptPayout = p2pkh(payload.keyIDVoting);
+        }, 'Expect payouts not to pay the owner or voting key');
+      });
+
+      it('Should accept a P2SH payee with the hash of a key', function () {
+        var payload = getPayload(TWO_PAYOUTS);
+        payload.payouts[0].scriptPayout =
+          'a914' + Buffer.from(payload.keyIDVoting, 'hex').reverse().toString('hex') + '87';
+        payload.validate();
+      });
+
+      it('Should require a non-null owner key and no early terms without shares', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.keyIDOwner = '00'.repeat(20);
+        }, 'Expect a non-null keyIDOwner');
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.earlyPeriodBlocks = 1;
+        }, 'Expect no earlyPeriodBlocks or earlyPenalty without shares');
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.earlyPenalty = 1;
+        }, 'Expect no earlyPeriodBlocks or earlyPenalty without shares');
+      });
+
+      it('Should require a regular or evo type', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.type = 2;
+        }, 'Expect type to be 0 (regular) or 1 (evo)');
+      });
     });
 
-    it('Should require addresses that can be serialized', function () {
-      var payload = getPayload('v3 evonode ProRegTx');
-      payload.addresses = { core_p2p: ['not an address'] };
+    describe('shares', function () {
+      it('Should require one 65 byte join signature per share', function () {
+        withPayload(SHARED, function (payload) {
+          payload.joinSigs.pop();
+        }, 'Expect one join signature per share');
+        withPayload(SHARED, function (payload) {
+          payload.joinSigs[0] = payload.joinSigs[0].slice(2);
+        }, 'Expect join signatures to be 65 bytes in size');
+      });
 
-      expect(function () {
+      it('Should require the collateral in the registration, a null owner key and no payouts', function () {
+        withPayload(SHARED, function (payload) {
+          payload.collateralHash = '11'.repeat(32);
+        }, 'Expect a shared masternode to have its collateral in the registration');
+        withPayload(SHARED, function (payload) {
+          payload.keyIDOwner = '11'.repeat(20);
+        }, 'Expect a null keyIDOwner for a shared masternode');
+        withPayload(SHARED, function (payload) {
+          payload.payouts = getPayload(TWO_PAYOUTS).payouts;
+        }, 'Expect no payouts for a shared masternode');
+      });
+
+      it('Should require 2 to 8 shares', function () {
+        withPayload(SHARED, function (payload) {
+          payload.shares.pop();
+          payload.joinSigs.pop();
+        }, 'Expect 2 to 8 shares');
+        var eightShares = getPayload('v3 shared ProRegTx with eight shares');
+        eightShares.validate();
+        eightShares.shares.push(eightShares.shares[0]);
+        eightShares.joinSigs.push(eightShares.joinSigs[0]);
+        expectInvalid(eightShares, 'Expect 2 to 8 shares');
+      });
+
+      it('Should require an early period of at most 420480 blocks', function () {
+        withPayload(SHARED, function (payload) {
+          payload.earlyPeriodBlocks = 420481;
+        }, 'Expect earlyPeriodBlocks to be at most 420480');
+      });
+
+      it('Should require amounts from 100 DASH to the collateral', function () {
+        withPayload(SHARED, function (payload) {
+          payload.shares[0].amount = 100 * COIN - 1;
+          payload.shares[1].amount = 900 * COIN + 1;
+        }, 'Expect share amount to be from 100 DASH to the masternode collateral');
+        withPayload(SHARED, function (payload) {
+          payload.shares[0].amount = 1000 * COIN + 1;
+        }, 'Expect share amount to be from 100 DASH to the masternode collateral');
+        withPayload(SHARED, function (payload) {
+          payload.shares[0].amount = -1;
+        }, 'Expect share amount to be from 100 DASH to the masternode collateral');
+      });
+
+      it('Should require amounts adding up to the collateral of the node type', function () {
+        withPayload(SHARED, function (payload) {
+          payload.shares[1].amount -= 1;
+        }, 'Expect share amounts to add up to the masternode collateral');
+        // 1000 DASH is a regular masternode's collateral, not an evonode's
+        withPayload(SHARED, function (payload) {
+          payload.type = 1;
+          payload.platformNodeID = '11'.repeat(20);
+        }, 'Expect share amounts to add up to the masternode collateral');
+      });
+
+      it('Should require non-null and unique owner keys', function () {
+        withPayload(SHARED, function (payload) {
+          payload.shares[0].keyIDOwner = '00'.repeat(20);
+        }, 'Expect share keyIDOwner to be a non-null 20 byte key id');
+        withPayload(SHARED, function (payload) {
+          payload.shares[1].keyIDOwner = payload.shares[0].keyIDOwner;
+        }, 'Expect share keyIDOwner to be unique');
+      });
+
+      it('Should require unique refund scripts', function () {
+        withPayload(SHARED, function (payload) {
+          payload.shares[1].scriptRefund = payload.shares[0].scriptRefund;
+        }, 'Expect share scriptRefund to be unique');
+      });
+
+      it('Should require p2pkh/p2sh share scripts', function () {
+        withPayload(SHARED, function (payload) {
+          payload.shares[0].scriptRefund = '';
+        }, 'Expected share scriptRefund to be a p2pkh/p2sh');
+        withPayload(SHARED, function (payload) {
+          payload.shares[1].scriptReward = '6a';
+        }, 'Expected share scriptReward to be empty or a p2pkh/p2sh');
+      });
+
+      it('Should reject share scripts paying the voting key or a share owner key', function () {
+        withPayload(SHARED, function (payload) {
+          payload.shares[0].scriptRefund = p2pkh(payload.keyIDVoting);
+        }, 'Expect share scripts not to pay the voting key or a share owner key');
+        withPayload(SHARED, function (payload) {
+          payload.shares[1].scriptReward = p2pkh(payload.shares[0].keyIDOwner);
+        }, 'Expect share scripts not to pay the voting key or a share owner key');
+      });
+
+      it('Should require a penalty below the smallest share, and none without an early period', function () {
+        withPayload(SHARED, function (payload) {
+          payload.earlyPenalty = 500 * COIN;
+        }, 'Expect earlyPenalty to be less than the smallest share');
+        withPayload(SHARED, function (payload) {
+          payload.earlyPeriodBlocks = 0;
+        }, 'Expect no earlyPenalty without an early period');
+        var payload = getPayload(SHARED);
+        payload.earlyPeriodBlocks = 0;
+        payload.earlyPenalty = 0;
         payload.validate();
-      }).to.throw('Invalid address entry');
-
-      payload.addresses = undefined;
-
-      expect(function () {
-        payload.validate();
-      }).to.throw('Expected addresses to be an object');
+      });
     });
 
-    it('Should not write platform ports for a version 3 evonode', function () {
-      var payload = getPayload('v3 evonode ProRegTx');
-      var json = payload.toJSON({ network: 'testnet' });
-      json.platformP2PPort = 26656;
-      json.platformHTTPPort = 443;
+    describe('JSON fields', function () {
+      it('Should reject fields version 3 payloads do not have', function () {
+        var json = getPayload('v3 evonode ProRegTx').toJSON({ network: 'testnet' });
+        ['service', 'payoutAddress', 'scriptPayout', 'platformP2PPort', 'platformHTTPPort'].forEach(
+          function (field) {
+            var withField = Object.assign({}, json);
+            withField[field] = field === 'platformP2PPort' || field === 'platformHTTPPort' ? 1 : 'x';
+            expect(function () {
+              ProRegTxPayload.fromJSON(withField);
+            }).to.throw('Expect no ' + field + ' in a version 3 payload');
+          }
+        );
+      });
 
-      expect(ProRegTxPayload.fromJSON(json).toBuffer()).to.be.deep.equal(
-        payload.toBuffer()
-      );
+      it('Should reject fields version 1 and 2 payloads do not have', function () {
+        var json = proRegTxFixture.getProRegPayloadJSON();
+        ['addresses', 'payouts', 'shares', 'joinSigs', 'earlyPeriodBlocks', 'earlyPenalty'].forEach(
+          function (field) {
+            var withField = Object.assign({}, json);
+            withField[field] = field.startsWith('early') ? 0 : [];
+            expect(function () {
+              ProRegTxPayload.fromJSON(withField);
+            }).to.throw('Expect no ' + field + ' in a version 2 payload');
+          }
+        );
+      });
     });
   });
 });

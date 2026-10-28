@@ -122,16 +122,50 @@ describe('ProTxUpServPayload', function () {
   describe('version 3 (ExtAddr)', function () {
     var vectors = require('../../fixtures/core24-protx.json').transactions;
 
-    it('Should require addresses that can be serialized', function () {
+    function getPayload() {
       var vector = vectors.find(function (v) {
         return v.name === 'v3 evonode ProUpServTx';
       });
-      var payload = new DashcoreLib.Transaction(vector.hex).extraPayload;
+      return new DashcoreLib.Transaction(vector.hex).extraPayload;
+    }
+
+    it('Should require addresses that can be serialized', function () {
+      var payload = getPayload();
       payload.addresses = { core_p2p: ['1.2.3.4:9999'], unknown: [] };
 
       expect(function () {
         payload.validate();
       }).to.throw('Unknown address purpose unknown');
+    });
+
+    it('Should require a 96 byte BLS signature', function () {
+      var payload = getPayload();
+      payload.validate();
+      payload.payloadSig = payload.payloadSig.slice(2);
+      expect(function () {
+        payload.validate();
+      }).to.throw("payloadSig size doesn't match BLS signature size");
+      payload.payloadSig = getPayload().payloadSig + '00';
+      expect(function () {
+        payload.validate();
+      }).to.throw("payloadSig size doesn't match BLS signature size");
+    });
+
+    it('Should reject fields of the other versions', function () {
+      var json = getPayload().toJSON({ network: 'testnet' });
+      ['service', 'platformP2PPort', 'platformHTTPPort'].forEach(function (field) {
+        var withField = Object.assign({}, json);
+        withField[field] = field === 'service' ? '1.2.3.4:9999' : 1;
+        expect(function () {
+          ProTxUpServPayload.fromJSON(withField);
+        }).to.throw('Expect no ' + field + ' in a version 3 payload');
+      });
+
+      var legacyJSON = proUpServTxFixture.getProUpServPayloadJSON();
+      legacyJSON.addresses = {};
+      expect(function () {
+        ProTxUpServPayload.fromJSON(legacyJSON);
+      }).to.throw('Expect no addresses in a version 1 payload');
     });
   });
 });

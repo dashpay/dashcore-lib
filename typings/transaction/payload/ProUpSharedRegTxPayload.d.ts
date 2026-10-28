@@ -87,6 +87,14 @@ export class ProUpSharedRegTxPayload {
   verifySignature(publicKeyId: string | Buffer, sigIndex?: number): boolean;
 
   /**
+   * Hash of the payload; with skipSignature it is the hash every share owner signs
+   * @param [options]
+   * @param {boolean} options.skipSignature - omit the signatures
+   * @return {Buffer}
+   */
+  getHash(options?: { skipSignature?: boolean }): Buffer;
+
+  /**
    * Copy payload instance
    * @return {ProUpSharedRegTxPayload}
    */

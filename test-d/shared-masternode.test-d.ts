@@ -23,3 +23,4 @@ expectType<boolean>(proUpShareTxPayload.verifySignature('id'));
 expectType<Buffer>(proUpShareTxPayload.getHash({ skipSignature: true }));
 expectType<ProUpSharedRegTxPayload>(proUpSharedRegTxPayload.sign('key'));
 expectType<boolean>(proUpSharedRegTxPayload.verifySignature('id', 1));
+expectType<Buffer>(proUpSharedRegTxPayload.getHash({ skipSignature: true }));

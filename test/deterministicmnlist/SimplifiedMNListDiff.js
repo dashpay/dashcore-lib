@@ -110,6 +110,61 @@ describe('SimplifiedMNListDiff', function () {
         SimplifiedMNListDiff.fromHexString(mnListDiffHexString + '00', 'testnet');
       }).to.throw('MnListDiff is followed by unexpected data');
     });
+    describe('with a crafted count', function () {
+      // byte offsets of each single-byte count in mnListDiffHexString
+      var offsets = {};
+
+      before(function () {
+        var diff = SimplifiedMNListDiff.fromHexString(mnListDiffHexString, 'testnet');
+        var tree = diff.cbTxMerkleTree;
+        var offset = 2 + 32 + 32 + 4; // nVersion, base and block hashes, totalTransactions
+        offsets['Merkle hash'] = offset;
+        offset += 1 + tree.merkleHashes.length * 32;
+        offsets['Merkle flag byte'] = offset;
+        offset += 1 + tree.merkleFlags.length + diff.cbTx.toBuffer().length;
+        offsets['Deleted masternode'] = offset;
+        offset += 1 + diff.deletedMNs.length * 32;
+        offsets['Masternode list entry'] = offset;
+        offset += 1;
+        offsets['Deleted quorum'] = offset;
+        offset += 1 + diff.deletedQuorums.length * 33;
+        offsets['New quorum'] = offset;
+        offset += 1;
+        diff.newQuorums.forEach(function (quorum) {
+          offset += quorum.toBufferForHashing().length;
+        });
+        offsets['Quorum chainlock signature'] = offset;
+        offsets['Quorum index'] = offset + 1 + 96;
+
+        // the vector has no masternode changes, so mnList adds no bytes above
+        expect(diff.mnList).to.be.empty;
+        Object.keys(offsets).forEach(function (name) {
+          expect(parseInt(mnListDiffHexString.substr(offsets[name] * 2, 2), 16)).to.be.below(0xfd);
+        });
+      });
+
+      [
+        'Merkle hash',
+        'Merkle flag byte',
+        'Deleted masternode',
+        'Masternode list entry',
+        'Deleted quorum',
+        'New quorum',
+        'Quorum chainlock signature',
+        'Quorum index',
+      ].forEach(function (name) {
+        it('Should throw quickly on a huge ' + name + ' count', function () {
+          this.timeout(2000);
+          var position = offsets[name] * 2;
+          var hex = mnListDiffHexString.slice(0, position) + 'feffffffff'
+            + mnListDiffHexString.slice(position + 2);
+
+          expect(function () {
+            SimplifiedMNListDiff.fromHexString(hex, 'testnet');
+          }).to.throw(name + ' count 4294967295 is larger than the remaining data allows');
+        });
+      });
+    });
     describe('with a crafted quorum bit set size', function () {
       // the first new quorum is a version 3 llmq_50_60 commitment: version (2 bytes),
       // llmqType (1), quorumHash (32), then the signers bit set size, 0x32 (50)

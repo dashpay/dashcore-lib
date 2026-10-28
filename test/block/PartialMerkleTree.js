@@ -91,5 +91,14 @@ describe('PartialMerkleTree', function () {
       expect(buffer.toString('hex')).to.be.equal(coreTreeHex);
       expect(tree.toString()).to.be.equal(coreTreeHex);
     });
+    it('Should throw quickly on a hash count larger than the data', function () {
+      this.timeout(2000);
+      // the hash count (04) follows the 4-byte transaction count
+      var hex = coreTreeHex.slice(0, 8) + 'feffffffff' + coreTreeHex.slice(10);
+
+      expect(function () {
+        PartialMerkleTree.fromHexString(hex);
+      }).to.throw('Merkle hash count 4294967295 is larger than the remaining data allows');
+    });
   });
 });

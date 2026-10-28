@@ -125,11 +125,6 @@ export class ProRegTxPayload {
   validate(): boolean;
 
   /**
-   * Validate the collateral shares of a version 3 payload
-   */
-  validateShares(): void;
-
-  /**
    * Serializes payload to JSON
    * @param [options]
    * @param [options.skipSignature]

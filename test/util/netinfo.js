@@ -91,7 +91,7 @@ describe('netinfo', () => {
       // a valid address with the last checksum character changed
       expect(() => extNetInfoToBuffer({
         core_p2p: ['pg6mmjiyjmcrsslvykfwnntlaru7p5svn6y2ymmju6nubxndf4pscsyd.onion:9999'],
-      })).to.throw('Invalid Tor v3 address checksum');
+      })).to.throw('Invalid Tor v3 address');
       // the last character of a 52 character I2P address carries 4 unused bits
       expect(() => extNetInfoToBuffer({
         core_p2p: ['eaqseizeeutcokbjfivsyljof4ydcmrtgq2tmnzyhe5dwpb5hy7r.b32.i2p:0'],

@@ -33,7 +33,8 @@ export class SimplifiedMNListDiff {
   constructor(arg?: Buffer | any | string, network?: string);
 
   /**
-   * Creates MnListDiff from a Buffer.
+   * Creates MnListDiff from a Buffer holding Core's P2P `mnlistdiff` message
+   * (protocol 70230 and later, unchanged through 70242).
    * @param {Buffer} buffer
    * @param {string} [network]
    * @return {SimplifiedMNListDiff}
@@ -51,7 +52,8 @@ export class SimplifiedMNListDiff {
   ): SimplifiedMNListDiff;
 
   /**
-   * Serializes mnlist diff to a Buffer
+   * Serializes mnlist diff as Core's P2P `mnlistdiff` message (protocol 70230
+   * and later). Quorums need their LLMQ type params, for the bit set sizes.
    * @return {Buffer}
    */
   toBuffer(): Buffer;
@@ -83,4 +85,9 @@ export class SimplifiedMNListDiff {
    * merkle root of the whole mn list
    */
   merkleRootMNList: string;
+  /**
+   * chainlock signatures used for quorum rotation, each mapped to indexes
+   * into newQuorums
+   */
+  quorumsCLSigs?: Record<string, number[]>[];
 }

@@ -5,6 +5,7 @@ var SimplifiedMNListEntry = require('../../lib/deterministicmnlist/SimplifiedMNL
 var _ = require('lodash');
 var expect = require('chai').expect;
 var Networks = require('../../lib/networks');
+var BufferReader = require('../../lib/encoding/bufferreader');
 
 var smlEntryJSON = {
   proRegTxHash:
@@ -172,6 +173,45 @@ describe('SimplifiedMNListEntry', function () {
       expect(entryWithNoAddress.length).to.be.equal(
         entryWithDifferentKeys.length
       );
+    });
+  });
+  describe('P2P serialization', function () {
+    // Core sends entries as nVersion followed by the hashed fields
+    [
+      ['version 2 evonode', smlEntryJSON, '0200' + smlEntryHex],
+      ['version 3 evonode', extAddrEvoEntryJSON, '0300' + extAddrEvoEntryHex],
+      ['version 3 regular masternode', extAddrRegularEntryJSON, '0300' + extAddrRegularEntryHex],
+    ].forEach(function (testCase) {
+      it('Should read and write a ' + testCase[0], function () {
+        var reader = new BufferReader(Buffer.from(testCase[2], 'hex'));
+        var entry = SimplifiedMNListEntry.fromP2PBufferReader(reader, Networks.testnet);
+
+        expect(reader.finished()).to.be.true;
+        expect(entry.toObject()).to.be.deep.equal(testCase[1]);
+        expect(entry.toP2PBuffer().toString('hex')).to.be.equal(testCase[2]);
+        expect(new SimplifiedMNListEntry(testCase[1]).toP2PBuffer().toString('hex'))
+          .to.be.equal(testCase[2]);
+      });
+    });
+    it('Should read a version 1 entry, which has no type, as a regular masternode', function () {
+      // the version 1 layout ends after isValid
+      var hex = '0100' + smlEntryHex.slice(0, 151 * 2);
+      var reader = new BufferReader(Buffer.from(hex, 'hex'));
+      var entry = SimplifiedMNListEntry.fromP2PBufferReader(reader, Networks.testnet);
+
+      expect(reader.finished()).to.be.true;
+      expect(entry.nVersion).to.be.equal(1);
+      expect(entry.nType).to.be.equal(0);
+      expect(entry.platformHTTPPort).to.be.undefined;
+      expect(entry.toP2PBuffer().toString('hex')).to.be.equal(hex);
+    });
+    it('Should not modify the buffer it parses', function () {
+      var hex = '0300' + extAddrEvoEntryHex;
+      var buffer = Buffer.from(hex, 'hex');
+
+      SimplifiedMNListEntry.fromP2PBufferReader(new BufferReader(buffer), Networks.testnet);
+
+      expect(buffer.toString('hex')).to.be.equal(hex);
     });
   });
   describe('fromObject', function () {

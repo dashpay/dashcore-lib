@@ -1,3 +1,5 @@
+import { BufferReader } from '../buffer/BufferReader';
+
 /**
  * @typedef {Object} SMLEntry
  * @property {string} proRegTxHash
@@ -54,6 +56,18 @@ export class SimplifiedMNListEntry {
   static fromBuffer(buffer: Buffer, network?: string): SimplifiedMNListEntry;
 
   /**
+   * Reads an entry as Core sends it in the P2P `mnlistdiff` message:
+   * nVersion followed by the hashed fields (see toP2PBuffer)
+   * @param {BufferReader} bufferReader
+   * @param {string} [network]
+   * @return {SimplifiedMNListEntry}
+   */
+  static fromP2PBufferReader(
+    bufferReader: BufferReader,
+    network?: string
+  ): SimplifiedMNListEntry;
+
+  /**
    * @param {string} string
    * @param {string} [network]
    * @return {SimplifiedMNListEntry}
@@ -65,6 +79,13 @@ export class SimplifiedMNListEntry {
    * @return {Buffer}
    */
   toBuffer(): Buffer;
+
+  /**
+   * Serialize SML entry as Core sends it in the P2P `mnlistdiff` message
+   * (protocol 70228 and later): nVersion, then the fields toBuffer() hashes
+   * @return {Buffer}
+   */
+  toP2PBuffer(): Buffer;
 
   /**
    * Create SMLEntry from an object

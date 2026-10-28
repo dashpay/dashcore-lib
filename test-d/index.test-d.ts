@@ -112,3 +112,14 @@ expectType<number | undefined>(proUpServTxPayload.platformHTTPPort);
 declare const proUpRegTxPayload: ProUpRegTxPayload;
 expectType<MasternodePayout[] | undefined>(proUpRegTxPayload.payouts);
 expectType<string | undefined>(proUpRegTxPayload.scriptPayout);
+
+// Core P2P masternode list diffs
+declare const bufferReader: BufferReader;
+declare const SMLEntryClass: typeof SimplifiedMNListEntry;
+declare const QuorumEntryClass: typeof QuorumEntry;
+expectType<SimplifiedMNListEntry>(SMLEntryClass.fromP2PBufferReader(bufferReader, 'testnet'));
+expectType<QuorumEntry>(QuorumEntryClass.fromP2PBufferReader(bufferReader));
+declare const smlEntry: SimplifiedMNListEntry;
+expectType<Buffer>(smlEntry.toP2PBuffer());
+declare const smlDiff: SimplifiedMNListDiff;
+expectType<Record<string, number[]>[] | undefined>(smlDiff.quorumsCLSigs);

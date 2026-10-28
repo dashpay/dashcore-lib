@@ -4,6 +4,7 @@
 var expect = require('chai').expect;
 var QuorumEntry = require('../../lib/deterministicmnlist/QuorumEntry');
 var SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList');
+var BufferReader = require('../../lib/encoding/bufferreader');
 var SMNListFixture = require('../fixtures/mnList');
 const DashcoreLib = require("../../index");
 
@@ -97,6 +98,25 @@ describe('QuorumEntry', function () {
       QuorumEntry.fromBuffer(buffer);
 
       expect(buffer.toString('hex')).to.be.equal(quorumEntryHex);
+    });
+  });
+  describe('fromP2PBufferReader', function () {
+    it('Should read the commitment Core sends and count set bits like Core RPC', function () {
+      // 50-member bit sets with 48 signers and 49 valid members
+      var hex = quorumEntryHex.replace('0cff0f0cff0f', '32fffffffffffe0232ffffffffffff02');
+      var reader = new BufferReader(Buffer.from(hex, 'hex'));
+      var entry = QuorumEntry.fromP2PBufferReader(reader, {
+        107: { size: 50 },
+      });
+
+      expect(reader.finished()).to.be.true;
+      expect(entry.toObject()).to.be.deep.equal(Object.assign({}, quorumEntryJSON, {
+        signersCount: 48,
+        signers: 'fffffffffffe02',
+        validMembersCount: 49,
+        validMembers: 'ffffffffffff02',
+      }));
+      expect(entry.toBufferForHashing().toString('hex')).to.be.equal(hex);
     });
   });
   describe('to buffer', function () {

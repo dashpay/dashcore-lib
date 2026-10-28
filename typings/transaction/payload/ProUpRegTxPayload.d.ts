@@ -1,3 +1,5 @@
+import { MasternodePayout, MasternodePayoutJSON } from './MasternodePayout';
+
 /**
  * @typedef {Object} ProUpRegTransactionPayloadJSON
  * @property {number} version
@@ -5,7 +7,8 @@
  * @property {string} proTxHash
  * @property {string} pubKeyOperator
  * @property {string} keyIDVoting
- * @property {string} payoutAddress
+ * @property {string} [payoutAddress] Before version 3
+ * @property {MasternodePayoutJSON[]} [payouts] Owner payees with their reward shares. From version 3
  * @property {string} inputsHash
  * @property {string} [platformNodeID] Platform Node ID
  * @property {number} [platformP2PPort] Platform P2P port
@@ -18,7 +21,8 @@ export type ProUpRegTransactionPayloadJSON = {
   proTxHash: string;
   pubKeyOperator: string;
   keyIDVoting: string;
-  payoutAddress: string;
+  payoutAddress?: string;
+  payouts?: MasternodePayoutJSON[];
   inputsHash: string;
   platformNodeID?: string;
   platformP2PPort?: number;
@@ -35,7 +39,8 @@ export type ProUpRegTransactionPayloadJSON = {
  * @property {string} pubKeyOperator BLSPubKey    48    The public key hash used for operational related signing (network messages, ProTx updates)
  * @property {string} keyIDVoting CKeyID    20    The public key hash used for voting.
  * @property {number} scriptPayoutSize compactSize uint    1-9    Size of the Payee Script.
- * @property {string} scriptPayout Script    Variable    Payee script (p2pkh/p2sh)
+ * @property {string} [scriptPayout] Script    Variable    Payee script (p2pkh/p2sh). Before version 3
+ * @property {MasternodePayout[]} [payouts] Owner payees with their reward shares. From version 3
  * @property {string} inputsHash uint256    32    Hash of all the outpoints of the transaction inputs
  * @property {number} payloadSigSize compactSize uint    1-9    Size of the Signature
  * @property {string} [platformNodeID] Platform Node ID
@@ -123,9 +128,13 @@ export class ProUpRegTxPayload {
    */
   scriptPayoutSize: number;
   /**
-   * Script    Variable    Payee script (p2pkh/p2sh)
+   * Script    Variable    Payee script (p2pkh/p2sh). Before version 3
    */
-  scriptPayout: string;
+  scriptPayout?: string;
+  /**
+   * Owner payees with their reward shares. From version 3
+   */
+  payouts?: MasternodePayout[];
   /**
    * uint256    32    Hash of all the outpoints of the transaction inputs
    */

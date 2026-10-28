@@ -102,4 +102,36 @@ describe('ProTxUpServPayload', function () {
       expect(payload.validate.callCount).to.be.equal(1);
     });
   });
+
+  describe('operator payout', function () {
+    it('Should leave out the operator payout address when there is none', function () {
+      var json = proUpServTxFixture.getProUpServPayloadJSON();
+      delete json.operatorPayoutAddress;
+
+      var payload = ProTxUpServPayload.fromJSON(json);
+      var restored = ProTxUpServPayload.fromJSON(
+        payload.toJSON({ network: 'testnet' })
+      );
+
+      expect(payload.scriptOperatorPayout).to.be.equal('');
+      expect(payload.toJSON({ network: 'testnet' })).to.be.deep.equal(json);
+      expect(restored.toBuffer()).to.be.deep.equal(payload.toBuffer());
+    });
+  });
+
+  describe('version 3 (ExtAddr)', function () {
+    var vectors = require('../../fixtures/core24-protx.json').transactions;
+
+    it('Should require addresses that can be serialized', function () {
+      var vector = vectors.find(function (v) {
+        return v.name === 'v3 evonode ProUpServTx';
+      });
+      var payload = new DashcoreLib.Transaction(vector.hex).extraPayload;
+      payload.addresses = { core_p2p: ['1.2.3.4:9999'], unknown: [] };
+
+      expect(function () {
+        payload.validate();
+      }).to.throw('Unknown address purpose unknown');
+    });
+  });
 });

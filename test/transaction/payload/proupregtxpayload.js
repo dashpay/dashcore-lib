@@ -103,4 +103,27 @@ describe('ProUpRegTxPayload', function () {
       expect(payload.validate.callCount).to.be.equal(1);
     });
   });
+
+  describe('version 3 (ExtAddr)', function () {
+    var vector = require('../../fixtures/core24-protx.json').transactions.find(
+      function (v) {
+        return v.name === 'v3 ProUpRegTx';
+      }
+    );
+
+    it('Should keep version 1 as the default for new payloads', function () {
+      expect(new ProUpRegTxPayload().version).to.be.equal(1);
+    });
+
+    it('Should require valid payouts', function () {
+      var payload = new DashcoreLib.Transaction(vector.hex).extraPayload;
+      payload.payouts = [];
+      payload.validate();
+
+      payload.payouts = undefined;
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect payouts to be an array');
+    });
+  });
 });

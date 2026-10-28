@@ -221,6 +221,34 @@ describe('ProRegTxPayload', function () {
       }).to.throw('Expected payout scriptPayout to be a p2pkh/p2sh');
     });
 
+    it('Should require payouts unless the masternode is shared', function () {
+      var payload = getPayload('v3 ProRegTx with two payouts');
+      payload.payouts = [];
+
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect at least one payout');
+
+      payload = getSharedPayload();
+      payload.payouts = getPayload('v3 ProRegTx with two payouts').payouts;
+
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect no payouts for a shared masternode');
+    });
+
+    it('Should reject a version 3 payoutAddress', function () {
+      var json = getPayload('v3 ProRegTx with two payouts').toJSON({
+        network: 'testnet',
+      });
+      json.payoutAddress = json.payouts[0].address;
+      delete json.payouts;
+
+      expect(function () {
+        ProRegTxPayload.fromJSON(json);
+      }).to.throw('Expect payouts instead of payoutAddress from version 3');
+    });
+
     it('Should require addresses that can be serialized', function () {
       var payload = getPayload('v3 evonode ProRegTx');
       payload.addresses = { core_p2p: ['not an address'] };

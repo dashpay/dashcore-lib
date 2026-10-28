@@ -76,6 +76,18 @@ describe('netinfo', () => {
       expect(() => extNetInfoToBuffer({ platform_https: ['Example.com:443'] })).to.throw('Invalid address entry');
       expect(() => extNetInfoToBuffer({ core_p2p: ['[2001:db8::1::2]:9999'] })).to.throw('Invalid IPv6');
       expect(() => extNetInfoToBuffer({ core_p2p: ['aaaa.onion:9999'] })).to.throw('Invalid Tor v3');
+      // IPv6 forms Core reads as IPv4, Tor v2 or internal addresses
+      ['[::ffff:102:304]:9999', '[fd87:d87e:eb43::1]:9999', '[fd6b:88c0:8724::1]:9999'].forEach((entry) => {
+        expect(() => extNetInfoToBuffer({ core_p2p: [entry] })).to.throw('Invalid IPv6 address');
+      });
+      // DOMAIN_MAX_LEN is 253 characters
+      const label = 'a'.repeat(63);
+      const domain253 = [label, label, label, 'a'.repeat(61)].join('.');
+      expect(domain253).to.have.lengthOf(253);
+      expect(extNetInfoFromBuffer(extNetInfoToBuffer({ platform_https: [`${domain253}:443`] })))
+        .to.deep.equal({ platform_https: [`${domain253}:443`] });
+      expect(() => extNetInfoToBuffer({ platform_https: [`${domain253}aa:443`] }))
+        .to.throw('Invalid address entry');
       // a valid address with the last checksum character changed
       expect(() => extNetInfoToBuffer({
         core_p2p: ['pg6mmjiyjmcrsslvykfwnntlaru7p5svn6y2ymmju6nubxndf4pscsyd.onion:9999'],
@@ -92,13 +104,15 @@ describe('netinfo', () => {
 
   describe('extNetInfoFromBuffer', () => {
     it('should read every address kind in Core\'s string form', () => {
-      // Tor, I2P and domain entries as Core v24 reports them (rpc_netinfo.py)
+      // Entries as Core v24 reports them: Tor, I2P and domain from rpc_netinfo.py;
+      // the IPv6 and CJDNS ones decoded by Core from an rpc_netinfo.py
+      // ProUpServTx with its [::1] entry replaced
       const addresses = {
         core_p2p: [
           '127.0.0.1:19951',
           'kpgvmscirrdqpekbqjsvw5teanhatztpp2gl6eee4zkowvwfxwenqaid.onion:19951',
-          '[2001:db8::1]:9999',
-          '[fc00::1]:9999',
+          '[2a01:4f8::1]:19951',
+          '[fc00::1]:19951',
         ],
         platform_p2p: ['c4gfnttsuwqomiygupdqqqyy5y5emnk5c73hrfvatri67prd7vyq.b32.i2p:0'],
         platform_https: ['server-1.example.com:22201'],

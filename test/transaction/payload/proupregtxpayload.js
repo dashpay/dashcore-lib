@@ -115,15 +115,29 @@ describe('ProUpRegTxPayload', function () {
       expect(new ProUpRegTxPayload().version).to.be.equal(1);
     });
 
-    it('Should require valid payouts', function () {
+    it('Should require at least one payout', function () {
       var payload = new DashcoreLib.Transaction(vector.hex).extraPayload;
       payload.payouts = [];
-      payload.validate();
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect at least one payout');
 
       payload.payouts = undefined;
       expect(function () {
         payload.validate();
       }).to.throw('Expect payouts to be an array');
+    });
+
+    it('Should reject a version 3 payoutAddress', function () {
+      var json = new DashcoreLib.Transaction(vector.hex).extraPayload.toJSON({
+        network: 'testnet',
+      });
+      json.payoutAddress = json.payouts[0].address;
+      delete json.payouts;
+
+      expect(function () {
+        ProUpRegTxPayload.fromJSON(json);
+      }).to.throw('Expect payouts instead of payoutAddress from version 3');
     });
   });
 });

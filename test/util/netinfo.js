@@ -230,6 +230,13 @@ describe('netinfo', () => {
         .to.throw('Duplicate core_p2p address 1.2.3.4');
     });
 
+    it('should reject the same IPv6 address written two ways', () => {
+      expect(() => valid({ core_p2p: ['[2a01:4f8::1]:9999', '[2A01:4F8:0:0::1]:9999'] }))
+        .to.throw('Duplicate address [2A01:4F8:0:0::1]:9999');
+      expect(() => valid({ core_p2p: ['[2a01:4f8::1]:9999', '[2a01:4f8:0::1]:9998'] }))
+        .to.throw('Duplicate core_p2p address [2a01:4f8:0::1]');
+    });
+
     it('should reject addresses Core considers invalid', () => {
       ['0.0.0.0:9999', '255.255.255.255:9999', '[::]:9999', '[2001:db8::1]:9999'].forEach((entry) => {
         expect(() => valid({ core_p2p: [entry] })).to.throw(`Invalid address ${entry}`);

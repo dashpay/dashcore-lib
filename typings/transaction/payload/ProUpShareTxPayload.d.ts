@@ -1,3 +1,5 @@
+import { PrivateKey } from '../../PrivateKey';
+
 /**
  * @typedef {Object} ProUpShareTransactionPayloadJSON
  * @property {number} version
@@ -69,6 +71,29 @@ export class ProUpShareTxPayload {
    * @return {Buffer}
    */
   toBuffer(options?: { skipSignature?: boolean }): Buffer;
+
+  /**
+   * Hash of the payload; with skipSignature it is the hash the share owner signs
+   * @param [options]
+   * @param {boolean} options.skipSignature - omit the signature
+   * @return {Buffer}
+   */
+  getHash(options?: { skipSignature?: boolean }): Buffer;
+
+  /**
+   * Signs the payload hash with the share owner key and sets payloadSig
+   * @param {string|PrivateKey} privateKey - share owner key
+   * @return {ProUpShareTxPayload}
+   */
+  sign(privateKey: string | PrivateKey): ProUpShareTxPayload;
+
+  /**
+   * Verifies the payload signature against the share owner key id.
+   * Only canonical signatures (recovery header 27..34, low S) verify.
+   * @param {string|Buffer} publicKeyId - share owner key id
+   * @return {boolean}
+   */
+  verifySignature(publicKeyId: string | Buffer): boolean;
 
   /**
    * Copy payload instance

@@ -79,6 +79,7 @@ export class ProUpSharedRegTxPayload {
 
   /**
    * Verifies one of the payload signatures against a share owner key id
+   * Only canonical signatures (recovery header 27..34, low S) verify.
    * @param {string|Buffer} publicKeyId - share owner key id
    * @param {number} [sigIndex=0] - index of the signature in payloadSigs
    * @return {boolean}

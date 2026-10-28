@@ -86,6 +86,7 @@ export class ProDisTxPayload {
 
   /**
    * Verifies one of the dissolution signatures against a share owner key id
+   * Only canonical signatures (recovery header 27..34, low S) verify.
    * @param {string|Buffer} publicKeyId - share owner key id
    * @param {Transaction} transaction - the dissolution transaction
    * @param {number} [sigIndex=0] - index of the signature in payloadSigs

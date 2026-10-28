@@ -71,5 +71,8 @@ expectType<ProDisTxPayload>(proDisTxPayload.sign('key', transaction, 1));
 expectType<boolean>(proDisTxPayload.verifySignature('id', transaction, 0));
 expectType<string>(proUpShareTxPayload.toJSON({ network: 'testnet' }).rewardAddress);
 expectType<string>(proUpShareTxPayload.scriptReward);
+expectType<ProUpShareTxPayload>(proUpShareTxPayload.sign('key'));
+expectType<boolean>(proUpShareTxPayload.verifySignature('id'));
+expectType<Buffer>(proUpShareTxPayload.getHash({ skipSignature: true }));
 expectType<ProUpSharedRegTxPayload>(proUpSharedRegTxPayload.sign('key'));
 expectType<boolean>(proUpSharedRegTxPayload.verifySignature('id', 1));

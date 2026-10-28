@@ -248,6 +248,20 @@ describe('SimplifiedMNListDiff', function () {
           return quorum.signersCount < quorum.getParams().size;
         })).to.be.true;
       });
+      it('Should give each evonode the Platform endpoint Core RPC reports', function () {
+        var checked = 0;
+        diff.mnList.forEach(function (entry, i) {
+          var platformHTTPS = coreDiffsJSON[0].mnList[i].addresses.platform_https;
+          // Version 1 entries carry no type on the wire
+          if (entry.nVersion < 2 || !platformHTTPS) {
+            return;
+          }
+          var endpoint = entry.getPlatformHTTPSEndpoint();
+          expect(endpoint.host + ':' + endpoint.port).to.be.equal(platformHTTPS[0]);
+          checked += 1;
+        });
+        expect(checked).to.be.above(50);
+      });
       it('Should serialize Core RPC JSON to the bytes Core sends', function () {
         expect(rpcDiff.toBuffer().toString('hex')).to.be.equal(vector.hex);
       });

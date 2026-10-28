@@ -106,6 +106,16 @@ export class SimplifiedMNListEntry {
   getIp(): string;
 
   /**
+   * Gets the evonode's Platform HTTPS endpoint: the first `platform_https` address
+   * of a version 3 (ExtAddr) entry, which may be an IPv6 address or a domain, or
+   * the service ip with platformHTTPPort of an older one. PoSe-banned entries
+   * have endpoints too; check isValid before using one.
+   * @return {{host: string, port: number}|null} host without IPv6 brackets, like
+   * getIp(); null for regular masternodes and evonodes without an address
+   */
+  getPlatformHTTPSEndpoint(): { host: string; port: number } | null;
+
+  /**
    * Creates a copy of SimplifiedMNListEntry
    * @return {SimplifiedMNListEntry}
    */

@@ -123,3 +123,4 @@ declare const smlEntry: SimplifiedMNListEntry;
 expectType<Buffer>(smlEntry.toP2PBuffer());
 declare const smlDiff: SimplifiedMNListDiff;
 expectType<Record<string, number[]>[] | undefined>(smlDiff.quorumsCLSigs);
+expectType<{ host: string; port: number } | null>(smlEntry.getPlatformHTTPSEndpoint());

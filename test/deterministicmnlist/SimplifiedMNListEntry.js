@@ -355,4 +355,59 @@ describe('SimplifiedMNListEntry', function () {
       expect(entry.getIp()).to.be.equal('2001:db8::1');
     });
   });
+  describe('getPlatformHTTPSEndpoint', function () {
+    it('Should get the service ip and platformHTTPPort of a legacy evonode', function () {
+      var entry = new SimplifiedMNListEntry(smlEntryJSON);
+      expect(entry.getPlatformHTTPSEndpoint()).to.be.deep.equal({
+        host: '95.183.51.146',
+        port: 3200,
+      });
+    });
+    it('Should get the platform_https address of a version 3 evonode', function () {
+      var entry = new SimplifiedMNListEntry(extAddrEvoEntryJSON);
+      expect(entry.getPlatformHTTPSEndpoint()).to.be.deep.equal({
+        host: '162.35.243.85',
+        port: 1443,
+      });
+    });
+    it('Should get a platform_https host that differs from the service ip', function () {
+      [
+        ['[2001:db8::1]:443', '2001:db8::1'],
+        ['evo.example.com:443', 'evo.example.com'],
+        ['203.0.113.7:443', '203.0.113.7'],
+      ].forEach(function (testCase) {
+        var json = Object.assign({}, extAddrEvoEntryJSON, {
+          addresses: Object.assign({}, extAddrEvoEntryJSON.addresses, {
+            platform_https: [testCase[0]],
+          }),
+        });
+        var entry = new SimplifiedMNListEntry(json);
+
+        expect(entry.getIp()).to.be.equal('162.35.243.85');
+        expect(entry.getPlatformHTTPSEndpoint()).to.be.deep.equal({
+          host: testCase[1],
+          port: 443,
+        });
+      });
+    });
+    it('Should return null for an evonode without a Platform address', function () {
+      var json = Object.assign({}, extAddrEvoEntryJSON, {
+        addresses: { core_p2p: extAddrEvoEntryJSON.addresses.core_p2p },
+      });
+      expect(new SimplifiedMNListEntry(json).getPlatformHTTPSEndpoint()).to.be.null;
+      expect(
+        new SimplifiedMNListEntry(smlEntryWithoutAddress).getPlatformHTTPSEndpoint()
+      ).to.be.null;
+    });
+    it('Should return null for a regular masternode', function () {
+      expect(
+        new SimplifiedMNListEntry(extAddrRegularEntryJSON).getPlatformHTTPSEndpoint()
+      ).to.be.null;
+      expect(
+        new SimplifiedMNListEntry(
+          Object.assign({}, smlEntryJSON, { nType: 0, platformHTTPPort: undefined })
+        ).getPlatformHTTPSEndpoint()
+      ).to.be.null;
+    });
+  });
 });

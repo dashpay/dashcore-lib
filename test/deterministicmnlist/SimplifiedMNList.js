@@ -7,6 +7,7 @@ var QuorumEntry = require('../../lib/deterministicmnlist/QuorumEntry');
 var constants = require('../../lib/constants');
 var Networks = require('../../lib/networks');
 const testnetDiffs = require('../fixtures/testnetSMLDiffs.json');
+const core24TestnetDiffs = require('../fixtures/core24-testnet-mnlistdiffs.json');
 
 describe('SimplifiedMNList', function () {
   this.timeout(15000);
@@ -116,6 +117,23 @@ describe('SimplifiedMNList', function () {
       testnetDiffs.forEach((diff) => {
         mnList.applyDiff(diff);
       });
+    });
+    it('should apply Core V24 testnet diffs with ExtAddr entries and CbTx v4', function () {
+      const [fullDiff, nextDiff] = core24TestnetDiffs;
+      const mnList = new SimplifiedMNList(fullDiff);
+
+      expect(mnList.cbTx.extraPayload.version).to.be.equal(4);
+      expect(mnList.mnList.filter((entry) => entry.nVersion === 3)).to.have.lengthOf(12);
+      expect(mnList.merkleRootMNList).to.be.equal(fullDiff.merkleRootMNList);
+      expect(mnList.merkleRootQuorums).to.be.equal(fullDiff.merkleRootQuorums);
+      expect(
+        mnList.quorumList.filter((quorum) => quorum.llmqType === constants.LLMQ_TYPES.LLMQ_TYPE_60_75)
+      ).to.have.lengthOf(32);
+
+      mnList.applyDiff(nextDiff);
+
+      expect(mnList.blockHash).to.be.equal(nextDiff.blockHash);
+      expect(mnList.merkleRootMNList).to.be.equal(nextDiff.merkleRootMNList);
     });
   });
   describe('calculateMerkleRoot', function () {

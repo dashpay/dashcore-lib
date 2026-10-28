@@ -4,6 +4,7 @@ const {
   extNetInfoToBuffer,
   extNetInfoFromBuffer,
   readExtNetInfo,
+  validateMasternodeAddresses,
 } = require('../../lib/util/netinfo');
 
 // Expected bytes follow Core's ExtNetInfo / NetInfoEntry serialization
@@ -75,6 +76,9 @@ describe('netinfo', () => {
       expect(() => extNetInfoToBuffer({ core_p2p: ['1.2.3.4:0x10'] })).to.throw('Invalid address entry');
       expect(() => extNetInfoToBuffer({ platform_https: ['Example.com:443'] })).to.throw('Invalid address entry');
       expect(() => extNetInfoToBuffer({ core_p2p: ['[2001:db8::1::2]:9999'] })).to.throw('Invalid IPv6');
+      // `::` must stand for at least one zero group
+      expect(() => extNetInfoToBuffer({ core_p2p: ['[1:2:3:4:5:6:7:8::]:9999'] })).to.throw('Invalid IPv6');
+      expect(() => extNetInfoToBuffer({ core_p2p: ['[::1:2:3:4:5:6:7:8]:9999'] })).to.throw('Invalid IPv6');
       expect(() => extNetInfoToBuffer({ core_p2p: ['aaaa.onion:9999'] })).to.throw('Invalid Tor v3');
       // longer than any base32 name, rejected before decoding
       expect(() => extNetInfoToBuffer({ core_p2p: [`${'a'.repeat(57)}.onion:9999`] })).to.throw('is too long');
@@ -168,11 +172,106 @@ describe('netinfo', () => {
       expect(() => extNetInfoFromBuffer(entry('01010501020304'))).to.throw('Invalid BIP155 address of network 1 and size 5');
       expect(() => extNetInfoFromBuffer(entry(`010210${'00000000000000000000ffff01020304'}270f`)))
         .to.throw('Invalid IPv6 address');
+      // Core reads CJDNS without the fc prefix as an invalid entry
+      expect(() => extNetInfoFromBuffer(entry(`010610${'fd000000000000000000000000000001'}270f`)))
+        .to.throw('Invalid CJDNS address');
+      // a domain Core's validation rejects still reads, like Core deserializes it
+      expect(extNetInfoFromBuffer(extNetInfoToBuffer({ platform_https: ['-a.b:443'] })))
+        .to.deep.equal({ platform_https: ['-a.b:443'] });
       expect(() => extNetInfoFromBuffer(entry(`0203${Buffer.from('A.b').toString('hex')}01bb`)))
         .to.throw('Invalid domain');
       expect(() => extNetInfoFromBuffer(entry('02fdfe00'))).to.throw('too long');
       expect(() => extNetInfoFromBuffer(Buffer.concat([extNetInfoToBuffer({}), Buffer.from('00', 'hex')])))
         .to.throw('ExtNetInfo is followed by unexpected data');
+    });
+  });
+
+  describe('validateMasternodeAddresses', () => {
+    const regular = { core_p2p: ['1.2.3.4:9999'] };
+    const evo = {
+      core_p2p: ['1.2.3.4:9999'],
+      platform_p2p: ['1.2.3.4:26656'],
+      platform_https: ['1.2.3.4:443', 'evo.example.org:443'],
+    };
+    const valid = (addresses, options = {}) => validateMasternodeAddresses(
+      addresses,
+      { evo: false, allowEmpty: false, ...options },
+    );
+    const withHTTPS = (entry) => ({ ...evo, platform_https: [entry] });
+
+    it('should accept the addresses of Core vectors', () => {
+      valid(regular);
+      valid(evo, { evo: true });
+      valid({
+        core_p2p: ['127.0.0.1:19951', 'kpgvmscirrdqpekbqjsvw5teanhatztpp2gl6eee4zkowvwfxwenqaid.onion:19951'],
+        platform_p2p: ['127.0.0.1:22200', 'c4gfnttsuwqomiygupdqqqyy5y5emnk5c73hrfvatri67prd7vyq.b32.i2p:0'],
+        platform_https: ['127.0.0.1:22201', 'server-1.example.com:22201'],
+      }, { evo: true });
+    });
+
+    it('should allow an empty map only where Core does', () => {
+      valid({}, { allowEmpty: true });
+      expect(() => valid({})).to.throw('Expected addresses to have core_p2p entries');
+    });
+
+    it('should require the purposes of the node type', () => {
+      expect(() => valid({ platform_https: ['1.2.3.4:443'] }, { allowEmpty: true }))
+        .to.throw('Expected addresses to have core_p2p entries');
+      expect(() => valid({ core_p2p: [] })).to.throw('Expected core_p2p addresses to be non-empty');
+      expect(() => valid(evo)).to.throw('Expected regular masternode addresses to have no platform entries');
+      expect(() => valid(regular, { evo: true }))
+        .to.throw('Expected evonode addresses to have platform_p2p and platform_https entries');
+    });
+
+    it('should reject duplicate addresses', () => {
+      expect(() => valid({ ...evo, platform_p2p: ['1.2.3.4:9999'] }, { evo: true }))
+        .to.throw('Duplicate address 1.2.3.4:9999');
+      expect(() => valid({ core_p2p: ['1.2.3.4:9999', '1.2.3.4:9998'] }))
+        .to.throw('Duplicate core_p2p address 1.2.3.4');
+    });
+
+    it('should reject addresses Core considers invalid', () => {
+      ['0.0.0.0:9999', '255.255.255.255:9999', '[::]:9999', '[2001:db8::1]:9999'].forEach((entry) => {
+        expect(() => valid({ core_p2p: [entry] })).to.throw(`Invalid address ${entry}`);
+      });
+    });
+
+    it('should reject bad ports', () => {
+      expect(() => valid({ core_p2p: ['1.2.3.4:0'] })).to.throw('Invalid port');
+      expect(() => valid({ core_p2p: ['1.2.3.4:1023'] })).to.throw('Invalid port');
+      expect(() => valid({ core_p2p: ['1.2.3.4:6667'] })).to.throw('Invalid port');
+      // 443 is only allowed for Platform HTTPS
+      expect(() => valid({ core_p2p: ['1.2.3.4:443'] })).to.throw('Invalid port');
+      expect(() => valid({ ...evo, platform_https: ['1.2.3.4:80'] }, { evo: true })).to.throw('Invalid port');
+      // I2P has no ports
+      expect(() => valid({
+        core_p2p: ['c4gfnttsuwqomiygupdqqqyy5y5emnk5c73hrfvatri67prd7vyq.b32.i2p:9999'],
+      })).to.throw('Invalid port');
+    });
+
+    it('should allow domains only for Platform HTTPS', () => {
+      expect(() => valid({ core_p2p: ['example.org:9999'] }))
+        .to.throw('Expected a domain only in platform_https addresses');
+    });
+
+    it('should apply Core\'s domain rules', () => {
+      const label = 'a'.repeat(63);
+      valid(withHTTPS(`${label}.${label}.org:443`), { evo: true });
+      [
+        'ab:443', // too short and dotless
+        'example:443', // dotless
+        `${'a'.repeat(64)}.org:443`, // label too long
+        'a..org:443', // empty label
+        '.a.org:443', // leading dot
+        'a.org.:443', // trailing dot
+        '-a.org:443', // label starting with a hyphen
+        'a-.org:443', // label ending with a hyphen
+        'a.org1:443', // non-alphabetic top-level label
+        'a.example:443', // reserved TLD
+        'a.local:443', // reserved TLD
+      ].forEach((entry) => {
+        expect(() => valid(withHTTPS(entry), { evo: true }), entry).to.throw('Invalid domain');
+      });
     });
   });
 });

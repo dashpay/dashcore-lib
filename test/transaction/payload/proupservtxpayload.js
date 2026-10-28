@@ -138,6 +138,36 @@ describe('ProTxUpServPayload', function () {
       }).to.throw('Unknown address purpose unknown');
     });
 
+    it('Should require a version from 1 to 3', function () {
+      [0, 4].forEach(function (version) {
+        var payload = getPayload();
+        payload.version = version;
+        expect(function () {
+          payload.validate();
+        }).to.throw('Expect version to be an integer from 1 to 3');
+      });
+    });
+
+    it('Should require addresses, with the purposes of the node type', function () {
+      var payload = getPayload();
+      payload.addresses = {};
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expected addresses to have core_p2p entries');
+
+      payload = getPayload();
+      payload.type = 0;
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expected regular masternode addresses to have no platform entries');
+
+      payload = getPayload();
+      delete payload.addresses.platform_p2p;
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expected evonode addresses to have platform_p2p and platform_https entries');
+    });
+
     it('Should require a 96 byte BLS signature', function () {
       var payload = getPayload();
       payload.validate();

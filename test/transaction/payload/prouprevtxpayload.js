@@ -105,4 +105,23 @@ describe('ProUpRevTxPayload', function () {
       expect(payload.validate.callCount).to.be.equal(1);
     });
   });
+
+  describe('#validate', function () {
+    var vector = require('../../fixtures/core24-protx.json').transactions.find(
+      function (v) {
+        return v.name === 'v3 ProUpRevTx';
+      }
+    );
+
+    it('Should require a version from 1 to 3', function () {
+      var payload = new DashcoreLib.Transaction(vector.hex).extraPayload;
+      payload.validate();
+      [0, 4].forEach(function (version) {
+        payload.version = version;
+        expect(function () {
+          payload.validate();
+        }).to.throw('Expect version to be an integer from 1 to 3');
+      });
+    });
+  });
 });

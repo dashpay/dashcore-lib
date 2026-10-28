@@ -175,6 +175,27 @@ describe('ProRegTxPayload', function () {
     var SHARED = 'v3 shared ProRegTx with an explicit reward script';
     var COIN = 100000000;
 
+    it('Should require a version from 1 to 3', function () {
+      [0, 4].forEach(function (version) {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.version = version;
+        }, 'Expect version to be an integer from 1 to 3');
+      });
+    });
+
+    it('Should allow registering without addresses, but check given ones', function () {
+      var payload = getPayload(TWO_PAYOUTS);
+      expect(payload.addresses).to.be.deep.equal({});
+      payload.validate();
+
+      withPayload(TWO_PAYOUTS, function (payload) {
+        payload.addresses = { core_p2p: ['1.2.3.4:9999'], platform_p2p: ['1.2.3.4:26656'] };
+      }, 'Expected regular masternode addresses to have no platform entries');
+      withPayload('v3 evonode ProRegTx', function (payload) {
+        delete payload.addresses.platform_https;
+      }, 'Expected evonode addresses to have platform_p2p and platform_https entries');
+    });
+
     it('Should validate every Core vector', function () {
       vectors
         .filter(function (v) {
@@ -325,6 +346,8 @@ describe('ProRegTxPayload', function () {
         withPayload(SHARED, function (payload) {
           payload.type = 1;
           payload.platformNodeID = '11'.repeat(20);
+          payload.addresses.platform_p2p = ['127.0.0.1:22000'];
+          payload.addresses.platform_https = ['127.0.0.1:22001'];
         }, 'Expect share amounts to add up to the masternode collateral');
       });
 

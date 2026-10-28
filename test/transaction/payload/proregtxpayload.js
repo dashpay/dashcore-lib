@@ -206,6 +206,96 @@ describe('ProRegTxPayload', function () {
         });
     });
 
+    describe('Core checks of every version', function () {
+      var V1 = 'v1 ProRegTx';
+      var V2_EVO = 'v2 evonode ProRegTx';
+      var V3_EVO = 'v3 evonode ProRegTx';
+
+      it('Should reject an unknown version while parsing', function () {
+        var raw = Buffer.from(getPayload(TWO_PAYOUTS).toBuffer());
+        [0, 4].forEach(function (version) {
+          raw.writeUInt16LE(version, 0);
+          expect(function () {
+            ProRegTxPayload.fromBuffer(raw);
+          }).to.throw('Expect version to be an integer from 1 to 3');
+        });
+      });
+
+      it('Should require a regular or evo type, and evonodes from version 2', function () {
+        [V1, V2_EVO, TWO_PAYOUTS].forEach(function (name) {
+          withPayload(name, function (payload) {
+            payload.type = 2;
+          }, 'Expect type to be 0 (regular) or 1 (evo)');
+        });
+        withPayload(V1, function (payload) {
+          payload.type = 1;
+        }, 'Expect evonodes to register with version 2 or later');
+      });
+
+      it('Should require mode 0', function () {
+        [V1, TWO_PAYOUTS].forEach(function (name) {
+          withPayload(name, function (payload) {
+            payload.mode = 1;
+          }, 'Expect mode to be 0');
+        });
+      });
+
+      it('Should require non-null owner and voting keys of 20 bytes', function () {
+        withPayload(V1, function (payload) {
+          payload.keyIDOwner = '00'.repeat(20);
+        }, 'Expect keyIDOwner to be a non-null 20 byte key id');
+        [V1, TWO_PAYOUTS, SHARED].forEach(function (name) {
+          withPayload(name, function (payload) {
+            payload.keyIDVoting = '00'.repeat(20);
+          }, 'Expect keyIDVoting to be a non-null 20 byte key id');
+          withPayload(name, function (payload) {
+            payload.keyIDVoting = payload.keyIDVoting.slice(2);
+          }, 'Expect keyIDVoting to be a non-null 20 byte key id');
+        });
+      });
+
+      it('Should require a 48 byte operator key and a 32 byte inputsHash', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.pubKeyOperator = payload.pubKeyOperator.slice(2);
+        }, 'Expect pubKeyOperator to be 48 bytes in size');
+        withPayload(V1, function (payload) {
+          payload.inputsHash = payload.inputsHash.slice(2);
+        }, 'Expect inputsHash to be a hex string representing sha256 hash');
+      });
+
+      it('Should require a non-null platformNodeID for evonodes', function () {
+        [V2_EVO, V3_EVO].forEach(function (name) {
+          withPayload(name, function (payload) {
+            payload.platformNodeID = '00'.repeat(20);
+          }, 'Expect platformNodeID to be a non-null 20 byte key id');
+        });
+      });
+
+      it('Should check the platform ports of a version 2 evonode', function () {
+        withPayload(V2_EVO, function (payload) {
+          payload.platformP2PPort = 9999;
+        }, 'Expect platform ports not to be the mainnet Core port 9999');
+        withPayload(V2_EVO, function (payload) {
+          payload.platformHTTPPort = payload.platformP2PPort;
+        }, 'Expect the platform ports and the Core port to differ');
+        withPayload(V2_EVO, function (payload) {
+          payload.platformHTTPPort = 19999;
+        }, 'Expect the platform ports and the Core port to differ');
+      });
+
+      it('Should check a version 1 or 2 payout script like a payout list', function () {
+        withPayload(V1, function (payload) {
+          payload.scriptPayout = '';
+        }, 'Expected payout scriptPayout to be a p2pkh/p2sh');
+        withPayload(V1, function (payload) {
+          payload.scriptPayout = p2pkh(payload.keyIDOwner);
+        }, 'Expect payouts not to pay the owner or voting key');
+        withPayload(V1, function (payload) {
+          payload.scriptPayout = p2pkh(payload.keyIDVoting);
+        }, 'Expect payouts not to pay the owner or voting key');
+      });
+    });
+
     describe('payouts', function () {
       it('Should require 1 to 8 payouts', function () {
         withPayload(TWO_PAYOUTS, function (payload) {
@@ -248,6 +338,10 @@ describe('ProRegTxPayload', function () {
         withPayload(TWO_PAYOUTS, function (payload) {
           payload.payouts[1].scriptPayout = payload.payouts[0].scriptPayout;
         }, 'Expect payout scripts to be unique');
+        // compared as bytes
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts[1].scriptPayout = payload.payouts[0].scriptPayout.toUpperCase();
+        }, 'Expect payout scripts to be unique');
       });
 
       it('Should reject payees paying the owner or voting key', function () {
@@ -269,7 +363,7 @@ describe('ProRegTxPayload', function () {
       it('Should require a non-null owner key and no early terms without shares', function () {
         withPayload(TWO_PAYOUTS, function (payload) {
           payload.keyIDOwner = '00'.repeat(20);
-        }, 'Expect a non-null keyIDOwner');
+        }, 'Expect keyIDOwner to be a non-null 20 byte key id');
         withPayload(TWO_PAYOUTS, function (payload) {
           payload.earlyPeriodBlocks = 1;
         }, 'Expect no earlyPeriodBlocks or earlyPenalty without shares');
@@ -358,11 +452,19 @@ describe('ProRegTxPayload', function () {
         withPayload(SHARED, function (payload) {
           payload.shares[1].keyIDOwner = payload.shares[0].keyIDOwner;
         }, 'Expect share keyIDOwner to be unique');
+        // compared as bytes
+        withPayload(SHARED, function (payload) {
+          payload.shares[1].keyIDOwner = payload.shares[0].keyIDOwner.toUpperCase();
+        }, 'Expect share keyIDOwner to be unique');
       });
 
       it('Should require unique refund scripts', function () {
         withPayload(SHARED, function (payload) {
           payload.shares[1].scriptRefund = payload.shares[0].scriptRefund;
+        }, 'Expect share scriptRefund to be unique');
+        // compared as bytes
+        withPayload(SHARED, function (payload) {
+          payload.shares[1].scriptRefund = payload.shares[0].scriptRefund.toUpperCase();
         }, 'Expect share scriptRefund to be unique');
       });
 

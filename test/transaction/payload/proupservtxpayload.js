@@ -168,6 +168,32 @@ describe('ProTxUpServPayload', function () {
       }).to.throw('Expected evonode addresses to have platform_p2p and platform_https entries');
     });
 
+    it('Should reject an unknown version while parsing', function () {
+      var raw = Buffer.from(getPayload().toBuffer());
+      [0, 4].forEach(function (version) {
+        raw.writeUInt16LE(version, 0);
+        expect(function () {
+          ProTxUpServPayload.fromBuffer(raw);
+        }).to.throw('Expect version to be an integer from 1 to 3');
+      });
+    });
+
+    it('Should require a regular or evo type', function () {
+      var payload = getPayload();
+      payload.type = 2;
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect type to be 0 (regular) or 1 (evo)');
+    });
+
+    it('Should require a non-null platformNodeID for evonodes', function () {
+      var payload = getPayload();
+      payload.platformNodeID = '00'.repeat(20);
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect platformNodeID to be a non-null 20 byte key id');
+    });
+
     it('Should require a 96 byte BLS signature', function () {
       var payload = getPayload();
       payload.validate();
@@ -196,6 +222,48 @@ describe('ProTxUpServPayload', function () {
       expect(function () {
         ProTxUpServPayload.fromJSON(legacyJSON);
       }).to.throw('Expect no addresses in a version 1 payload');
+    });
+  });
+
+  describe('versions 1 and 2', function () {
+    function getV2Evo() {
+      var json = proUpServTxFixture.getProUpServPayloadJSON();
+      json.version = 2;
+      json.type = 1;
+      json.platformNodeID = '11'.repeat(20);
+      json.platformP2PPort = 36656;
+      json.platformHTTPPort = 1443;
+      return ProTxUpServPayload.fromJSON(json);
+    }
+
+    it('Should require a service address', function () {
+      var json = proUpServTxFixture.getProUpServPayloadJSON();
+      json.service = '[0:0:0:0:0:0:0:0]:0';
+      expect(function () {
+        ProTxUpServPayload.fromJSON(json);
+      }).to.throw('Expected service to be a string with ip address and port');
+    });
+
+    it('Should check the platform fields of a version 2 evonode', function () {
+      var payload = getV2Evo();
+      payload.validate();
+
+      payload.platformNodeID = '00'.repeat(20);
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect platformNodeID to be a non-null 20 byte key id');
+
+      payload = getV2Evo();
+      payload.platformHTTPPort = 9999;
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect platform ports not to be the mainnet Core port 9999');
+
+      payload = getV2Evo();
+      payload.platformP2PPort = 19999;
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect the platform ports and the Core port to differ');
     });
   });
 });

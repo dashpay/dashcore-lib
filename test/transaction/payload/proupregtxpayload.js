@@ -159,6 +159,51 @@ describe('ProUpRegTxPayload', function () {
       }).to.throw('Expect payouts not to pay the owner or voting key');
     });
 
+    it('Should reject an unknown version while parsing', function () {
+      var raw = Buffer.from(getPayload().toBuffer());
+      [0, 4].forEach(function (version) {
+        raw.writeUInt16LE(version, 0);
+        expect(function () {
+          ProUpRegTxPayload.fromBuffer(raw);
+        }).to.throw('Expect version to be an integer from 1 to 3');
+      });
+    });
+
+    it('Should require mode 0, a 48 byte operator key and a non-null 20 byte voting key', function () {
+      var payload = getPayload();
+      payload.mode = 1;
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect mode to be 0');
+
+      payload = getPayload();
+      payload.pubKeyOperator = payload.pubKeyOperator.slice(2);
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect pubKeyOperator to be 48 bytes in size');
+
+      ['00'.repeat(20), getPayload().keyIDVoting.slice(2)].forEach(function (keyID) {
+        payload = getPayload();
+        payload.keyIDVoting = keyID;
+        expect(function () {
+          payload.validate();
+        }).to.throw('Expect keyIDVoting to be a non-null 20 byte key id');
+      });
+    });
+
+    it('Should check a version 1 or 2 payout script like a payout list', function () {
+      var payload = ProUpRegTxPayload.fromBuffer(proUpRegTxFixture.getProUpRegPayloadBuffer());
+      payload.validate();
+      payload.scriptPayout = p2pkh(payload.keyIDVoting);
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expect payouts not to pay the owner or voting key');
+      payload.scriptPayout = '';
+      expect(function () {
+        payload.validate();
+      }).to.throw('Expected payout scriptPayout to be a p2pkh/p2sh');
+    });
+
     it('Should require a compact signature', function () {
       var payload = getPayload();
       expect(payload.payloadSig).to.have.lengthOf(130);

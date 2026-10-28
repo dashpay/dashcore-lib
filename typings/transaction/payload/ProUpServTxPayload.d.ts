@@ -89,6 +89,10 @@ export class ProUpServTxPayload {
    */
   version: number;
   /**
+   * Masternode type. From version 2
+   */
+  type?: number;
+  /**
    * The hash of the initial ProRegTx
    */
   proTXHash: string;
@@ -108,6 +112,18 @@ export class ProUpServTxPayload {
    * Payee script (p2pkh/p2sh)
    */
   scriptOperatorPayout?: string;
+  /**
+   * Platform Node ID. Evonodes from version 2
+   */
+  platformNodeID?: string;
+  /**
+   * Platform P2P port. Evonodes of version 2
+   */
+  platformP2PPort?: number;
+  /**
+   * Platform HTTP port. Evonodes of version 2
+   */
+  platformHTTPPort?: number;
   /**
    * BLSSig Signature of the hash of the ProUpServTx fields. Signed by the Operator.
    */

@@ -76,6 +76,9 @@ describe('netinfo', () => {
       expect(() => extNetInfoToBuffer({ platform_https: ['Example.com:443'] })).to.throw('Invalid address entry');
       expect(() => extNetInfoToBuffer({ core_p2p: ['[2001:db8::1::2]:9999'] })).to.throw('Invalid IPv6');
       expect(() => extNetInfoToBuffer({ core_p2p: ['aaaa.onion:9999'] })).to.throw('Invalid Tor v3');
+      // longer than any base32 name, rejected before decoding
+      expect(() => extNetInfoToBuffer({ core_p2p: [`${'a'.repeat(57)}.onion:9999`] })).to.throw('is too long');
+      expect(() => extNetInfoToBuffer({ core_p2p: [`${'a'.repeat(10000)}.b32.i2p:0`] })).to.throw('is too long');
       // IPv6 forms Core reads as IPv4, Tor v2 or internal addresses
       ['[::ffff:102:304]:9999', '[fd87:d87e:eb43::1]:9999', '[fd6b:88c0:8724::1]:9999'].forEach((entry) => {
         expect(() => extNetInfoToBuffer({ core_p2p: [entry] })).to.throw('Invalid IPv6 address');

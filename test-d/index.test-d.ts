@@ -104,6 +104,10 @@ expectAssignable<MasternodePayoutJSON>({ address: 'yRyv33x1PzwSTW3B2DV3XXRyr7Z5M
 declare const proUpServTxPayload: ProUpServTxPayload;
 expectType<MasternodeAddresses | undefined>(proUpServTxPayload.addresses);
 expectType<string | undefined>(proUpServTxPayload.service);
+expectType<number | undefined>(proUpServTxPayload.type);
+expectType<string | undefined>(proUpServTxPayload.platformNodeID);
+expectType<number | undefined>(proUpServTxPayload.platformP2PPort);
+expectType<number | undefined>(proUpServTxPayload.platformHTTPPort);
 
 declare const proUpRegTxPayload: ProUpRegTxPayload;
 expectType<MasternodePayout[] | undefined>(proUpRegTxPayload.payouts);

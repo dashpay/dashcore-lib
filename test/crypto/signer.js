@@ -142,4 +142,33 @@ describe('HashSigner', function () {
       expect(verified).to.be.false;
     });
   });
+
+  describe('verifyHashSignatureCanonical', function () {
+    // R = N + 2 is a curve x-coordinate, so recovery succeeds with an unreduced R
+    // that Core's compact signature parser rejects as overflowing
+    var hash = Buffer.alloc(32, 7);
+    var overflowingR = Buffer.from(
+      '1ffffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364143' +
+        '0000000000000000000000000000000000000000000000000000000000000001',
+      'hex'
+    );
+    var recoveredKeyId = '35edadb287744590300dbc5a1d346c4c82ee73f5';
+
+    it('should reject an R value that is not below the curve order', function () {
+      expect(
+        Signer.verifyHashSignature(hash, overflowingR, recoveredKeyId)
+      ).to.be.true;
+      expect(
+        Signer.verifyHashSignatureCanonical(hash, overflowingR, recoveredKeyId)
+      ).to.be.false;
+    });
+
+    it('should reject a zero R value', function () {
+      var zeroR = Buffer.from(overflowingR);
+      zeroR.fill(0, 1, 33);
+      expect(
+        Signer.verifyHashSignatureCanonical(hash, zeroR, recoveredKeyId)
+      ).to.be.false;
+    });
+  });
 });

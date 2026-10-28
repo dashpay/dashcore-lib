@@ -77,4 +77,19 @@ describe('PartialMerkleTree', function () {
       );
     });
   });
+
+  describe('.fromBuffer', function () {
+    // cbTxMerkleTree of Core's testnet mnlistdiff at block 1580498
+    var coreTreeHex =
+      '0800000004a868b2ed8d2301e11fe10af03de99739daabf69fd189ea44fb5aa1c47df56f1d389ffc77b4ade36785589c1161ed70c244ff26dbfda7830e56bad2a9300d165bb9f91e0478b64957632ae2729374a2c7c0f386052c87ac24864baf6bf0f711c70eb605f91fd18b14932cb62fa77678cfffc9ab19d7990e7283e456398d44d5b0010f';
+
+    it('Should not modify the buffer it parses', function () {
+      var buffer = Buffer.from(coreTreeHex, 'hex');
+
+      var tree = PartialMerkleTree.fromBuffer(buffer);
+
+      expect(buffer.toString('hex')).to.be.equal(coreTreeHex);
+      expect(tree.toString()).to.be.equal(coreTreeHex);
+    });
+  });
 });

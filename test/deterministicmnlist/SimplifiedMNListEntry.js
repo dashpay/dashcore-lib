@@ -131,6 +131,13 @@ describe('SimplifiedMNListEntry', function () {
       var entryJSON = entry.toObject();
       expect(entryJSON).to.be.deep.equal(smlEntryJSON);
     });
+    it('Should not modify the buffer it parses', function () {
+      var buffer = Buffer.from(smlEntryHex, 'hex');
+
+      SimplifiedMNListEntry.fromBuffer(buffer, Networks.testnet);
+
+      expect(buffer.toString('hex')).to.be.equal(smlEntryHex);
+    });
   });
   describe('toBuffer', function () {
     it('Should serialize data to same buffer', function () {

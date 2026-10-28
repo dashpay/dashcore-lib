@@ -91,6 +91,13 @@ describe('QuorumEntry', function () {
         Buffer.from(quorumEntryHash, 'hex')
       );
     });
+    it('Should not modify the buffer it parses', function () {
+      var buffer = Buffer.from(quorumEntryHex, 'hex');
+
+      QuorumEntry.fromBuffer(buffer);
+
+      expect(buffer.toString('hex')).to.be.equal(quorumEntryHex);
+    });
   });
   describe('to buffer', function () {
     it('Should be able to generate correct buffer', function () {

@@ -69,6 +69,14 @@ describe('CoinbasePayload', function () {
         'Failed to parse payload: raw payload is bigger than expected.'
       );
     });
+
+    it('Should not modify the buffer it parses', function () {
+      var buffer = Buffer.from(validCoinbasePayloadBuffer);
+
+      CoinbasePayload.fromBuffer(buffer);
+
+      expect(buffer).to.be.deep.equal(validCoinbasePayloadBuffer);
+    });
   });
 
   describe('.fromJSON', function () {

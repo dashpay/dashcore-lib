@@ -98,6 +98,13 @@ describe('SimplifiedMNListDiff', function () {
       var parsed = smlDiff.toObject();
       expect(parsed).to.be.deep.equal(mnListDiffJSON);
     });
+    it('Should not modify the buffer it parses', function () {
+      var buf = Buffer.from(mnListDiffHexString, 'hex');
+
+      SimplifiedMNListDiff.fromBuffer(buf, Networks.testnet);
+
+      expect(buf.toString('hex')).to.be.equal(mnListDiffHexString);
+    });
   });
   describe('toBuffer', function () {
     it('Should be able to serialize data', function () {

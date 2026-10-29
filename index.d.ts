@@ -61,7 +61,17 @@ export { AbstractPayload };
 export { CoinbasePayload } from './typings/transaction/payload/CoinbasePayload';
 export { CommitmentTxPayload } from './typings/transaction/payload/CommitmentTxPayload';
 export { MnHfSignalPayload } from './typings/transaction/payload/MnHfSignalPayload';
-export { ProRegTxPayload } from './typings/transaction/payload/ProRegTxPayload';
+export {
+  ProRegTxPayload,
+  ProRegTxPayloadJSON,
+  CollateralShare,
+  CollateralShareJSON,
+} from './typings/transaction/payload/ProRegTxPayload';
+export {
+  MasternodeAddresses,
+  MasternodePayout,
+  MasternodePayoutJSON,
+} from './typings/transaction/payload/MasternodePayout';
 export { ProUpRegTxPayload } from './typings/transaction/payload/ProUpRegTxPayload';
 export { ProUpRevTxPayload } from './typings/transaction/payload/ProUpRevTxPayload';
 export { ProUpServTxPayload } from './typings/transaction/payload/ProUpServTxPayload';

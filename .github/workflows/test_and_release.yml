@@ -44,24 +44,25 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     if: ${{ github.event_name == 'release' }}
+    # npm trusted publishing: npm exchanges the job's OIDC token for a publish
+    # token, so no NPM_TOKEN secret is needed
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
+
+      # Trusted publishing needs npm 11.5.1 or later. No registry-url: with it,
+      # setup-node writes a token entry to .npmrc and npm tries token auth
+      # instead of the OIDC exchange.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.14.1'
 
       - name: Check package version matches tag
         uses: geritol/match-tag-to-package-version@0.1.0
         env:
           TAG_PREFIX: refs/tags/v
-
-      - name: Enable NPM cache
-        uses: actions/cache@v4
-        with:
-          path: '~/.npm'
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install NPM dependencies
-        run: npm ci
 
       - name: Set release tag
         uses: actions/github-script@v7
@@ -73,8 +74,12 @@ jobs:
             const [, major, minor] = tag.match(/^v([0-9]+)\.([0-9]+)/);
             return (tag.includes('dev') ? `${major}.${minor}-dev` : 'latest');
 
+      # Packs the checkout as earlier releases did: --ignore-scripts skips the
+      # prepublishOnly build, and nothing is installed in this job, so no package
+      # script runs while the OIDC token is available. Trusted publishing adds a
+      # provenance attestation, which requires package.json's repository.url to
+      # name this repository.
       - name: Publish NPM package
-        uses: JS-DevTools/npm-publish@v3
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          tag: ${{ steps.tag.outputs.result }}
+        env:
+          NPM_TAG: ${{ steps.tag.outputs.result }}
+        run: npm publish --ignore-scripts --access public --tag "$NPM_TAG"

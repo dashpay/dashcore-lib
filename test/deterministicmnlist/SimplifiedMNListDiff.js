@@ -299,7 +299,20 @@ describe('SimplifiedMNListDiff', function () {
     diff.quorumsCLSigs = [, { [signatureHex]: [0] }];
     expect(function () {
       diff.toBuffer();
-    }).to.throw('Expected each quorumsCLSigs entry to hold exactly one signature');
+    }).to.throw('Expected quorumsCLSigs to be an array without empty slots');
+  });
+  it('Should reject array-like or huge sparse vectors without materializing them', function () {
+    ['deletedMNs', 'mnList', 'deletedQuorums', 'newQuorums', 'quorumsCLSigs'].forEach(function (name) {
+      [{ length: 1e9 }, new Array(1e9)].forEach(function (value) {
+        var diff = new SimplifiedMNListDiff(mnListDiffJSON);
+        diff[name] = value;
+        var started = Date.now();
+        expect(function () {
+          diff.toBuffer();
+        }).to.throw('Expected ' + name + ' to be an array without empty slots');
+        expect(Date.now() - started).to.be.below(1000);
+      });
+    });
   });
   it('Should reject a chainlock signature that appears in two entries', function () {
     var diff = new SimplifiedMNListDiff(mnListDiffJSON);

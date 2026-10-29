@@ -278,6 +278,9 @@ describe('SimplifiedMNListDiff', function () {
         'Expected quorumsCLSigs indexes to be sorted and unique, as Core sends them'],
       ['a repeated index', { [signatureHex]: [1, 1] },
         'Expected quorumsCLSigs indexes to be sorted and unique, as Core sends them'],
+      // eslint-disable-next-line no-sparse-arrays
+      ['a sparse index array', { [signatureHex]: [0, , 2] },
+        'Expected quorumsCLSigs values to be arrays of quorum indexes'],
     ].forEach(function (testCase) {
       it('Should reject ' + testCase[0], function () {
         var diff = new SimplifiedMNListDiff(mnListDiffJSON);
@@ -288,6 +291,14 @@ describe('SimplifiedMNListDiff', function () {
         }).to.throw(testCase[2]);
       });
     });
+  });
+  it('Should reject a chainlock signature that appears in two entries', function () {
+    var diff = new SimplifiedMNListDiff(mnListDiffJSON);
+    var signatureHex = Object.keys(coreDiffsJSON[0].quorumsCLSigs[0])[0];
+    diff.quorumsCLSigs = [{ [signatureHex]: [0] }, { [signatureHex.toUpperCase()]: [1] }];
+    expect(function () {
+      diff.toBuffer();
+    }).to.throw('Expected each quorumsCLSigs signature to appear once');
   });
   describe('fromBuffer canonical encodings', function () {
     // a diff with one chainlock signature: serialize, then edit the trailing bytes

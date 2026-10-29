@@ -412,6 +412,20 @@ describe('SimplifiedMNListDiff', function () {
     });
   });
   describe('copy', function () {
+    it('Should keep the ExtNetInfo bytes entries were read from', function () {
+      var vector = coreDiffs.testnetFull;
+      var diff = SimplifiedMNListDiff.fromHexString(vector.hex, 'testnet');
+      var copy = diff.copy();
+      var extAddrEntries = copy.mnList.filter(function (entry) {
+        return entry.nVersion >= 3;
+      });
+
+      expect(extAddrEntries).to.not.be.empty;
+      extAddrEntries.forEach(function (entry) {
+        expect(entry._rawExtNetInfo).to.be.an('object');
+      });
+      expect(copy.toBuffer().toString('hex')).to.be.equal(vector.hex);
+    });
     it('Should create a detached copy of an instance', function () {
       var instance = new SimplifiedMNListDiff(mnListDiffJSON);
       var copy = new SimplifiedMNListDiff(instance);

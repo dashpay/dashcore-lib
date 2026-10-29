@@ -6,6 +6,7 @@ var _ = require('lodash');
 var expect = require('chai').expect;
 var Networks = require('../../lib/networks');
 var BufferReader = require('../../lib/encoding/bufferreader');
+var Hash = require('../../lib/crypto/hash');
 
 var smlEntryJSON = {
   proRegTxHash:
@@ -223,6 +224,51 @@ describe('SimplifiedMNListEntry', function () {
           Networks.testnet
         );
       }).to.throw('expected 20 more bytes, found 10');
+    });
+    describe('a BIP155 IPv6 address in fc00::/8', function () {
+      // extAddrRegularEntryHex with its IPv4 core_p2p replaced by fc00::1 under
+      // BIP155 network id 2 (IPv6), which prints like CJDNS (network id 6)
+      var ipv4NetInfo = '010100010101044e1146af4dbb';
+      var ipv6NetInfo = '01010001010210fc0000000000000000000000000000014e1f';
+      var hashedHex = extAddrRegularEntryHex.replace(ipv4NetInfo, ipv6NetInfo);
+      var p2pHex = '0300' + hashedHex;
+      var entry;
+
+      beforeEach(function () {
+        expect(hashedHex).to.not.equal(extAddrRegularEntryHex);
+        entry = SimplifiedMNListEntry.fromP2PBufferReader(
+          new BufferReader(Buffer.from(p2pHex, 'hex')),
+          Networks.testnet
+        );
+      });
+
+      it('Should keep the bytes it was read from', function () {
+        expect(entry.addresses).to.be.deep.equal({ core_p2p: ['[fc00::1]:19999'] });
+        expect(entry.toP2PBuffer().toString('hex')).to.be.equal(p2pHex);
+        expect(entry.calculateHash()).to.be.deep.equal(
+          Hash.sha256sha256(Buffer.from(hashedHex, 'hex'))
+        );
+        expect(entry.copy().toP2PBuffer().toString('hex')).to.be.equal(p2pHex);
+        expect(new SimplifiedMNListEntry(entry).toP2PBuffer().toString('hex'))
+          .to.be.equal(p2pHex);
+      });
+      it('Should leave the bytes out of toObject and JSON', function () {
+        expect(entry.toObject()).to.not.have.property('_rawExtNetInfo');
+        expect(JSON.stringify(entry)).to.not.include('_rawExtNetInfo');
+      });
+      it('Should re-encode changed addresses, and JSON input, by the string rule', function () {
+        var cjdnsHex = '0300' + extAddrRegularEntryHex.replace(
+          ipv4NetInfo,
+          '01010001010610fc0000000000000000000000000000014e1f'
+        );
+        expect(new SimplifiedMNListEntry(entry.toObject()).toP2PBuffer().toString('hex'))
+          .to.be.equal(cjdnsHex);
+
+        entry.addresses.core_p2p = ['[fc00::1]:9999'];
+        expect(entry.toP2PBuffer().toString('hex')).to.be.equal(
+          cjdnsHex.replace('fc0000000000000000000000000000014e1f', 'fc000000000000000000000000000001270f')
+        );
+      });
     });
   });
   describe('fromObject', function () {

@@ -465,6 +465,15 @@ describe('SimplifiedMNListEntry', function () {
       noPlatform.addresses = Object.assign({}, noPlatform.addresses, { platform_https: ['203.0.113.7:1443'] });
       expect(noPlatform.getPlatformHTTPSEndpoint()).to.be.deep.equal({ host: '203.0.113.7', port: 1443 });
     });
+    it('Should return null for a Platform port of 0', function () {
+      var legacy = new SimplifiedMNListEntry(smlEntryJSON);
+      legacy.platformHTTPPort = 0;
+      expect(legacy.getPlatformHTTPSEndpoint()).to.be.null;
+
+      var v3 = new SimplifiedMNListEntry(extAddrEvoEntryJSON);
+      v3.addresses = Object.assign({}, v3.addresses, { platform_https: ['203.0.113.7:0'] });
+      expect(v3.getPlatformHTTPSEndpoint()).to.be.null;
+    });
     it('Should return null for an evonode without a Platform address', function () {
       var json = Object.assign({}, extAddrEvoEntryJSON, {
         addresses: { core_p2p: extAddrEvoEntryJSON.addresses.core_p2p },

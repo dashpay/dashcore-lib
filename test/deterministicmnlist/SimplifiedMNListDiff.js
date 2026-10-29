@@ -314,6 +314,19 @@ describe('SimplifiedMNListDiff', function () {
       });
     });
   });
+  it('Should reject vectors with extra properties in place of their elements', function () {
+    ['deletedMNs', 'mnList', 'deletedQuorums', 'newQuorums', 'quorumsCLSigs'].forEach(function (name) {
+      // as many own keys as its length, but none of them an index
+      var value = [];
+      value.length = 1;
+      value.extra = true;
+      var diff = new SimplifiedMNListDiff(mnListDiffJSON);
+      diff[name] = value;
+      expect(function () {
+        diff.toBuffer();
+      }).to.throw('Expected ' + name + ' to be an array without empty slots');
+    });
+  });
   it('Should reject a huge sparse chainlock index array without materializing it', function () {
     var diff = new SimplifiedMNListDiff(mnListDiffJSON);
     var signatureHex = Object.keys(coreDiffsJSON[0].quorumsCLSigs[0])[0];

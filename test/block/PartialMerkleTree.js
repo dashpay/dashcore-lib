@@ -78,6 +78,25 @@ describe('PartialMerkleTree', function () {
     });
   });
 
+  describe('#toBuffer', function () {
+    it('Should reject merkle hashes or flags with empty slots or extra properties', function () {
+      ['merkleHashes', 'merkleFlags'].forEach(function (name) {
+        var extra = [];
+        extra.length = 1;
+        extra.extra = 0;
+        [[, 0], extra].forEach(function (value) {
+          var tree = PartialMerkleTree.fromHexString(
+            '0100000001' + '11'.repeat(32) + '0101'
+          );
+          tree[name] = value;
+          expect(function () {
+            tree.toBuffer();
+          }).to.throw('Expected ' + name + ' to be an array without empty slots');
+        });
+      });
+    });
+  });
+
   describe('.fromBuffer', function () {
     // cbTxMerkleTree of Core's testnet mnlistdiff at block 1580498
     var coreTreeHex =

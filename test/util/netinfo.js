@@ -69,6 +69,21 @@ describe('netinfo', () => {
       );
     });
 
+    it('should reject address lists with empty slots or extra properties', () => {
+      // forEach would skip the hole and write a count of 2 with one entry
+      // eslint-disable-next-line no-sparse-arrays
+      const sparse = [, '1.2.3.4:9999'];
+      const extra = [];
+      extra.length = 1;
+      extra.extra = '1.2.3.4:9999';
+      [sparse, extra].forEach((entries) => {
+        ['core_p2p', 'platform_p2p', 'platform_https'].forEach((purpose) => {
+          expect(() => extNetInfoToBuffer({ [purpose]: entries }))
+            .to.throw(`Expected ${purpose} addresses to be an array without empty slots`);
+        });
+      });
+    });
+
     it('should reject unknown purposes and malformed entries', () => {
       expect(() => extNetInfoToBuffer({ unknown: [] })).to.throw('Unknown address purpose');
       expect(() => extNetInfoToBuffer({ core_p2p: '1.2.3.4:9999' })).to.throw('to be an array');

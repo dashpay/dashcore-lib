@@ -175,6 +175,28 @@ describe('ProRegTxPayload', function () {
     var SHARED = 'v3 shared ProRegTx with an explicit reward script';
     var COIN = 100000000;
 
+    it('Should keep supplied v3 fields for validation instead of defaulting them', function () {
+      var json = getPayload(TWO_PAYOUTS).toJSON({ network: 'testnet' });
+      [
+        ['shares', null, 'Expect shares to be an array'],
+        ['joinSigs', null, 'Expect shares and joinSigs to be arrays'],
+        ['earlyPenalty', null, 'Expect earlyPenalty to be an unsigned integer'],
+        ['earlyPeriodBlocks', false, 'Expect earlyPeriodBlocks to be an uint32'],
+      ].forEach(function (testCase) {
+        var changed = Object.assign({}, json, { [testCase[0]]: testCase[1] });
+        expect(function () {
+          ProRegTxPayload.fromJSON(changed).validate();
+        }).to.throw(testCase[2]);
+      });
+      var omitted = Object.assign({}, json);
+      delete omitted.shares;
+      delete omitted.joinSigs;
+      delete omitted.earlyPeriodBlocks;
+      delete omitted.earlyPenalty;
+      expect(ProRegTxPayload.fromJSON(omitted).toBuffer())
+        .to.deep.equal(getPayload(TWO_PAYOUTS).toBuffer());
+    });
+
     it('Should require a version from 1 to 3', function () {
       [0, 4].forEach(function (version) {
         withPayload(TWO_PAYOUTS, function (payload) {

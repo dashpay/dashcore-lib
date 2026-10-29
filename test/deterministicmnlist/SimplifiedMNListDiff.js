@@ -327,6 +327,14 @@ describe('SimplifiedMNListDiff', function () {
       }).to.throw('Expected ' + name + ' to be an array without empty slots');
     });
   });
+  it('Should write quorumsCLSigs in Core\'s order whatever order they are given in', function () {
+    var vector = coreDiffs.testnetFull;
+    var diff = SimplifiedMNListDiff.fromHexString(vector.hex, 'testnet');
+    expect(diff.quorumsCLSigs.length).to.be.above(2);
+    diff.quorumsCLSigs.reverse();
+
+    expect(diff.toBuffer().toString('hex')).to.be.equal(vector.hex);
+  });
   it('Should reject a huge sparse chainlock index array without materializing it', function () {
     var diff = new SimplifiedMNListDiff(mnListDiffJSON);
     var signatureHex = Object.keys(coreDiffsJSON[0].quorumsCLSigs[0])[0];
@@ -365,6 +373,37 @@ describe('SimplifiedMNListDiff', function () {
           SimplifiedMNListDiff.fromBuffer(raw, Networks.testnet);
         }).to.throw('Quorum chainlock indexes are not a sorted set');
       });
+    });
+
+    it('Should reject chainlock signatures that are not in Core\'s map order', function () {
+      var diff = SimplifiedMNListDiff.fromHexString(coreDiffs.testnetFull.hex, 'testnet');
+      var entries = diff.quorumsCLSigs.map(function (clSig) {
+        var signatureHex = Object.keys(clSig)[0];
+        var indexes = clSig[signatureHex];
+        var indexBytes = Buffer.alloc(indexes.length * 2);
+        indexes.forEach(function (index, i) {
+          indexBytes.writeUInt16LE(index, i * 2);
+        });
+        return Buffer.concat([
+          Buffer.from(signatureHex, 'hex'),
+          Buffer.from([indexes.length]),
+          indexBytes,
+        ]);
+      });
+      var tail = Buffer.concat(entries);
+      var coreRaw = Buffer.from(coreDiffs.testnetFull.hex, 'hex');
+      var head = coreRaw.slice(0, coreRaw.length - tail.length - 1);
+      expect(Buffer.concat([head, Buffer.from([entries.length]), tail]))
+        .to.be.deep.equal(coreRaw);
+
+      var reversed = Buffer.concat([
+        head,
+        Buffer.from([entries.length]),
+        Buffer.concat(entries.slice().reverse()),
+      ]);
+      expect(function () {
+        SimplifiedMNListDiff.fromBuffer(reversed, Networks.testnet);
+      }).to.throw('Quorum chainlock signatures are not in Core\'s map order');
     });
 
     it('Should reject a repeated chainlock signature', function () {

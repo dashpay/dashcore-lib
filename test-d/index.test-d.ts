@@ -136,3 +136,7 @@ expectType<SimplifiedMNListDiff>(new SMLDiffClass({}, 'testnet', customLLMQ));
 proUpRegTxPayload.platformNodeID;
 // @ts-expect-error
 proUpRegTxPayload.type;
+expectType<QuorumEntry>(QuorumEntryClass.fromBuffer(Buffer.alloc(0), customLLMQ));
+expectType<QuorumEntry>(QuorumEntryClass.fromHexString('', customLLMQ));
+expectType<QuorumEntry>(QuorumEntryClass.fromObject({}, customLLMQ));
+expectType<QuorumEntry>(new QuorumEntryClass({}, customLLMQ));

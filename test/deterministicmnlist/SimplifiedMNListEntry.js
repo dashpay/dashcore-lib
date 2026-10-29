@@ -454,6 +454,17 @@ describe('SimplifiedMNListEntry', function () {
         });
       });
     });
+    it('Should follow platform_https when it changes after construction', function () {
+      var entry = new SimplifiedMNListEntry(extAddrEvoEntryJSON);
+      entry.addresses = Object.assign({}, entry.addresses, { platform_https: ['node.example:443'] });
+      expect(entry.getPlatformHTTPSEndpoint()).to.be.deep.equal({ host: 'node.example', port: 443 });
+
+      var noPlatform = new SimplifiedMNListEntry(Object.assign({}, extAddrEvoEntryJSON, {
+        addresses: { core_p2p: extAddrEvoEntryJSON.addresses.core_p2p },
+      }));
+      noPlatform.addresses = Object.assign({}, noPlatform.addresses, { platform_https: ['203.0.113.7:1443'] });
+      expect(noPlatform.getPlatformHTTPSEndpoint()).to.be.deep.equal({ host: '203.0.113.7', port: 1443 });
+    });
     it('Should return null for an evonode without a Platform address', function () {
       var json = Object.assign({}, extAddrEvoEntryJSON, {
         addresses: { core_p2p: extAddrEvoEntryJSON.addresses.core_p2p },

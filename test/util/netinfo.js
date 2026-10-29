@@ -193,6 +193,19 @@ describe('netinfo', () => {
       expect(() => extNetInfoFromBuffer(entry(`0203${Buffer.from('A.b').toString('hex')}01bb`)))
         .to.throw('Invalid domain');
       expect(() => extNetInfoFromBuffer(entry('02fdfe00'))).to.throw('too long');
+      // CompactSizes must be canonical and data complete, as Core reads them
+      expect(() => extNetInfoFromBuffer(Buffer.from('01fd0100' + '00' + '00', 'hex')))
+        .to.throw('non-canonical CompactSize');
+      expect(() => extNetInfoFromBuffer(Buffer.from('0101' + '00' + 'fd0100', 'hex')))
+        .to.throw('non-canonical CompactSize');
+      expect(() => extNetInfoFromBuffer(entry('0102fd1000' + '00'.repeat(16) + '270f')))
+        .to.throw('non-canonical CompactSize');
+      expect(() => extNetInfoFromBuffer(entry('02fd0d00' + Buffer.from('example.org').toString('hex'))))
+        .to.throw('non-canonical CompactSize');
+      expect(() => extNetInfoFromBuffer(entry('020b' + Buffer.from('example').toString('hex'))))
+        .to.throw('expected 11 more bytes, found 7');
+      expect(() => extNetInfoFromBuffer(entry('010210' + '00'.repeat(8))))
+        .to.throw('expected 16 more bytes, found 8');
       expect(() => extNetInfoFromBuffer(Buffer.concat([extNetInfoToBuffer({}), Buffer.from('00', 'hex')])))
         .to.throw('ExtNetInfo is followed by unexpected data');
     });

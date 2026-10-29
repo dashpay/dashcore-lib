@@ -180,3 +180,95 @@ describe('ProTx payloads produced by Dash Core', () => {
     });
   });
 });
+
+describe('ProTx payload parsing', () => {
+  const getVector = (name) => fixtures.transactions.find((v) => v.name === name);
+  const getRawPayload = (name) => new Transaction(getVector(name).hex).extraPayload.toBuffer();
+  const parsers = {
+    proRegTx: ProRegTxPayload,
+    proUpServTx: ProTxUpServPayload,
+    proUpRegTx: ProUpRegTxPayload,
+    proUpRevTx: ProUpRevTxPayload,
+  };
+
+  it('should reject truncated payloads at every length', () => {
+    [
+      'v1 ProRegTx',
+      'v3 shared ProRegTx with an explicit reward script',
+      'v3 evonode ProUpServTx with Tor, I2P and domain addresses',
+      'v3 ProUpRegTx',
+      'v3 ProUpRevTx',
+    ].forEach((name) => {
+      const PayloadClass = parsers[getVector(name).coreKey];
+      const raw = getRawPayload(name);
+      for (let length = 0; length < raw.length; length++) {
+        expect(() => PayloadClass.fromBuffer(raw.slice(0, length)), `${name} cut at ${length}`).to.throw();
+      }
+    });
+  });
+
+  it('should reject a signature shorter than its declared length', () => {
+    ['v1 ProRegTx', 'v3 ProUpRegTx'].forEach((name) => {
+      const raw = getRawPayload(name);
+      // the 65-byte signature is the last field
+      expect(raw[raw.length - 66]).to.equal(65);
+      expect(() => parsers[getVector(name).coreKey].fromBuffer(raw.slice(0, -1)))
+        .to.throw('expected 65 more bytes, found 64');
+    });
+    const upServ = getRawPayload('v3 evonode ProUpServTx');
+    expect(() => ProTxUpServPayload.fromBuffer(upServ.slice(0, -1)))
+      .to.throw('expected 96 more bytes, found 95');
+  });
+
+  it('should validate a parsed ProRegTx', () => {
+    const raw = Buffer.from(getRawPayload('v3 ProRegTx with two payouts'));
+    raw.writeUInt16LE(1, 4); // mode
+    expect(() => ProRegTxPayload.fromBuffer(raw)).to.throw('Expect mode to be 0');
+  });
+
+  describe('addresses without a string form of their own', () => {
+    // fc00::1 stored as BIP155 IPv6 (network id 2) instead of CJDNS (6); valid
+    // on regtest, and printed like the CJDNS address
+    const IPV6_ENTRY = `0210${'00'.repeat(15)}01`;
+    const FC00_AS_IPV6_ENTRY = `0210fc${'00'.repeat(14)}01`;
+    const withFc00AsIPv6 = (name) => {
+      const hex = getRawPayload(name).toString('hex');
+      expect(hex).to.include(IPV6_ENTRY);
+      return Buffer.from(hex.replace(IPV6_ENTRY, FC00_AS_IPV6_ENTRY), 'hex');
+    };
+
+    [
+      ['v3 evonode ProRegTx with IPv4 and IPv6 addresses', ProRegTxPayload],
+      ['v3 evonode ProUpServTx with IPv6 addresses', ProTxUpServPayload],
+    ].forEach(([name, PayloadClass]) => {
+      it(`should re-serialize a ${PayloadClass === ProRegTxPayload ? 'ProRegTx' : 'ProUpServTx'} byte for byte until its addresses change`, () => {
+        const raw = withFc00AsIPv6(name);
+        const payload = PayloadClass.fromBuffer(raw);
+
+        expect(payload.addresses.core_p2p).to.include('[fc00::1]:19951');
+        expect(payload.toBuffer()).to.deep.equal(raw);
+        expect(payload.copy().toBuffer()).to.deep.equal(raw);
+        expect(Object.keys(payload)).to.not.include('_extNetInfo');
+        expect(payload.toJSON()).to.not.have.property('_extNetInfo');
+
+        // equal addresses keep the bytes
+        payload.addresses = JSON.parse(JSON.stringify(payload.addresses));
+        expect(payload.toBuffer()).to.deep.equal(raw);
+
+        // changed addresses are written from their strings, fc00::/8 as CJDNS
+        payload.addresses.core_p2p = payload.addresses.core_p2p.map(
+          (entry) => entry.replace('19951', '19952'),
+        );
+        const rewritten = payload.toBuffer().toString('hex');
+        expect(rewritten).to.include(`0610fc${'00'.repeat(14)}01`);
+        expect(rewritten).to.not.include(FC00_AS_IPV6_ENTRY);
+      });
+    });
+
+    it('should apply the string rule to JSON, which cannot tell the two apart', () => {
+      const payload = ProTxUpServPayload.fromBuffer(withFc00AsIPv6('v3 evonode ProUpServTx with IPv6 addresses'));
+      const fromJSON = ProTxUpServPayload.fromJSON(payload.toJSON());
+      expect(fromJSON.toBuffer().toString('hex')).to.include(`0610fc${'00'.repeat(14)}01`);
+    });
+  });
+});

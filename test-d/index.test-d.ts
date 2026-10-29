@@ -131,3 +131,8 @@ expectType<SimplifiedMNListDiff>(SMLDiffClass.fromHexString('', 'testnet', custo
 expectType<SimplifiedMNListDiff>(SMLDiffClass.fromObject({}, 'testnet', customLLMQ));
 expectType<SimplifiedMNListDiff>(SMLDiffClass.fromJSON({}, customLLMQ));
 expectType<SimplifiedMNListDiff>(new SMLDiffClass({}, 'testnet', customLLMQ));
+// ProUpRegTx has no type or platform fields
+// @ts-expect-error
+proUpRegTxPayload.platformNodeID;
+// @ts-expect-error
+proUpRegTxPayload.type;

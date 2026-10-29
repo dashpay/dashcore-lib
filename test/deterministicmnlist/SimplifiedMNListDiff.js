@@ -153,17 +153,37 @@ describe('SimplifiedMNListDiff', function () {
         'Quorum chainlock signature',
         'Quorum index',
       ].forEach(function (name) {
+        function craftCount(count) {
+          var position = offsets[name] * 2;
+          return mnListDiffHexString.slice(0, position) + count
+            + mnListDiffHexString.slice(position + 2);
+        }
+
         it('Should throw quickly on a huge ' + name + ' count', function () {
           this.timeout(2000);
-          var position = offsets[name] * 2;
-          var hex = mnListDiffHexString.slice(0, position) + 'feffffffff'
-            + mnListDiffHexString.slice(position + 2);
-
+          // MAX_SIZE, the largest count Core reads
           expect(function () {
-            SimplifiedMNListDiff.fromHexString(hex, 'testnet');
-          }).to.throw(name + ' count 4294967295 is larger than the remaining data allows');
+            SimplifiedMNListDiff.fromHexString(craftCount('fe00000002'), 'testnet');
+          }).to.throw(name + ' count 33554432 is larger than the remaining data allows');
+        });
+        it('Should reject a ' + name + ' count above MAX_SIZE or not shortest-encoded', function () {
+          this.timeout(2000);
+          expect(function () {
+            SimplifiedMNListDiff.fromHexString(craftCount('feffffffff'), 'testnet');
+          }).to.throw('CompactSize too large');
+          expect(function () {
+            SimplifiedMNListDiff.fromHexString(craftCount('fd0100'), 'testnet');
+          }).to.throw('non-canonical CompactSize');
         });
       });
+    });
+    it('Should throw if the diff is cut off inside a fixed-size field', function () {
+      // nVersion, baseBlockHash, then half of blockHash
+      var hex = mnListDiffHexString.slice(0, (2 + 32 + 16) * 2);
+
+      expect(function () {
+        SimplifiedMNListDiff.fromHexString(hex, 'testnet');
+      }).to.throw('expected 32 more bytes, found 16');
     });
     describe('with a crafted quorum bit set size', function () {
       // the first new quorum is a version 3 llmq_50_60 commitment: version (2 bytes),
@@ -188,7 +208,7 @@ describe('SimplifiedMNListDiff', function () {
 
       it('Should throw if it differs from the size of a known quorum type', function () {
         this.timeout(2000);
-        [hugeSize, '31'].forEach(function (size) {
+        ['fe00000002', '31'].forEach(function (size) {
           expect(function () {
             SimplifiedMNListDiff.fromHexString(craft('01', size), 'testnet');
           }).to.throw('Expected a bit set of 50 bits, got');
@@ -196,9 +216,30 @@ describe('SimplifiedMNListDiff', function () {
       });
       it('Should throw if it is longer than the data of an unknown quorum type', function () {
         this.timeout(2000);
+        // MAX_SIZE bits
         expect(function () {
-          SimplifiedMNListDiff.fromHexString(craft('c8', hugeSize), 'testnet');
-        }).to.throw('Bit set of 9007199254740992 bits is longer than the remaining data');
+          SimplifiedMNListDiff.fromHexString(craft('c8', 'fe00000002'), 'testnet');
+        }).to.throw('expected 4194304 more bytes');
+      });
+      it('Should round-trip a custom quorum type through fromJSON with its params', function () {
+        var override = { 200: { size: 50, threshold: 30, maximumActiveQuorumsCount: 24 } };
+        var hex = craft('c8', '32');
+        var diff = SimplifiedMNListDiff.fromHexString(hex, 'testnet', override);
+        var copy = SimplifiedMNListDiff.fromJSON(JSON.parse(JSON.stringify(diff)), override);
+
+        expect(diff.newQuorums[0].llmqType).to.be.equal(200);
+        expect(copy.toBuffer().toString('hex')).to.be.equal(hex);
+      });
+      it('Should reject a size above MAX_SIZE or not shortest-encoded', function () {
+        this.timeout(2000);
+        ['01', 'c8'].forEach(function (llmqType) {
+          expect(function () {
+            SimplifiedMNListDiff.fromHexString(craft(llmqType, hugeSize), 'testnet');
+          }).to.throw('CompactSize too large');
+          expect(function () {
+            SimplifiedMNListDiff.fromHexString(craft(llmqType, 'fd3200'), 'testnet');
+          }).to.throw('non-canonical CompactSize');
+        });
       });
     });
   });
@@ -224,6 +265,14 @@ describe('SimplifiedMNListDiff', function () {
       ['an array entry', [[1]], 'Expected each quorumsCLSigs entry to hold exactly one signature'],
       ['a short signature', { abcd: [1] }, 'Expected quorumsCLSigs keys to be bls signatures'],
       ['indexes that are not an array', { [signatureHex]: 1 },
+        'Expected quorumsCLSigs values to be arrays of quorum indexes'],
+      ['an index above 65535', { [signatureHex]: [1, 65536] },
+        'Expected quorumsCLSigs values to be arrays of quorum indexes'],
+      ['a negative index', { [signatureHex]: [-1] },
+        'Expected quorumsCLSigs values to be arrays of quorum indexes'],
+      ['a fractional index', { [signatureHex]: [1.5] },
+        'Expected quorumsCLSigs values to be arrays of quorum indexes'],
+      ['a string index', { [signatureHex]: ['1'] },
         'Expected quorumsCLSigs values to be arrays of quorum indexes'],
     ].forEach(function (testCase) {
       it('Should reject ' + testCase[0], function () {

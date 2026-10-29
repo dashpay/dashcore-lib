@@ -213,6 +213,17 @@ describe('SimplifiedMNListEntry', function () {
 
       expect(buffer.toString('hex')).to.be.equal(hex);
     });
+    it('Should throw if the entry is cut off inside a fixed-size field', function () {
+      // drop the last 10 bytes of the platformNodeID
+      var hex = '0200' + smlEntryHex.slice(0, smlEntryHex.length - 20);
+
+      expect(function () {
+        SimplifiedMNListEntry.fromP2PBufferReader(
+          new BufferReader(Buffer.from(hex, 'hex')),
+          Networks.testnet
+        );
+      }).to.throw('expected 20 more bytes, found 10');
+    });
   });
   describe('fromObject', function () {
     it('Should create an instance from a JSONObject', function () {

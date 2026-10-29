@@ -94,11 +94,11 @@ describe('PartialMerkleTree', function () {
     it('Should throw quickly on a hash count larger than the data', function () {
       this.timeout(2000);
       // the hash count (04) follows the 4-byte transaction count
-      var hex = coreTreeHex.slice(0, 8) + 'feffffffff' + coreTreeHex.slice(10);
+      var hex = coreTreeHex.slice(0, 8) + 'fe00000002' + coreTreeHex.slice(10);
 
       expect(function () {
         PartialMerkleTree.fromHexString(hex);
-      }).to.throw('Merkle hash count 4294967295 is larger than the remaining data allows');
+      }).to.throw('Merkle hash count 33554432 is larger than the remaining data allows');
     });
   });
 });

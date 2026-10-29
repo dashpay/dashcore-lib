@@ -127,6 +127,13 @@ describe('QuorumEntry', function () {
         QuorumEntry.fromP2PBufferReader(reader, { 107: { size: 50 } });
       }).to.throw('Out-of-range bits set');
     });
+
+    it('Should throw if the commitment is cut off inside a signature', function () {
+      var hex = quorumEntryHex.slice(0, quorumEntryHex.length - 20);
+      expect(function () {
+        QuorumEntry.fromP2PBufferReader(new BufferReader(Buffer.from(hex, 'hex')));
+      }).to.throw('expected 96 more bytes, found 86');
+    });
   });
   describe('to buffer', function () {
     it('Should be able to generate correct buffer', function () {
@@ -176,6 +183,20 @@ describe('QuorumEntry', function () {
       expect(entryCommitmentHash).to.be.deep.equal(
         Buffer.from(commitmentHash, 'hex')
       );
+    });
+    it('Should reject validMembers that do not fit the LLMQ size', function () {
+      var long = new QuorumEntry(quorumEntryJSON);
+      long.validMembers += '00';
+      expect(function () {
+        long.getCommitmentHash();
+      }).to.throw('Expected validMembers to have the LLMQ bit set length');
+
+      // a 12-member bit set uses the low 4 bits of its last byte
+      var outOfRange = new QuorumEntry(quorumEntryJSON);
+      outOfRange.validMembers = 'ff1f';
+      expect(function () {
+        outOfRange.getCommitmentHash();
+      }).to.throw('Expected no bits set past the LLMQ size');
     });
   });
   describe('quorum members', function () {

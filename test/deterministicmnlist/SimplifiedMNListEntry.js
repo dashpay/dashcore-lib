@@ -5,6 +5,8 @@ var SimplifiedMNListEntry = require('../../lib/deterministicmnlist/SimplifiedMNL
 var _ = require('lodash');
 var expect = require('chai').expect;
 var Networks = require('../../lib/networks');
+var BufferReader = require('../../lib/encoding/bufferreader');
+var Hash = require('../../lib/crypto/hash');
 
 var smlEntryJSON = {
   proRegTxHash:
@@ -131,6 +133,13 @@ describe('SimplifiedMNListEntry', function () {
       var entryJSON = entry.toObject();
       expect(entryJSON).to.be.deep.equal(smlEntryJSON);
     });
+    it('Should not modify the buffer it parses', function () {
+      var buffer = Buffer.from(smlEntryHex, 'hex');
+
+      SimplifiedMNListEntry.fromBuffer(buffer, Networks.testnet);
+
+      expect(buffer.toString('hex')).to.be.equal(smlEntryHex);
+    });
   });
   describe('toBuffer', function () {
     it('Should serialize data to same buffer', function () {
@@ -165,6 +174,108 @@ describe('SimplifiedMNListEntry', function () {
       expect(entryWithNoAddress.length).to.be.equal(
         entryWithDifferentKeys.length
       );
+    });
+  });
+  describe('P2P serialization', function () {
+    // Core sends entries as nVersion followed by the hashed fields
+    [
+      ['version 2 evonode', smlEntryJSON, '0200' + smlEntryHex],
+      ['version 3 evonode', extAddrEvoEntryJSON, '0300' + extAddrEvoEntryHex],
+      ['version 3 regular masternode', extAddrRegularEntryJSON, '0300' + extAddrRegularEntryHex],
+    ].forEach(function (testCase) {
+      it('Should read and write a ' + testCase[0], function () {
+        var reader = new BufferReader(Buffer.from(testCase[2], 'hex'));
+        var entry = SimplifiedMNListEntry.fromP2PBufferReader(reader, Networks.testnet);
+
+        expect(reader.finished()).to.be.true;
+        expect(entry.toObject()).to.be.deep.equal(testCase[1]);
+        expect(entry.toP2PBuffer().toString('hex')).to.be.equal(testCase[2]);
+        expect(new SimplifiedMNListEntry(testCase[1]).toP2PBuffer().toString('hex'))
+          .to.be.equal(testCase[2]);
+      });
+    });
+    it('Should read a version 1 entry, which has no type, as a regular masternode', function () {
+      // the version 1 layout ends after isValid
+      var hex = '0100' + smlEntryHex.slice(0, 151 * 2);
+      var reader = new BufferReader(Buffer.from(hex, 'hex'));
+      var entry = SimplifiedMNListEntry.fromP2PBufferReader(reader, Networks.testnet);
+
+      expect(reader.finished()).to.be.true;
+      expect(entry.nVersion).to.be.equal(1);
+      expect(entry.nType).to.be.equal(0);
+      expect(entry.platformHTTPPort).to.be.undefined;
+      expect(entry.toP2PBuffer().toString('hex')).to.be.equal(hex);
+    });
+    it('Should reject a masternode type Core does not have', function () {
+      // a version 2 entry ends its hashed fields with isValid, then nType (2 here)
+      var hex = '0200' + smlEntryHex.slice(0, 151 * 2) + '0200';
+      expect(function () {
+        SimplifiedMNListEntry.fromP2PBufferReader(new BufferReader(Buffer.from(hex, 'hex')), Networks.testnet);
+      }).to.throw('Expected nType to be 0 (regular) or 1 (evo)');
+    });
+    it('Should not modify the buffer it parses', function () {
+      var hex = '0300' + extAddrEvoEntryHex;
+      var buffer = Buffer.from(hex, 'hex');
+
+      SimplifiedMNListEntry.fromP2PBufferReader(new BufferReader(buffer), Networks.testnet);
+
+      expect(buffer.toString('hex')).to.be.equal(hex);
+    });
+    it('Should throw if the entry is cut off inside a fixed-size field', function () {
+      // drop the last 10 bytes of the platformNodeID
+      var hex = '0200' + smlEntryHex.slice(0, smlEntryHex.length - 20);
+
+      expect(function () {
+        SimplifiedMNListEntry.fromP2PBufferReader(
+          new BufferReader(Buffer.from(hex, 'hex')),
+          Networks.testnet
+        );
+      }).to.throw('expected 20 more bytes, found 10');
+    });
+    describe('a BIP155 IPv6 address in fc00::/8', function () {
+      // extAddrRegularEntryHex with its IPv4 core_p2p replaced by fc00::1 under
+      // BIP155 network id 2 (IPv6), which prints like CJDNS (network id 6)
+      var ipv4NetInfo = '010100010101044e1146af4dbb';
+      var ipv6NetInfo = '01010001010210fc0000000000000000000000000000014e1f';
+      var hashedHex = extAddrRegularEntryHex.replace(ipv4NetInfo, ipv6NetInfo);
+      var p2pHex = '0300' + hashedHex;
+      var entry;
+
+      beforeEach(function () {
+        expect(hashedHex).to.not.equal(extAddrRegularEntryHex);
+        entry = SimplifiedMNListEntry.fromP2PBufferReader(
+          new BufferReader(Buffer.from(p2pHex, 'hex')),
+          Networks.testnet
+        );
+      });
+
+      it('Should keep the bytes it was read from', function () {
+        expect(entry.addresses).to.be.deep.equal({ core_p2p: ['[fc00::1]:19999'] });
+        expect(entry.toP2PBuffer().toString('hex')).to.be.equal(p2pHex);
+        expect(entry.calculateHash()).to.be.deep.equal(
+          Hash.sha256sha256(Buffer.from(hashedHex, 'hex'))
+        );
+        expect(entry.copy().toP2PBuffer().toString('hex')).to.be.equal(p2pHex);
+        expect(new SimplifiedMNListEntry(entry).toP2PBuffer().toString('hex'))
+          .to.be.equal(p2pHex);
+      });
+      it('Should leave the bytes out of toObject and JSON', function () {
+        expect(entry.toObject()).to.not.have.property('_rawExtNetInfo');
+        expect(JSON.stringify(entry)).to.not.include('_rawExtNetInfo');
+      });
+      it('Should re-encode changed addresses, and JSON input, by the string rule', function () {
+        var cjdnsHex = '0300' + extAddrRegularEntryHex.replace(
+          ipv4NetInfo,
+          '01010001010610fc0000000000000000000000000000014e1f'
+        );
+        expect(new SimplifiedMNListEntry(entry.toObject()).toP2PBuffer().toString('hex'))
+          .to.be.equal(cjdnsHex);
+
+        entry.addresses.core_p2p = ['[fc00::1]:9999'];
+        expect(entry.toP2PBuffer().toString('hex')).to.be.equal(
+          cjdnsHex.replace('fc0000000000000000000000000000014e1f', 'fc000000000000000000000000000001270f')
+        );
+      });
     });
   });
   describe('fromObject', function () {
@@ -306,6 +417,96 @@ describe('SimplifiedMNListEntry', function () {
       });
       var entry = new SimplifiedMNListEntry(json);
       expect(entry.getIp()).to.be.equal('2001:db8::1');
+    });
+  });
+  describe('getPlatformHTTPSEndpoint', function () {
+    it('Should get the service ip and platformHTTPPort of a legacy evonode', function () {
+      var entry = new SimplifiedMNListEntry(smlEntryJSON);
+      expect(entry.getPlatformHTTPSEndpoint()).to.be.deep.equal({
+        host: '95.183.51.146',
+        port: 3200,
+      });
+    });
+    it('Should get the platform_https address of a version 3 evonode', function () {
+      var entry = new SimplifiedMNListEntry(extAddrEvoEntryJSON);
+      expect(entry.getPlatformHTTPSEndpoint()).to.be.deep.equal({
+        host: '162.35.243.85',
+        port: 1443,
+      });
+    });
+    it('Should get a platform_https host that differs from the service ip', function () {
+      [
+        ['[2001:db8::1]:443', '2001:db8::1'],
+        ['evo.example.com:443', 'evo.example.com'],
+        ['203.0.113.7:443', '203.0.113.7'],
+      ].forEach(function (testCase) {
+        var json = Object.assign({}, extAddrEvoEntryJSON, {
+          addresses: Object.assign({}, extAddrEvoEntryJSON.addresses, {
+            platform_https: [testCase[0]],
+          }),
+        });
+        var entry = new SimplifiedMNListEntry(json);
+
+        expect(entry.getIp()).to.be.equal('162.35.243.85');
+        expect(entry.getPlatformHTTPSEndpoint()).to.be.deep.equal({
+          host: testCase[1],
+          port: 443,
+        });
+      });
+    });
+    it('Should follow platform_https when it changes after construction', function () {
+      var entry = new SimplifiedMNListEntry(extAddrEvoEntryJSON);
+      entry.addresses = Object.assign({}, entry.addresses, { platform_https: ['node.example:443'] });
+      expect(entry.getPlatformHTTPSEndpoint()).to.be.deep.equal({ host: 'node.example', port: 443 });
+
+      var noPlatform = new SimplifiedMNListEntry(Object.assign({}, extAddrEvoEntryJSON, {
+        addresses: { core_p2p: extAddrEvoEntryJSON.addresses.core_p2p },
+      }));
+      noPlatform.addresses = Object.assign({}, noPlatform.addresses, { platform_https: ['203.0.113.7:1443'] });
+      expect(noPlatform.getPlatformHTTPSEndpoint()).to.be.deep.equal({ host: '203.0.113.7', port: 1443 });
+    });
+    it('Should return null for a Platform port of 0', function () {
+      var legacy = new SimplifiedMNListEntry(smlEntryJSON);
+      legacy.platformHTTPPort = 0;
+      expect(legacy.getPlatformHTTPSEndpoint()).to.be.null;
+
+      var v3 = new SimplifiedMNListEntry(extAddrEvoEntryJSON);
+      v3.addresses = Object.assign({}, v3.addresses, { platform_https: ['203.0.113.7:0'] });
+      expect(v3.getPlatformHTTPSEndpoint()).to.be.null;
+    });
+    it('Should return null for an evonode without a Platform address', function () {
+      var json = Object.assign({}, extAddrEvoEntryJSON, {
+        addresses: { core_p2p: extAddrEvoEntryJSON.addresses.core_p2p },
+      });
+      expect(new SimplifiedMNListEntry(json).getPlatformHTTPSEndpoint()).to.be.null;
+      expect(
+        new SimplifiedMNListEntry(smlEntryWithoutAddress).getPlatformHTTPSEndpoint()
+      ).to.be.null;
+    });
+    it('Should return null for a version 3 evonode with a zero or missing platform_https', function () {
+      var json = Object.assign({}, extAddrEvoEntryJSON, {
+        addresses: Object.assign({}, extAddrEvoEntryJSON.addresses, {
+          platform_https: ['[::]:0'],
+        }),
+      });
+      expect(new SimplifiedMNListEntry(json).getPlatformHTTPSEndpoint()).to.be.null;
+
+      // platformHTTPPort left set after the addresses change
+      var entry = new SimplifiedMNListEntry(extAddrEvoEntryJSON);
+      entry.addresses.platform_https = [];
+      expect(entry.getPlatformHTTPSEndpoint()).to.be.null;
+      delete entry.addresses.platform_https;
+      expect(entry.getPlatformHTTPSEndpoint()).to.be.null;
+    });
+    it('Should return null for a regular masternode', function () {
+      expect(
+        new SimplifiedMNListEntry(extAddrRegularEntryJSON).getPlatformHTTPSEndpoint()
+      ).to.be.null;
+      expect(
+        new SimplifiedMNListEntry(
+          Object.assign({}, smlEntryJSON, { nType: 0, platformHTTPPort: undefined })
+        ).getPlatformHTTPSEndpoint()
+      ).to.be.null;
     });
   });
 });

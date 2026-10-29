@@ -4,6 +4,7 @@
 var expect = require('chai').expect;
 var QuorumEntry = require('../../lib/deterministicmnlist/QuorumEntry');
 var SimplifiedMNList = require('../../lib/deterministicmnlist/SimplifiedMNList');
+var BufferReader = require('../../lib/encoding/bufferreader');
 var SMNListFixture = require('../fixtures/mnList');
 const DashcoreLib = require("../../index");
 
@@ -91,6 +92,48 @@ describe('QuorumEntry', function () {
         Buffer.from(quorumEntryHash, 'hex')
       );
     });
+    it('Should not modify the buffer it parses', function () {
+      var buffer = Buffer.from(quorumEntryHex, 'hex');
+
+      QuorumEntry.fromBuffer(buffer);
+
+      expect(buffer.toString('hex')).to.be.equal(quorumEntryHex);
+    });
+  });
+  describe('fromP2PBufferReader', function () {
+    it('Should read the commitment Core sends and count set bits like Core RPC', function () {
+      // 50-member bit sets with 48 signers and 49 valid members
+      var hex = quorumEntryHex.replace('0cff0f0cff0f', '32fffffffffffe0232ffffffffffff02');
+      var reader = new BufferReader(Buffer.from(hex, 'hex'));
+      var entry = QuorumEntry.fromP2PBufferReader(reader, {
+        107: { size: 50 },
+      });
+
+      expect(reader.finished()).to.be.true;
+      expect(entry.toObject()).to.be.deep.equal(Object.assign({}, quorumEntryJSON, {
+        signersCount: 48,
+        signers: 'fffffffffffe02',
+        validMembersCount: 49,
+        validMembers: 'ffffffffffff02',
+      }));
+      expect(entry.toBufferForHashing().toString('hex')).to.be.equal(hex);
+    });
+
+    it('Should reject bits set past the bit set size like Core', function () {
+      // a 50-bit set uses the low 2 bits of its last byte; 0x06 sets bit 50
+      var hex = quorumEntryHex.replace('0cff0f0cff0f', '32fffffffffffe0632ffffffffffff02');
+      var reader = new BufferReader(Buffer.from(hex, 'hex'));
+      expect(function () {
+        QuorumEntry.fromP2PBufferReader(reader, { 107: { size: 50 } });
+      }).to.throw('Out-of-range bits set');
+    });
+
+    it('Should throw if the commitment is cut off inside a signature', function () {
+      var hex = quorumEntryHex.slice(0, quorumEntryHex.length - 20);
+      expect(function () {
+        QuorumEntry.fromP2PBufferReader(new BufferReader(Buffer.from(hex, 'hex')));
+      }).to.throw('expected 96 more bytes, found 86');
+    });
   });
   describe('to buffer', function () {
     it('Should be able to generate correct buffer', function () {
@@ -105,6 +148,33 @@ describe('QuorumEntry', function () {
       var buffer = entry.toBufferForHashing();
       expect(buffer).to.be.deep.equal(Buffer.from(quorumEntryHex, 'hex'));
     });
+
+    it('Should reject bit sets that do not match the LLMQ size', function () {
+      var short = QuorumEntry.fromBuffer(Buffer.from(quorumEntryHex, 'hex'));
+      short.signers = '00';
+      expect(function () {
+        short.toBufferForHashing();
+      }).to.throw('Expected signers to have the LLMQ bit set length');
+
+      var long = QuorumEntry.fromBuffer(Buffer.from(quorumEntryHex, 'hex'));
+      long.validMembers += '00';
+      expect(function () {
+        long.toBufferForHashing();
+      }).to.throw('Expected validMembers to have the LLMQ bit set length');
+    });
+
+    it('Should reject bits set past the LLMQ size', function () {
+      var entry = QuorumEntry.fromBuffer(Buffer.from(quorumEntryHex, 'hex'));
+      var size = entry.getParams().size;
+      expect(size % 8).to.not.equal(0);
+      var bytes = Buffer.from(entry.signers, 'hex');
+      // eslint-disable-next-line no-bitwise
+      bytes[bytes.length - 1] |= 0x80;
+      entry.signers = bytes.toString('hex');
+      expect(function () {
+        entry.toBufferForHashing();
+      }).to.throw('Expected no bits set past the LLMQ size');
+    });
   });
   describe('generate commitmentHash', function () {
     it('Should be able to generate a correct commitmentHash', function () {
@@ -113,6 +183,20 @@ describe('QuorumEntry', function () {
       expect(entryCommitmentHash).to.be.deep.equal(
         Buffer.from(commitmentHash, 'hex')
       );
+    });
+    it('Should reject validMembers that do not fit the LLMQ size', function () {
+      var long = new QuorumEntry(quorumEntryJSON);
+      long.validMembers += '00';
+      expect(function () {
+        long.getCommitmentHash();
+      }).to.throw('Expected validMembers to have the LLMQ bit set length');
+
+      // a 12-member bit set uses the low 4 bits of its last byte
+      var outOfRange = new QuorumEntry(quorumEntryJSON);
+      outOfRange.validMembers = 'ff1f';
+      expect(function () {
+        outOfRange.getCommitmentHash();
+      }).to.throw('Expected no bits set past the LLMQ size');
     });
   });
   describe('quorum members', function () {

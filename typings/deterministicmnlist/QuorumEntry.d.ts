@@ -1,5 +1,6 @@
 import { SimplifiedMNList } from './SimplifiedMNList';
 import { SimplifiedMNListEntry } from './SimplifiedMNListEntry';
+import { BufferReader } from '../buffer/BufferReader';
 /**
  * @class QuorumEntry
  * @param {string|Object|Buffer} [arg] - A Buffer, JSON string,
@@ -19,26 +20,42 @@ import { SimplifiedMNListEntry } from './SimplifiedMNListEntry';
  * @property {string} membersSig
  */
 export class QuorumEntry {
-  constructor(arg?: Buffer | any | string);
+  constructor(arg?: Buffer | any | string, llmqParamsOverride?: Object);
 
   /**
    * Parse buffer and returns QuorumEntry
    * @param {Buffer} buffer
+   * @param {Object} [llmqParamsOverride]
    * @return {QuorumEntry}
    */
-  static fromBuffer(buffer: Buffer): QuorumEntry;
+  static fromBuffer(buffer: Buffer, llmqParamsOverride?: Object): QuorumEntry;
+
+  /**
+   * Reads a final commitment as Core sends it in the P2P `mnlistdiff` message,
+   * the layout toBufferForHashing() writes. Like Core's RPC, signersCount and
+   * validMembersCount are the numbers of set bits.
+   * @param {BufferReader} bufferReader
+   * @param {Object} [llmqParamsOverride]
+   * @return {QuorumEntry}
+   */
+  static fromP2PBufferReader(
+    bufferReader: BufferReader,
+    llmqParamsOverride?: Object
+  ): QuorumEntry;
   /**
    * @param {string} string
+   * @param {Object} [llmqParamsOverride]
    * @return {QuorumEntry}
    */
-  static fromHexString(string: String): QuorumEntry;
+  static fromHexString(string: String, llmqParamsOverride?: Object): QuorumEntry;
 
   /**
    * Create SMLQuorumEntry from an object
    * @param {SMLQuorumEntry} obj
+   * @param {Object} [llmqParamsOverride]
    * @return {QuorumEntry}
    */
-  static fromObject(obj: Object): QuorumEntry;
+  static fromObject(obj: Object, llmqParamsOverride?: Object): QuorumEntry;
 
   /**
    * Validate QuorumEntry structure

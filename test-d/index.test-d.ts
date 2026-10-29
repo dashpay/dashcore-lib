@@ -112,3 +112,31 @@ expectType<number | undefined>(proUpServTxPayload.platformHTTPPort);
 declare const proUpRegTxPayload: ProUpRegTxPayload;
 expectType<MasternodePayout[] | undefined>(proUpRegTxPayload.payouts);
 expectType<string | undefined>(proUpRegTxPayload.scriptPayout);
+
+// Core P2P masternode list diffs
+declare const bufferReader: BufferReader;
+declare const SMLEntryClass: typeof SimplifiedMNListEntry;
+declare const QuorumEntryClass: typeof QuorumEntry;
+expectType<SimplifiedMNListEntry>(SMLEntryClass.fromP2PBufferReader(bufferReader, 'testnet'));
+expectType<QuorumEntry>(QuorumEntryClass.fromP2PBufferReader(bufferReader));
+declare const smlEntry: SimplifiedMNListEntry;
+expectType<Buffer>(smlEntry.toP2PBuffer());
+declare const smlDiff: SimplifiedMNListDiff;
+expectType<Record<string, number[]>[] | undefined>(smlDiff.quorumsCLSigs);
+expectType<{ host: string; port: number } | null>(smlEntry.getPlatformHTTPSEndpoint());
+declare const SMLDiffClass: typeof SimplifiedMNListDiff;
+const customLLMQ = { 200: { size: 3 } };
+expectType<SimplifiedMNListDiff>(SMLDiffClass.fromBuffer(Buffer.alloc(0), 'testnet', customLLMQ));
+expectType<SimplifiedMNListDiff>(SMLDiffClass.fromHexString('', 'testnet', customLLMQ));
+expectType<SimplifiedMNListDiff>(SMLDiffClass.fromObject({}, 'testnet', customLLMQ));
+expectType<SimplifiedMNListDiff>(SMLDiffClass.fromJSON({}, customLLMQ));
+expectType<SimplifiedMNListDiff>(new SMLDiffClass({}, 'testnet', customLLMQ));
+// ProUpRegTx has no type or platform fields
+// @ts-expect-error
+proUpRegTxPayload.platformNodeID;
+// @ts-expect-error
+proUpRegTxPayload.type;
+expectType<QuorumEntry>(QuorumEntryClass.fromBuffer(Buffer.alloc(0), customLLMQ));
+expectType<QuorumEntry>(QuorumEntryClass.fromHexString('', customLLMQ));
+expectType<QuorumEntry>(QuorumEntryClass.fromObject({}, customLLMQ));
+expectType<QuorumEntry>(new QuorumEntryClass({}, customLLMQ));

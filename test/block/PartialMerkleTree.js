@@ -77,4 +77,47 @@ describe('PartialMerkleTree', function () {
       );
     });
   });
+
+  describe('#toBuffer', function () {
+    it('Should reject merkle hashes or flags with empty slots or extra properties', function () {
+      ['merkleHashes', 'merkleFlags'].forEach(function (name) {
+        var extra = [];
+        extra.length = 1;
+        extra.extra = 0;
+        [[, 0], extra].forEach(function (value) {
+          var tree = PartialMerkleTree.fromHexString(
+            '0100000001' + '11'.repeat(32) + '0101'
+          );
+          tree[name] = value;
+          expect(function () {
+            tree.toBuffer();
+          }).to.throw('Expected ' + name + ' to be an array without empty slots');
+        });
+      });
+    });
+  });
+
+  describe('.fromBuffer', function () {
+    // cbTxMerkleTree of Core's testnet mnlistdiff at block 1580498
+    var coreTreeHex =
+      '0800000004a868b2ed8d2301e11fe10af03de99739daabf69fd189ea44fb5aa1c47df56f1d389ffc77b4ade36785589c1161ed70c244ff26dbfda7830e56bad2a9300d165bb9f91e0478b64957632ae2729374a2c7c0f386052c87ac24864baf6bf0f711c70eb605f91fd18b14932cb62fa77678cfffc9ab19d7990e7283e456398d44d5b0010f';
+
+    it('Should not modify the buffer it parses', function () {
+      var buffer = Buffer.from(coreTreeHex, 'hex');
+
+      var tree = PartialMerkleTree.fromBuffer(buffer);
+
+      expect(buffer.toString('hex')).to.be.equal(coreTreeHex);
+      expect(tree.toString()).to.be.equal(coreTreeHex);
+    });
+    it('Should throw quickly on a hash count larger than the data', function () {
+      this.timeout(2000);
+      // the hash count (04) follows the 4-byte transaction count
+      var hex = coreTreeHex.slice(0, 8) + 'fe00000002' + coreTreeHex.slice(10);
+
+      expect(function () {
+        PartialMerkleTree.fromHexString(hex);
+      }).to.throw('Merkle hash count 33554432 is larger than the remaining data allows');
+    });
+  });
 });

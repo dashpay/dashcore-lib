@@ -1,3 +1,5 @@
+import { BufferReader } from '../buffer/BufferReader';
+
 /**
  * @typedef {Object} SMLEntry
  * @property {string} proRegTxHash
@@ -54,6 +56,18 @@ export class SimplifiedMNListEntry {
   static fromBuffer(buffer: Buffer, network?: string): SimplifiedMNListEntry;
 
   /**
+   * Reads an entry as Core sends it in the P2P `mnlistdiff` message:
+   * nVersion followed by the hashed fields (see toP2PBuffer)
+   * @param {BufferReader} bufferReader
+   * @param {string} [network]
+   * @return {SimplifiedMNListEntry}
+   */
+  static fromP2PBufferReader(
+    bufferReader: BufferReader,
+    network?: string
+  ): SimplifiedMNListEntry;
+
+  /**
    * @param {string} string
    * @param {string} [network]
    * @return {SimplifiedMNListEntry}
@@ -65,6 +79,13 @@ export class SimplifiedMNListEntry {
    * @return {Buffer}
    */
   toBuffer(): Buffer;
+
+  /**
+   * Serialize SML entry as Core sends it in the P2P `mnlistdiff` message
+   * (protocol 70228 and later): nVersion, then the fields toBuffer() hashes
+   * @return {Buffer}
+   */
+  toP2PBuffer(): Buffer;
 
   /**
    * Create SMLEntry from an object
@@ -83,6 +104,16 @@ export class SimplifiedMNListEntry {
    * @return {string}
    */
   getIp(): string;
+
+  /**
+   * Gets the evonode's Platform HTTPS endpoint: the first `platform_https` address
+   * of a version 3 (ExtAddr) entry, which may be an IPv6 address or a domain, or
+   * the service ip with platformHTTPPort of an older one. PoSe-banned entries
+   * have endpoints too; check isValid before using one.
+   * @return {{host: string, port: number}|null} host without IPv6 brackets, like
+   * getIp(); null for regular masternodes and evonodes without an address
+   */
+  getPlatformHTTPSEndpoint(): { host: string; port: number } | null;
 
   /**
    * Creates a copy of SimplifiedMNListEntry

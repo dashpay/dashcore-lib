@@ -19,6 +19,7 @@ export var validMNs: SimplifiedMNListEntry[];
 /**
  * @param {Buffer|Object|string} [arg] - A Buffer, JSON string, or Object representing a MnListDiff
  * @param {string} [network]
+ * @param {Object} [llmqParamsOverride] - params for LLMQ types dashcore-lib doesn't know
  * @class SimplifiedMNListDiff
  * @property {string} baseBlockHash - sha256
  * @property {string} blockHash - sha256
@@ -30,28 +31,37 @@ export var validMNs: SimplifiedMNListEntry[];
  * @property {string} merkleRootMNList - merkle root of the whole mn list
  */
 export class SimplifiedMNListDiff {
-  constructor(arg?: Buffer | any | string, network?: string);
+  constructor(arg?: Buffer | any | string, network?: string, llmqParamsOverride?: Object);
 
   /**
-   * Creates MnListDiff from a Buffer.
+   * Creates MnListDiff from a Buffer holding Core's P2P `mnlistdiff` message
+   * (protocol 70230 and later, unchanged through 70242).
    * @param {Buffer} buffer
    * @param {string} [network]
+   * @param {Object} [llmqParamsOverride]
    * @return {SimplifiedMNListDiff}
    */
-  static fromBuffer(buffer: Buffer, network?: string): SimplifiedMNListDiff;
+  static fromBuffer(
+    buffer: Buffer,
+    network?: string,
+    llmqParamsOverride?: Object
+  ): SimplifiedMNListDiff;
 
   /**
    * @param {string} hexString
    * @param {string} [network]
+   * @param {Object} [llmqParamsOverride]
    * @return {SimplifiedMNListDiff}
    */
   static fromHexString(
     hexString: string,
-    network?: string
+    network?: string,
+    llmqParamsOverride?: Object
   ): SimplifiedMNListDiff;
 
   /**
-   * Serializes mnlist diff to a Buffer
+   * Serializes mnlist diff as Core's P2P `mnlistdiff` message (protocol 70230
+   * and later). Quorums need their LLMQ type params, for the bit set sizes.
    * @return {Buffer}
    */
   toBuffer(): Buffer;
@@ -60,9 +70,22 @@ export class SimplifiedMNListDiff {
    * Creates MNListDiff from object
    * @param obj
    * @param {string} [network]
+   * @param {Object} [llmqParamsOverride]
    * @return {SimplifiedMNListDiff}
    */
-  static fromObject(obj: any, network?: string): SimplifiedMNListDiff;
+  static fromObject(
+    obj: any,
+    network?: string,
+    llmqParamsOverride?: Object
+  ): SimplifiedMNListDiff;
+
+  /**
+   * Creates MNListDiff from the JSON produced by JSON.stringify, not from toObject()
+   * @param diffJSON
+   * @param {Object} [llmqParamsOverride]
+   * @return {SimplifiedMNListDiff}
+   */
+  static fromJSON(diffJSON: any, llmqParamsOverride?: Object): SimplifiedMNListDiff;
 
   /**
    * sha256
@@ -83,4 +106,9 @@ export class SimplifiedMNListDiff {
    * merkle root of the whole mn list
    */
   merkleRootMNList: string;
+  /**
+   * chainlock signatures used for quorum rotation, each mapped to indexes
+   * into newQuorums
+   */
+  quorumsCLSigs?: Record<string, number[]>[];
 }

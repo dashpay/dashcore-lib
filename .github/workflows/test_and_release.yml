@@ -49,30 +49,40 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    # Every step here can request an npm publish token, so only GitHub's own
+    # actions run, pinned to commits, and the checks are plain shell
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       # Trusted publishing needs npm 11.5.1 or later. No registry-url: with it,
       # setup-node writes a token entry to .npmrc and npm tries token auth
       # instead of the OIDC exchange.
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '24.14.1'
 
       - name: Check package version matches tag
-        uses: geritol/match-tag-to-package-version@0.1.0
         env:
-          TAG_PREFIX: refs/tags/v
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [ "$RELEASE_TAG" != "v$VERSION" ]; then
+            echo "::error::Release tag $RELEASE_TAG does not match package version v$VERSION"
+            exit 1
+          fi
 
+      # X.Y-dev for dev releases, latest otherwise
       - name: Set release tag
-        uses: actions/github-script@v7
         id: tag
-        with:
-          result-encoding: string
-          script: |
-            const tag = context.payload.release.tag_name;
-            const [, major, minor] = tag.match(/^v([0-9]+)\.([0-9]+)/);
-            return (tag.includes('dev') ? `${major}.${minor}-dev` : 'latest');
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          if [[ "$RELEASE_TAG" == *dev* ]]; then
+            [[ "$RELEASE_TAG" =~ ^v([0-9]+)\.([0-9]+) ]]
+            echo "result=${BASH_REMATCH[1]}.${BASH_REMATCH[2]}-dev" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=latest" >> "$GITHUB_OUTPUT"
+          fi
 
       # Packs the checkout as earlier releases did: --ignore-scripts skips the
       # prepublishOnly build, and nothing is installed in this job, so no package

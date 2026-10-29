@@ -568,4 +568,40 @@ describe('ProRegTxPayload', function () {
       });
     });
   });
+
+  describe('fields of other versions and node types', function () {
+    function withField(json, field, value) {
+      var copy = Object.assign({}, json);
+      copy[field] = value;
+      return copy;
+    }
+
+    it('Should reject platform fields of a regular masternode or version 1', function () {
+      var json = proRegTxFixture.getProRegPayloadJSON();
+      var v1JSON = withField(json, 'version', 1);
+      ProRegTxPayload.fromJSON(v1JSON);
+      ['platformNodeID', 'platformP2PPort', 'platformHTTPPort'].forEach(function (field) {
+        expect(function () {
+          ProRegTxPayload.fromJSON(withField(json, field, 1));
+        }).to.throw('Expect no ' + field + ' in a regular masternode payload');
+        expect(function () {
+          ProRegTxPayload.fromJSON(withField(v1JSON, field, 1));
+        }).to.throw('Expect no ' + field + ' in a version 1 payload');
+      });
+    });
+
+    it('Should keep the platform fields of an evonode', function () {
+      var vectors = require('../../fixtures/core24-protx.json').transactions;
+      ['v2 evonode ProRegTx', 'v3 evonode ProRegTx'].forEach(function (name) {
+        var payload = new DashcoreLib.Transaction(
+          vectors.find(function (v) {
+            return v.name === name;
+          }).hex
+        ).extraPayload;
+        var restored = ProRegTxPayload.fromJSON(payload.toJSON({ network: 'testnet' }));
+        expect(restored.platformNodeID).to.be.equal(payload.platformNodeID);
+        expect(restored.toBuffer()).to.be.deep.equal(payload.toBuffer());
+      });
+    });
+  });
 });

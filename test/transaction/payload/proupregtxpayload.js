@@ -231,4 +231,18 @@ describe('ProUpRegTxPayload', function () {
       }).to.throw('Expect no payouts in a version 1 payload');
     });
   });
+
+  describe('fields it does not have', function () {
+    it('Should reject type and platform fields', function () {
+      var json = proUpRegTxFixture.getProUpRegPayloadJSON();
+      ProUpRegTxPayload.fromJSON(json);
+      ['type', 'platformNodeID', 'platformP2PPort', 'platformHTTPPort'].forEach(function (field) {
+        var withField = Object.assign({}, json);
+        withField[field] = 0;
+        expect(function () {
+          ProUpRegTxPayload.fromJSON(withField);
+        }).to.throw('Expect no ' + field + ' in a ProUpRegTx payload');
+      });
+    });
+  });
 });

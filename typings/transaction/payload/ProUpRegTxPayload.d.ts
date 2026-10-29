@@ -3,30 +3,22 @@ import { MasternodePayout, MasternodePayoutJSON } from './MasternodePayout';
 /**
  * @typedef {Object} ProUpRegTransactionPayloadJSON
  * @property {number} version
- * @property {number} [type]
  * @property {string} proTxHash
  * @property {string} pubKeyOperator
  * @property {string} keyIDVoting
  * @property {string} [payoutAddress] Before version 3
  * @property {MasternodePayoutJSON[]} [payouts] Owner payees with their reward shares. From version 3
  * @property {string} inputsHash
- * @property {string} [platformNodeID] Platform Node ID
- * @property {number} [platformP2PPort] Platform P2P port
- * @property {number} [platformHTTPPort] Platform HTTP port
  * @property {string} [payloadSig]
  */
 export type ProUpRegTransactionPayloadJSON = {
   version: number;
-  type?: number;
   proTxHash: string;
   pubKeyOperator: string;
   keyIDVoting: string;
   payoutAddress?: string;
   payouts?: MasternodePayoutJSON[];
   inputsHash: string;
-  platformNodeID?: string;
-  platformP2PPort?: number;
-  platformHTTPPort?: number;
   payloadSig?: string;
 };
 

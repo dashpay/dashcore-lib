@@ -266,4 +266,70 @@ describe('ProTxUpServPayload', function () {
       }).to.throw('Expect the platform ports and the Core port to differ');
     });
   });
+
+  describe('fields of other versions and node types', function () {
+    function withField(json, field, value) {
+      var copy = Object.assign({}, json);
+      copy[field] = value;
+      return copy;
+    }
+
+    it('Should reject a version 1 type or platform field', function () {
+      var json = proUpServTxFixture.getProUpServPayloadJSON();
+      expect(function () {
+        ProTxUpServPayload.fromJSON(withField(json, 'type', 0));
+      }).to.throw('Expect no type in a version 1 payload');
+      ['platformNodeID', 'platformP2PPort', 'platformHTTPPort'].forEach(function (field) {
+        expect(function () {
+          ProTxUpServPayload.fromJSON(withField(json, field, 1));
+        }).to.throw('Expect no ' + field + ' in a version 1 payload');
+      });
+    });
+
+    it('Should reject platform fields of a regular masternode', function () {
+      var json = proUpServTxFixture.getProUpServPayloadJSON();
+      json.version = 2;
+      json.type = 0;
+      ProTxUpServPayload.fromJSON(json);
+      ['platformNodeID', 'platformP2PPort', 'platformHTTPPort'].forEach(function (field) {
+        expect(function () {
+          ProTxUpServPayload.fromJSON(withField(json, field, 1));
+        }).to.throw('Expect no ' + field + ' in a regular masternode payload');
+      });
+    });
+  });
+
+  describe('operator payout script', function () {
+    var vector = require('../../fixtures/core24-protx.json').transactions.find(
+      function (v) {
+        return v.name === 'v3 ProUpServTx with an operator payout';
+      }
+    );
+
+    function getPayload() {
+      return new DashcoreLib.Transaction(vector.hex).extraPayload;
+    }
+
+    it('Should accept no script or Core\'s exact P2PKH/P2SH', function () {
+      var payload = getPayload();
+      expect(payload.scriptOperatorPayout).to.have.lengthOf(50);
+      payload.validate();
+      payload.scriptOperatorPayout = '';
+      payload.validate();
+      payload.scriptOperatorPayout = 'a914' + '11'.repeat(20) + '87';
+      payload.validate();
+    });
+
+    it('Should reject a P2PKH pushed with PUSHDATA1 and a trailing hex digit', function () {
+      var p2pkh = getPayload().scriptOperatorPayout;
+      var hash = p2pkh.slice(6, 46);
+      ['76a94c14' + hash + '88ac', p2pkh + '0'].forEach(function (script) {
+        var payload = getPayload();
+        payload.scriptOperatorPayout = script;
+        expect(function () {
+          payload.validate();
+        }).to.throw('Expected scriptOperatorPayout to be a p2pkh/p2sh');
+      });
+    });
+  });
 });

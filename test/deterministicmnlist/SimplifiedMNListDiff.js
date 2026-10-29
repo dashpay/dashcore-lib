@@ -274,6 +274,10 @@ describe('SimplifiedMNListDiff', function () {
         'Expected quorumsCLSigs values to be arrays of quorum indexes'],
       ['a string index', { [signatureHex]: ['1'] },
         'Expected quorumsCLSigs values to be arrays of quorum indexes'],
+      ['unsorted indexes', { [signatureHex]: [2, 1] },
+        'Expected quorumsCLSigs indexes to be sorted and unique, as Core sends them'],
+      ['a repeated index', { [signatureHex]: [1, 1] },
+        'Expected quorumsCLSigs indexes to be sorted and unique, as Core sends them'],
     ].forEach(function (testCase) {
       it('Should reject ' + testCase[0], function () {
         var diff = new SimplifiedMNListDiff(mnListDiffJSON);
@@ -283,6 +287,52 @@ describe('SimplifiedMNListDiff', function () {
           diff.toBuffer();
         }).to.throw(testCase[2]);
       });
+    });
+  });
+  describe('fromBuffer canonical encodings', function () {
+    // a diff with one chainlock signature: serialize, then edit the trailing bytes
+    function withCLSigs(clSigs) {
+      var diff = new SimplifiedMNListDiff(mnListDiffJSON);
+      diff.quorumsCLSigs = [];
+      var head = diff.toBuffer().slice(0, -1); // drop the zero quorumsCLSigs count
+      return Buffer.concat([head, clSigs]);
+    }
+    var signature = Buffer.from(Object.keys(coreDiffsJSON[0].quorumsCLSigs[0])[0], 'hex');
+
+    it('Should reject chainlock indexes that are not a sorted set', function () {
+      [[2, 1], [1, 1]].forEach(function (pair) {
+        var indexes = Buffer.alloc(4);
+        indexes.writeUInt16LE(pair[0], 0);
+        indexes.writeUInt16LE(pair[1], 2);
+        var raw = withCLSigs(Buffer.concat([Buffer.from('01', 'hex'), signature, Buffer.from('02', 'hex'), indexes]));
+        expect(function () {
+          SimplifiedMNListDiff.fromBuffer(raw, Networks.testnet);
+        }).to.throw('Quorum chainlock indexes are not a sorted set');
+      });
+    });
+
+    it('Should reject a repeated chainlock signature', function () {
+      var entry = Buffer.concat([signature, Buffer.from('00', 'hex')]);
+      var raw = withCLSigs(Buffer.concat([Buffer.from('02', 'hex'), entry, entry]));
+      expect(function () {
+        SimplifiedMNListDiff.fromBuffer(raw, Networks.testnet);
+      }).to.throw('Duplicate quorum chainlock signature');
+    });
+
+    it('Should reject a coinbase transaction with a non-canonical CompactSize', function () {
+      var diff = new SimplifiedMNListDiff(mnListDiffJSON);
+      diff.quorumsCLSigs = [];
+      var raw = diff.toBuffer();
+      var cbTx = diff.cbTx.toBuffer();
+      var cbStart = raw.indexOf(cbTx);
+      expect(cbStart).to.be.above(0);
+      // the input count follows the 4-byte version and type; re-encode 1 as fd0100
+      expect(cbTx[4]).to.equal(1);
+      var nonCanonicalTx = Buffer.concat([cbTx.slice(0, 4), Buffer.from('fd0100', 'hex'), cbTx.slice(5)]);
+      var tampered = Buffer.concat([raw.slice(0, cbStart), nonCanonicalTx, raw.slice(cbStart + cbTx.length)]);
+      expect(function () {
+        SimplifiedMNListDiff.fromBuffer(tampered, Networks.testnet);
+      }).to.throw('Non-canonical coinbase transaction encoding');
     });
   });
   describe('Core P2P mnlistdiff messages', function () {

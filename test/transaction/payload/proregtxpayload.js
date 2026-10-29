@@ -365,6 +365,15 @@ describe('ProRegTxPayload', function () {
         }, 'Expected payout scriptPayout to be a p2pkh/p2sh');
       });
 
+      it('Should reject a payee script with a trailing hex digit', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts[0].scriptPayout = 'a914' + '11'.repeat(20) + '87' + '0';
+        }, 'Expected payout scriptPayout to be a p2pkh/p2sh');
+        withPayload(TWO_PAYOUTS, function (payload) {
+          payload.payouts[0].scriptPayout += '0';
+        }, 'Expected payout scriptPayout to be a p2pkh/p2sh');
+      });
+
       it('Should require unique payees', function () {
         withPayload(TWO_PAYOUTS, function (payload) {
           payload.payouts[1].scriptPayout = payload.payouts[0].scriptPayout;

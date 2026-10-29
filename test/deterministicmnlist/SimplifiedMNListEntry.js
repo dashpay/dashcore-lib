@@ -206,6 +206,13 @@ describe('SimplifiedMNListEntry', function () {
       expect(entry.platformHTTPPort).to.be.undefined;
       expect(entry.toP2PBuffer().toString('hex')).to.be.equal(hex);
     });
+    it('Should reject a masternode type Core does not have', function () {
+      // a version 2 entry ends its hashed fields with isValid, then nType (2 here)
+      var hex = '0200' + smlEntryHex.slice(0, 151 * 2) + '0200';
+      expect(function () {
+        SimplifiedMNListEntry.fromP2PBufferReader(new BufferReader(Buffer.from(hex, 'hex')), Networks.testnet);
+      }).to.throw('Expected nType to be 0 (regular) or 1 (evo)');
+    });
     it('Should not modify the buffer it parses', function () {
       var hex = '0300' + extAddrEvoEntryHex;
       var buffer = Buffer.from(hex, 'hex');

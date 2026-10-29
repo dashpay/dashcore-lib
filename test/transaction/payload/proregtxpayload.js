@@ -356,6 +356,15 @@ describe('ProRegTxPayload', function () {
         }, 'Expected payout scriptPayout to be a p2pkh/p2sh');
       });
 
+      it('Should reject a p2pkh payee that pushes the key hash with PUSHDATA1', function () {
+        withPayload(TWO_PAYOUTS, function (payload) {
+          // 76a914<hash>88ac becomes 76a94c14<hash>88ac, which Core doesn't accept
+          var script = payload.payouts[0].scriptPayout;
+          expect(script.slice(0, 6)).to.equal('76a914');
+          payload.payouts[0].scriptPayout = '76a94c14' + script.slice(6);
+        }, 'Expected payout scriptPayout to be a p2pkh/p2sh');
+      });
+
       it('Should require unique payees', function () {
         withPayload(TWO_PAYOUTS, function (payload) {
           payload.payouts[1].scriptPayout = payload.payouts[0].scriptPayout;

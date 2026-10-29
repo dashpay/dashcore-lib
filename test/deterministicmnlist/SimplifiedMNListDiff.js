@@ -292,6 +292,15 @@ describe('SimplifiedMNListDiff', function () {
       });
     });
   });
+  it('Should reject a sparse quorumsCLSigs array', function () {
+    var diff = new SimplifiedMNListDiff(mnListDiffJSON);
+    var signatureHex = Object.keys(coreDiffsJSON[0].quorumsCLSigs[0])[0];
+    // eslint-disable-next-line no-sparse-arrays
+    diff.quorumsCLSigs = [, { [signatureHex]: [0] }];
+    expect(function () {
+      diff.toBuffer();
+    }).to.throw('Expected each quorumsCLSigs entry to hold exactly one signature');
+  });
   it('Should reject a chainlock signature that appears in two entries', function () {
     var diff = new SimplifiedMNListDiff(mnListDiffJSON);
     var signatureHex = Object.keys(coreDiffsJSON[0].quorumsCLSigs[0])[0];

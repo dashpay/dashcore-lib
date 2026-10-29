@@ -314,6 +314,16 @@ describe('SimplifiedMNListDiff', function () {
       });
     });
   });
+  it('Should reject a huge sparse chainlock index array without materializing it', function () {
+    var diff = new SimplifiedMNListDiff(mnListDiffJSON);
+    var signatureHex = Object.keys(coreDiffsJSON[0].quorumsCLSigs[0])[0];
+    diff.quorumsCLSigs = [{ [signatureHex]: new Array(1e9) }];
+    var started = Date.now();
+    expect(function () {
+      diff.toBuffer();
+    }).to.throw('Expected quorumsCLSigs values to be arrays of quorum indexes');
+    expect(Date.now() - started).to.be.below(1000);
+  });
   it('Should reject a chainlock signature that appears in two entries', function () {
     var diff = new SimplifiedMNListDiff(mnListDiffJSON);
     var signatureHex = Object.keys(coreDiffsJSON[0].quorumsCLSigs[0])[0];

@@ -114,13 +114,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/dashevo/dashcore-lib.git"
+    "url": "git+https://github.com/dashpay/dashcore-lib.git"
   },
   "types": "index.d.ts",
   "bugs": {
-    "url": "https://github.com/dashevo/dashcore-lib/issues"
+    "url": "https://github.com/dashpay/dashcore-lib/issues"
   },
-  "homepage": "https://github.com/dashevo/dashcore-lib",
+  "homepage": "https://github.com/dashpay/dashcore-lib",
   "dependencies": {
     "@dashevo/bls": "~1.2.9",
     "@dashevo/x11-hash-js": "^1.0.2",

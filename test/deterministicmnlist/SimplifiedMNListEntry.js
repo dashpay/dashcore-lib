@@ -175,6 +175,17 @@ describe('SimplifiedMNListEntry', function () {
         entryWithDifferentKeys.length
       );
     });
+    ['', 'abcd', smlEntryJSON.platformNodeID + '00', smlEntryJSON.platformNodeID.slice(0, -2) + 'zz']
+      .forEach(function (platformNodeID) {
+        it('Should reject an evonode platformNodeID "' + platformNodeID + '" that is not 20 bytes of hex', function () {
+          var entry = new SimplifiedMNListEntry(smlEntryJSON);
+          entry.platformNodeID = platformNodeID;
+
+          expect(function () {
+            entry.toP2PBuffer();
+          }).to.throw('Expected platformNodeID to be a 20-byte hex string');
+        });
+      });
   });
   describe('P2P serialization', function () {
     // Core sends entries as nVersion followed by the hashed fields

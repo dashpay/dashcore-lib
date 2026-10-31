@@ -253,6 +253,32 @@ describe('SimplifiedMNListDiff', function () {
         Object.assign({}, mnListDiffJSON, { quorumsCLSigs: [] })
       );
     });
+
+    var hash = mnListDiffJSON.blockHash;
+    [
+      ['a short baseBlockHash', function (diff) { diff.baseBlockHash = 'abcd'; },
+        'Expected baseBlockHash to be a sha256 hex string'],
+      ['a long blockHash', function (diff) { diff.blockHash = hash + '00'; },
+        'Expected blockHash to be a sha256 hex string'],
+      ['a non-hex blockHash', function (diff) { diff.blockHash = hash.slice(0, -2) + 'zz'; },
+        'Expected blockHash to be a sha256 hex string'],
+      ['a short deletedMNs hash', function (diff) { diff.deletedMNs = [hash.slice(2)]; },
+        'Expected deletedMNs to hold sha256 hex strings'],
+      ['a deletedMNs buffer', function (diff) { diff.deletedMNs = [Buffer.from(hash, 'hex')]; },
+        'Expected deletedMNs to hold sha256 hex strings'],
+      ['a short deleted quorum hash',
+        function (diff) { diff.deletedQuorums = [{ llmqType: 1, quorumHash: hash.slice(2) }]; },
+        'Expected deletedQuorums quorumHash to be a sha256 hex string'],
+    ].forEach(function (testCase) {
+      it('Should reject ' + testCase[0], function () {
+        var diff = new SimplifiedMNListDiff(mnListDiffJSON);
+        testCase[1](diff);
+
+        expect(function () {
+          diff.toBuffer();
+        }).to.throw(testCase[2]);
+      });
+    });
   });
   describe('toBuffer quorumsCLSigs', function () {
     var signature = coreDiffsJSON[0].quorumsCLSigs[0];
